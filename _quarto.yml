@@ -1,0 +1,14 @@
+project: 
+  output-dir: _output
+
+format: 
+  revealjs:
+    overview: true
+    transition: fade
+    height: 900
+    width: 1600
+    slide-number: c/t
+    theme: 
+    - styles.scss
+
+echo: true
