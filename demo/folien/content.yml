@@ -1,5 +1,7 @@
 slides:
 
+  root: "."
+
   content:
 
   - root: w-erste-schritte

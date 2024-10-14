@@ -18,9 +18,11 @@ source("skripte/read-data.R")
 # Beispiel zum Einstieg: Niederschläge in ausgewählten deutschen Städten
 
 
-## 
+## {}
 
 ```{r}
+#| echo: false
+
 # Dataframes für Deutschlandkarte
 d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
 d_bl <- gisco_get_nuts(country = "Germany", nuts_level = 2, resolution = 03)
@@ -57,15 +59,14 @@ p2 <- ggplot(data = d_ns_jahr) +
 
 # Darstellen
 p1 + p2
-
-# Aufräumen
-rm(p1, p2, d_bl, d_de, d_stat_a, d_ns_jahr)
 ```
 
 
-## 
+## {}
 
 ```{r}
+#| echo: false
+
 d_ns_monat <- d_ns |>
   filter(!is.na(Niederschlag)) |>
   group_by(Station, Jahr, Monat) |>
@@ -77,9 +78,11 @@ ggplot(data = d_ns_monat) +
 ```
 
 
-## 
+## {}
 
 ```{r}
+#| echo: false
+ 
 ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
   labs(title = "Monatliche Niederschläge (nach Stationen)")

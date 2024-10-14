@@ -5,10 +5,10 @@ format:
   revealjs:
     overview: true
     transition: fade
-    height: 900
     width: 1600
+    height: 900
     slide-number: c/t
     theme: 
-    - styles.scss
+    - style.scss
 
 echo: true
