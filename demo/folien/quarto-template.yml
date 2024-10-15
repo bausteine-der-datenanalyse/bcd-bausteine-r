@@ -1,5 +1,5 @@
-project: 
-  output-dir: _output
+execute: 
+  echo: true
 
 format: 
   revealjs:
@@ -10,5 +10,3 @@ format:
     slide-number: c/t
     theme: 
     - style.scss
-
-echo: true

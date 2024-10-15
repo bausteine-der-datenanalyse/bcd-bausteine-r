@@ -20,7 +20,7 @@ load("daten/data-lecture.Rdata")
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x=gdp, y=gge, fill=region, size=pop), shape=21) +
   scale_x_log10() + scale_y_log10() +
-  labs(x="Bruttoinlandsprodukt", y="Treibhausgasemissionen", title="2012")
+  labs(x="Bruttoinlandsprodukt", y="Treibhausgasemissionen", title="Jahr 2012")
 ```
 
 
@@ -48,9 +48,7 @@ ggplot(data = d_wb_2012) +
 - Basiert auf dem Buch 'The Grammar of Graphics' von Leland Wilkinson
 - Sehr strukturiert, aber man muss sich hineindenken
 - Mit Quellcode frei verfügbar
-- Beispiele unter https://www.r-graph-gallery.com
-
-→ Und warum heißt das Paket jetzt ggplot?
+- Eine schöne Sammlung von Beispielen gibt es [hier](https://www.r-graph-gallery.com)
 
 
 ## Genereller Aufbau einer ggplot2 Anweisung
@@ -77,21 +75,23 @@ ggplot(data = <DATA>) +
 
 ## {}
 
-### Dataframes `d_wb_all` und `d_wb_2012` aus Datei laden
+### Daten aus Datei laden
 
 ```{r}
 #| eval: false
 load("daten/data-lecture.Rdata")
 ```
 
+<br/>
+
 ### Dataframe anzeigen
 
 ```{r}
-show(d_wb_all)
+show(d_wb_2012)
 ```
 
 
-## Inhalt von Dataframe `d_wb_all`
+## Inhalt von Dataframe `d_wb_2012`
 
 | Spalte | Deutsch | Englisch (Originaltitel) |
 |------------------------|------------------------|------------------------|
@@ -104,22 +104,6 @@ show(d_wb_all)
 | ig | Einkommensgruppe | Income group |
 
 : {tbl-colwidths="[20,40,40]"}
-
-
-## Übersicht Dataframes für diese Folien
-
-<br/><br/>
-
-| Name      | Inhalt                                    |
-|-----------|-------------------------------------------|
-| `d_wb_all`  | Weltbank - Alle Daten (vorherige Folie)   |
-| `d_wb_2012` | Wie `d_wb_all` aber nur für das Jahr 2012 |
-
-: {tbl-colwidths="[20,80]"}
-
-<br/>
-
-Quelle: https://data.worldbank.org
 
 
 # 3. Funktionsweise von ggplot
@@ -177,7 +161,7 @@ kable(d_bsp)
 
 ```{r}
 ggplot(data = d_bsp) +
-  geom_point(mapping = aes(x = A, y = B, color = C, size = D)) + coord_fixed()
+  geom_point(mapping = aes(x = A, y = B, color = C, size = D))
 ```
 
 
@@ -204,9 +188,9 @@ ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x=gdp, y=gge, color=region, size=pop))
 ```
 
-- `geom_point()` sagt, dass Punkte geplottet werden sollen
+- `geom_point(...)` sagt, dass Punkte geplottet werden sollen
 - Parameter `mapping` definiert Zuordnung von *Merkmalen* auf *visuelle Eigenschaften*
-- Zuordnung wird mit der Funktion `aes()` erzeugt. Hier:
+- Zuordnung wird mit der Funktion `aes(...)` erzeugt. Hier:
   - Koordinaten nach BIP (`gdp`) und Emission (`gge`)
   - Farbe nach Region (`region`)
   - Größe entsprechend Bevölkerung (`pop`)
