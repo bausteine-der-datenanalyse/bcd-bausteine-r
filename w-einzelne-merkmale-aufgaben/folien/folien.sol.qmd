@@ -1,26 +1,16 @@
 ---
 title: "Aufgaben zur Untersuchung einzelner Merkmale"
 author: "Matthias Baitsch"
-output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    css: [default, metropolis-fonts, metropolis, style/metropolis-bo.css]
-    nature:
-      ratio: 16:9
-      beforeInit: "style/macros.js"
-      highlightLines: true
-      highlightStyle: default
-      countIncrementalSlides: false
-      navigation:
-        scroll: false
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-source("style/setup.R")
-load("data/data-exercise.Rdata")
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+load("daten/einzelne-merkmale-uebung.Rdata")
 ```
 
-# Entfernungen in andere Städte
+## Entfernungen in andere Städte
 
 ```{r}
 d_bo_entfernung <- tibble(
@@ -30,28 +20,21 @@ d_bo_entfernung <- tibble(
 ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung))
 ```
 
-
----
-
-# Studierende an der BO: Geschlecht
+## Studierende an der BO: Geschlecht
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Geschlecht))
 ```
 
----
-
-# Studierende an der BO: Geschlecht
+## Studierende an der BO: Geschlecht
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Jahr, fill = Geschlecht))
 ```
 
----
-
-# Studierende an der BO: Fachbereiche
+## Studierende an der BO: Fachbereiche
 
 ```{r}
 ggplot(data = d_bo_vm) +
@@ -59,45 +42,35 @@ ggplot(data = d_bo_vm) +
   coord_polar(theta = "y")
 ```
 
----
-
-# Verkehrsmittel
+## Verkehrsmittel
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Verkehrsmittel))
 ```
 
----
-
-# Verkehrsmittel in den Fachbereichen 
+## Verkehrsmittel in den Fachbereichen 
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Fachbereich, fill = Verkehrsmittel), position = "fill")
 ```
 
----
-
-# Histogramm der Fahrzeiten
+## Histogramm der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_histogram(mapping = aes(x = Zeit, fill = Verkehrsmittel), boundary=0, binwidth=15)
 ```
 
----
-
-# Empirische Verteilungsfunktion der Fahrzeiten
+## Empirische Verteilungsfunktion der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf")
 ```
 
----
-
-# Extra: Wert für 75% berechnen
+## Extra: Wert für 75% berechnen
 
 ```{r}
 z75 = quantile(d_bo_vm$Zeit, probs = 0.75)
@@ -106,13 +79,9 @@ ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf") 
 ```
 
-.up20[]
-
 75% der Befragten sind `r z75` Minuten oder kürzer unterwegs.
 
----
-
-# Empirische Verteilungsfunktion der Fahrzeiten
+## Empirische Verteilungsfunktion der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
