@@ -459,7 +459,7 @@ ggplot(data = d) +
 | y    | Relative Häufigkeiten mit `y=stat(density))` | Ja       |
 | fill | Merkmal für Füllfarbe                        |          |
 
-<br/>
+## {}
 
 | Argument | Beschreibung                                                |
 |----------|-------------------------------------------------------------|
