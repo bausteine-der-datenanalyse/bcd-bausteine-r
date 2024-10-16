@@ -7,7 +7,7 @@ author: "Matthias Baitsch"
 #| echo: false
 #| message: false
 library(tidyverse)
-load("daten/einzelne-merkmale-uebung.Rdata")
+load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
 
 ## Entfernungen in andere Städte

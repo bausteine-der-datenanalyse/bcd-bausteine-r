@@ -6,7 +6,7 @@ title: "Untersuchung einzelner Merkmale in R"
 #| echo: false
 library(tidyverse)
 library(kableExtra)
-load("daten/einzelne-merkmale-vorlesung.Rdata")
+load("daten/einzelne-merkmale.Rdata")
 ```
 
 ## Dataframes für diese Folien

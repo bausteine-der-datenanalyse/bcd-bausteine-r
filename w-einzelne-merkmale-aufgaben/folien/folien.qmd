@@ -7,7 +7,7 @@ author: "TODO: Namen eintragen"
 #| echo: false
 #| message: false
 library(tidyverse)
-load("daten/einzelne-merkmale-uebung.Rdata")
+load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
 
 ## Titel Folie 1
