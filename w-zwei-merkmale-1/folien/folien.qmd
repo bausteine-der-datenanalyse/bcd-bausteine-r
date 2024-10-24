@@ -1,0 +1,260 @@
+---
+title: "Untersuchung von zwei Merkmalen in R (1/2)"
+---
+
+```{r}
+#| echo: false
+library(plotly)
+library(kableExtra)
+library(tidyverse)
+library(hexbin)
+load("daten/data-lecture.Rdata")
+```
+
+
+
+# Übersicht Dataframes für diese Folien
+
+## {}
+
+# Sachverständigenrat
+
+```{r}
+kable(d_svrw)
+```
+
+## {}
+
+# Lebenserwartung (Weltbank)
+
+```{r}
+kable(d_le_latest)
+```
+
+## Spalten und Indikatoren
+
+- `le` Life expectancy at birth, total (years) - [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)
+- `gdppc` GDP per capita (current US$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
+- `edu` Government expenditure on education, total (% of GDP) - [SE.XPD.TOTL.GD.ZS](https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS)
+- `he` Current health expenditure (% of GDP) - [SH.XPD.CHEX.GD.ZS](https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS)
+- `gini` GINI index - [SI.POV.GINI](https://data.worldbank.org/indicator/SI.POV.GINI)
+
+
+## {}
+
+
+
+# 1. Streudiagramme und Blasendiagramme
+
+## {}
+
+# Prognosen Sachverständigenrat
+
+```{r}
+ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) + 
+  geom_abline(intercept = 0, slope = 1, color = 'red') +
+  geom_point(size = 2) + geom_rug(color = 'blue')
+```
+
+
+
+- Gerade mit `geom_abline()` wobei `intercept`=y-Achsenabschnitt und `slope`=Steigung
+- Mapping für `geom_point()` **und** `geom_rug()` (Blaue Striche)
+
+## {}
+
+# Ausgaben G und Lebenserwartung
+
+```{r}
+ggplot(data = d_le_latest) +
+  geom_point(mapping = aes(x = he, y = le))
+```
+
+## {}
+
+# Ausgaben G und Lebenserwartung
+
+```{r}
+ggplot(data = d_le_latest) +
+  geom_point(mapping = aes(x = he, y = le), shape = 21, fill = 'orange')
+```
+
+## {}
+
+# `geom_point()`: Shapes
+
+```{r, echo=FALSE}
+# From https://ggplot2.tidyverse.org/reference/scale_shape.html
+d <- tibble(S = 0:24)
+ggplot(d, aes(0, 0, shape = S)) +
+  geom_point(aes(shape = S), size = 5, fill = 'red') +
+  scale_shape_identity() +
+  facet_wrap(~S) +
+  theme_void()
+```
+
+## {}
+
+# Interaktiv mit plotly
+
+```{r}
+p <- ggplot(data=d_le_latest) +
+  geom_point(mapping = aes(x = he, y = le, label = country), shape = 21, fill = 'orange')
+ggplotly(p, width = 800, height = 400)
+```
+
+
+
+- Interaktive Diagramme mit plotly
+- Weitere Informationen anzeigen mit `label=<M>`
+- Funktioniert nur in HTML (und nicht auf Papier)
+
+## {}
+
+# Mit Beschriftung
+
+```{r}
+countries <- c("United States", "Sierra Leone", "Sri Lanka")
+d_le_latest <- d_le_latest |> mutate(highlight = country %in% countries)
+d_le_labels <- d_le_latest |> filter(country %in% countries)
+```
+
+- Array mit interessanten Ländern
+- `mutate()`: Punkte dieser Länder farblich hervorheben mit Merkmal `highlight`
+- `filter()`: Zeilen mit anderen Ländern herausfiltern
+- Dazu später mehr
+
+```{r}
+p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
+  geom_point(data = d_le_latest, mapping = aes(color = highlight)) +
+  geom_label(data = d_le_labels, hjust = 0.7, nudge_y = 2, size = 2.5, alpha = 0.5)
+```
+
+- Plot in Variable `p` speichern und auf nächster Folie ausgegeben
+- Farblich hervorheben mit Merkmal `highlight` (siehe oben)
+- Beschriftung hinzufügen mit `geom_label()` (Dokumentation!)
+- Details später
+
+## {}
+
+# Lebenserwartung mit Beschriftung
+
+```{r}
+p
+```
+
+## {}
+
+# Blasendiagramm
+
+```{r}
+ggplot(data = d_le_latest) + 
+  geom_point(mapping=aes(x = he, y = le, size = gdppc))
+```
+
+- Skalierung nach BIP pro Kopf
+
+## {}
+
+# Fünf auf einen Streich
+
+```{r}
+d <- tibble(A = c(1, 6, 2, 8), B = c(10, 0, 5, 3.75), C = c(16, 2, 8, 4), D = c('a', 'b', 'b', 'a'), E = c('u', 'u', 'v', 'v'))
+ggplot(data = d) + 
+  geom_point(mapping = aes(x = A, y = B, size = C, color = D, shape = E))
+```
+
+
+
+- Hier: Schwer zu lesen
+- Sinnvoll? Von Fall zu Fall entscheiden
+
+## {}
+
+
+
+# 2. Histogramme und Dichtefunktionen
+
+## {}
+
+# Histogramm 2D (Basisversion)
+
+```{r}
+ggplot(data = d_le_latest) + 
+  geom_bin2d(mapping = aes(x = he, y = le))
+```
+
+- Histogramm für zwei Merkmale mit `geom_bin2d()`
+
+## {}
+
+# Histogramm 2D (mit Klassenbreiten)
+
+```{r}
+ggplot(data = d_le_latest) +
+  geom_bin2d(mapping = aes(x = he, y = le), binwidth = c(1, 4))
+```
+
+
+
+- Klassenbreiten mit `binwidth()`
+- Zwei Parameter (jeweils für eine Richtung)
+
+## {}
+
+# Alternativ mit Sechsecken
+
+```{r}
+ggplot(data = d_le_latest) +
+  geom_hex(mapping = aes(x=he, y=le), binwidth = c(1, 4))
+```
+
+
+
+- Unterschied zu vorher: `geom_hex` statt `geom_bin2d`
+
+## {}
+
+# Dichtefunktion
+
+```{r}
+ggplot(data = d_le_latest) +
+  geom_density_2d(mapping = aes(x = he, y = le))
+```
+
+- `geom_density_2d()` erzeugt Höhenlinien der geschätzten Dichtefunktion
+
+## {}
+
+# Dichtefunktion gefüllt
+
+```{r}
+ggplot(data = d_le_latest) + 
+  geom_density_2d_filled(mapping = aes(x = he, y = le))
+```
+
+
+
+- `geom_density_2d_filled()` färbt Bereiche nach der geschätzten Dichtefunktion
+- Seit ggplot2 3.3.2 (https://github.com/tidyverse/ggplot2/releases)
+
+## {}
+
+
+
+# Zusammenfassung
+
+## {}
+
+# `geom_point()`
+
+
+AES/Argument | Beschreibung | Optional
+-|-|-
+x | Merkmal für x-Position | Nein
+y | Merkmal für y-Position | Nein
+shape | Form (nur qualitative Merkmale) | Ja
+size | Größe (nur stetige Merkmale) | Ja
+alpha | Transparenz (nur stetige Merkmale) | Ja
+color | Farbe | Ja
+fill | Füllfarbe für Shapes 21 ‒ 24 | Ja
