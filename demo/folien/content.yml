@@ -1,9 +1,21 @@
 # Output goes here, this folder is cleared on each run
 # Absolute path or relative to the folder containing this file
-target-folder: "c"
+target-folder: c
 
 # Folder where things go for deployment, relative to project folder
 deploy-folder: _output/folien-r/c
+
+
+# Parts, folders relative to project root
+parts:
+- folder: w-erste-schritte/folien
+- folder: w-ggplot2/folien
+- folder: w-einzelne-merkmale/folien
+
+
+# Pattern to extract name from part folder
+part-name-pattern: "w\\-(.*)/"
+
 
 # Jobs
 jobs:
@@ -14,48 +26,52 @@ jobs:
   from: quarto-template.yml
   to: ${target-folder}/_metadata.yml
 
-# Jobs running on all parts
+
+# Jobs running on all parts, additional variables
+# - part-folder: Absolute path to part folder
+# -        name: Name extracted from part folder via part-name-pattern
+# -         idx: Index of part filled with 0
 jobs-on-parts:
 
 # Copy into target folder (web access)
 - copy:
   from: ${part-folder}/folien.qmd
-  to: ${idx}-${name}.qmd
+  to: ${target-folder}/${idx}-${name}.qmd
 - copy:
   from: ${part-folder}/bilder
-  to: bilder
+  to: ${target-folder}/bilder
   exclude-patterns: [".afdesign$"]
 - copy:
   from: ${part-folder}/daten
-  to: daten
+  to: ${target-folder}/daten
 - copy:
   from: ${part-folder}/skripte
-  to: skripte
+  to: ${target-folder}/skripte
 
 # Into subfolders of target folder to be zipped and deleted. Zipfile
 # for download from Moodle
 - copy:
   from: ${part-folder}/folien.qmd
-  to: ${idx}-${name}/${name}.qmd
+  to: ${target-folder}/${idx}-${name}/${name}.qmd
 - copy:
   from: ${part-folder}/folien.Rproj
-  to: ${idx}-${name}/${name}.Rproj
+  to: ${target-folder}/${idx}-${name}/${name}.Rproj
 - copy:
   from: ${part-folder}/bilder
-  to: ${idx}-${name}/bilder
+  to: ${target-folder}/${idx}-${name}/bilder
   exclude-patterns: [".afdesign$"]
 - copy:
   from: ${part-folder}/daten
-  to: ${idx}-${name}/daten
+  to: ${target-folder}/${idx}-${name}/daten
 - copy:
   from: ${part-folder}/skripte
-  to: ${idx}-${name}/skripte
+  to: ${target-folder}/${idx}-${name}/skripte
 - copy:
   from: quarto-template.yml
-  to: ${idx}-${name}/_quarto.yml
+  to: ${target-folder}/${idx}-${name}/_quarto.yml
 - copy:
   from: style.scss
-  to: ${idx}-${name}/style.scss
+  to: ${target-folder}/${idx}-${name}/style.scss
 - zip:
   zipfile: ${idx}-${name}.zip
   folder: ${idx}-${name}
@@ -63,14 +79,7 @@ jobs-on-parts:
 - copy:
   from: ${target-folder}/${idx}-${name}.zip
   to: ${deploy-folder}/${idx}-${name}.zip
+  overwrite: yes
 - delete:
   folder: ${target-folder}/${idx}-${name}
 
-# Pattern to extract name from part folder
-part-name-pattern: "w\\-(.*)/"
-
-# Parts, folders relative to project root
-parts:
-- folder: w-erste-schritte/folien
-- folder: w-ggplot2/folien
-- folder: w-einzelne-merkmale/folien
