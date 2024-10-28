@@ -30,32 +30,32 @@ d_bl <- gisco_get_nuts(country = "Germany", nuts_level = 2, resolution = 03)
 # Dataframes für ausgewählte Stationen und Jahreswerte
 d_stat_a <- d_stat |> filter(Station %in% unique(d_ns$Station))
 d_ns_jahr <- d_ns |>
-  filter(!is.na(Niederschlag)) |>
-  group_by(Station, Jahr) |>
-  summarise(n = n(), Niederschlag = sum(Niederschlag)) |>
-  filter(n >= 365) |>
-  summarise(n = n(), Niederschlag = mean(Niederschlag)) |>
-  ungroup()
+    filter(!is.na(Niederschlag)) |>
+    group_by(Station, Jahr) |>
+    summarise(n = n(), Niederschlag = sum(Niederschlag)) |>
+    filter(n >= 365) |>
+    summarise(n = n(), Niederschlag = mean(Niederschlag)) |>
+    ungroup()
 
 # Plot auf Landkarte
 p1 <- ggplot() +
-  geom_sf(data = d_bl, fill = NA, color = "lightcoral", linewidth = 0.5) +
-  geom_sf(data = d_de, fill = NA, color = "slategray", linewidth = 0.75) +
-  geom_sf(data = d_stat, alpha = 0.2) +
-  geom_sf(
-    data = d_stat_a, mapping = aes(fill = Station),
-    shape = 21, color = "black", size = 2.5, show.legend = FALSE
-  ) +
-  theme_void()
+    geom_sf(data = d_bl, fill = NA, color = "lightcoral", linewidth = 0.5) +
+    geom_sf(data = d_de, fill = NA, color = "slategray", linewidth = 0.75) +
+    geom_sf(data = d_stat, alpha = 0.2) +
+    geom_sf(
+        data = d_stat_a, mapping = aes(fill = Station),
+        shape = 21, color = "black", size = 2.5, show.legend = FALSE
+    ) +
+    theme_void()
 
 # Plot der Niederschläge
 p2 <- ggplot(data = d_ns_jahr) +
-  geom_col(
-    mapping = aes(x = reorder(Station, desc(Niederschlag)), y = Niederschlag, fill = Station),
-    color = "black", show.legend = FALSE
-  ) +
-  labs(title = "Mittlerer jährlicher Niederschlag", x = NULL, y = NULL) +
-  theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust = 1))
+    geom_col(
+        mapping = aes(x = reorder(Station, desc(Niederschlag)), y = Niederschlag, fill = Station),
+        color = "black", show.legend = FALSE
+    ) +
+    labs(title = "Mittlerer jährlicher Niederschlag", x = NULL, y = NULL) +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust = 1))
 
 # Darstellen
 p1 + p2
@@ -68,13 +68,13 @@ p1 + p2
 #| echo: false
 
 d_ns_monat <- d_ns |>
-  filter(!is.na(Niederschlag)) |>
-  group_by(Station, Jahr, Monat) |>
-  summarise(n = n(), Niederschlag = sum(Niederschlag))
+    filter(!is.na(Niederschlag)) |>
+    group_by(Station, Jahr, Monat) |>
+    summarise(n = n(), Niederschlag = sum(Niederschlag))
 
 ggplot(data = d_ns_monat) +
-  geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
-  labs(title = "Monatliche Niederschläge (alle Stationen)")
+    geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
+    labs(title = "Monatliche Niederschläge (alle Stationen)")
 ```
 
 
@@ -82,10 +82,10 @@ ggplot(data = d_ns_monat) +
 
 ```{r}
 #| echo: false
- 
+
 ggplot(data = d_ns_monat) +
-  geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
-  labs(title = "Monatliche Niederschläge (nach Stationen)")
+    geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
+    labs(title = "Monatliche Niederschläge (nach Stationen)")
 ```
 
 
@@ -152,21 +152,23 @@ Tageswerte der Niederschläge liegen beim Deutschen Wetterdienst in Form von CSV
 **Traditionelle Arbeitsweise (zum Beispiel mit Word)**
 
 -   Statistische Untersuchungen mit speziellem Programm
--   Ergebnisse und Grafiken von Hand in Textdokument / Präsentation übernehmen
+-   Ergebnisse und Grafiken von Hand in Dokument übernehmen
 -   Vorteile: Einfach, gewohnte Arbeitsweise
 -   Nachteile: Fehler in Berechnung - Zurück auf Start! Weg von den Daten zum Dokument nicht reproduzierbar
+
+[]{.up20}
 
 **Arbeiten mit Quarto**
 
 -   Quarto-Markdown-Dokument fasst Text und Berechnungen zusammen
--   Daraus wird PDF/HTML/Word/PPT erzeugt (ähnlich wie LaTeX aber mit Berechnungen)
+-   Daraus wird PDF/HTML/Word/PPT erzeugt (ähnlich wie mit LaTeX)
 -   Vorteile: Änderungen einfach, Methoden nachvollziehbar, reproduzierbar
 -   Nachteile: Ungewohnte Arbeitsweise, Lernkurve
 
 
 ## Möglichkeiten mit Quarto
 
-<br/> <br/> <br/>
+[]{.down100}
 
 -   Kurze Berichte erstellen
 -   Präsentationen (Sie schauen gerade eine an) vorbereiten
@@ -185,7 +187,7 @@ Quelle: https://quarto.org
 
 ## Quarto konvertiert Quarto-Markdown
 
-<br/> <br/> <br/> <br/>
+[]{.down140}
 
 ![](bilder/qmd-how-it-works.png)
 
