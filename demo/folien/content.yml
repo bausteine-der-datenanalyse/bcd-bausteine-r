@@ -11,6 +11,7 @@ parts:
 - folder: w-erste-schritte/folien
 - folder: w-ggplot2/folien
 - folder: w-einzelne-merkmale/folien
+- folder: w-kenngroessen/folien
 
 
 # Pattern to extract name from part folder
