@@ -1,9 +1,17 @@
 ---
 title: "Aufgaben zu Kenngrößen und Beschreibung von Verteilungen"
+author: "TODO: Namen eintragen"
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
 library(ineq)
-load("daten/data-exercise.Rdata")
+load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
 ```
+
+## Titel Folie 1
+
+```{r}
+show(d_bo_vm)
+```
+
