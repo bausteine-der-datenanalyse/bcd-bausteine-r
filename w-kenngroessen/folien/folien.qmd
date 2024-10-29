@@ -1,5 +1,5 @@
 ---
-title: "Kenngrößen von Verteilungen"
+title: "Kenngrößen und Beschreibung von Verteilungen in R"
 ---
 
 ```{r}
