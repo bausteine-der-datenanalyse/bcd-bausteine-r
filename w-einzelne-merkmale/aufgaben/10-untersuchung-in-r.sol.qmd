@@ -86,7 +86,7 @@ ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf") 
 ```
 
-75% der Befragten sind `{{r}} z75` Minuten oder kürzer unterwegs.
+75% der Befragten sind `` `{{r}} z75` `` Minuten oder kürzer unterwegs.
 
 #### Empirische Verteilungsfunktion der Fahrzeiten
 
