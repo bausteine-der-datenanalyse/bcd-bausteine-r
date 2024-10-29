@@ -1,0 +1,363 @@
+---
+title: "Dichtekurven und Normalverteilung"
+---
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(kableExtra)
+library(ggridges)
+load("daten/data-lecture.Rdata")
+```
+
+## Übersicht Dataframes für diese Folien
+
+<br/><br/>
+
+Name | Inhalt
+-|-
+`d_ns_m` | Monatswerte für Niederschläge in Bochum
+
+<br/><br/>
+
+Quellen: <https://www.dwd.de>
+
+
+# 1. Normalverteilung
+
+## Funktionen erzeugen
+
+### Eigene Funktionen
+
+```{r}
+f1 <- function(x) x^2
+f1(2)
+```
+
+- Funktion `f1` berechnet `x^2`
+- Dabei ist `function(x) x^2` die Funktion mit dem Namen `f1`
+
+### Normalverteilung mit $\mu = 1$ und $\sigma = 2$
+
+```{r}
+f2 <- function(x) dnorm(x, mean = 1, sd = 2)
+f2(0)
+```
+
+- Funktion `f2` berechnet mit `dnorm(x, mean = mu, sd = sigma)` Normalverteilung
+ - an der Stelle x
+ - mit Mittelwert `mu` und Standardabweichung `sigma`
+
+## Plotten mit `geom_line()` und `stat`
+
+```{r}
+ggplot(data = tibble(A = c(-1, 1), B = c(1, 1))) +
+  geom_line(stat = 'function', fun = f1) + 
+  geom_point(mapping = aes(x = A, y = B))
+```
+
+
+
+- `geom_line()` plottet Kurve ohne Mapping
+  - Funktionswerte aus `stat = 'function'` (statistische Transformation)
+  - Funktion angeben mit `fun = <Funktion>` 
+
+## Plotten mit `geom_line()` und `stat`
+
+```{r}
+ggplot(data = tibble(X = c(-8, 10)), mapping = aes(x = X)) +
+  geom_line(stat = 'function', fun = f2)
+```
+
+- `geom_line()` plottet Kurve ohne Mapping
+  - Funktionswerte aus `stat = 'function'` (statistische Transformation)
+  - Funktion angeben mit `fun = <Funktion>` 
+
+## Plotbereich festlegen
+
+### Erste Möglichkeit
+
+```{r, eval = FALSE}
+ggplot(data = tibble(A = c(0, 1))) +
+  geom_line(stat = 'function', fun = f1) + 
+  geom_point(mapping = aes(x = A, y = A))
+```
+
+- Plotbereich aus zweitem Geom (zum Beispiel Punkte)
+
+### Zweite Möglichkeit
+
+```{r, eval = FALSE}
+ggplot(data = tibble(X = c(-8, 10)), mapping = aes(x = X)) +
+  geom_line(stat = 'function', fun = f2)
+```
+
+- Mit `data` und `mapping` für `x` als Argumente für `ggplot()`
+
+## Funktion plotten mit `geom_ribbon()`
+
+```{r}
+ggplot(data = tibble(X = c(-8, -3, -1, 1, 3, 5, 10))) +
+  geom_vline(mapping = aes(xintercept = X), color = 'red') +
+  geom_ribbon(mapping = aes(ymin = 0, ymax = stat(y)),
+        stat='function', fun=f2, color='black', fill='linen', alpha=0.8)
+```
+
+- Mapping mit  `x` und `y` aus `stat = 'function'` mit `stat(x)` und `stat(y)` 
+
+## Histogramm mit Normalverteilung
+
+### Mittelwert und Standardabweichung der Stichprobe berechnen
+
+```{r}
+mu <- mean(d_ns_m$Niederschlag)
+sigma <- sd(d_ns_m$Niederschlag)
+```
+
+### Funktion `f` für Normalverteilung x mit `mu` und `sigma`
+
+```{r}
+f <- function(x) dnorm(x, mean=mu, sd=sigma)
+```
+
+### Plot in Variable `p` speichern (für nächste Folie)
+
+```{r}
+p <- ggplot(data = d_ns_m) +
+  geom_histogram(mapping = aes(x = Niederschlag, y = stat(density)), binwidth = 5, boundary = 0) +
+  geom_line(stat = 'function', fun = f, color = 'red', size = 1)
+```
+
+## Histogramm mit Normalverteilung
+
+```{r}
+p
+```
+
+## Kontrolle: Normal-Quantil-Plot
+
+```{r, fig.height=3}
+ggplot(data = d_ns_m) +
+  geom_qq(mapping = aes(sample = Niederschlag)) + 
+  geom_qq_line(mapping = aes(sample = Niederschlag))
+```
+
+### Erläuterung
+- Normal-Quantil-Plot mit `geom_qq()` sowie `geom_qq_line()`
+- Ergebnis: Normalverteilung nicht gut geeignet, Verteilung der Daten ist rechtsschief
+
+## Kontrolle: Normal-Quantil-Plot
+
+```{r, fig.height=3}
+ggplot(data = d_ns_m, mapping = aes(sample = Niederschlag)) +
+  geom_qq() + 
+  geom_qq_line()
+```
+
+## Erläuterung
+- Mapping für alle Geoms gleich? Dann als Argument in `ggplot()`
+
+# 2. Approximierte Dichtefunktionen
+
+## Dichtefunktion Niederschläge BO
+
+```{r, fig.height=3}
+ggplot(data = d_ns_m) +
+  geom_histogram(mapping = aes(x = Niederschlag, y = stat(density)), binwidth = 10, boundary = 0) +
+  geom_density(mapping = aes(x = Niederschlag), color = 'red', size = 1) +
+  lims(x = c(-50, 250))
+```
+
+
+- `geom_density()` erzeugt approximierte Dichtefunktion
+- Größerer Plotbereich mit `lims(x = c(xmin, xmax))` (Details später)
+
+## Dichtefunktion Niederschläge BO
+
+```{r, fig.height=3}
+ggplot(data = d_ns_m) +
+  geom_histogram(mapping = aes(x = Niederschlag, y = stat(density)), binwidth = 10, boundary = 0) +
+  geom_density(mapping = aes(x = Niederschlag), color = 'red', size = 1, fill = 'linen', alpha = 0.8) +
+  lims(x = c(-50, 250))
+```
+
+- Fläche füllen mit `fill = <Farbe>`
+- Transparenz mit `alpha = <Wert>`
+
+## Dichtefunktion Niederschläge BO
+
+```{r, fig.height=3}
+ggplot(data = d_ns_m) +
+  geom_histogram(mapping = aes(x = Niederschlag, y = stat(density)), binwidth = 10, boundary = 0) +
+  geom_density(mapping = aes(x = Niederschlag), bw = 2, size = 1, color = 'orange') +
+  geom_density(mapping = aes(x = Niederschlag), bw = 4, size = 1, color = 'blue') +
+  geom_density(mapping = aes(x = Niederschlag), bw = 8, size = 1, color = 'red') + lims(x = c(-50,250))
+```
+
+- Argument `bw = <Wert>` legt die Breite des Kerns fest (bw = _bandwidth_)
+- Je größer `bw` umso glatter die Kurve
+
+## Dichtefunktion in Monaten
+
+```{r}
+ggplot(data = d_ns_m) +
+  geom_density(mapping = aes(x = Niederschlag, fill = Monat), alpha = 1/4)
+```
+
+
+- Füllfarbe nach Monat
+- Transparenz mit `alpha = <Wert>`
+
+## Dichtefunktionen untereinander
+
+```{r}
+ggplot(data = d_ns_m) +
+  geom_density_ridges(mapping = aes(x = Niederschlag, y = Monat), bandwidth = 10)
+```
+
+
+- Geom `geom_density_ridges()` wie `geom_density()` aber untereinander
+- Kernbreite mit `bandwidth = <Wert>` angeben
+- Paket `ggridges` installieren
+
+
+## Violinenplot
+
+```{r}
+ggplot(data = d_ns_m) +
+  geom_violin(mapping = aes(x = 0, y = Niederschlag))
+```
+
+- Ähnlich Boxplot, aber mit Kurven
+
+## Violinenplot
+
+```{r}
+ggplot(data = d_ns_m) +
+  geom_violin(mapping = aes(x = Monat, y = Niederschlag))
+```
+
+- Monate besitzen unterschiedliche Charakteristiken
+
+# 3. Zusammenfassung
+
+## Funktionen definieren
+
+### Normale Funktion
+
+```{r, eval=FALSE}
+f <- function(x) sin(x^2)
+```
+
+### Normalverteilung
+
+```{r, eval=FALSE}
+mu <- mean(<Vektor>)
+sigma <- sd(<Vektor>)
+f <- function(x) dnorm(x, mu, sigma)
+```
+
+## Funktionen plotten
+
+### Mit `geom_line()`
+
+```{r, eval=FALSE}
+ggplot(data = <Dataframe>) +
+  geom_line(stat = 'function', fun = <Funktion>, Argumente) +
+  <Weiteres Geom mit Mapping>
+```
+
+- Trick: Kombination von `stat = 'function'` und `fun = <Funktion>`
+- Funktion vorab definieren
+- Übliche Argumente für `geom_line`
+
+### Mit `geom_ribbon()`
+
+```{r, eval = FALSE}
+ggplot(data = <Dataframe>) +
+  geom_ribbon(mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)),
+        stat = 'function', fun = <Funktion>, Argumente) +
+  <Weiteres Geom mit Mapping>
+```
+
+- Mapping mit Werten, die das Stat berechnet (hier: `x` und `y`)
+- Sonst wie mit `geom_line()`
+
+## Dichtefunktion mit `geom_density()`
+
+```{r, eval=FALSE}
+ggplot(data = <DATAFRAME>) +
+  geom_density(mapping = aes(x = <M>, ...), Argumente)
+```
+
+
+AES | Beschreibung | Optional
+-|-|-
+x | Merkmal für Dichte | Nein
+
+<br/>
+
+AES/Argumente | Beschreibung | Optional
+-|-|-
+color | Farbe der Linie | Ja
+fill | Füllfarbe | Ja
+alpha | Transparenz der Füllfarbe | Ja
+
+<br/>
+
+Argumente | Beschreibung
+-|-
+kernel | Art des Kerns ('gaussian', 'epanechnikov', 'cosine', ...)
+bw | Glättungsbreite h
+
+→ Nicht dieselben Kerne, wie in der Vorlesung
+
+## Normal-Quantil-Plot
+
+```{r, eval=FALSE}
+ggplot(data = <Dataframe>) +
+  geom_qq(mapping = aes(sample = <M>), Argumente) + 
+  geom_qq_line(mapping = aes(sample = <M>), Argumente)
+```
+
+<br/>
+
+AES | Beschreibung | Optional
+-|-|-
+sample | Merkmal mit Daten | Nein
+
+<br/>
+
+Argumente | Beschreibung
+-|-
+color | Farbe
+
+## Dichtefunktionen untereinander
+
+```{r, eval=FALSE}
+ggplot(data = <Dataframe>) +
+  geom_density_ridges(mapping = aes(x = <M>, y = <M>, ...), bandwidth = bw)
+```
+
+AES | Beschreibung | Optional
+-|-|-
+x | Merkmal für Dichte | Nein
+y | Merkmal einzelne Plots | Nein
+
+<br/>
+
+AES/Argumente | Beschreibung | Optional
+-|-|-
+color | Farbe der Linie | Ja
+fill | Füllfarbe | Ja
+alpha | Transparenz der Füllfarbe | Ja
+
+<br/>
+
+Argumente | Beschreibung
+-|-
+bandwidth | Glättungsbreite h
+
+## Violinenplot
+
+Wie Boxplot

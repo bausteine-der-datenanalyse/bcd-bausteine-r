@@ -1,0 +1,9 @@
+---
+title: "Aufgaben zu Kenngrößen und Beschreibung von Verteilungen"
+---
+
+```{r setup, include=FALSE, message=FALSE}
+library(ineq)
+load("daten/data-exercise.Rdata")
+lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
+```
