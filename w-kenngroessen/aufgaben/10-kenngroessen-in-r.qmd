@@ -8,7 +8,7 @@ Bestimmen Sie die gängigen Lage- und Streumaße für die Fahrzeiten.
 
 ### Histogramm
 
-Plotten Sie ein Histogramm der Fahrzeiten und stellen Sie die Werte $\overline{x} - \sigma$, $\overline{x}$ sowie $\overline{x} + \sigma$ mit farbigen vertikalen Linien dar.
+Plotten Sie ein Histogramm der Fahrzeiten und stellen Sie die Werte $\overline{x} - \tilde{s}$, $\overline{x}$ sowie $\overline{x} + \tilde{s}$ mit farbigen vertikalen Linien dar.
 
 ### Verteilungsfunktion
 
