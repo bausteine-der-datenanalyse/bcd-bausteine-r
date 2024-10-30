@@ -5,6 +5,7 @@ author: "TODO: Namen eintragen"
 
 ```{r setup, include=FALSE, message=FALSE}
 library(ineq)
+library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
 ```
