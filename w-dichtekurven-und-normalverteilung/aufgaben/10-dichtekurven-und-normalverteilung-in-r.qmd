@@ -20,7 +20,7 @@ Plotten Sie das Histogramm der Geschwindigkeiten zusammen mit der zugehörigen N
 Stellen Sie das Histogramm der Geschwindigkeiten gemeinsam mit einer approximierten Dichtekurve dar. Experimentieren Sie hierbei mit verschiedenen Breiten des Kerns.
 
 
-## Darstellungsformen: Dichtekurven, Violinenplots und Boxplots
+### Darstellungsformen: Dichtekurven, Violinenplots und Boxplots
 
 Vergleichen Sie die Verteilung der Geschwindigkeiten für
 
