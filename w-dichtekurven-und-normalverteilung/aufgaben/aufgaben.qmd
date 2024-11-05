@@ -1,25 +1,17 @@
 ---
 title: "Aufgaben zu Dichtekurven und Normalverteilung"
+author: "TODO: Namen eintragen"
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-library(kableExtra)
-load("daten/data-exercise.Rdata")
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 ```
 
-# Übersicht Dataframes für diese Folien
-
-+----------------+---------------------------------------------------------------+
-| Name           | Inhalt                                                        |
-+================+===============================================================+
-| `d_unistrasse` | Verkehrsmessung Universitätsstraße 2017, rund 20000 Fahrzeuge |
-+----------------+---------------------------------------------------------------+
+## Dataframe
 
 ```{r}
-kable(d_unistrasse)
+show(d_unistrasse)
 ```
-
-Anmerkungen
-
--   Verkehrszeiten VZ siehe <https://de.wikipedia.org/wiki/Verkehrszeiten>
--   Quelle: Prof. Iris Mühlenbruch
