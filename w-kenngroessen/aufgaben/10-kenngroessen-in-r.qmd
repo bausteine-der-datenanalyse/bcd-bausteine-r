@@ -1,4 +1,4 @@
-## Kenngrößen von Verteilungen in R
+## Kenngrößen und Beschreibung von Verteilungen in R
 
 In dieser Übungsaufgabe verwenden Sie nochmals die Ergebnisse eine Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat. Verwenden Sie hierzu die Datei [03-kenngroessen-aufgaben.zip](03-kenngroessen-aufgaben.zip).
 
