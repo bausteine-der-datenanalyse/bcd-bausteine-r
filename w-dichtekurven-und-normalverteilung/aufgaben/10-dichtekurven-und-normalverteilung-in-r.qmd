@@ -1,5 +1,6 @@
 ## Dichtekurven und Normalverteilung in R
 
+Laden Sie das RStudio-Projekt [05-dichtekurven-und-normalverteilung.zip](05-dichtekurven-und-normalverteilung.zip) herunter und entpacken Sie die Datei.
 
 ### Normalverteilung
 
