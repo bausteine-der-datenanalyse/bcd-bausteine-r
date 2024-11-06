@@ -5,7 +5,7 @@
 # lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
 ```
 
-### Lage- und Streumaße für Fahrzeiten
+#### Lage- und Streumaße für Fahrzeiten
 
 ```{r}
 #| echo: true
@@ -17,7 +17,7 @@ var(d_bo_vm$Zeit)
 sd(d_bo_vm$Zeit)
 ```
 
-### Verteilung mit $\tilde x$ und $\tilde s$
+#### Verteilung mit $\tilde x$ und $\tilde s$
 
 ```{r}
 #| echo: true
@@ -29,7 +29,7 @@ ggplot(data = d_bo_vm) +
   geom_vline(xintercept = c(m-s, m, m + s), color = c('red','blue','red'))
 ```
 
-### Emp. Verteilungsfunktion mit Werten
+#### Emp. Verteilungsfunktion mit Werten
 
 ```{r}
 #| echo: true
@@ -42,7 +42,7 @@ ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf")
 ```
 
-### Boxplot aller Fahrzeiten
+#### Boxplot aller Fahrzeiten
 
 ```{r}
 #| echo: true
@@ -51,7 +51,7 @@ ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(y = Zeit))
 ```
 
-### Fahrzeiten und Fachbereiche
+#### Fahrzeiten und Fachbereiche
 
 ```{r}
 #| echo: true
@@ -60,7 +60,7 @@ ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x = Fachbereich, y = Zeit))
 ```
 
-### Fahrzeiten und Verkehrsmittel
+#### Fahrzeiten und Verkehrsmittel
 
 ```{r}
 #| echo: true
@@ -69,7 +69,7 @@ ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x=Verkehrsmittel, y=Zeit), varwidth = TRUE)
 ```
 
-### Fahrzeiten, Fachbereiche und Geschlecht
+#### Fahrzeiten, Fachbereiche und Geschlecht
 
 ```{r}
 #| echo: true
@@ -78,7 +78,7 @@ ggplot(data = d_bo_vm) +
   geom_boxplot(mapping=aes(x=Fachbereich,y=Zeit,fill=Geschlecht), varwidth=TRUE)
 ```
 
-### Lorenzkurve der Fahrzeiten
+#### Lorenzkurve der Fahrzeiten
 
 ```{r}
 #| echo: true
@@ -88,7 +88,7 @@ ggplot(data = lc_to_tibble(lcz)) +
   geom_ribbon(mapping=aes(x=u,ymin=v,ymax=u),color='black',fill='light blue')
 ```
 
-### Gini-Koeffizient
+#### Gini-Koeffizient
 
 ```{r}
 #| echo: true
@@ -97,9 +97,9 @@ n <- nrow(d_bo_vm)
 Gini(d_bo_vm$Zeit)
 ```
 
-Für $n = `r n`$ Beobachtungen ist dabei der Vorfaktor für den Lorenz-Münzer-Koeffizienten mit $n / (n-1) = `r signif(n/(n-1), 4)`$ nahe bei 1. Der Unterschied ist vernachlässigbar.
+Für $n =$ `` `{{r}} n` `` Beobachtungen ist dabei der Vorfaktor für den Lorenz-Münzer-Koeffizienten mit $n / (n-1) =$ `` `{{r}} signif(n/(n-1), 4)` `` nahe bei 1. Der Unterschied ist vernachlässigbar.
 
-#### Anmerkungen
+##### Anmerkungen
 
 - Sie sehen hier, dass R-Code auch direkt in den Text eingebaut werden kann. Dabei wird der Programmcode in `'r Programmcode'` ausgewertet und das Ergebnis in den Text eingesetzt. Statt ' muss man dabei den Schrägstrich nach hinten (Backtick) verwenden.
 - Mathematische Formeln werden zwischen Dollarzeichen gesetzt und verwenden die Schreibweise von LaTeX.
