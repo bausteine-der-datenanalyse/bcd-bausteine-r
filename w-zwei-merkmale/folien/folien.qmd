@@ -1,5 +1,5 @@
 ---
-title: "Untersuchung von zwei Merkmalen in R (1/2)"
+title: "Untersuchung von zwei Merkmalen in R"
 ---
 
 ```{r}
@@ -8,33 +8,48 @@ library(plotly)
 library(kableExtra)
 library(tidyverse)
 library(hexbin)
-load("daten/data-lecture.Rdata")
+load("daten/zwei-merkmale-1.Rdata")
 ```
 
 # Übersicht Dataframes für diese Folien
 
-## Sachverständigenrat
+## Sachverständigenrat für Wirtschaft [^1]
+
+[^1]: Quelle: Fahrmeir et al., Statistik, Der Weg zur Datenanalyse
+
+[]{.down10}
 
 ```{r}
-kable(d_svrw)
+#| echo: false
+kable(d_svrw) |> scroll_box(height="300px")
 ```
 
-## Lebenserwartung (Weltbank)
+[]{.down10}
+
+- `Jahr`: Betrachtetes Jahr
+- `Prognose`: Vom Sachverständigenrat prognostiziertes Wirtschaftswachstum
+- `Wachstum`: Tatsächlich eingetretenes Wirtschaftswachstum
+
+## Lebenserwartung [^2]
+
+[^2]: Quelle: Weltbank
+
+[]{.down10}
 
 ```{r}
-kable(d_le_latest)
+#| echo: false
+kable(d_le_latest) |> scroll_box(height="200px")
 ```
 
-### Spalten und Indikatoren
+[]{.down10}
 
-- `le` Life expectancy at birth, total (years) - [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)
-- `gdppc` GDP per capita (current US$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
-- `edu` Government expenditure on education, total (% of GDP) - [SE.XPD.TOTL.GD.ZS](https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS)
-- `he` Current health expenditure (% of GDP) - [SH.XPD.CHEX.GD.ZS](https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS)
-- `gini` GINI index - [SI.POV.GINI](https://data.worldbank.org/indicator/SI.POV.GINI)
+- `le`: Life expectancy at birth, total (years) - [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)
+- `gdppc`: GDP per capita (current US\$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
+- `edu`: Gov. expenditure on education (% of GDP) - [SE.XPD.TOTL.GD.ZS](https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS)
+- `he`: Current health expenditure (% of GDP) - [SH.XPD.CHEX.GD.ZS](https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS)
+- `gini`: GINI index - [SI.POV.GINI](https://data.worldbank.org/indicator/SI.POV.GINI)
 
-
-# 1. Streudiagramme und Blasendiagramme
+# Streudiagramme und Blasendiagramme
 
 ## Prognosen Sachverständigenrat
 
@@ -47,14 +62,14 @@ ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +
 - Gerade mit `geom_abline()` wobei `intercept`=y-Achsenabschnitt und `slope`=Steigung
 - Mapping für `geom_point()` **und** `geom_rug()` (Blaue Striche)
 
-## Ausgaben G und Lebenserwartung
+## Ausgaben Gesundheitswesen und Lebenserwartung
 
 ```{r}
 ggplot(data = d_le_latest) +
   geom_point(mapping = aes(x = he, y = le))
 ```
 
-## Ausgaben G und Lebenserwartung
+## Ausgaben Gesundheitswesen und Lebenserwartung
 
 ```{r}
 ggplot(data = d_le_latest) +
@@ -63,7 +78,10 @@ ggplot(data = d_le_latest) +
 
 ## `geom_point()`: Shapes
 
-```{r, echo=FALSE}
+[]{.down10}
+
+```{r}
+#| echo: false
 # From https://ggplot2.tidyverse.org/reference/scale_shape.html
 d <- tibble(S = 0:24)
 ggplot(d, aes(0, 0, shape = S)) +
@@ -73,16 +91,13 @@ ggplot(d, aes(0, 0, shape = S)) +
   theme_void()
 ```
 
-## Interaktiv mit plotly
+## Interaktive Diagramme mit `plotly`
 
 ```{r}
-p <- ggplot(data=d_le_latest) +
-  geom_point(mapping = aes(x = he, y = le, label = country), shape = 21, fill = 'orange')
+p <- ggplot(data=d_le_latest) + geom_point(mapping = aes(x = he, y = le, label = country), shape = 21, fill = 'orange')
 ggplotly(p, width = 800, height = 400)
 ```
 
-
-- Interaktive Diagramme mit plotly
 - Weitere Informationen anzeigen mit `label=<M>`
 - Funktioniert nur in HTML (und nicht auf Papier)
 
@@ -99,6 +114,8 @@ d_le_labels <- d_le_latest |> filter(country %in% countries)
 - `filter()`: Zeilen mit anderen Ländern herausfiltern
 - Dazu später mehr
 
+##
+
 ```{r}
 p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
   geom_point(data = d_le_latest, mapping = aes(color = highlight)) +
@@ -110,7 +127,7 @@ p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
 - Beschriftung hinzufügen mit `geom_label()` (Dokumentation!)
 - Details später
 
-## Lebenserwartung mit Beschriftung
+## 
 
 ```{r}
 p
@@ -119,8 +136,7 @@ p
 ## Blasendiagramm
 
 ```{r}
-ggplot(data = d_le_latest) + 
-  geom_point(mapping=aes(x = he, y = le, size = gdppc))
+ggplot(data = d_le_latest) + geom_point(mapping=aes(x = he, y = le, size = gdppc))
 ```
 
 - Skalierung nach BIP pro Kopf
@@ -129,14 +145,12 @@ ggplot(data = d_le_latest) +
 
 ```{r}
 d <- tibble(A = c(1, 6, 2, 8), B = c(10, 0, 5, 3.75), C = c(16, 2, 8, 4), D = c('a', 'b', 'b', 'a'), E = c('u', 'u', 'v', 'v'))
-ggplot(data = d) + 
-  geom_point(mapping = aes(x = A, y = B, size = C, color = D, shape = E))
+ggplot(data = d) + geom_point(mapping = aes(x = A, y = B, size = C, color = D, shape = E))
 ```
 
-- Hier: Schwer zu lesen
-- Sinnvoll? Von Fall zu Fall entscheiden
+- Hier schwer zu lesen, von Fall zu Fall entscheiden
 
-# 2. Histogramme und Dichtefunktionen
+# Histogramme und Dichtefunktionen
 
 ## Histogramm 2D (Basisversion)
 
@@ -154,8 +168,7 @@ ggplot(data = d_le_latest) +
   geom_bin2d(mapping = aes(x = he, y = le), binwidth = c(1, 4))
 ```
 
-- Klassenbreiten mit `binwidth()`
-- Zwei Parameter (jeweils für eine Richtung)
+- Klassenbreiten mit `binwidth()` und Werten für jede Richtung
 
 ## Alternativ mit Sechsecken
 
@@ -182,20 +195,18 @@ ggplot(data = d_le_latest) +
   geom_density_2d_filled(mapping = aes(x = he, y = le))
 ```
 
-- `geom_density_2d_filled()` färbt Bereiche nach der geschätzten Dichtefunktion
-- Seit ggplot2 3.3.2 (https://github.com/tidyverse/ggplot2/releases)
+- `geom_density_2d_filled()` färbt nach der geschätzten Dichtefunktion
 
 # Zusammenfassung
 
 ## `geom_point()`
 
-
-AES/Argument | Beschreibung | Optional
--|-|-
-x | Merkmal für x-Position | Nein
-y | Merkmal für y-Position | Nein
-shape | Form (nur qualitative Merkmale) | Ja
-size | Größe (nur stetige Merkmale) | Ja
-alpha | Transparenz (nur stetige Merkmale) | Ja
-color | Farbe | Ja
-fill | Füllfarbe für Shapes 21 ‒ 24 | Ja
+| AES/Argument | Beschreibung                       | Optional |
+|--------------|------------------------------------|----------|
+| x            | Merkmal für x-Position             | Nein     |
+| y            | Merkmal für y-Position             | Nein     |
+| shape        | Form (nur qualitative Merkmale)    | Ja       |
+| size         | Größe (nur stetige Merkmale)       | Ja       |
+| alpha        | Transparenz (nur stetige Merkmale) | Ja       |
+| color        | Farbe                              | Ja       |
+| fill         | Füllfarbe für Shapes 21 ‒ 24       | Ja       |
