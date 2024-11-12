@@ -3,7 +3,9 @@ title: "Aufgaben zu Kenngrößen und Beschreibung von Verteilungen"
 author: "TODO: Namen eintragen"
 ---
 
-```{r setup, include=FALSE, message=FALSE}
+```{r}
+#| echo: false
+#| message: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")

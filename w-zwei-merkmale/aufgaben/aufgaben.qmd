@@ -1,24 +1,29 @@
 ---
-title: "Aufgaben zur Untersuchung von zwei Merkmalen (1/2)"
+title: "Aufgaben zur Untersuchung von zwei Merkmalen"
+author: "TODO: Namen eintragen"
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-library(ggridges)
-library(kableExtra)
-load("daten/data-exercise.Rdata")
+```{r}
+#| echo: false
+#| message: false
+load("daten/zwei-merkmale-aufgaben-1.Rdata")
+load("daten/zwei-merkmale-aufgaben-2.Rdata")
 ```
 
-# Übersicht Dataframes für diese Folien
-
-| Name           | Inhalt                                                        |
-|----------------|---------------------------------------------------------------|
-| `d_unistrasse` | Verkehrsmessung Universitätsstraße 2017, rund 20000 Fahrzeuge |
+## Dataframe Geschwindigkeitsmessung
 
 ```{r}
-kable(d_unistrasse)
+show(d_unistrasse)
 ```
 
 Anmerkungen:
 
 -   Uhrzeit = Stunde + Minute / 60 + Sekunde / 3600
 -   Quelle: Prof. Iris Mühlenbruch
+
+## Dataframe Windenergieanlage
+
+```{r}
+show(d_wea_min)
+```
+
