@@ -4,6 +4,7 @@ title: "Untersuchung von zwei Merkmalen in R"
 
 ```{r}
 #| echo: false
+#| message: false
 library(plotly)
 library(kableExtra)
 library(tidyverse)

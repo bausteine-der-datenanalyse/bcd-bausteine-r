@@ -4,7 +4,8 @@ title: "Kenngrößen und Beschreibung von Verteilungen in R"
 
 ```{r}
 #| echo: false
-library(tidyverse)
+#| message: false
+library(tidyverse#| )
 library(kableExtra)
 library(ineq)
 

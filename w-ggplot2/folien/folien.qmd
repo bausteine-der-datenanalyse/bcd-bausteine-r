@@ -5,6 +5,7 @@ title: "Grundlagen von ggplot2"
 
 ```{r}
 #| echo: false
+#| message: false
 library(tidyverse)
 library(kableExtra)
 load("daten/data-lecture.Rdata")

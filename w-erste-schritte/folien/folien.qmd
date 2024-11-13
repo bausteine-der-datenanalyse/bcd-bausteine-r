@@ -6,6 +6,7 @@ subtitle: "Erste Schritte in RStudio"
 
 ```{r}
 #| echo: false
+#| message: false
 library(sf)
 library(giscoR)
 library(lubridate)

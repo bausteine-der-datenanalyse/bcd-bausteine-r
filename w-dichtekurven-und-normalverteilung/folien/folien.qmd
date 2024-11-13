@@ -4,6 +4,7 @@ title: "Dichtekurven und Normalverteilung"
 
 ```{r}
 #| echo: false
+#| message: false
 library(tidyverse)
 library(kableExtra)
 library(ggridges)
