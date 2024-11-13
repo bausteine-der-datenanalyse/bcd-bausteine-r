@@ -1,8 +1,6 @@
 #### Entfernungen in andere Städte
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 d_bo_entfernung <- tibble(
   Stadt =      c("Essen", "Wattenscheid", "Dortmund", "Herne", "Wuppertal", "Gelsenkirchen", "Mühlheim"),
   Entfernung = c(  17.8 ,          10.2 ,      15.4 ,   10.7 ,       21.4 ,           14.1 ,      27.2 )
@@ -12,27 +10,23 @@ ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung))
 
 #### Studierende an der BO: Geschlecht
 
-```{r}
-#| echo: true
-#| eval: false
+Basisversion
+
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Geschlecht))
 ```
 
-#### Studierende an der BO: Geschlecht
+Mit Farbe
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Jahr, fill = Geschlecht))
 ```
 
 #### Studierende an der BO: Fachbereiche
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = 0, fill = Fachbereich)) +
   coord_polar(theta = "y")
@@ -40,45 +34,35 @@ ggplot(data = d_bo_vm) +
 
 #### Verkehrsmittel
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Verkehrsmittel))
 ```
 
 #### Verkehrsmittel in den Fachbereichen 
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Fachbereich, fill = Verkehrsmittel), position = "fill")
 ```
 
 #### Histogramm der Fahrzeiten
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_histogram(mapping = aes(x = Zeit, fill = Verkehrsmittel), boundary=0, binwidth=15)
 ```
 
 #### Empirische Verteilungsfunktion der Fahrzeiten
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf")
 ```
 
 #### Extra: Wert für 75% berechnen
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 z75 = quantile(d_bo_vm$Zeit, probs = 0.75)
 ggplot(data = d_bo_vm) +
   geom_hline(yintercept=0.75, color="light blue") + 
@@ -90,9 +74,7 @@ ggplot(data = d_bo_vm) +
 
 #### Empirische Verteilungsfunktion der Fahrzeiten
 
-```{r}
-#| echo: true
-#| eval: false
+```{.r}
 ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit, color = Verkehrsmittel), stat = "ecdf")
 ```

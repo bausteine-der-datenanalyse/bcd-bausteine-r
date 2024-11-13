@@ -10,7 +10,7 @@ Stellen Sie die Beobachtungen der Geschwindigkeitsmessung in einem Streuplot dar
 
 ### Zweidimensionales Histogramm
 
-Erstellen Sie ein zweidimensionales Histogramm der Geschwindigkeiten über die Urzeit jeweils mit rechteckigen und mit sechseckigen Klassen. Experimentieren Sie dabei mit verschiedenen Klassenbreiten. Welche Darstellung gefällt ihnen besser?
+Erstellen Sie ein zweidimensionales Histogramm der Geschwindigkeiten über die Urzeit jeweils mit rechteckigen und mit sechseckigen Klassen (installieren Sie hierzu das Paket `hexbin`). Experimentieren Sie dabei mit verschiedenen Klassenbreiten. Welche Darstellung gefällt ihnen besser?
 
 ### Dichtefunktionsplot
 
