@@ -17,10 +17,14 @@ load("daten/zwei-merkmale-1.Rdata")
 
 [^1]: Quelle: Fahrmeir et al., Statistik, Der Weg zur Datenanalyse
 
+[]{.down10}
+
 ```{r}
 #| echo: false
 kable(d_svrw) |> scroll_box(height="300px")
 ```
+
+[]{.down10}
 
 - `Jahr`: Betrachtetes Jahr
 - `Prognose`: Vom Sachverständigenrat prognostiziertes Wirtschaftswachstum
@@ -30,10 +34,14 @@ kable(d_svrw) |> scroll_box(height="300px")
 
 [^2]: Quelle: Weltbank
 
+[]{.down10}
+
 ```{r}
 #| echo: false
 kable(d_le_latest) |> scroll_box(height="200px")
 ```
+
+[]{.down10}
 
 - `le`: Life expectancy at birth, total (years) - [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)
 - `gdppc`: GDP per capita (current US\$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
@@ -45,10 +53,14 @@ kable(d_le_latest) |> scroll_box(height="200px")
 
 [^3]: Quelle: OECD
 
+[]{.down10}
+
 ```{r}
 #| echo: false
 kable(d_pisa) |> scroll_box(height="250px")
 ```
+
+[]{.down10}
 
 PISA misst Schülerleistung in Punkten auf einer willkürlichen Skala. Interpretierbar werden die Punktwerte erst, wenn sie in einen Kontext gesetzt werden. Das geschieht regelmäßig durch den Vergleich zwischen verschiedenen Ländern. Die Berichte der OECD und ihrer Projektpartner bestehen dementsprechend zu einem erheblichen Teil aus Länder-Ranglisten. (Wikipedia)
 
@@ -57,12 +69,26 @@ PISA misst Schülerleistung in Punkten auf einer willkürlichen Skala. Interpret
 ## Prognosen Sachverständigenrat
 
 ```{r}
-ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) + 
-  geom_abline(intercept = 0, slope = 1, color = 'red') +
-  geom_point(size = 2) + geom_rug(color = 'blue')
+ggplot(data = d_svrw) + 
+  geom_point(mapping = aes(x = Prognose, y = Wachstum))
 ```
 
-- Gerade mit `geom_abline()` wobei `intercept`=y-Achsenabschnitt und `slope`=Steigung
+## Prognosen Sachverständigenrat erweitert
+
+```{r}
+ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +   
+  geom_point(size = 2) + geom_abline(intercept = 0, slope = 1, color = 'red') + geom_rug(color = 'blue')
+```
+
+## Prognosen Sachverständigenrat erweitert
+
+```{r}
+ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +   
+  geom_point(size = 2) + geom_abline(intercept = 0, slope = 1, color = 'red') + geom_rug(color = 'blue')
+```
+
+- Gerade mit `geom_abline()` und `intercept` sowie `slope`
+- Beobachtungen entlang der Achsen mit `geom_rug()`
 - Mapping für `geom_point()` **und** `geom_rug()` (Blaue Striche)
 
 ## Ausgaben Gesundheitswesen und Lebenserwartung
@@ -80,6 +106,8 @@ ggplot(data = d_le_latest) +
 ```
 
 ## `geom_point()`: Shapes
+
+[]{.down10}
 
 ```{r}
 #| echo: false
@@ -102,7 +130,9 @@ ggplotly(p, width = 800, height = 400)
 - Weitere Informationen anzeigen mit `label=<M>`
 - Funktioniert nur in HTML (und nicht auf Papier)
 
-## Mit Beschriftung
+## Mit Beschriftung 1/3
+
+[]{.down20}
 
 ```{r}
 countries <- c("United States", "Sierra Leone", "Sri Lanka")
@@ -110,12 +140,14 @@ d_le_latest <- d_le_latest |> mutate(highlight = country %in% countries)
 d_le_labels <- d_le_latest |> filter(country %in% countries)
 ```
 
+[]{.down20}
+
 - Array mit interessanten Ländern
-- `mutate()`: Punkte dieser Länder farblich hervorheben mit Merkmal `highlight`
+- `mutate()`: Länder hervorheben mit Merkmal `highlight`
 - `filter()`: Zeilen mit anderen Ländern herausfiltern
 - Dazu später mehr
 
-## 
+## Mit Beschriftung 2/3
 
 ```{r}
 p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
@@ -128,7 +160,7 @@ p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
 - Beschriftung hinzufügen mit `geom_label()` (Dokumentation!)
 - Details später
 
-## 
+## Mit Beschriftung 3/3
 
 ```{r}
 p
@@ -137,12 +169,13 @@ p
 ## Blasendiagramm
 
 ```{r}
-ggplot(data = d_le_latest) + geom_point(mapping=aes(x = he, y = le, size = gdppc))
+ggplot(data = d_le_latest) + 
+  geom_point(mapping=aes(x = he, y = le, size = gdppc))
 ```
 
 - Skalierung nach BIP pro Kopf
 
-## Fünf auf einen Streich
+## Darstellung von fünf Merkmalen
 
 ```{r}
 d <- tibble(A = c(1, 6, 2, 8), B = c(10, 0, 5, 3.75), C = c(16, 2, 8, 4), D = c('a', 'b', 'b', 'a'), E = c('u', 'u', 'v', 'v'))
@@ -329,6 +362,8 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
 | color        | Farbe                              | Ja       |
 | fill         | Füllfarbe für Shapes 21 ‒ 24       | Ja       |
 
+: {tbl-colwidths="[20,50,30]"}
+
 ## Geglättete Daten mit `geom_smooth()`
 
 ```{r}
@@ -342,6 +377,8 @@ ggplot(data = <DATAFRAME>) +
 | x   | Merkmal für x-Achse | Nein     |
 | y   | Merkmal für y-Achse | Nein     |
 
+: {tbl-colwidths="[20,50,30]"}
+
 | Argumente | Beschreibung                                       | Optional |
 |-----------|----------------------------------------------------|----------|
 | formula   | In der Regel `y ~ x`                               | Nein     |
@@ -349,3 +386,5 @@ ggplot(data = <DATAFRAME>) +
 | se        | Konfidenzintervall anzeigen (`TRUE` oder `FALSE`)  | Ja       |
 | color     | Farbe                                              | Ja       |
 | size      | Linienstärke                                       | Ja       |
+
+: {tbl-colwidths="[20,50,30]"}
