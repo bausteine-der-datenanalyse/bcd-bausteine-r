@@ -6,6 +6,7 @@ author: "TODO: Namen eintragen"
 ```{r}
 #| echo: false
 #| message: false
+library(tidyverse)
 load("daten/zwei-merkmale-aufgaben-1.Rdata")
 load("daten/zwei-merkmale-aufgaben-2.Rdata")
 ```
