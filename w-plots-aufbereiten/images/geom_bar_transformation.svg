@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 425.2 166.2" style="enable-background:new 0 0 425.2 166.2;" xml:space="preserve">
+<style type="text/css">
+	.st0{font-family:'Courier-Bold';}
+	.st1{font-size:12px;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{letter-spacing:9;}
+	.st4{letter-spacing:15;}
+	.st5{letter-spacing:3;}
+	.st6{letter-spacing:27;}
+	.st7{letter-spacing:1;}
+	.st8{letter-spacing:22;}
+	.st9{fill:#0020FF;}
+	.st10{fill:#00BF22;}
+	.st11{fill:#E90077;}
+	.st12{font-family:'HelveticaNeue';}
+</style>
+<g>
+	<text transform="matrix(1 0 0 1 17.8369 54.2705)" class="st0 st1">farbe</text>
+	<text transform="matrix(1 0 0 1 17.8369 68.6705)" class="st0 st1">rot</text>
+	<text transform="matrix(1 0 0 1 17.8369 83.0705)" class="st0 st1">gruen</text>
+	<text transform="matrix(1 0 0 1 17.8369 97.4705)" class="st0 st1">blau</text>
+	<text transform="matrix(1 0 0 1 17.8369 111.8705)" class="st0 st1">gruen</text>
+	<text transform="matrix(1 0 0 1 17.8369 126.2705)" class="st0 st1">rot</text>
+	<text transform="matrix(1 0 0 1 17.8369 140.6705)" class="st0 st1">gruen</text>
+	<rect x="12.5" y="58.8" class="st2" width="47" height="88"/>
+	<rect x="12.5" y="42.8" class="st2" width="47" height="16"/>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 173.8369 76.2705)" class="st0 st1">farbe</text>
+	<text transform="matrix(1 0 0 1 209.8369 76.2705)" class="st0 st1 st3"> </text>
+	<text transform="matrix(1 0 0 1 226.5369 76.2705)" class="st0 st1">n</text>
+	<text transform="matrix(1 0 0 1 173.8369 90.6705)" class="st0 st1">blau</text>
+	<text transform="matrix(1 0 0 1 202.6369 90.6705)" class="st0 st1 st4"> </text>
+	<text transform="matrix(1 0 0 1 226.5369 90.6705)" class="st0 st1">1</text>
+	<text transform="matrix(1 0 0 1 233.7369 90.6705)" class="st0 st1 st5"> </text>
+	<text transform="matrix(1 0 0 1 245.8369 90.6705)" class="st0 st1 st6"> </text>
+	<text transform="matrix(1 0 0 1 173.8369 105.0705)" class="st0 st1">gruen </text>
+	<text transform="matrix(1 0 0 1 217.0369 105.0705)" class="st0 st1 st7"> </text>
+	<text transform="matrix(1 0 0 1 226.5369 105.0705)" class="st0 st1">3</text>
+	<text transform="matrix(1 0 0 1 173.8369 119.4705)" class="st0 st1">rot</text>
+	<text transform="matrix(1 0 0 1 195.4369 119.4705)" class="st0 st1 st8"> </text>
+	<text transform="matrix(1 0 0 1 226.5369 119.4705)" class="st0 st1">2</text>
+	<rect x="168.5" y="80.8" class="st2" width="74.5" height="44"/>
+	<rect x="168.5" y="64.8" class="st2" width="74.5" height="16"/>
+</g>
+<g>
+	<rect x="315" y="107.2" class="st9" width="19.3" height="19.3"/>
+	<rect x="343.3" y="107.2" class="st10" width="19.3" height="19.3"/>
+	<rect x="343.3" y="87.8" class="st10" width="19.3" height="19.3"/>
+	<rect x="343.3" y="68.5" class="st10" width="19.3" height="19.3"/>
+	<rect x="371.5" y="107.2" class="st11" width="19.3" height="19.3"/>
+	<rect x="371.5" y="87.8" class="st11" width="19.3" height="19.3"/>
+	<rect x="298" y="55" class="st2" width="113" height="79.5"/>
+</g>
+<text transform="matrix(1 0 0 1 12.2651 19.7344)" class="st12 st1">Ausgangsdaten</text>
+<text transform="matrix(1 0 0 1 152.2651 19.7344)" class="st12 st1">Transformierte Daten</text>
+<text transform="matrix(1 0 0 1 80.374 72.7344)" class="st12 st1">Statistische </text>
+<text transform="matrix(1 0 0 1 72.674 87.1344)" class="st12 st1">Transformation</text>
+<text transform="matrix(1 0 0 1 356.3901 19.7344)" class="st12 st1">Diagram</text>
+<text transform="matrix(1 0 0 1 401.4901 19.7344)" class="st12 st1">m</text>
+<g>
+	<g>
+		<line class="st2" x1="64" y1="95" x2="160.7" y2="95"/>
+		<g>
+			<polygon points="154.8,98.2 154.4,97.2 160.6,95 154.4,92.8 154.8,91.8 163.5,95 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st2" x1="251" y1="95" x2="285.7" y2="95"/>
+		<g>
+			<polygon points="279.8,98.2 279.4,97.2 285.6,95 279.4,92.8 279.8,91.8 288.5,95 			"/>
+		</g>
+	</g>
+</g>
+</svg>
