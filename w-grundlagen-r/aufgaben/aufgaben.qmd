@@ -1,11 +1,13 @@
 ---
 title: "Übung zur Programmiersprache R"
 author: "TODO"
-output: html_document
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-source("style/setup.R")
+```{r}
+#| echo: false
+#| warning: false
+library(lubridate)
+library(tidyverse)
 ```
 
 # Aufgabe 1
