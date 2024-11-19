@@ -86,3 +86,4 @@ parts:
 - folder: w-kenngroessen/folien
 - folder: w-dichtekurven-und-normalverteilung/folien
 - folder: w-zwei-merkmale/folien
+- folder: w-weitere-geoms-und-plots-aufbereiten/folien
