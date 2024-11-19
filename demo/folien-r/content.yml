@@ -33,6 +33,7 @@ jobs-on-parts:
 - copy:
   from: ${part-folder}/daten
   to: ${target-folder}/daten
+  optional: yes
 - copy:
   from: ${part-folder}/skripte
   to: ${target-folder}/skripte
@@ -54,6 +55,7 @@ jobs-on-parts:
 - copy:
   from: ${part-folder}/daten
   to: ${target-folder}/${idx}-${name}/daten
+  optional: yes
 - copy:
   from: ${part-folder}/skripte
   to: ${target-folder}/${idx}-${name}/skripte
@@ -87,3 +89,4 @@ parts:
 - folder: w-dichtekurven-und-normalverteilung/folien
 - folder: w-zwei-merkmale/folien
 - folder: w-weitere-geoms-und-plots-aufbereiten/folien
+- folder: w-grundlagen-r/folien
