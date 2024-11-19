@@ -7,9 +7,9 @@ author: "TODO"
 #| echo: false
 #| warning: false
 library(tidyverse)
-load("data/data-exercise-03.Rdata")
-load("data/data-exercise-05.Rdata")
-load("data/data-exercise-06.Rdata")
+load("daten/data-exercise-03.Rdata")
+load("daten/data-exercise-05.Rdata")
+load("daten/data-exercise-06.Rdata")
 d_bo_entfernung <- tibble(
   Stadt =      c("Essen", "Wattenscheid", "Dortmund", "Herne", "Wuppertal", "Gelsenkirchen", "Mühlheim"),
   Entfernung = c(  17.8 ,          10.2 ,      15.4 ,   10.7 ,       21.4 ,           14.1 ,      27.2 )
