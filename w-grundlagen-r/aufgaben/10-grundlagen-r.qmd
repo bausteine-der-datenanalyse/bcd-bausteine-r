@@ -1,5 +1,5 @@
 ## Grundlagen R
 
-Laden Sie das RStudio-Projekt [08-grundlagen-r.zip](08-grundlagen-r.zip) herunter und entpacken Sie die Datei. 
+Laden Sie das RStudio-Projekt [07-grundlagen-r.zip](07-grundlagen-r.zip) herunter und entpacken Sie die Datei. 
 
-Bearbeiten Sie die Punkte in `08-grundlagen-r.qmd`.
+Bearbeiten Sie die Punkte in `grundlagen-r-aufgaben.qmd`.
