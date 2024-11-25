@@ -1,0 +1,13 @@
+execute: 
+  echo: true
+
+format: 
+  revealjs:
+    overview: true
+    slide-number: "c/t"
+    code-line-numbers: false
+    number-sections: true
+    toc-depth: 1
+    number-depth: 1
+    theme: 
+    - style.scss
