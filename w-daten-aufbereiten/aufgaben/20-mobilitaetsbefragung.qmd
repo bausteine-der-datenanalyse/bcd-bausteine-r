@@ -1,0 +1,29 @@
+---
+title: "Aufgabe 2"
+subtitle: "Mobilitätsbefragung an der BO"
+author: "TODO"
+output: html_document
+---
+
+# 1. Einlesen und Aufbereiten der Daten *To-DO: angemessene Formulierung*
+
+Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Daten sinnvoll auf. Hinweise zur Kodierung erhalten Sie in `daten/BefragungMVP2017_0_kodierung.xlsx` .
+
+# 2. Häufigkeiten
+
+- Stellen Sie in einem nach den Häufigkeiten sortierten Balkendiagramm die verschiedenen Fachbereiche dar.
+- Zeigen Sie für jeden Fachbereich in einem Balkendiagramm die gewählten Verkehrsmittel.
+- Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere"
+
+Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:
+
+- Fahrzeiten und Ort
+- Fahrzeiten und Verkehrsmittel
+
+# 3. Wegstrecke und Fahrzeit
+
+Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne , Wuppertal, Gelsenkirchen und Mülheim dar, ob ein Zusammenhang zwischen Strecke und Fahrzeit erkennbar ist.
+
+# 4. Reisezeit und Verkehrsmittel
+
+Erstellen Sie für jedes Verkehrsmittel einen Boxplot für die Reisezeit und deuten Sie kurz das Ergebnis.

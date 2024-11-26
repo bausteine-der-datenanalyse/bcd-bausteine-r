@@ -1,0 +1,260 @@
+---
+title: "Daten einlesen"
+subtitle: "Bevor es bunt wird..."
+---
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+library(kableExtra)
+```
+
+## Übersicht
+
+[]{.down50}
+
+1. Tidyverse
+1. Excel-Dateien lesen
+1. CSV-Dateien lesen
+1. Rohdaten
+
+## 1 Tidyverse
+
+## Tidyverse
+
+[]{.down40}
+
+![](bilder/tidyverse.svg)
+
+[]{.down40}
+
+- Sammlung von Bibliotheken für Data-Science in R
+- Durchgängige Designphilosophie und Datenstrukturen
+- Viele Dinge leichter und eleganter zu erledigen als in 'reinem' R
+- Ursprünglich von Hadley Wickham, heute viele Entwickler
+- Einführung in https://youtu.be/MjHQo-t2v_c
+
+## 2 Excel-Dateien lesen
+
+## Funktionen zum Einlesen {.smaller}
+
+[]{.up20}
+
+### Paket
+
+```{r}
+library(readxl)
+```
+
+### Die Funktion `read_excel()`
+
+<br/>
+[]{.up50}
+
+Funktion | Beschreibung
+-|-
+read_excel | Excel Tabelle einlesen
+
+### Verwendung
+
+```{r, eval = FALSE}
+d <- read_excel(datei, optionen)
+```
+
+### Optionen (die wichtigsten)
+
+<br/>
+[]{.up50}
+
+Parameter | Bedeutung | Optional
+-|-|-
+skip = Anzahl | Anzahl zeilen, die überlesen werden sollten | Ja
+range = "B2:G20" | Bereich der eingelesen werden soll (ersetzt skip) | Ja
+sheet = "Name" | Tabellenblatt, das gelesen werden soll | Ja
+
+## Beispiel 1: Einfache Tabelle {.scrollable}
+
+::: {layout-ncol=2}
+
+![](bilder/tabelle.svg)
+
+```{r}
+d<-read_excel("daten/tabelle.xlsx")
+kable(d)
+```
+:::
+
+
+### Anmerkungen
+- `read_excel()` liest Excel-Datei und gibt Dataframe zurück
+- Im einfachsten Fall nur die Datei angeben
+- Erstes Sheet wird gelesen
+- Nur der Bereich, in dem etwas steht
+- Formatierung (fett/Farbe/...) der Zellen egal
+- Datum wird korrekt als date-time eingelesen (klappt nicht immer)
+
+## Leider nicht immer so einfach
+
+### Rohdaten Seitenradarmessung
+
+![](bilder/excel-screenshot.svg)
+
+### Wo liegt das Problem
+- Es soll bestimmtes Tabellenblatt gelesen werden
+- Bereiche links und oben sollen ignoriert werden
+
+→ Importassistent!
+
+## Importassistent 1/3
+
+![](bilder/importassistent-1.svg)
+
+## Importassistent 2/3
+
+![](bilder/importassistent-2.svg)
+
+## Importassistent 3/3 {.scrollable}
+
+```{r}
+d<-read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
+kable(d)
+```
+
+
+### Anmerkungen
+
+- Datum wird nicht korrekt gelesen (hier Zeichenkette)
+- Liegt an der Formatierung in Excel
+
+## Hands-On
+
+### Aufgabe
+
+- Lesen Sie die Datei `daten/Pegel_Metadaten.xlsx` ein (Daten zu Messpegeln, Prof. Mudersbach) und überprüfen Sie das Ergebnis.
+
+```{r}
+#HANDSON 1
+```
+
+## 3 CSV-Dateien einlesen
+
+## Aufbau und Inhalt von CSV-Dateien {.scrollable}
+
+![](bilder/csv.svg){.nostretch}
+
+### Anmerkungen
+
+- CSV = "Comma separated values"
+- Aufbau: Kopf und Inhalt
+- Kopf: Meist Beschreibung und Spaltennamen
+- Inhalt in der Regel mit:
+  1. Datenfeldern getrennt durch spezielles Zeichen (meist Tabulator, Leerzeichen, Komma oder Semikolon)
+  1. Datum als Text (verschiedene Formate) 
+  1. Zahlen ohne oder mit Dezimaltrenner (Punkt oder Komma)
+  1. Spezielle Kennzeichnung von fehlenden Werten
+  
+→ Leider kein einheitlicher Standard (aber weit verbreitet)
+
+## Beispiel 1  - Amerikanische Konvention
+
+### Inhalt `beispiel-1.csv`
+
+```{}
+A, B, C, D
+1.2, 3, Frances, 2020-12-01
+2.6, 1, Howard, 2020-12-01
+1.7, 6, Kimberley, 2020-12-01
+500000.2, 3, Stacey, 2020-12-01
+```
+
+$\rightarrow$ Dezimalzeichen ist `.` und Einträge sind durch `,` getrennt
+
+### Lesen mit mit `read_csv`
+
+```{r message=FALSE}
+read_csv("daten/beispiel-1.csv")
+```
+
+## Beispiel 2 - Deutsche Konvention
+
+### Inhalt `beispiel-2.csv`
+
+```{}
+A; B; C; D
+1,2; 3; Fanziska; 1-10-2022
+2,6; 1; Philipp; 3-12-2002
+1,7; 6; Angela; 29-1-1977
+500.000,2; 3; Sabine; 7-1-1898
+```
+
+$\rightarrow$ Dezimalzeichen ist `,` wobei Tausender mit `.` und Einträge durch `;` getrennt werden
+
+### Lesen mit mit `read_csv2`
+
+```{r message=FALSE}
+read_csv2("daten/beispiel-2.csv")
+```
+
+## Beispiel 3 - Gemischte Konvention {.smaller}
+
+### Inhalt `beispiel-3.csv`
+
+```{}
+A; B; C; D
+1.2; 3; Fanziska; 1-10-2022
+2.6; 1; Philipp; 3-12-2002
+1.7; 6; Angela; 29-1-1977
+500,000.2; 3; Sabine; 7-1-1898
+```
+
+$\rightarrow$ Dezimalzeichen ist `.` wobei Tausender mit `,` und Einträge durch `;` getrennt werden
+
+### Lesen mit mit `read_delim` und Angabe von Eintrags-,  Dezimal- und Tausendertrenner
+
+```{r}
+read_delim("daten/beispiel-3.csv", delim = ";", locale = locale(decimal_mark = ".", grouping_mark = ","))
+```
+
+### Vorsicht
+
+- Die eingelesenen Daten muss man sich sehr sorgfältig anschauen
+- Überblick verschaffen mit `summary(d)` und/oder `str(d)`
+
+## Beispiel Niederschlagsdaten Bochum {.scrollable}
+
+```{r message=FALSE}
+d_ns <- read_delim(
+  "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
+  delim = ";",
+  locale = locale(decimal_mark = ".", grouping_mark = ",")
+)
+kable(d_ns)
+```
+
+## Hands-On
+
+Lesen Sie die Datei `daten/10088003_beginn_bis_31.12.2017_tmw.csv` ein (Pegel Donau Hofkirchen, Prof. Mudersbach) und überprüfen Sie das Ergebnis.
+
+```{r}
+# HANDSON 2
+```
+
+Tipp: Auch beim Einlesen von CSV-Dateien kann mit `skip` die Anzahl der zu überspringenden Zeilen angegeben werden
+
+## 4 Rohdaten
+
+## Hände weg von den Rohdaten!
+
+![](bilder/haende-weg.svg)
+
+### Rohdaten dürfen nicht verändert werden
+
+- 'Von Hand' durchgeführte Änderungen sind später nicht mehr nachvollziehbar
+- Änderungen nur schwer einzeln rückgängig zu machen
+
+### Statdessen: Rohdaten einlesen und in R aufbereiten
+
+- R-Code dokumentiert was verändert wurde
+
+→ Wird bei der Benotung berücksichtigt
