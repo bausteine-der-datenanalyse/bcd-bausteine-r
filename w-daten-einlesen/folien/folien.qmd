@@ -58,7 +58,7 @@ sheet = "Name"  | Tabellenblatt, das gelesen werden soll      | Ja
 ![](bilder/tabelle.svg)
 
 ```{r}
-d<-read_excel("daten/tabelle.xlsx")
+d <- read_excel("daten/tabelle.xlsx")
 kable(d)
 ```
 :::
@@ -177,6 +177,26 @@ read_delim(
   locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
 ```
+
+## CSV-Dateien Zusammenfassung
+
+[]{.down60}
+
+```{.r}
+read_csv(Dateiname, Parameter...)   # Amerikanische Konvention
+read_csv2(Dateiname, Parameter...)  # Deutsche Konvention
+read_delim(Dateiname, locale=locale(decimal_mark=".", grouping_mark=","), Parameter...)
+```
+
+[]{.down60}
+
+Die wichtigsten Parameter
+
+Parameter              | Bedeutung                                   | Optional
+-----------------------|---------------------------------------------|---------
+skip = 5               | Anzahl zeilen, die überlesen werden sollten | Ja
+trim_ws = TRUE         | Leerzeichen entfernen (für `read_delim`)    | Ja
+show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
 
 # Rohdaten
 
