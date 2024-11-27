@@ -52,7 +52,7 @@ read_one_file <- function(file) {
 }
 
 d_ns <- list.files(
-  path = "daten", pattern = "produkt.*txt", full.names = TRUE
+  path = "daten", pattern = "produkt_nieder_tag_.*txt", full.names = TRUE
 ) |>
   map(read_one_file) |>
   bind_rows()
