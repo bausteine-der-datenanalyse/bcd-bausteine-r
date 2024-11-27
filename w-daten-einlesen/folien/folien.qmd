@@ -173,7 +173,7 @@ read_delim("daten/beispiel-3.csv", delim=";", trim_ws=TRUE, locale=locale(decima
 ```{r message=FALSE}
 read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
-  delim = ";", , trim_ws=TRUE,
+  delim = ";", trim_ws=TRUE,
   locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
 ```
