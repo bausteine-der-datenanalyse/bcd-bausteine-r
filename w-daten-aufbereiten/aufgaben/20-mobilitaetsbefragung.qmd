@@ -2,7 +2,7 @@
 
 ### Einlesen und Aufbereiten der Daten
 
-Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Daten sinnvoll auf. Hinweise zur Kodierung erhalten Sie in `daten/BefragungMVP2017_0_kodierung.xlsx` .
+Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Daten sinnvoll auf. Hinweise zur Kodierung finden Sie in `daten/BefragungMVP2017_0_kodierung.xlsx` .
 
 ### Häufigkeiten
 

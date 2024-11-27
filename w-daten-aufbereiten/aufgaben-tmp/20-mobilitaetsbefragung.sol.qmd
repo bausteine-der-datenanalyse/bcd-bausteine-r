@@ -12,7 +12,7 @@ source("style/setup.R")
 
 # 1. Einlesen und Aufbereiten der Daten
 
-```{r echo=FALSE, message=FALSE}
+```{r}
 d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
   select(
     geschlecht_id = V1_Ge,
@@ -42,7 +42,7 @@ d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
 bo_kable(d_mb)
 ```
 
-- Die Kodierung steht in einer eigenen Excel-Tabelle im data2 Ordner
+- Die Kodierung steht in einer eigenen Excel-Tabelle im data Ordner
 
 # 2.1 Angehörige der Fachbereiche
 
