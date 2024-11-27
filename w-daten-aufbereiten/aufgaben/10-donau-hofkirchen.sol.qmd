@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE, message=FALSE}
 library(readxl)
+library(tidyverse)
+library(kableExtra)
 ```
 
 # 1. Einlesen und Aufbereiten der Daten
@@ -22,7 +24,7 @@ d_donau <- read_delim(
     Monat = month(Datum, label = TRUE),
     Jahr = year(Datum)
   )
-bo_kable(d_donau)
+d_donau
 ```
 
 # 2.1 Streuplot der Abflüsse

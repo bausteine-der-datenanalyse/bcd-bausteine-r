@@ -1,54 +1,51 @@
----
-title: "Aufgabe 1"
-subtitle: "Abfluss der Donau bei Hofkirchen"
-author: "Matthias Baitsch"
-output: html_document
----
+## Afluss der Donau bei Hofkirchen
 
-# 1. Einlesen und Aufbereiten der Daten *To-DO: angemessene Formulierung*
+### Einlesen und Aufbereiten der Daten
 
-Lesen Sie die Datei aus `"daten/6342800.day` ein und bereiten Sie die Daten sinnvoll auf.
+Lesen Sie die Datei aus `"daten/6342800.day` ein und bereiten Sie die Daten so auf, dass Sie einen Dataframe mit den folgenden Variablen erhalten:
 
-# 2. Plots der Abflüsse
+- `Datum`: Datum als Date-Objekt
+- `Jahr`: Jahr der Messung
+- `Monat`: Name des Monats der Messung
+- `Abfluss`: Wert aus ursprünglicher Variable `Original`
 
-Stellen Sie einen Streuplot der Abflüsse dar. Erstellen Sie separat für jedes Jahr einen Boxplot der Abflüsse.
+### Plots der Abflüsse
 
-# 3. Linearer Trend
+Erstellen Sie folgende Plots:
+
+1. Streuplot der Abflüsse über die Zeit
+1. Einen Boxplot der Abflüsse für jedes Jahr
+
+### Linearer Trend
 
 Berechnen Sie die Ausgleichsgerade und geben Sie den Anstieg des Abflusses in den letzten 100 Jahren an.
 
-# 4. Statistische Kennwerte
+### Statistische Kennwerte
 
 Bestimmen Sie die üblichen statistischen Kennwerte für den Abfluss.
 
-# 5. Standardabweichung für jedes Jahr
+### Standardabweichung für jedes Jahr
 
 Stellen sie die Standardabweichung des Abflusses für jedes Jahr in einer Tabelle dar.
 
-# 6. Standardabweichung über die Jahre
+### Standardabweichung über die Jahre
 
 Stellen sie die Standardabweichung des Abflusses grafisch in einem Plot dar. Bewerten Sie ,ob ein linearer Trend zu erkennen ist.
 
-# 7. Jahre mit kleinster/größter Standardabweichung
+### Jahre mit kleinster/größter Standardabweichung
 
 Bestimmen Sie die drei Jahre mit der jeweils kleinsten und jeweils größten Standardabweichung. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
 
-# 8. Weitere Jahre mit besonderem Ereignis
+### Weitere Jahre mit besonderem Ereignis
 
 Bestimmen Sie das Jahr mit dem jeweils kleinsten und jeweils größten Gesamtabfluss. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
 
-# 9. Monats-Mittelwerte
+### Monats-Mittelwerte
 
 Stellen Sie die Mittelwerte sowie das obere und untere Quartil jedes Monats dar. Bewerten Sie kurz das Ergebnis.
 
-# 10. Verteilung
+### Verteilung
 
-Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar.
-
-# 11. Normalverteilung
-
-Überprüfen Sie grafisch, ob eine Normalverteilung vorliegt.
-
-# 12. QQ-Plot
-
-Stellen Sie den Abfluss in einem QQ-Plot dar und bewerten Sie das Ergebnis.
+- Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar
+- Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung
+- Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis
