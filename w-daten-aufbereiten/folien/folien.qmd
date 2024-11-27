@@ -537,7 +537,7 @@ d_ud |>
 - Unfalldaten mit beiden Kodierungstabellen verknüpfen
 - Spalten mit den Codes löschen
 
-# Dataframes aneinanderhängen `rbind()`/`cbind()`
+# Dataframes aneinanderhängen `bind_rows()`/`bind_cols()`
 
 ## Dataframes aneinander hängen {.smaller}
 
@@ -547,41 +547,44 @@ d2 <- tibble(X = "C", Y = 3)
 d3 <- tibble(Z = c(1.7, 2.9))
 ```
 
-::: {.columns}
-::: {.column width=33%}
+:::::: columns
+::: {.column width="33%"}
 ```{r}
 kable(d1)
 ```
 :::
-::: {.column width=33%}
+
+::: {.column width="33%"}
 ```{r}
 kable(d2)
 ```
 :::
-::: {.column width=33%}
+
+::: {.column width="33%"}
 ```{r}
 kable(d3)
 ```
 :::
 :::
 
-::: {.columns}
-::: {.column width=50%}
+::::: columns
+::: {.column width="50%"}
 ```{r}
-d1 |> cbind(d3) |> kable()
+d1 |> bind_cols(d3) |> kable()
 ```
-:::
-::: {.column width=50%}
-```{r}
-d1 |> rbind(d2) |> kable()
-```
-:::
 :::
 
-- Mit `cbind()` Dataframes nebeneinander *(column-bind)*  
-  - Anzahl der Beobachtungen müssen gleich sein!
-- Mit `rbind()` Dataframes hintereinander *(row-bind)*  
-  - Merkmale müssen gleich sein!
+::: {.column width="50%"}
+```{r}
+d1 |> bind_rows(d2) |> kable()
+```
+:::
+:::::
+
+-   Mit `bind_cols()` Dataframes nebeneinander *(column-bind)*
+    -   Anzahl der Beobachtungen müssen gleich sein!
+-   Mit `bind_rows()` Dataframes hintereinander *(row-bind)*
+    -   Merkmale müssen gleich sein!
 
 # Verschiedenes
 
