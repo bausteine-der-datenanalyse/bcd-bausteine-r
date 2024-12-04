@@ -2,7 +2,19 @@
 
 ### Einlesen und Aufbereiten der Daten
 
-Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Daten sinnvoll auf. Hinweise zur Kodierung finden Sie in `daten/BefragungMVP2017_0_kodierung.xlsx` .
+Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Daten auf. Hinweise zur Kodierung finden Sie in `daten/BefragungMVP2017_0_kodierung.xlsx`. Der resultierende Datensatz sollte folgende Merkmale beinhalten:
+
+- `zeit`: Wegezeit bis zur Hochschule
+
+- `im_ruhrgebiet`: Logischer Wert ob der Wohnort im Ruhrgebiet liegt oder nicht
+
+- `geschlecht`: Buchstabe `m`, `w` oder `d`
+
+- `fachbereich`: Buchstabe für den Fachbereich
+
+- `vm_heute`: Verkehrsmittel, das am Tag der Befragung verwendet wurde
+
+- `ort`: Wohnort, beachten Sie, dass es Orte gibt, die falsch eingetragen wurden, z.B. "Remschei"
 
 ### Häufigkeiten
 
