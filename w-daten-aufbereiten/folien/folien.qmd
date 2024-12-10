@@ -72,7 +72,7 @@ sin(sqrt(exp(1.5)))
 
 ## Beispieldatensatz
 
-```{r message = FALSE}
+```{r}
 d_uni <- read_excel("daten/unistrasse-2017-2.xlsx", sheet = "raw(T)", range = "B2:H20712") |> 
   select(-Fahrtrichtung, -ends_with("(Radar)"))
 d_uni
@@ -126,12 +126,12 @@ d |> kable()
 ```
 
 ::: {.columns}
-::: {.column width=50%}
+::: {.column}
 ```{r}
 d |> select(starts_with("X")) |> kable()
 ```
 :::
-::: {.column width=50%}
+::: {.column}
 ```{r}
 d |> select(-ends_with("X")) |> kable()
 ```
@@ -156,7 +156,7 @@ d_uni |> rename(V = Geschwindigkeit)
 - Variable umbenennen mit `neuer_name = alter_name`
 - Alle anderen Variablen werden beibehalten
 
-# Beobachtungen auswählen mit `filter()`
+# Beobachtungen auswählen mit `filter()` und `slice()`
 
 ## Wann braucht man das?
 
@@ -208,6 +208,57 @@ d_uni |> filter(is.na(Fahrzeug))
 ```{r}
 d_uni |> filter(!is.na(Fahrzeug)) 
 ```
+
+## Kriterium in Vektor
+
+```{r}
+d_uni |> filter(Fahrzeug %in% c("Zweirad", "LKW"))
+```
+
+- Werte für Merkmal aus Vektor
+
+## Beobachtungen nach Zeilennummer
+
+```{r}
+d_uni |> slice(c(10, 30, 700))
+```
+
+- Beobachtungen nach Position auswählen
+
+## Beobachtungen am Anfang oder am Ende {.smaller}
+
+::: {.columns}
+::: {.column}
+```{r}
+d_uni |> slice_head(n = 5)
+```
+:::
+::: {.column}
+```{r}
+d_uni |> slice_tail(n = 5)
+```
+:::
+:::
+
+- Erste und letzte Beobachtungen auswählen
+
+## Beobachtungen mit größtem/kleinsten Wert {.smaller}
+
+::: {.columns}
+::: {.column}
+```{r}
+d_uni |> slice_min(Geschwindigkeit, n = 5)
+```
+:::
+::: {.column}
+```{r}
+d_uni |> slice_max(Geschwindigkeit, n = 5)
+```
+:::
+:::
+
+
+- Beobachtungen mit kleinstem/größten Wert für ein Merkmal auswählen
 
 # Beobachtungen sortieren mit `arrange()`
 
@@ -443,8 +494,7 @@ d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbr
 
 - `names_from = Name`: Spalte mit neuen Spaltenüberschriften
 - `values_from = Name`: Spalte mit Werten, die verteilt werden sollen
-
-→ Damit transponierte der ursprünglichen Tabelle
+- Damit transponierte der ursprünglichen Tabelle
 
 # Dataframes verknüpfen mit `left_join()`
 
@@ -470,7 +520,7 @@ d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbr
 
 ## Umsetzung in R mit `left_join()`
 
-```{r, message = FALSE}
+```{r}
 d_mitarbeiter <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "B2:E7")
 kable(d_mitarbeiter)
 ```
@@ -478,14 +528,14 @@ kable(d_mitarbeiter)
 
 ## Umsetzung in R mit `left_join()`
 
-```{r, message = FALSE}
+```{r}
 d_abteilungen <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "G2:I7")
 kable(d_abteilungen)
 ```
 
 ## Umsetzung in R mit `left_join()`
 
-```{r, message = FALSE}
+```{r}
 d_mitarbeiter_1 <- d_mitarbeiter |> left_join(d_abteilungen)
 kable(d_mitarbeiter_1)
 ```
@@ -526,7 +576,7 @@ kable(d_ud_k2)
 
 ## Anwendung: Kodierte Werte 4/4
 
-```{r, message = FALSE}
+```{r}
 d_ud |>
   left_join(d_ud_k1) |>
   left_join(d_ud_k2) |>
@@ -547,34 +597,32 @@ d2 <- tibble(X = "C", Y = 3)
 d3 <- tibble(Z = c(1.7, 2.9))
 ```
 
-:::::: columns
-::: {.column width="33%"}
+::::: columns
+::: {.column}
 ```{r}
 kable(d1)
 ```
 :::
-
-::: {.column width="33%"}
+::: {.column}
 ```{r}
 kable(d2)
 ```
 :::
-
-::: {.column width="33%"}
+::: {.column}
 ```{r}
 kable(d3)
 ```
 :::
-:::
+:::::
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column}
 ```{r}
 d1 |> bind_cols(d3) |> kable()
 ```
 :::
 
-::: {.column width="50%"}
+::: {.column}
 ```{r}
 d1 |> bind_rows(d2) |> kable()
 ```
