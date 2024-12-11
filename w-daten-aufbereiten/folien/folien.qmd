@@ -536,6 +536,7 @@ kable(d_abteilungen)
 ## Umsetzung in R mit `left_join()`
 
 ```{r}
+#| message: false
 d_mitarbeiter_1 <- d_mitarbeiter |> left_join(d_abteilungen)
 kable(d_mitarbeiter_1)
 ```
@@ -544,6 +545,7 @@ kable(d_mitarbeiter_1)
 - Gegebenenfalls Merkmal mit `rename()` umbenennen (wie `select()`)
 - Left in `left_join()`: Alle Zeilen aus linker Tabelle werden übernommen
 - Andere Varianten (`inner_join()` etc.) für Spezialfälle
+- Ausgabe von `left_join` unterdrücken mit `#| message: false`
 
 ## Anwendung: Kodierte Werte 1/4
 
@@ -577,6 +579,7 @@ kable(d_ud_k2)
 ## Anwendung: Kodierte Werte 4/4
 
 ```{r}
+#| message: false
 d_ud |>
   left_join(d_ud_k1) |>
   left_join(d_ud_k2) |>
