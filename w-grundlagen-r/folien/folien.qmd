@@ -172,12 +172,10 @@ as.logical(0.1)
 |    `is.na(x)`      |    Test of `x` gleich `NA`    |
 
 | Verknüpfung   |   Bedeutung    |
-|------------|----------------|
-|  `a && b`  | Logisches und  |
-|  `a || b`  | Logisches oder |
-|    `!a`    |    Negation    |
-
-- Wie in Java und vielen anderen Programmiersprachen
+|-----------|----------------|
+|  `a & b`  | Logisches und  |
+|  `a | b`  | Logisches oder |
+|    `!a`   |    Negation    |
 
 ## Beispiele {.smaller}
 
@@ -194,8 +192,8 @@ as.character(3 * 9 + 1) == 28
 :::
 ::: {.column width=50%}
 ```{r}
-TRUE || FALSE
-TRUE && FALSE
+TRUE | FALSE
+TRUE & FALSE
 !FALSE
 ```
 :::
