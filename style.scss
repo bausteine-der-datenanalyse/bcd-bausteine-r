@@ -258,7 +258,7 @@ $selection-bg: #26351c !default;
 }
 
 
-/* code - maba */
+/* maba */
 
 .reveal div.sourceCode pre code {
   margin-left: 0.75em !important;
@@ -283,6 +283,11 @@ $selection-bg: #26351c !default;
   margin-bottom: 1em !important;
 }
 
+.imagesource {
+  display: block;
+  font-size: 0.5em;
+  float: right;
+}
 
 .up10 {
   display: block;
