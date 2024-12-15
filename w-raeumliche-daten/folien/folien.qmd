@@ -399,7 +399,7 @@ ggplot() + geom_sf(data = s1$osm_lines)
 ## Shapefiles {.smaller}
 
 ```{r}
-d_wkr <- st_read("daten/Wkr_25833.shp", quiet = TRUE) |> st_transform(crs = "+proj=longlat")
+d_wkr <- st_read("daten/Wkr_25833/Wkr_25833.shp", quiet = TRUE) |> st_transform(crs = "+proj=longlat")
 ggplot(data = d_wkr) + geom_sf(mapping = aes(fill = Wkr), show.legend = FALSE)
 ```
 
