@@ -6,6 +6,8 @@ In diesem Abschnitt sollen die Daten genutzt werden um den Stand des Windenergie
 
 Eine vergleichbare Auswertung der Daten finden Sie auf der Webseite [Strom-Report](https://strom-report.com/windenergie/).
 
+Verwenden Sie für dieses Aufgabenblatt die Datei [09-raeumliche-daten-aufgaben.zip](09-raeumliche-daten-aufgaben.zip).
+
 ### Auswertung ohne räumlichen Bezug
 
 Werten Sie die Daten zur Windkraft zunächst ohne räumlichen Bezug aus. Erstellen Sie dazu Grafiken zu den folgenden Entwicklungen der Windkraft in Deutschland:
