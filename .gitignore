@@ -10,3 +10,6 @@ aufgaben.html
 .Rhistory
 *.scss
 *.yml
+*.js
+/w-schreiben-mit-rmarkdown/
+/w-raeumliche-daten/
