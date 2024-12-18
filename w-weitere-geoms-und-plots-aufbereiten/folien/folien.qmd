@@ -109,6 +109,54 @@ ggplot(data = filter(d_ns_bochum_tag, Jahr %in% 2014:2017)) +
 - Anzahl der Zeilen oder Spalten mit `ncol =  nc` oder `nrow = nr`
 - Jahre 2014 - 2017 mit `filter()` (später)
 
+## Sortierung nach Häufigkeit 1/3
+
+```{r}
+ggplot(d_wb_all) + geom_bar(mapping = aes(x = region))
+```
+
+- Standardmäßig wird alphabetisch sortiert
+
+## Sortierung nach Häufigkeit 2/3
+
+```{r}
+ggplot(d_wb_all) + geom_bar(mapping = aes(x = fct_infreq(region)))
+```
+
+- Nach Häufigkeit sortieren mit `fct_infreq()`
+
+## Sortierung nach Häufigkeit 3/3
+
+```{r}
+ggplot(d_wb_all) + geom_bar(mapping = aes(x = fct_rev(fct_infreq(region))))
+```
+
+- Ansteigend mit `fct_rev()`
+
+## Sortierung nach Merkmal 1/3
+
+```{r}
+ggplot(d_wb_countries) + geom_col(mapping = aes(x = country, y = pop))
+```
+
+- Standardmäßig wird alphabetisch sortiert
+
+## Sortierung nach Merkmal 2/3
+
+```{r}
+ggplot(d_wb_countries) + geom_col(mapping = aes(x = fct_reorder(country, pop), y = pop))
+```
+
+- Nach Merkmal sortieren mit `fct_reorder()`
+
+## Sortierung nach Merkmal 3/3
+
+```{r}
+ggplot(d_wb_countries) + geom_col(mapping = aes(x = fct_rev(fct_reorder(country, pop)), y = pop))
+```
+
+- Absteigend sortieren wieder mit `fct_rev()`
+
 ## Skalen
 
 ::: {.columns}
