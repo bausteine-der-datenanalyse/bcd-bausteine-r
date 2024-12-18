@@ -10,7 +10,7 @@ d_bo_entfernung <- tibble(
 )
 ```
 
-# Entfernungen in andere Städte
+### Entfernungen in andere Städte
 
 ```{.r}
 ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung)) + 
@@ -21,7 +21,7 @@ ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung)) +
 
 ---
 
-# Studierende an der BO: Geschlecht
+### Studierende an der BO: Geschlecht
 
 ```{.r}
 ggplot(data = d_bo_vm) +
@@ -32,7 +32,7 @@ ggplot(data = d_bo_vm) +
 
 ---
 
-# Studierende an der BO: Fachbereiche
+### Studierende an der BO: Fachbereiche
 
 ```{.r}
 ggplot(data = d_bo_vm) +
@@ -44,7 +44,7 @@ ggplot(data = d_bo_vm) +
 
 ---
 
-# Histogramm mit Uhrzeit (Rechtecke)
+### Histogramm mit Uhrzeit (Rechtecke)
 
 ```{.r}
 ggplot(data = d_unistrasse) + 
