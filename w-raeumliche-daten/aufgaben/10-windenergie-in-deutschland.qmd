@@ -2,7 +2,7 @@
 
 Die Bundesnetzagentur führt mit dem [Marktstammdatenregister (MaStR)](https://www.marktstammdatenregister.de/MaStR) ein umfassendes behördliches Register für Stammdaten des Strom- und Gasmarktes. Die erfassten Daten sind öffentlich zugänglich, dabei allerdings sehr umfangreich und in der Rohform (XML-Dateien) schwer auszuwerten.  
 
-In diesem Abschnitt sollen die Daten genutzt werden um den Stand des Windenergieausbaus in Deutschland zu untersuchen. Sie verwenden dabei einen Ausschnitt der Daten des Marktstammdatenregisters, die vorab aufbereitet wurden. Bei Interesse finden Sie die zugehörigen Programme im Unterordner `skripte`.
+In diesem Abschnitt sollen die Daten genutzt werden um den Stand des Windenergieausbaus in Deutschland zu untersuchen. Sie verwenden dabei einen Ausschnitt der Daten des Marktstammdatenregisters, der vorab aufbereitet wurden. Bei Interesse finden Sie die zugehörigen Programme im Unterordner `skripte`.
 
 Eine vergleichbare Auswertung der Daten finden Sie auf der Webseite [Strom-Report](https://strom-report.com/windenergie/).
 
