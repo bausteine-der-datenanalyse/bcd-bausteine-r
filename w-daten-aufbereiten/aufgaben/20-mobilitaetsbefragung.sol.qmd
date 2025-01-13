@@ -1,11 +1,10 @@
+
+###  Einlesen und Aufbereiten der Daten
+
 ```{.r}
 library(readxl)
 library(tidyverse)
-```
 
-# 1. Einlesen und Aufbereiten der Daten
-
-```{.r}
 d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
   select(
     geschlecht_id = V1_Ge,
@@ -36,7 +35,7 @@ d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
 
 - Die Kodierung steht in einer eigenen Excel-Tabelle.
 
-# 2.1 Angehörige der Fachbereiche
+### Angehörige der Fachbereiche
 
 ```{.r}
 ggplot(data = d_mb) +
@@ -49,7 +48,7 @@ ggplot(data = d_mb) +
 
 - Mit `fct_infreq()` wird die Reihenfolge nach der Häufigkeit gewählt
 
-# 2.2 Fachbereiche und Verkehrsmittel
+### Fachbereiche und Verkehrsmittel
 
 ```{.r}
 ggplot(data = d_mb) +
@@ -62,7 +61,7 @@ ggplot(data = d_mb) +
 
 - Mit `position = position_dodge(preserve = "single")` werden die Balken nebeneinander dargestellt
 
-# 2.3 Häufigste Orte
+### Häufigste Orte
 
 ```{.r}
 orte <- (d_mb |> group_by(ort) |> summarise(n = n()) |> arrange(desc(n)) |> filter(!is.na(ort)) |> head(5))$ort
@@ -81,21 +80,21 @@ ggplot(data = d_mb) +
 
 - Mit `ort2 = factor(ort2, levels = c(orte, "Andere"))` wird die Reihenfolge festgelegt
 
-# 2.4 Fahrzeiten und Ort
+### Fahrzeiten und Ort
 
 ```{.r}
 ggplot(data = d_mb) + 
   geom_boxplot(mapping = aes(x = ort2, y = zeit))
 ```
 
-# 2.5 Fahrzeiten und Verkehrsmittel
+### Fahrzeiten und Verkehrsmittel
 
 ```{.r}
 ggplot(data = d_mb) + 
   geom_boxplot(mapping = aes(x = vm_heute, y = zeit))
 ```
 
-# 3. Wegstrecke und Fahrzeit
+### Wegstrecke und Fahrzeit
 
 ```{.r}
 d_e <- tibble(
@@ -110,7 +109,7 @@ ggplot(data = d_mb_e) +
 
 - Kein unmittelbarer Zusammenhang erkennbar
 
-# 4. Reisezeit und Verkehrsmittel
+### Reisezeit und Verkehrsmittel
 
 ```{.r}
 ggplot(data = d_mb) +

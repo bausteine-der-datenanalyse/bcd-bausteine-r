@@ -47,7 +47,7 @@ s
 sd(x)
 ```
 
-## Aufgabe 4
+### Aufgabe 4
 
 -   Lesen Sie die folgenden Datumswerte ein
 
@@ -61,7 +61,7 @@ mdy("August 19 (1966)")
 mdy("12/30/14") 
 ```
 
-## Aufgabe 5
+### Aufgabe 5
 
 1.  An welchem Wochentag sind Sie geboren?
 2.  Welcher Tag im Jahr war das?

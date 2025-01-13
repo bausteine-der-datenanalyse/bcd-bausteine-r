@@ -1,13 +1,11 @@
 
+### Einlesen und Aufbereiten der Daten
+
 ```{.r}
 library(readxl)
 library(tidyverse)
 library(kableExtra)
-```
 
-# 1. Einlesen und Aufbereiten der Daten
-
-```{.r}
 d_donau <- read_delim(
     "daten/6342800.day",
     locale = locale(decimal_mark = ".", grouping_mark = ","),
@@ -20,7 +18,7 @@ d_donau <- read_delim(
   )
 ```
 
-# 2.1 Streuplot der Abflüsse
+### Streuplot der Abflüsse
 
 ```{.r}
 ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) + 
@@ -28,7 +26,7 @@ ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
-# 2.2 Boxplot der Abflüsse
+### Boxplot der Abflüsse
 
 ```{.r}
 ggplot(data = d_donau) +
@@ -40,7 +38,7 @@ ggplot(data = d_donau) +
   labs(x = NULL, y = NULL)
 ```
 
-# 3. Linearer Trend
+### Linearer Trend
 
 ```{.r}
 x <- as.numeric(d_donau$Datum)
@@ -63,7 +61,7 @@ paste0(
 paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 ```
 
-## Erläuterungen
+#### Erläuterungen
 
 -   Bestimmtheitsmaß mit Werten auf der Ausgleichsgeraden
 
@@ -71,7 +69,7 @@ paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 
 -   Zuwachs in Hundert Jahren ist die Steigung der Ausgleichsgeraden $\beta$ mal 100 Jahre mal 365 Tage pro Jahr bezogen auf den Mittelwert und in Prozent
 
-# 4. Statistische Kennwerte
+### Statistische Kennwerte
 
 Kennwerte Abfluss
 
@@ -80,7 +78,7 @@ summary(d_donau$Abfluss)
 paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 ```
 
-# 5. Standardabweichung für jedes Jahr
+### Standardabweichung für jedes Jahr
 
 ```{.r}
 d_donau_sd <- d_donau |> 
@@ -89,7 +87,7 @@ d_donau_sd <- d_donau |>
 kable(d_donau_sd)
 ```
 
-# 6. Standardabweichung über die Jahre
+### Standardabweichung über die Jahre
 
 ```{.r}
 ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
@@ -97,11 +95,11 @@ ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
-## Bewertung
+#### Bewertung
 
 -   Im linearen Trend wächst die Standardabweichung
 
-# 7.1 Jahre mit kleinster Standardabweichung
+### Jahre mit kleinster Standardabweichung
 
 ```{.r}
 jahre <- (d_donau_sd |> arrange(sd) |> head(3))$Jahr
@@ -111,7 +109,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-# 7.2 Jahre mit größter Standardabweichung
+### Jahre mit größter Standardabweichung
 
 ```{.r}
 jahre <- (d_donau_sd |> arrange(desc(sd)) |> head(3))$Jahr
@@ -121,7 +119,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-# 8. Weitere Jahre mit besonderem Ereignis
+### Weitere Jahre mit besonderem Ereignis
 
 Jahre mit größtem und kleinsten Gesamtabfluss (Summe aller Tage)
 
@@ -138,7 +136,7 @@ ggplot(data = d_donau_min_max, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-# 9. Monats-Mittelwerte
+### Monats-Mittelwerte
 
 ```{.r}
 dd2 <- d_donau |> 
@@ -158,25 +156,25 @@ ggplot(data = dd2, mapping = aes(group = 1)) +
   labs(y = "Abfluss")
 ```
 
-## Beschreibung
+#### Beschreibung
 
 -   Mittlerer Abfluss steigt zum Frühjahr an, im Herbst am kleinsten
 
-# 10.1 Verteilung als Histogramm
+### Verteilung als Histogramm
 
 ```{.r}
 ggplot(data = d_donau) + geom_histogram(mapping = aes(x = Abfluss), binwidth = 30) +
     labs(y = "", title = "Histogramm")
 ```
 
-# 10.1 Empirische Verteilungsfunktion
+### Empirische Verteilungsfunktion
 
 ```{.r}
 ggplot(data = d_donau) + stat_ecdf(mapping = aes(x = Abfluss)) + 
     labs(y = "", title = "Empirische Verteilung")
 ```
 
-# 10.2 Normalverteilung
+### Normalverteilung
 
 ```{.r}
 ggplot(data = d_donau) +
@@ -184,17 +182,17 @@ ggplot(data = d_donau) +
   stat_function(fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)), color = "red")
 ```
 
-## Bewertung
+#### Bewertung
 
 -   Normalverteilung passt nicht gut
 
-# 10.3 QQ-Plot
+### QQ-Plot
 
 ```{.r}
 ggplot(data = d_donau, mapping = aes(sample = Abfluss)) +
   stat_qq() + stat_qq_line()
 ```
 
-## Bewertung
+#### Bewertung
 
 -   Auch hier zu erkennen, dass Verteilung linkssteil
