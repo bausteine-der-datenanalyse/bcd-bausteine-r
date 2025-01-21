@@ -63,17 +63,18 @@ d <- bind_rows(d1, d2, d3)
 
 ```{r}
 read_one_file <- function(filename) {
-  read_delim(filename, delim = ";", locale = locale(decimal_mark = "."), trim_ws = TRUE) |>
+  read_delim(filename, delim = ";", locale = locale(decimal_mark = "."), trim_ws = TRUE, show_col_types = FALSE) |>
   mutate(
     MESS_DATUM = ymd(MESS_DATUM),
     STATIONS_ID = factor(STATIONS_ID)
   )
 }
 
-d <- list.files(path = "daten", pattern = "*.txt", full.names = TRUE) |>
+d <- list.files(path = "daten", pattern = "produkt_nieder_tag.*.txt", full.names = TRUE) |>
   map(read_one_file) |>
   bind_rows()
 ```
+
 
 - Mit `list.files` Dateien auflisten lassen
 
