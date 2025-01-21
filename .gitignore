@@ -1,12 +1,13 @@
 .quarto
 _output
-.Rproj.user
-c
 
+.Rproj.user
+.Rhistory
+
+c
 folien_files
 aufgaben_files
 folien.html
 aufgaben.html
-.Rhistory
 
 /.quarto/
