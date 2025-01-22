@@ -1,0 +1,61 @@
+---
+title: Das Paket rdwd verwenden
+---
+
+```{r}
+#| echo: false
+library(rdwd)
+library(tidyverse)
+```
+
+
+## Regendaten einer Station
+
+```{r, message=FALSE}
+d <- selectDWD(name = "Bochum", res = "daily", var = "kl", per = "historical", current=TRUE) |>
+  dataDWD(read = FALSE) |>
+  readDWD(varnames = TRUE) |>
+  mutate(datum = ymd(MESS_DATUM))
+ggplot(data = d) + geom_col(mapping = aes(x = datum, y = RSK.Niederschlagshoehe))
+```
+
+
+## Parameter von `selectDWD`
+
+- `name` : Name der Station
+- `id` : Stationsnummer (statt Name)
+- `res` : Resolution ("daily", "hourly")
+- `var` : Variable ("kl", "more_precip")
+  - "kl" : Verschiedene Klimadaten (mit Niederschlag)
+  - "more_precip" : Weitere Niederschlagsdaten
+- `per` : Period ("recent", "historical")
+  - "recent" : Die letzten 500 Tage
+  - "historical" : Alle vorliegenden Daten
+
+
+## Lage der Stationen
+
+```{r}
+data("geoIndex")
+geoIndex
+```
+
+
+## Daten über die Stationen
+
+```{r}
+data("metaIndex")
+metaIndex
+```
+
+
+## Stationen raussuchen
+
+```{r}
+ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
+metaIndex |>
+  filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
+  select(Stationsname, von_datum, bis_datum)
+```
+
+
