@@ -2,6 +2,11 @@
 title: "Tipps und Tricks"
 ---
 
+```{r}
+#| echo: false
+library(tidyverse)
+```
+
 
 # Dataframes speichern und laden
 
