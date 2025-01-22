@@ -30,20 +30,20 @@ Diese Vorgehensweise lässt sich mit wenig Aufwand durch die Funktionen `save` u
 
 ```{r, message=FALSE}
 d <- tibble(A = c(1, 2, 3), B = c('u', 'v', 'w'))
-save(d, file = "data/test.RData")
+save(d, file = "daten/test.RData")
 rm(list = "d")
 ```
 
 Dataframe `d` 
 1. anlegen
-1. in der Datei `data/test.RData` speichern
+1. in der Datei `daten/test.RData` speichern
 1. löschen (nur für Demonstrationszwecke)
 
 
 ## Dataframe speichern und laden 3/3
 
 ```{r}
-load('data/test.RData')
+load('daten/test.RData')
 ```
 
 - Dataframe `d` wurde aus der Datei geladen und ist jetzt wieder vorhanden
