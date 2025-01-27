@@ -1,16 +1,19 @@
 .quarto
 _output
+_files
 .Rproj.user
 c
 
 folien_files
 aufgaben_files
 schreiben-mit-rmarkdown_files
+10-windenergie-in-deutschland.sol_files
+10-windenergie-in-deutschland_files
 folien.html
 aufgaben.html
 .Rhistory
 *.scss
 *.yml
 *.js
+/w-schreiben-mit-quarto/
 /w-schreiben-mit-rmarkdown/
-/w-raeumliche-daten/
