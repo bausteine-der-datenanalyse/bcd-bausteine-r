@@ -10,12 +10,13 @@ lang: de
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
 
+execute: 
+  echo: false
+
 format: 
   typst:
     toc: true
     section-numbering: 1.1.1
-    execute:
-      echo: false
 ---
 
 ```{r}
@@ -55,12 +56,13 @@ lang: de
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
 
+execute: 
+  echo: false
+
 format: 
   typst:
     toc: true
     section-numbering: 1.1.1
-    execute:
-      echo: false
 ---
 ```
 
@@ -68,7 +70,9 @@ In diesem Header werden zunächst Titel, Autor:innen, das Datum sowie die Dokume
 
 Anschließend wird angegeben, dass sich die verwendeten Literaturstellen in der Datei `bibliographie.bib` befinden und der weit verbreitete Zitierstil der amerikanischen Psychologischen Vereinigung verwendet werden soll.
 
-Als Ausgabeformat wird `typst` verwendet um ein PDF-Dokument zu erzeugen. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*), `number-sections: true` für nummerierte Abschnitte und `section-numbering: 1.1.1` für das Nummerierungschema. Abschließend wird noch angegeben, dass der R-Code nicht mit ausgegeben wird.
+Im nächsten Abschnitt wird gesagt, dass der R-Code nicht ausgegeben wird. Verwenden Sie diese Option um den Fluss beim Lesen Ihres Textes nicht durch Programmcode zu stören. Bei Bedarf lassen sich die Rechnungen gut anhand des Quellcodes nachvollziehen.
+
+Schließlich wir als Ausgabeformat `typst` ausgewählt um ein PDF-Dokument zu erzeugen. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*), `number-sections: true` für nummerierte Abschnitte und `section-numbering: 1.1.1` für das Nummerierungschema. 
 
 ## Inhalt
 
