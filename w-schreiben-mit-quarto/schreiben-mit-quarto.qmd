@@ -27,14 +27,14 @@ library(kableExtra)
 
 # Einführung
 
-Dieser Text ist eine kurze Einführung in das Schreiben mit [Quarto](www.quarto.org). Quarto ist ein Programmsystem zur Erstellung wissenschaftlicher und technischer Dokumente. Sie können damit
+Dies ist eine kurze Einführung in das Schreiben mit [Quarto](www.quarto.org). Es handelt sich um ein Programmsystem zur Erstellung wissenschaftlicher und technischer Dokumente, mit dem Sie
 
--   Abschlussarbeiten, Berichte oder Webseiten erstellen.
--   Text und Programmcode (R, Python, Julia) mischen.
--   Mathematische Formeln in LaTeX-Schreibweise eingeben.
--   Automatisch ein Literatur- und Inhaltsverzeichnis erstellen.
+- Abschlussarbeiten, Berichte oder Webseiten erstellen,
+- Text und Programmcode (R, Python, Julia) mischen,
+- Mathematische Formeln in LaTeX-Schreibweise eingeben,
+- Automatisch ein Literatur- und Inhaltsverzeichnis erstellen
 
-Ein Tutorial zur Verwendung von Quarto in RStudio finden Sie unter <https://quarto.org/docs/get-started/hello/rstudio.html>.
+können. Mehr Informationen finden Sie in im [Tutorial zur Verwendung von Quarto in RStudio](https://quarto.org/docs/get-started/hello/rstudio.html).
 
 # Aufbau einer Quarto-Datei
 
@@ -202,7 +202,7 @@ Mit der Option `#| label:` können Sie ihrem Code-Chunk eine Bezeichnung geben, 
 
 Darüber hinaus gibt es eine Reihe von Optionen, mit denen sich die erzeugten Graphiken angepassen lassen:
 
--   `#| fig-width` und `#|fig-height`: Die Größe des R-Plots in Inches (2.54cm). Die Plots werden zunächst in dieser Größe erzeugt und dann auf die Abmessungen der Seite skaliert. Große Plots resultieren also in einer kleinen Schriftgröße.
+-   `#| fig-width` und `#| fig-height`: Die Größe des R-Plots in Inches (2.54cm). Die Plots werden zunächst in dieser Größe erzeugt und dann auf die Abmessungen der Seite skaliert. Große Plots resultieren also in einer kleinen Schriftgröße.
 
 -   `#| fig-asp`: Mit diesem Wert wird das Seitenverhältnis der Graphik angegeben.
 
@@ -212,7 +212,7 @@ Darüber hinaus gibt es eine Reihe von Optionen, mit denen sich die erzeugten Gr
 
 -   `#| fig-cap`: Bildunterschrift.
 
-Hier ein Beispiel mit den Optionen `#| fig-width: 3` , `#| fig-height: 3` und `out-width: 50%`, die einen quadratischen Plot erzeugen.
+Hier ein Beispiel mit den Optionen `#| fig-width: 3` , `#| fig-height: 3` und `#| out-width: 50%`, die einen quadratischen Plot erzeugen.
 
 ```{r}
 #| fig-cap: Ein quadratischer Plot (Beispieldatensatz `mtcars`)
@@ -222,7 +222,7 @@ Hier ein Beispiel mit den Optionen `#| fig-width: 3` , `#| fig-height: 3` und `o
 ggplot(data = mtcars) + geom_point(mapping = aes(x = cyl, y = mpg))
 ```
 
-Dasselbe Ergebnis hätte man alternativ auch mit `fig-width: 3`, `fig-asp: 1` sowie `out-width: 50%'` erzielen können.
+In der Regel funktionieren die Standardeinstellung aber gut und können unverändert beibehalten werden.
 
 ### Inline-Code
 
@@ -307,8 +307,8 @@ Um auf Literaturstellen zu verweisen werden die verwendeten Veröffentlichungen 
 
 ## Weitere Punkte
 
--   Zur Verwaltung der Literaturliste ist das Programm [Zotero](https://www.zotero.org) sehr gut geeignet. Es lassen sich damit Literaturstellen sammeln und im BibTeX-Format exportieren. Im visuellen Editor von RStudio lassen sich Zotero-Referenzen sehr komfortabel einfügen.
+-   Zur Verwaltung der Literaturliste ist das Programm [Zotero](https://www.zotero.org) sehr gut geeignet. Es lassen sich damit Literaturstellen sammeln und im BibTeX-Format exportieren, im visuellen Editor von RStudio können Zotero-Referenzen sogar direkt eingefügt werden.
 
--   Das Aussehen der PDF-Dokumente kann angepasst werden, [hier ein kurzes Video zur Einführung](https://youtu.be/2DbuqYKOsrY?si=oVfzelhrEbnCLPJv&t=715).
+-   Das Aussehen der PDF-Dokumente kann man angepassen. Wie das geht erklärt [ein kurzes Video zur Einführung](https://youtu.be/2DbuqYKOsrY?si=oVfzelhrEbnCLPJv&t=715) auf Youtube.
 
--   Eine etwas tiefergehende Einführung in das wissenschaftliche Schreiben mit Quarto finden Sie [hier](https://quarto.org/docs/visual-editor/technical.html).
+-   Auf der Webseite von Quarto gibt es noch eine [tiefergehende Einführung in das wissenschaftliche Schreiben mit Quarto](https://quarto.org/docs/visual-editor/technical.html).
