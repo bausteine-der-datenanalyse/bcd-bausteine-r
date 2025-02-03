@@ -1,115 +1,92 @@
 ---
 title: "Schreiben mit Quarto"
-author: "Matthias Baitsch, Florian Bagemihl"
-date: "13. Januar 2024"
+author: "Matthias Baitsch und Florian Bagemihl"
+
+date: today
 date-format: long
+
+lang: de
+
+bibliography: bibliographie.bib
+bibliographystyle: american-psychological-association
+
 format: 
   typst:
     toc: true
-    toc-depth: 2
-    number-sections: true
     section-numbering: 1.1.1
-    include-in-header:
-      style.typ
-lang: de
-fontsize: 12pt
-execute: 
-  echo: false
-fig-align: center
-bibliography: bibliographie.bib
-citeproc: true
+    execute:
+      echo: false
 ---
 
 ```{r}
 #| include: false
-library(kableExtra)
 library(readxl)
 library(tidyverse)
+library(kableExtra)
 ```
 
-# Einführung 
+# Einführung
 
-Dieser Text ist eine kurze Einführung in das Schreiben von wissenschaftlichen Dokumenten mit Quarto.
+Dieser Text ist eine kurze Einführung in das Schreiben mit [Quarto](www.quarto.org). Quarto ist ein Programmsystem zur Erstellung wissenschaftlicher und technischer Dokumente. Sie können damit
 
-**Mit Quarto können Sie:**
+-   Abschlussarbeiten, Berichte oder Webseiten erstellen.
+-   Text und Programmcode (R, Python, Julia) mischen.
+-   Mathematische Formeln in LaTeX-Schreibweise eingeben.
+-   Automatisch ein Literatur- und Inhaltsverzeichnis erstellen.
 
--   Text und R-Programmcode zu mischen.
--   Aus einer Quarto Markdown Datei Dokumente in verschiedenen Formaten (PDF, HTML, Word) erstellen. Wir     fokussieren uns aber auf die PDF-Ausgabe.
--   Mathematische Formeln in LaTeX-Schreibweise einzugeben.
--   Automatisch ein Literatur- und Inhaltsverzeichnis zu erstellen.
+Ein Tutorial zur Verwendung von Quarto in RStudio finden Sie unter <https://quarto.org/docs/get-started/hello/rstudio.html>.
 
-**Dokumentation**
+# Aufbau einer Quarto-Datei
 
--   Das Online-Tutorial zur Verwendung von Quarto in RStudio : <https://quarto.org/docs/get-started/hello/rstudio.html>
+Eine Quarto-Datei besitzt die Endung `.qmd` und setzt sich aus einem Dateikopf und dem eigentlichen Inhalt zusammen.
 
-**Ausgabeformate**
+## Dateikopf
 
-Mit dem Render-Button in RStudio erzeugen Sie aus ihrer QMD-Datei ein Dokument in verschiedenen möglichen Formaten. Um das Format auszuwählen klicken Sie auf das kleine schwarze Dreieck neben dem Button. Dieses Dreieck taucht erst auf, wenn mehrere Formate im YAML-Header(dazu später mehr) definiert werden (ist für uns also nicht relevant).
-
-**HTML**: Die generierten HTML-Dokumente können in einem Webbrowser betrachtet werden.
-
-**PDF mit Typst**: Dokumente im PDF-Format können aus Quarto Markdown Dateien mithilfe des Textsatzsystem Typst erzeugt werden. Typst beschreibt sich selbst als schneller und einfacher zu lernen als das System LaTeX.
-
-**Empfohlene Arbeitsweise**: Am besten sehen die PDF-Dokumente aus. Zu Beginn können Sie die Standardeinstellungen von typst. Am Ende werden Sie dann noch einige Nachbesserungen benötigen, um die PDF-Ausgabe gut hinzubekommen. Sollten Sie sich für Nachbesserungen interessieren können Sie auf der Quarto-Website Informationen zu Typst erhalten (<https://quarto.org/docs/output-formats/typst.html>) oder die Typst-Website benutzen (<https://typst.app/docs/tutorial/>).
-
-# Aufbau der Eingabedatei
-
-Eine Quarto Markdown Eingabedatei besitzt die Endung .Qmd und besitzt den folgenden Aufbau:
-
-1.  YAML-Header
-2.  Inhalt
-
-## YAML-Header
-
-Ganz zu Beginn der Datei steht zwischen `---` und `---` der so genannte YAML-Header der Datei (YAML heißt die Auszeichnungssprache des Headers, aber das ist für uns nicht wichtig). Hier werden einige grundlegende Einstellungen zum Dokument festgelegt. Sie könnnen für ihre Arbeit diesen Header als Grundlage verwenden:
+Ganz zu Beginn der Datei steht zwischen `---` und `---` der so genannte YAML-Header der Datei (YAML heißt die Auszeichnungssprache des Headers, aber das ist für uns nicht wichtig). Im Dateikopf werden grundlegende Einstellungen zum Dokument festgelegt. Sie könnnen für ihre Arbeit folgenden Header als Grundlage verwenden:
 
 ``` yaml
 ---
-title: "Schreiben mit Quarto"
-author: "Matthias Baitsch, Florian Bagemihl"
-date: "13. Januar 2024"
+title: "Titel eintragen"
+author: "Namen eintragen"
+date: today
 date-format: long
+lang: de
+
+bibliography: bibliographie.bib
+bibliographystyle: american-psychological-association
+
 format: 
   typst:
     toc: true
-    toc-depth: 2
-    number-sections: true
     section-numbering: 1.1.1
-    include-in-header:
-      style.typ
-lang: de
-fontsize: 12pt
-execute: 
-  echo: false
-fig-align: center
-bibliography: bibliographie.bib
-citeproc: true
+    execute:
+      echo: false
 ---
 ```
 
-In dem Header stehen Titel, Autor/Autoren, das Datum und die Dokumentensprache. Falls Sie eine Bibliographie verwenden wollen, dann geben Sie die Datei `bibliographie.bib` hier an (mehr dazu weiter unten). `citeproc: true` sorgt dafür, dass in der PDF-Ausgabe der Zitationsprozess von Pandoc und nicht das System von Typst (Typst nummeriert lediglich die Verweise im Text, Pandoc verwendet den Author und das Jahr). Diese Optionen sind "Geschmackssache", je nachdem welchen Zitationsstil sie gerne befolgen (müssen).
+In diesem Header werden zunächst Titel, Autor:innen, das Datum sowie die Dokumentensprache festgelegt.
 
-Als Ausgabeformat ist hier PDF (durch typst) konfiguriert. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*) und `number-sections: true` für nummerierte Abschnitte. Zusätzlich stellt `toc-depth: 2` ein wieviele Ebenen des Inhaltsverzeichnis dargestellt werden. Für die PDF-Ausgabe mit typst stellt `section-numbering:` das Nummerierungschema (Zahlen, Großbuchstaben oder Kleinbuchstaben) der Abschnitte ein (in unserem Beispiel also nur Zahlen).
+Anschließend wird angegeben, dass sich die verwendeten Literaturstellen in der Datei `bibliographie.bib` befinden und der weit verbreitete Zitierstil der amerikanischen Psychologischen Vereinigung verwendet werden soll.
 
-Für die PDF-Ausgabe lassen sich Einstellungen in der Datei `style.typ` vornehmen (zum Beispiel Größe von Überschriften festlegen, für weitere Information hilft das [Tutorial auf der Seite von Typst](https://typst.app/docs/tutorial/formatting/) ). Die Anweisung `execute:` gefolgt von `echo: false` konfiguriert Quarto so, dass R-Code-Blöcke standardmäßig nicht mit ausgeben werden (dazu unten mehr), die Zeile `fig-align: center` sorgt dafür, dass Graphiken zentriert angeordnet werden.
+Als Ausgabeformat wird `typst` verwendet um ein PDF-Dokument zu erzeugen. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*), `number-sections: true` für nummerierte Abschnitte und `section-numbering: 1.1.1` für das Nummerierungschema. Abschließend wird noch angegeben, dass der R-Code nicht mit ausgegeben wird.
 
-Warum soll der R-Code nicht ausgegeben werden? Für das Verständnis ihrer statistischen Auswertungen ist der R-Code nicht notwendig. Die Programmierung lässt sich sehr gut anhand der Qmd-Datei nachvollziehen. Für besonders wichtigen R-Code kann man immer noch explizit angeben, dass der Code angezeigt werden soll (siehe unten).
+## Inhalt
 
 **R-Setup**
 
 In dem Setup-Abschnitt
 
 ```{{r}}
-library(kableExtra)
 library(readxl)
 library(tidyverse)
+library(kableExtra)
 ```
 
 werden die notwendigen Bibliotheken geladen. Es empfiehlt sich alle im Dokument verwendeten Pakete als ersten Code-Chunk im Dokument zu laden.
 
 ## Eigener Text
 
-Den weitaus größten Teil des Dokuments nimmt ihr eigener Text mit den statistischen Berechnungen und Auswertungen ein. Geschrieben wird in der Quarto Markdown Auszeichnungssprache, einer Variante von Markdown (<https://de.wikipedia.org/wiki/Markdown>). Es handelt sich bei Quarto Markdown um eine einfache Sprache zur Erstellung von Dokumenten aus einer Kombination von eigenem Text und Programmcode. Die Elemente der Sprache werden im folgenden Abschnitt erklärt.
+Den weitaus größten Teil des Dokuments nehmen Ihre eigenen statistischen Berechnungen und Auswertungen ein. Geschrieben wird in der Quarto Markdown Auszeichnungssprache, einer Variante von Markdown (<https://de.wikipedia.org/wiki/Markdown>). Es handelt sich bei Quarto Markdown um eine einfache Sprache zur Erstellung von Dokumenten aus einer Kombination von eigenem Text und Programmcode. Die Elemente der Sprache werden im folgenden Abschnitt erklärt.
 
 # Elemente von Quarto Markdown
 
@@ -135,13 +112,13 @@ Text wird *kursiv* gesetzt, wenn die Zeichen wie in `*text*` zwischen Sternchen 
 
 ### Listen
 
-Bullet-Listen werden mit vorangestellten Sternchen erstellt. Zum Beispiel ergibt die Eingabe
+Bullet-Listen werden mit vorangestellten Bindestrich erstellt. Zum Beispiel ergibt die Eingabe
 
 ``` markdown
-* Ein Punkt in der Liste
-* Ein weiterer Punkt
-  * Eine Ebene eingerückt
-  * Und noch ein Punkt
+- Ein Punkt in der Liste
+- Ein weiterer Punkt
+  - Eine Ebene eingerückt
+  - Und noch ein Punkt
 ```
 
 die Liste
@@ -151,7 +128,7 @@ die Liste
     -   Eine Ebene eingerückt
     -   Und noch ein Punkt
 
-Nummerierte Listen erzeugt man entsprechend mit einer vorangestellten Zahl. Mit
+Nummerierte Listen erzeugt man entsprechend mit einer vorangestellten Zahl oder Buchstaben. Mit
 
 ``` markdown
 1. Ein Punkt in der Liste
@@ -164,7 +141,7 @@ ergibt sich die Ausgabe
 
 1.  Ein Punkt in der Liste
 2.  Ein weiterer Punkt
-    a.  Eine Ebene eingerückt
+    a.  Eine Ebene eingerückt\
     b.  Und noch ein Punkt
 
 ## R-Programmcode
@@ -209,19 +186,17 @@ Welche Ausgaben von den verschiedenen Optionen unterdrückt werden ist in der fo
 
 | Option           | Ausführung | Anzeige | Ausgabe | Plots | Meldungen | Warnungen |
 |------------------|:----------:|:-------:|:-------:|:-----:|:---------:|:---------:|
-| `eval: FALSE`    |     --     |         |   --    |  --   |    --     |    --     |
-| `include: FALSE` |            |   --    |   --    |  --   |    --     |    --     |
-| `echo: FALSE`    |            |   --    |         |       |           |           |
-| `results: hide`  |            |         |   --    |       |           |           |
-| `fig-show: hide` |            |         |         |  --   |           |           |
-| `message: FALSE` |            |         |         |       |    --     |           |
-| `warning: FALSE` |            |         |         |       |           |    --     |
-
-Voreingestellt ist jeweils `TRUE`.
+| `eval: FALSE`    |     X      |         |    X    |   X   |     X     |     X     |
+| `include: FALSE` |            |    X    |    X    |   X   |     X     |     X     |
+| `echo: FALSE`    |            |    X    |         |       |           |           |
+| `results: hide`  |            |         |    X    |       |           |           |
+| `fig-show: hide` |            |         |         |   X   |           |           |
+| `message: FALSE` |            |         |         |       |     X     |           |
+| `warning: FALSE` |            |         |         |       |           |     X     |
 
 **Optionen zur Referenzerstellung**
 
-Mit der Option `#| label:` können Sie ihrem Code-Chunk eine Bezeichnung geben, um diesen später im Text zu referenzieren. Die wichtigsten Optionen dabei sind `fig-Referenzname` für Graphiken und `tbl-Referenzname` für Tabellen. Dazu später mehr.
+Mit der Option `#| label:` können Sie ihrem Code-Chunk eine Bezeichnung geben, um diesen später im Text zu referenzieren.
 
 **Optionen für Graphiken**
 
@@ -240,7 +215,7 @@ Darüber hinaus gibt es eine Reihe von Optionen, mit denen sich die erzeugten Gr
 Hier ein Beispiel mit den Optionen `#| fig-width: 3` , `#| fig-height: 3` und `out-width: 50%`, die einen quadratischen Plot erzeugen.
 
 ```{r}
-#| fig-cap: Eine Bildunterschrift
+#| fig-cap: Ein quadratischer Plot (Beispieldatensatz `mtcars`)
 #| fig-width: 3
 #| fig-height: 3
 #| out-width: 50%
@@ -288,48 +263,52 @@ Eine externe Graphik können Sie folgendermaßen einbinden:
 
 Als Beispiel:
 
-`![Golden Gate Brücke (Quelle: Wikipedia)](bilder/golden-gate.jpg){#fig-ggb width=60%}`
+`![Golden Gate Brücke (Quelle: Wikipedia)](bilder/golden-gate.jpg){#fig-golden-gate width=60%}`
 
-![Golden Gate Brücke (Quelle: Wikipedia)](bilder/golden-gate.jpg){#fig-ggb width="60%"}
+![Golden Gate Brücke (Quelle: Wikipedia)](bilder/golden-gate.jpg){#fig-golden-gate width="60%"}
 
-Standardmäßig werden Graphiken in ihrer tatsächlichen Größe dargestellt. Sie können mit den Darstellungsoptionen `width` und `height` die Größe anpassen. Wenn Sie, wie in unserem Beispiel, nur `width` spezifizieren wird `height` automatisch an das Seitenverhältnis angepasst. Die Standardeinheit für Graphiken sind Pixel, sie können aber sowohl Prozentangaben (in Relation zum Textoutput) als auch anderen Einheiten wie Inches verwenden. Weiterhin ist `#fig-ggb` ein Label, das sie in der Form `@fig-ggb` verwenden, um im Text auf die Graphik zu verweisen. Hier ein Beispiel, wie das aussehen kann.
+Standardmäßig werden Graphiken in ihrer tatsächlichen Größe dargestellt. Sie können mit den Darstellungsoptionen `width` und `height` die Größe anpassen. Wenn Sie, wie in unserem Beispiel, nur `width` spezifizieren wird `height` automatisch an das Seitenverhältnis angepasst. Die Standardeinheit für Graphiken sind Pixel, sie können aber sowohl Prozentangaben (in Relation zum Textoutput) als auch anderen Einheiten wie Inches verwenden. Weiterhin ist `#fig-golden-gate` ein Label, das sie in der Form `@fig-golden-gate` verwenden, um im Text auf die Graphik zu verweisen. Hier ein Beispiel, wie das aussehen kann.
 
-@fig-ggb zeigt die Golden Gate Brücke in San Francisco, ein bedeutendes Denkmal der Ingenieurbaukunst.
+@fig-golden-gate zeigt die Golden Gate Brücke in San Francisco, ein bedeutendes Denkmal der Ingenieurbaukunst.
 
 Grundsätzlich gilt die Regel: Abbildungen werden immer im Text referenziert, sonst kann man sie auch weglassen.
 
 ## Tabellen
 
-Tabellen lassen sich aus einem Dataframe mit der Funktion `kable` erzeugen, ein Minimalbeispiel zeigt Tabelle @tbl-tabelle. Auch hier kann wieder mithilfe der Bezeichnung des R-Chunks aus dem Text auf die Tabelle verwiesen werden.
+Tabellen lassen sich aus einem Dataframe mit der Funktion `kable` erzeugen, ein Minimalbeispiel zeigt @tbl-mathematische-konstanten. Auch hier kann wieder mithilfe der Bezeichnung des R-Chunks aus dem Text auf die Tabelle verwiesen werden.
 
 ```{r}
-#| label: tbl-tabelle
+#| label: tbl-mathematische-konstanten
 d <- tibble(
-  A = c(1, 2, 3),
-  Test = round(c(pi, exp(1), 1/3), digits = 3)
+  A = c("$\\pi$", "$\\mathrm{e}$", "$\\sqrt{2}$"),
+  Test = round(c(pi, exp(1), sqrt(2)), digits = 3)
 )
-
-kable(
-  d, booktabs = TRUE,
-  caption = 'Eine kleine Tabelle'
-)
+kable(d, caption = 'Mathematische Konstanten')
 ```
 
 Alternativ können Tabellen auch in der Markdown-Schreibweise eingefügt werden.
 
 | Länge | Breite | Höhe | Dichte |
-|------:|-------:|-----:|-------:|
-|   5.1 |    3.5 |  1.4 |    0.2 |
-|   4.9 |    3.0 |  1.4 |    0.2 |
-|   4.7 |    3.2 |  1.3 |    0.2 |
-|   4.6 |    3.1 |  1.5 |    0.2 |
-|   5.0 |    3.6 |  1.4 |    0.2 |
-|   5.4 |    3.9 |  1.7 |    0.4 |
+|-------|--------|------|--------|
+| 5.1   | 3.5    | 1.4  | 0.2    |
+| 4.9   | 3.0    | 1.4  | 0.2    |
+| 4.7   | 3.2    | 1.3  | 0.2    |
+| 4.6   | 3.1    | 1.5  | 0.2    |
+| 5.0   | 3.6    | 1.4  | 0.2    |
+| 5.4   | 3.9    | 1.7  | 0.4    |
+
+: Eine weitere Tabelle {#tbl-eine-weitere-tabelle}
 
 Eine umfassende Erläuterung finden Sie auf der Website von Quarto unter <https://quarto.org/docs/authoring/tables.html>.
 
 ## Verweise auf Literaturstellen
 
-Um auf Literaturstellen zu verweisen werden benötigten Veröffentlichungen in der Datei `bibliographie.bib` gesammelt (die Datei kann auch anders heißen). Es handelt sich dabei um eine Datei im BibTeX-Format (siehe <https://de.wikipedia.org/wiki/BibTeX>). Jeder Eintrag beginnt mit einer ID, zum Beispiel `fahrmeir2016` für das Statistikbuch von Fahrmeir et al. Auf die Literaturstellen kann dann im Text mit `[@ID]` verwiesen werden. Beispielsweise ergibt `[@fahrmeir2016]` den Verweis [@fahrmeir2016]. Die referenzierten Literaturstellen werden automatisch am Ende des Dokuments zusammengefasst.
+Um auf Literaturstellen zu verweisen werden die verwendeten Veröffentlichungen in der Datei `bibliographie.bib` gesammelt (die Datei kann auch anders heißen). Es handelt sich dabei um eine Datei im [BibTeX-Format](https://de.wikipedia.org/wiki/BibTeX). Jeder Eintrag beginnt mit einer ID, zum Beispiel `fahrmeir2016` für das Statistikbuch von Fahrmeir et al. Auf die Literaturstellen kann dann im Text mit `[@ID]` verwiesen werden. Beispielsweise ergibt `[@fahrmeir2016]` den Verweis [@fahrmeir2016]. Die referenzierten Literaturstellen werden automatisch am Ende des Dokuments zusammengefasst.
 
-# Literaturverzeichnis {.unnumbered}
+## Weitere Punkte
+
+-   Zur Verwaltung der Literaturliste ist das Programm [Zotero](https://www.zotero.org) sehr gut geeignet. Es lassen sich damit Literaturstellen sammeln und im BibTeX-Format exportieren. Im visuellen Editor von RStudio lassen sich Zotero-Referenzen sehr komfortabel einfügen.
+
+-   Das Aussehen der PDF-Dokumente kann angepasst werden, [hier ein kurzes Video zur Einführung](https://youtu.be/2DbuqYKOsrY?si=oVfzelhrEbnCLPJv&t=715).
+
+-   Eine etwas tiefergehende Einführung in das wissenschaftliche Schreiben mit Quarto finden Sie [hier](https://quarto.org/docs/visual-editor/technical.html).
