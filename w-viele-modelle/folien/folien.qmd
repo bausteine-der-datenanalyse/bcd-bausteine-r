@@ -9,7 +9,7 @@ library(trend)
 library(readxl)
 library(modelr)
 library(tidyverse)
-load("data/rd.rdata")
+load("daten/rd.rdata")
 ```
 
 # Einführung
