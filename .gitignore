@@ -5,10 +5,12 @@ _output
 .Rhistory
 
 c
-folien_files
-aufgaben_files
+*_files
 folien.html
 aufgaben.html
+
+w-*/*.html
+w-*/*.pdf
 
 /.quarto/
 DWDdata
