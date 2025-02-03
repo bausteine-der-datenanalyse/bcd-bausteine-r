@@ -57,7 +57,7 @@ d_stationen
 ## Daten herunterladen und Zwischenspeichern {.smaller}
 
 ```{r message=FALSE}
-fname <- "data/d_wind_raw.RData"
+fname <- "daten/d_wind_raw.RData"
 if (!file.exists(fname)) {
   d_wind_raw <- selectDWD(
     name = "Helgoland", res = "10_minutes", var = "wind", per = "historical", current = TRUE
