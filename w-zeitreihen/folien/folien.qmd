@@ -60,7 +60,7 @@ d_stationen
 fname <- "data/d_wind_raw.RData"
 if (!file.exists(fname)) {
   d_wind_raw <- selectDWD(
-    name = "Helgoland", res = "10_minutes", var = "wind", per = "historical"
+    name = "Helgoland", res = "10_minutes", var = "wind", per = "historical", current = TRUE
   ) |>
   dataDWD() |>
   bind_rows()
