@@ -36,8 +36,8 @@ Das R-Paket `tsibble` stellt eine Datenstruktur (das `tsibble` - wie `tibble` au
 - [Link zur Einführung](https://cran.rstudio.com/web/packages/tsibble/vignettes/intro-tsibble.html)
 
 - Normalen Dataframe mit `as_tsibble` in `tsibble` konvertieren
-  * Zeitpunkte dürfen nicht doppelt vorkommen
-  * Angeben, welche Spalte Index sein soll
+  - Zeitpunkte dürfen nicht doppelt vorkommen
+  - Angeben, welche Spalte Index sein soll
   
 # Winddaten vom Deutschen Wetterdienst
 

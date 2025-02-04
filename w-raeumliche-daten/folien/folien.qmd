@@ -22,7 +22,7 @@ sf_use_s2(FALSE)
 
 ## Räumliche Daten
 
-![GIS Layers](bilder/GISLayers.png) [Quelle: http//landportal.org]{.imagesource}
+![GIS Layers](bilder/GISLayers.png) [Quelle: <https://landportal.org/>]{.imagesource}
 
 -   Viele Daten haben räumlichen Bezug
 -   Klassische Anwendung von Geoinformationssystemen (GIS)
@@ -129,7 +129,7 @@ d_world <- ne_countries(returnclass = "sf") |>
   filter(adm0_a3 != "ATA")
 ```
 
-- Weltkarte mit `ne_countries()` (http://www.naturalearthdata.com) als `sf`-Objekt
+- Weltkarte mit `ne_countries()` (<http://www.naturalearthdata.com>) als `sf`-Objekt
 - Benötigte Spalten mit `select()` auswählen
   - ISO3-Codes der Länder (Eindeutig)
   - Geometrie
@@ -184,7 +184,7 @@ d_le <- wb_data(indicator = "SP.DYN.LE00.IN") |>
 ```
 
 - Dataframe zu Weltbankindikatoren mit `wb_data()` (Paket `wbstats`) herunterladen
-  - Indikator auf https://data.worldbank.org heraussuchen (Details)
+  - Indikator auf <https://data.worldbank.org> heraussuchen (Details)
 - Wichtige Merkmale auswählen und passend umbenennen
 - Für jedes Land den neuesten Wert heraussuchen
 
@@ -271,7 +271,7 @@ ggplot() +
 - Freie Alternative zu Google Maps
 - Zugriff auf Daten aus eigenen Programmen
 - SEHR umfangreich aber nicht ganz einfach zu nutzen
-- In R mit Paket `osmdata` (https://github.com/ropensci/osmdata)
+- In R mit Paket `osmdata` (<https://github.com/ropensci/osmdata>)
 
 ## Straßen in Bochum 1/2
 
@@ -285,7 +285,7 @@ s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
 - Objekte zu Anfrage hinzufügen mit `add_osm_feature`
   - `key` ist die Kategorie
   - `value` sagt was genau gemeint ist
-  - https://wiki.openstreetmap.org/wiki/Map_features
+  - <https://wiki.openstreetmap.org/wiki/Map_features>
 - Mit `osmdata_sf` zur Verwendung mit SF aufbereiten
   - Objekt enthält `osm_points`, `osm_lines`, `osm_polygons`, ...
   - Dies sind die eigentlichen SF-Objekte
@@ -354,7 +354,7 @@ if (!file.exists("daten/bab.RData")) {
 
 - Daten einmal herunterladen, aufbereiten und speichern, dann nur noch einlesen
 - Aufbereiten der Daten nicht trivial (zusammenfügen, auswählen und vereinfachen)
-- siehe auch https://github.com/spiegel-daten/2019-02-tempolimit
+- siehe auch <https://github.com/spiegel-daten/2019-02-tempolimit>
 
 ## Bundesautobahnen 2/2
 
@@ -390,9 +390,9 @@ ggplot() + geom_sf(data = s1$osm_lines)
 
 ## Weitere Quellen zu OSM
 
-- https://wiki.openstreetmap.org/wiki/Map_features
-- http://joshuamccrain.com/tutorials/maps/streets_tutorial.html
-- https://ggplot2tutor.com/streetmaps/streetmaps/
+- <https://wiki.openstreetmap.org/wiki/Map_features>
+- <http://joshuamccrain.com/tutorials/maps/streets_tutorial.html>
+- <https://ggplot2tutor.com/streetmaps/streetmaps/>
 
 # Shapefiles
 
@@ -405,5 +405,5 @@ ggplot(data = d_wkr) + geom_sf(mapping = aes(fill = Wkr), show.legend = FALSE)
 
 - Dateiformat Shapefile (Endung .shp): Ursprünglich für ArcView (ESRI) entwickeltes Format für vektorielle Geodaten
 - Einlesen in R mit `st_read()`
-- Quelle: https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016
+- Quelle: <https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016>
 
