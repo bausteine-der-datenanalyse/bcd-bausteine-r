@@ -1,5 +1,5 @@
 
-### Einlesen und Aufbereiten der Daten
+#### Einlesen und Aufbereiten der Daten
 
 ```{.r}
 library(readxl)
@@ -18,7 +18,9 @@ d_donau <- read_delim(
   )
 ```
 
-### Streuplot der Abflüsse
+#### Plots der Abflüsse
+
+###### Streuplot
 
 ```{.r}
 ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) + 
@@ -26,7 +28,7 @@ ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
-### Boxplot der Abflüsse
+###### Boxplot
 
 ```{.r}
 ggplot(data = d_donau) +
@@ -38,7 +40,7 @@ ggplot(data = d_donau) +
   labs(x = NULL, y = NULL)
 ```
 
-### Linearer Trend
+#### Linearer Trend
 
 ```{.r}
 x <- as.numeric(d_donau$Datum)
@@ -61,15 +63,13 @@ paste0(
 paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 ```
 
-#### Erläuterungen
-
 -   Bestimmtheitsmaß mit Werten auf der Ausgleichsgeraden
 
 -   Anstatt $R^2$ können wir auch den Korrelationskoeffizienten $r$ berechnen und quadrieren
 
 -   Zuwachs in Hundert Jahren ist die Steigung der Ausgleichsgeraden $\beta$ mal 100 Jahre mal 365 Tage pro Jahr bezogen auf den Mittelwert und in Prozent
 
-### Statistische Kennwerte
+#### Statistische Kennwerte
 
 Kennwerte Abfluss
 
@@ -78,7 +78,7 @@ summary(d_donau$Abfluss)
 paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 ```
 
-### Standardabweichung für jedes Jahr
+#### Standardabweichung für jedes Jahr
 
 ```{.r}
 d_donau_sd <- d_donau |> 
@@ -87,7 +87,7 @@ d_donau_sd <- d_donau |>
 kable(d_donau_sd)
 ```
 
-### Standardabweichung über die Jahre
+#### Standardabweichung über die Jahre
 
 ```{.r}
 ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
@@ -95,11 +95,11 @@ ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
-#### Bewertung
-
 -   Im linearen Trend wächst die Standardabweichung
 
-### Jahre mit kleinster Standardabweichung
+#### Jahre mit kleinster/größter Standardabweichung
+
+###### Jahre mit kleinster Standardabweichung
 
 ```{.r}
 jahre <- (d_donau_sd |> arrange(sd) |> head(3))$Jahr
@@ -109,7 +109,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-### Jahre mit größter Standardabweichung
+###### Jahre mit größter Standardabweichung
 
 ```{.r}
 jahre <- (d_donau_sd |> arrange(desc(sd)) |> head(3))$Jahr
@@ -119,7 +119,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-### Weitere Jahre mit besonderem Ereignis
+#### Weitere Jahre mit besonderem Ereignis
 
 Jahre mit größtem und kleinsten Gesamtabfluss (Summe aller Tage)
 
@@ -136,7 +136,7 @@ ggplot(data = d_donau_min_max, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-### Monats-Mittelwerte
+#### Monats-Mittelwerte
 
 ```{.r}
 dd2 <- d_donau |> 
@@ -156,25 +156,25 @@ ggplot(data = dd2, mapping = aes(group = 1)) +
   labs(y = "Abfluss")
 ```
 
-#### Beschreibung
-
 -   Mittlerer Abfluss steigt zum Frühjahr an, im Herbst am kleinsten
 
-### Verteilung als Histogramm
+#### Verteilung
+
+###### Verteilung als Histogramm
 
 ```{.r}
 ggplot(data = d_donau) + geom_histogram(mapping = aes(x = Abfluss), binwidth = 30) +
     labs(y = "", title = "Histogramm")
 ```
 
-### Empirische Verteilungsfunktion
+###### Empirische Verteilungsfunktion
 
 ```{.r}
 ggplot(data = d_donau) + stat_ecdf(mapping = aes(x = Abfluss)) + 
     labs(y = "", title = "Empirische Verteilung")
 ```
 
-### Normalverteilung
+###### Normalverteilung
 
 ```{.r}
 ggplot(data = d_donau) +
@@ -182,17 +182,13 @@ ggplot(data = d_donau) +
   stat_function(fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)), color = "red")
 ```
 
-#### Bewertung
-
 -   Normalverteilung passt nicht gut
 
-### QQ-Plot
+###### QQ-Plot
 
 ```{.r}
 ggplot(data = d_donau, mapping = aes(sample = Abfluss)) +
   stat_qq() + stat_qq_line()
 ```
 
-#### Bewertung
-
--   Auch hier zu erkennen, dass Verteilung linkssteil
+-   Auch hier ist zu erkennen, dass die Verteilung linkssteil ist.
