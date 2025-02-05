@@ -9,7 +9,7 @@ library(tidyverse)
 load("daten/mastr-data.RData")
 ```
 
-### Daten (ohne räumlichen Bezug) aufbereiten
+#### Daten (ohne räumlichen Bezug) aufbereiten
 ```{.r}
 data_wind = d_wind |>
   mutate(Inbetriebnahmedatum = ymd(Inbetriebnahmedatum)) |>
@@ -17,7 +17,7 @@ data_wind = d_wind |>
   filter(!is.na(Betriebsjahr))
 ```
 
-### Anzahl der installierten Anlagen
+#### Anzahl der installierten Anlagen
 
 ```{.r}
 data_wind2 = data_wind |>
@@ -42,7 +42,7 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Anzahl)) +
   labs(y = "Anzahl von Anlagen")
 ```
 
-### Zuwachs an installierter Leistung
+#### Zuwachs an installierter Leistung
 
 Zuwachs an installierter Leistung pro Jahr:
 
@@ -60,7 +60,7 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Leistung)) +
   labs (y = "Gesamtleistung von Windkraftanlagen")
 ```
 
-### Leistung pro Anlage
+#### Leistung pro Anlage
 
 ```{.r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr , y = Leistung_pro_Anlage)) +
@@ -73,11 +73,11 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Leistung_pro_Anlage)) +
   labs(y = "Kumulierter Anstieg der Leistung pro Anlage")
 ```
 
-### Welche Größen könnten noch von Interesse sein?
+#### Welche Größen könnten noch von Interesse sein?
 
 Hier eigenständig nachdenken!
 
-### Daten (für räumlichen Bezug) aufbereiten
+#### Daten (für räumlichen Bezug) aufbereiten
 
 Deutschlandkarte:
 
@@ -133,7 +133,7 @@ data_bl_sf = left_join(d_deu_1, data_bl)
 
 ```
 
-### Leistung pro Anlage
+#### Leistung pro Anlage
 
 Leistung farblich dargestellt:
 
@@ -145,7 +145,7 @@ ggplot() +
   scale_color_distiller(palette = 8 , direction = 1)
 ```
 
-### Inbetriebnahme Anlage
+#### Inbetriebnahme Anlage
 
 ```{.r}
 ggplot() +
@@ -155,7 +155,7 @@ ggplot() +
   scale_color_distiller(palette = 8)
 ```
 
-### Anzahl pro BL
+#### Anzahl pro BL
 
 ```{.r}
 ggplot() +
@@ -164,7 +164,7 @@ ggplot() +
   scale_fill_distiller(palette = 8 , direction = 1)
 ```
 
-### Leistung pro BL
+#### Leistung pro BL
 
 ```{.r}
 ggplot() +
@@ -173,7 +173,7 @@ ggplot() +
   scale_fill_distiller(palette = 8 , direction = 1)
 ```
 
-### Leistung pro Fläche pro BL
+#### Leistung pro Fläche pro BL
 
 ```{.r}
 ggplot() +
