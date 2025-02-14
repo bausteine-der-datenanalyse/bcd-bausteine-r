@@ -151,6 +151,8 @@ read_csv2("daten/beispiel-2.csv")
 
 ## Gemischte Konvention {.smaller}
 
+Datei `beispiel-3.csv`
+
 ```{}
 {{< include daten/beispiel-3.csv >}}
 ```
@@ -167,6 +169,24 @@ read_delim("daten/beispiel-3.csv", delim=";", trim_ws=TRUE, locale=locale(decima
 - `locale` enthält länderspezifische Einstellungen
 - `trim_ws` entfernt Leerzeichen (wichtig!)
 - Datum wird nicht erkannt
+
+## Kodierung {.smaller}
+
+Datei `beispiel-4.csv`
+
+```{}
+{{< include daten/beispiel-4.csv >}}
+```
+
+- Datei ist ISO-8859-1 kodiert, Grundeinstellung in R ist UTF-8
+
+Einlesen mit `read_csv2(...)`
+
+```{r}
+read_csv2("daten/beispiel-4.csv", locale=locale(encoding="iso-8859-1"))
+```
+
+- Kodierung beim Einlesen explizit angeben
 
 ## Beispiel: Niederschlagsdaten Bochum
 
