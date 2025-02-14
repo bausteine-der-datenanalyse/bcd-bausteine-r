@@ -143,7 +143,8 @@ Datei `beispiel-2.csv`
 
 Einlesen mit `read_csv2(...)`
 
-```{r message=FALSE}
+```{r}
+#| message: false
 read_csv2("daten/beispiel-2.csv")
 ```
 
@@ -163,6 +164,7 @@ Datei `beispiel-3.csv`
 Einlesen mit `read_delim(...)`, 
 
 ```{r}
+#| message: false
 read_delim("daten/beispiel-3.csv", delim=";", trim_ws=TRUE, locale=locale(decimal_mark=".", grouping_mark=","))
 ```
 
@@ -183,6 +185,7 @@ Datei `beispiel-4.csv`
 Einlesen mit `read_csv2(...)`
 
 ```{r}
+#| message: false
 read_csv2("daten/beispiel-4.csv", locale=locale(encoding="iso-8859-1"))
 ```
 
@@ -191,6 +194,7 @@ read_csv2("daten/beispiel-4.csv", locale=locale(encoding="iso-8859-1"))
 ## Beispiel: Niederschlagsdaten Bochum
 
 ```{r message=FALSE}
+#| message: false
 read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
   delim = ";", trim_ws=TRUE,
