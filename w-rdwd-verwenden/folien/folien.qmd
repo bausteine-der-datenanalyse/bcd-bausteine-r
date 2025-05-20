@@ -1,5 +1,7 @@
 ---
 title: Das Paket rdwd verwenden
+execute:
+  cache: true
 ---
 
 ```{r}
@@ -58,4 +60,167 @@ metaIndex |>
   select(Stationsname, von_datum, bis_datum)
 ```
 
+# Weiterverarbeitung im Detail
+
+## Informationen zum Weiterverarbeiten 1/
+
+```{r}
+data("geoIndex")
+d.geoindex.code <- geoIndex |> select(id, name, breit = lat, lang = lon)
+
+data("metaIndex")
+d.metaindex.code <- metaIndex |> rename(id = Stations_id)
+
+data("fileIndex")
+d.fileindex.code <- fileIndex
+```
+
+Für Sie relevante Variablen des Geoindexes sind lediglich die ID, der Name der Station und die Geodaten. Beim Metaindex und Fileindex sind alle Variablen für unseren Fall sinnvoll.
+
+**Anwendungsfall** 
+
+Mehrere Filter anwenden
+
+## 1. Funktion
+
+```{r}
+read_one_file.dwd <- function(location) {
+  selectDWD(location, res = "daily", var = "more_precip", per = "hist", current = TRUE) |>
+    dataDWD(read = FALSE) |>
+    readDWD(varnames = TRUE)
+}
+```
+
+## Zum Ausprobieren 
+
+```{r}
+ids.megatest <- d.metaindex.code |>
+  filter(id < 50, res == "daily", var == "more_precip", per == "historical") |>
+  select(Stationsname)
+```
+
+## Was Sie glauben
+
+```{r}
+for (x in 1:10) {
+  cat("Eintrag: ", x, "\n")
+}
+```
+
+## Was wirklich geschah
+
+```{r}
+for (x in ids.megatest) {
+  cat("Eintrag: ", x, "\n")
+}
+```
+
+## Download
+
+MB: So funktioniert es ebenfalls und der Code ist nicht so verwirrend wie mit der `for`-Schleife. Sie übergeben ihrer Funktion den Vektor der Stationsnamen: 
+
+```{r}
+#| warning: false
+
+d.megatest <- ids.megatest |>
+  pull(Stationsname) |>
+  read_one_file.dwd() |>
+  bind_rows()
+```
+
+MB: So geht es auch:
+
+```{r}
+#| warning: false
+
+d.megatest.1 <- read_one_file.dwd(pull(ids.megatest, Stationsname)) |>
+  bind_rows()
+```
+
+## `selectDWD` mit Vektor
+
+MB: Weil `selectDWD` wunderbar mit einem Vektor zurechtkommt brauchen Sie die Funktion `read_one_file.dwd` gar nicht.
+
+```{r}
+#| warning: false
+
+d.megatest.2 <- ids.megatest |>
+  pull(Stationsname) |>
+  selectDWD(res = "daily", var = "more_precip", per = "hist", current = TRUE) |>
+  dataDWD(read = FALSE) |>
+  readDWD(varnames = TRUE) |>
+  bind_rows()
+```
+
+## Hier ist die Zeile die laut Ihnen funktionieren soll
+
+MB: So funktioniert es, wie ich das dachte. Allerdings nicht für beliebig viele Stationen (das ist vielleicht ein Limit für die Downloads). Aber das ist ja auch egal, es geht ja viel einfacher.
+
+```{r}
+#| warning: false
+
+d.megatest.3 <- ids.megatest |>
+  head(5) |>
+  pull(Stationsname) |>
+  map(read_one_file.dwd) |>
+  bind_rows()
+```
+
+## Datensatz editieren
+
+```{r}
+d.megatest.filter <- d.megatest |>
+  mutate(datum = ymd(MESS_DATUM)) |>
+  select(STATIONS_ID, RS.Niederschlagshoehe, datum) |>
+  rename(id = STATIONS_ID, niederschlagshoehe = RS.Niederschlagshoehe) |>
+  left_join(d.geoindex.code)
+d.megatest.filter
+```
+
+## Gefilterten Datensatz speichern
+
+Für die spätere Verwendung ist es hilfreich den gefilterten Datensatz zu speichern.
+
+```{r}
+save(d.megatest.filter, file = "daten/megatest.RData")
+```
+
+## 2. Funktion (kann alternativ zu editieren passieren) {.smaller}
+
+```{r}
+edit_one_file <- function(d) {
+  d |>
+    mutate(datum = ymd(MESS_DATUM)) |>
+    select(STATIONS_ID, RS.Niederschlagshoehe, datum) |>
+    rename(id = STATIONS_ID, niederschlagshoehe = RS.Niederschlagshoehe) |>
+    left_join(d.geoindex.code)
+}
+```
+
+```{r}
+head(edit_one_file(d.megatest) , 15) 
+```
+
+## Verarbeitung (für andere Datei gedacht)
+
+```{r}
+d.kennwerte.megatest <- d.megatest.filter |>
+  group_by(id) |>
+  drop_na(niederschlagshoehe) |>
+  summarise(
+    maximum = max(niederschlagshoehe),
+    mittelwert = mean(niederschlagshoehe),
+    median = median(niederschlagshoehe),
+    varianz = var(niederschlagshoehe),
+    standardabweichung = sd(niederschlagshoehe)
+  ) |>
+  left_join(d.geoindex.code)
+```
+
+`drop_na()` wird verwendet, um fehlende Werte von der Bearbeitung auszuschließen.
+
+## Fertiger Datensatz mit Kennwerten
+```{r}
+d.kennwerte.megatest
+```
 

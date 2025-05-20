@@ -1,0 +1,8 @@
+folien_files/
+folien_cache/
+.Rhistory
+.RData
+.RDataTmp
+.Rproj.user
+*.Rproj
+
