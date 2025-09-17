@@ -17,10 +17,10 @@ source("skripte/read-data-erste-schritte.R")
 ```
 
 
-# Beispiel zum Einstieg: Niederschläge in ausgewählten deutschen Städten
+# Beispiele zum Einstieg: Niederschläge in ausgewählten deutschen Städten {#sec-VL1-beispiele}
 
 
-## {}
+## Beispiel 1: Mittlerer jährlicher Niederschlag an verschiedenen Stationen in Deutschland
 
 ```{r}
 #| echo: false
@@ -64,7 +64,7 @@ p1 + p2
 ```
 
 
-## {}
+## Beispiel 2: Monatlicher Niederschlag im Jahresverlauf (alle Stationen)
 
 ```{r}
 #| echo: false
@@ -80,7 +80,7 @@ ggplot(data = d_ns_monat) +
 ```
 
 
-## {}
+## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf je Station
 
 ```{r}
 #| echo: false
@@ -91,13 +91,13 @@ ggplot(data = d_ns_monat) +
 ```
 
 
-## Von den Daten zu den Folien
+## Von den Daten zu den Folien {#sec-VL1-von-daten-zu-folien}
 
-Tageswerte der Niederschläge vom Deutschen Wetterdienst
+Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wetterdienst
 
 []{.down20}
 
-### Wie entstehen daraus die Folien?
+### Wie entstehen daraus die Folien? 
 
 1. Daten aus CVS-Datei einlesen
 1. Jahres- und Monatswerte ermitteln
@@ -121,7 +121,7 @@ Tageswerte der Niederschläge vom Deutschen Wetterdienst
 1. Arbeiten mit der Programmierumgebung RStudio
 
 
-# Was ist R und was ist RStudio?
+# Was ist R und was ist RStudio? {#sec-VL1-R-und-RStudio}
 
 
 ## R und RStudio
@@ -150,7 +150,7 @@ Tageswerte der Niederschläge vom Deutschen Wetterdienst
 4. Hilfe (u.A.): Hilfe zu Funktionen (nicht immer einfach zu verstehen)
 
 
-# Quarto-Markdown in RStudio
+# Quarto-Markdown in RStudio {#sec-VL1-Quarto}
 
 
 ## Reproduzierbare Statistik
@@ -188,7 +188,11 @@ Tageswerte der Niederschläge vom Deutschen Wetterdienst
 
 ![](bilder/quarto-hello-world.png)
 
-Quelle: https://quarto.org
+- links: Eingabe in Quarto Markdown
+- rechts: Ausgabe in html
+
+- [Quelle](https://quarto.org/docs/computations/r.html)
+
 
 
 ## Quarto konvertiert Quarto-Markdown
