@@ -193,7 +193,7 @@ read_csv2("daten/beispiel-4.csv", locale=locale(encoding="iso-8859-1"))
 
 ## Beispiel: Niederschlagsdaten Bochum
 
-```{r message=FALSE}
+```{r}
 #| message: false
 read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
