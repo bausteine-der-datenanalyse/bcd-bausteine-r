@@ -102,13 +102,13 @@ d
 
 ![](bilder/csv.svg)
 
-- Comma Separated Values, weit verbreitet, nicht standardisiert
+- csv = Comma Separated Values, weit verbreitet, nicht standardisiert
 - Häufig Kopfzeile(n) mit Beschreibung des Inhalts
 - Inhalt in der Regel mit
-  1. Datenfeldern getrennt z.B. durch Komma, Semikolon, Leerzeichen...
-  1. Datum in verschiedensten Formaten
-  1. Zahlen mit oder ohne Dezimaltrenner (Punkt oder Komma)
-  1. Spezielle Kennzeichnung von fehlenden Werten
+  - Datenfeldern getrennt z.B. durch Komma, Semikolon, Leerzeichen...
+  - Datum in verschiedensten Formaten
+  - Zahlen mit oder ohne Dezimaltrenner (Punkt oder Komma)
+  - Spezielle Kennzeichnung von fehlenden Werten
 
 ## Amerikanische Konvention {.smaller}
 
@@ -168,9 +168,11 @@ Einlesen mit `read_delim(...)`,
 read_delim("daten/beispiel-3.csv", delim=";", trim_ws=TRUE, locale=locale(decimal_mark=".", grouping_mark=","))
 ```
 
+- `delim` wie delimiter = Trennzeichen
 - `locale` enthält länderspezifische Einstellungen
-- `trim_ws` entfernt Leerzeichen (wichtig!)
+- `trim_ws` wie trim whitespace = entfernt Leerzeichen (wichtig!)
 - Datum wird nicht erkannt
+
 
 ## Kodierung {.smaller}
 
@@ -202,6 +204,7 @@ read_delim(
 )
 ```
 
+
 ## CSV-Dateien Zusammenfassung
 
 []{.down60}
@@ -222,6 +225,8 @@ skip = 5               | Anzahl zeilen, die überlesen werden sollten | Ja
 trim_ws = TRUE         | Leerzeichen entfernen (für `read_delim`)    | Ja
 show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
 
+: {tbl-colwidths="[30,50,20]"}
+
 # Rohdaten
 
 ## Hände weg von den Rohdaten! {.smaller}
@@ -229,14 +234,21 @@ show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
 ![](bilder/haende-weg.svg)
 
 :::: {.columns}
-::: {.column width=50%}
+::: {.column width=45%}
 **Rohdaten dürfen nicht verändert werden**
+
+[]{.down40}
 
 - 'Von Hand' durchgeführte Änderungen sind später nicht mehr nachvollziehbar
 - Änderungen nur schwer einzeln rückgängig zu machen
 :::
-::: {.column width=50%}
-**Statdessen: Rohdaten einlesen und in R aufbereiten**
+
+::: {.column width=10%}
+
+:::
+
+::: {.column width=45%}
+**Stattdessen: Rohdaten einlesen und in R aufbereiten**
 
 - R-Code dokumentiert was verändert wurde
 - Wird bei der Benotung berücksichtigt
