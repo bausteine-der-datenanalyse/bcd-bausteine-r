@@ -34,7 +34,7 @@ Tidy data (aufgeräumte Daten)
 
 []{.down120}
 
-- Daten sind dann aufgeräumt, wenn das was man vorhat, einfach umzusetzen ist
+- Daten sind dann aufgeräumt, wenn das, was man vorhat, einfach umzusetzen ist
 - Zum Beispiel plotten
 
 # Der Pipe-Operator `|>`
@@ -73,85 +73,91 @@ sin(sqrt(exp(1.5)))
 ## Beispieldatensatz
 
 ```{r}
-d_uni <- read_excel("daten/unistrasse-2017-2.xlsx", sheet = "raw(T)", range = "B2:H20712") |> 
-  select(-Fahrtrichtung, -ends_with("(Radar)"))
+d_uni <- read_excel("daten/unistrasse-2017-2.xlsx", sheet = "raw(T)", range = "B2:H20712")
 d_uni
 ```
 
-## Auswählen/umbenennen mit `select()`
-
-```{r}
-d_uni
-```
-
-## Auswählen/umbenennen mit `select()`
+## Variablen auswählen mit `select()`
 
 ```{r}
 d_uni |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
 
-- Alle Merkmale angeben, die beibehalten werden sollen
-- Anführungszeichen bei Leerzeichen
+[]{.down60}
 
-## Auswählen/umbenennen mit `select()`
+- Alle Merkmale angeben, die ausgewählt werden sollen
+- Anführungszeichen bei Spaltennamen mit Leerzeichen
 
-```{r}
-d_uni |> select(Datum, Fahrzeug, Geschwindigkeit, L = "Länge (cm)")
-```
 
-- Alle Merkmale angeben, die beibehalten werden sollen
-- Anführungszeichen bei Leerzeichen
-- Umbenennen mit `neuer_name = alter_name` 
-
-## Variablen entfernen
+## Variablen entfernen mit `select()`
 
 ```{r}
-d_uni
+d_uni |> select(-Fahrtrichtung, -ends_with("(Radar)"))
 ```
 
-## Variablen entfernen
+[]{.down60}
 
-```{r}
-d_uni |> select(-Datum, -Fahrzeug) 
-```
-
+- Hier: Merkmale angegeben, die nicht ausgewählt werden sollen
+- Anführungszeichen bei Spaltennamen mit Leerzeichen
 - Wird einer Variablen ein `-` vorangestellt, dann wird die Spalte entfernt
 - Alle anderen Variablen werden beibehalten
 
-## Variablen nach Muster auswählen
+
+## Variablen umbenennen mit `select()`
+
+```{r}
+d_uni |> select(Datum, FZ = Fahrzeug, v = Geschwindigkeit, L = "Länge (cm)")
+```
+
+[]{.down60}
+
+- Umbenennen mit `neuer_name = alter_name` 
+
+
+## Beispieldatensatz 2
 
 ```{r}
 d <- tibble(A_X = 1:2, B_X = 1:2, X_A = 1:2, X_B = 1:2, Datum = 1:2)
 d |> kable()
 ```
 
-::: {.columns}
-::: {.column}
+
+## Variablen nach Muster auswählen
+
+:::: {.columns}
+::: {.column width=45%}
 ```{r}
 d |> select(starts_with("X")) |> kable()
 ```
-:::
-::: {.column}
+
 ```{r}
-d |> select(-ends_with("X")) |> kable()
+d |> select(ends_with("X")) |> kable()
 ```
 :::
+
+::: {.column width=10%}
+
 :::
 
-- Mit `starts_with()` und `end_with()` ein Muster für Namen festlegen
+::: {.column width=45%}
+```{r}
+d |> select(-starts_with("X")) |> kable()
+```
+
+- Mit `starts_with()` und `ends_with()` ein Muster für Namen festlegen
 - Funktioniert auch wieder mit `-`
 
-## Variablen umbenennen mit `rename()`
+:::
+::::
 
-```{r}
-d_uni
-```
 
 ## Variablen umbenennen mit `rename()`
 
 ```{r}
-d_uni |> rename(V = Geschwindigkeit) 
+d_uni |> rename(v = Geschwindigkeit) 
 ```
+
+[]{.down60}
 
 - Variable umbenennen mit `neuer_name = alter_name`
 - Alle anderen Variablen werden beibehalten
@@ -165,100 +171,116 @@ d_uni |> rename(V = Geschwindigkeit)
 - Wenn einzelne Werte aussortiert werden sollen
 - Wenn man sich nur für bestimmte Beobachtungen interessiert
 
-## Beispiel
+## Wieder Beispieldatensatz
 
 ```{r}
-d_uni
+d_uni |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
 
-## Beispiel: Nur LKWs
+## Filter: Nur LKW
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW") 
+d_uni |> filter(Fahrzeug == "LKW") |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
+
+[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 
-## Beispiel: LKWs schneller als 60km/h
+## Filter: Nur LKW, die schneller als 60km/h gefahren sind
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW" & Geschwindigkeit > 60) 
+d_uni |> filter(Fahrzeug == "LKW" & Geschwindigkeit > 60) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
+
+[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 - Logisches und: `&` 
 
-## Beispiel: LKW oder schneller als 80km/h
+## Filter: Nur LKW oder Fahrzeuge, die schneller als 80km/h gefahren sind
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW" | Geschwindigkeit > 80) 
+d_uni |> filter(Fahrzeug == "LKW" | Geschwindigkeit > 80) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
+
+[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 - Logisches oder: `|` 
 
-## Beispiel: Fahrzeugtyp nicht erkannt
+## Filter: Alle Fahrzeuge, deren Fahrzeugtyp nicht erkannt wurde
 
 ```{r}
-d_uni |> filter(is.na(Fahrzeug)) 
+d_uni |> filter(is.na(Fahrzeug)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
 
-## Beispiel: Zeilen mit `NA` entfernen
+## Filter: Zeilen mit `NA` entfernen
 
 ```{r}
-d_uni |> filter(!is.na(Fahrzeug)) 
+d_uni |> filter(!is.na(Fahrzeug)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
 
-## Kriterium in Vektor
+## Filter: Kriterium in Vektor
 
 ```{r}
-d_uni |> filter(Fahrzeug %in% c("Zweirad", "LKW"))
+d_uni |> filter(Fahrzeug %in% c("Zweirad", "LKW")) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
+
+[]{.down60}
 
 - Werte für Merkmal aus Vektor
 
-## Beobachtungen nach Zeilennummer
+## Auswahl von Beobachtungen nach Zeilennummer mit `slice()`
 
 ```{r}
-d_uni |> slice(c(10, 30, 700))
+d_uni |> slice(c(10, 30, 700)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
 ```
+
+[]{.down60}
 
 - Beobachtungen nach Position auswählen
 
-## Beobachtungen am Anfang oder am Ende {.smaller}
+## Auswahl von Beobachtungen am Anfang oder Ende mit `slice()`
 
 ::: {.columns}
 ::: {.column}
 ```{r}
-d_uni |> slice_head(n = 5)
+d_uni |> slice_head(n = 10) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
 :::
 ::: {.column}
 ```{r}
-d_uni |> slice_tail(n = 5)
+d_uni |> slice_tail(n = 10) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
 :::
 :::
 
-- Erste und letzte Beobachtungen auswählen
+[]{.down60}
 
-## Beobachtungen mit größtem/kleinsten Wert {.smaller}
+- Die ersten und letzten n (Anzahl) Beobachtungen auswählen
+- `Head` wie Kopf und `tail` wie Schwanz oder Ende
+
+## Auswahl von kleinsten oder größten Beobachtungen mit `slice()`
 
 ::: {.columns}
 ::: {.column}
 ```{r}
-d_uni |> slice_min(Geschwindigkeit, n = 5)
+d_uni |> slice_min(Geschwindigkeit, n = 8) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
 :::
 ::: {.column}
 ```{r}
-d_uni |> slice_max(Geschwindigkeit, n = 5)
+d_uni |> slice_max(Geschwindigkeit, n = 8) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
 :::
 :::
 
+[]{.down60}
 
-- Beobachtungen mit kleinstem/größten Wert für ein Merkmal auswählen
+- Die kleinsten und größten n (Anzahl) Beobachtungen für ein Merkmal auswählen
+- `min` wie Minimum und `max` wie Maximum
+
 
 # Beobachtungen sortieren mit `arrange()`
 
@@ -269,23 +291,38 @@ d_uni |> slice_max(Geschwindigkeit, n = 5)
 - Wenn man sich für die größten oder kleinsten Werte interessiert
 - Um die Reihenfolge beim Plotten zu ändern, so dass bestimmte Objekte über anderen liegen
 
-## Die langsamsten Fahrzeuge
+## Übersicht der langsamsten Fahrzeuge
 
 ```{r}
-d_uni |> arrange(Geschwindigkeit) 
+d_uni |> arrange(Geschwindigkeit) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
+
+[]{.down60}
 
 - Sortiert aufsteigend nach dem angegebenen Merkmal
 - Schnellste Fahrer mit `desc(merkmal)` (sortiert absteigend)
 
-## Nach mehreren Kriterien sortieren
+## Nach mehreren Kriterien sortieren (1/2)
 
 ```{r}
-d_uni |> arrange(Fahrzeug, Geschwindigkeit)
+d_uni |> arrange(Fahrzeug, Geschwindigkeit) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
+
+[]{.down60}
 
 - Zuerst nach Fahrzeugen sortieren
 - Innerhalb einer Fahrzeuggruppe nach Geschwindigkeit angeordnet
+
+## Nach mehreren Kriterien sortieren (2/2)
+
+```{r}
+d_uni |> arrange(Geschwindigkeit, Fahrzeug) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+```
+
+[]{.down60}
+
+- Zuerst nach der Geschwindigkeit sortieren
+- Innerhalb einer Geschwindigkeiten nach Fahrzeugen angeordnet
 
 # Variablen hinzufügen oder verändern mit `mutate()`
 
@@ -296,11 +333,13 @@ d_uni |> arrange(Fahrzeug, Geschwindigkeit)
 - Wenn aus den vorliegenden Werten neue Werte berechnet werden sollen
 - Wenn bestehende Werte verändert werden sollen (typischerweise: Datum)
 
-## Beispiel: Geschwindigkeit gerundet
+## Geschwindigkeit runden
 
 ```{r}
-d_uni |> mutate(V10 = signif(Geschwindigkeit, digits = 1)) 
+d_uni |> mutate(V10 = signif(Geschwindigkeit, digits = 1))|> select(Datum, Fahrzeug, v = Geschwindigkeit, V10)
 ```
+
+[]{.down60}
 
 - `neue_variable = Ausdruck(alte_variablen)`
 - Mehrere Variablen sind möglich
@@ -309,58 +348,85 @@ d_uni |> mutate(V10 = signif(Geschwindigkeit, digits = 1))
 ## Datum konvertieren
 
 ```{r}
-d_uni |> mutate(Datum = dmy_hms(Datum, tz = "Europe/Berlin")) 
+d_uni |> mutate(Datum = dmy_hms(Datum, tz = "Europe/Berlin")) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
 ```
+
+[]{.down60}
 
 - Nach dem Einlesen ist das Merkmal Datum eine Zeichenkette
 - Alter Wert von Datum wird überschrieben
 - Mit `dmy_hms()` in date-time konvertiert, Zeitzone angeben
 - Jetzt können wir mit dem Datum arbeiten
 
-## Datum und Uhrzeit
+## Datum und Uhrzeit konvertieren
 
 ```{r}
 d_uni |> 
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
     Uhrzeit = as_hms(Datum)
-  ) 
+  ) |> select(Datum, Uhrzeit, Fahrzeug, v = Geschwindigkeit)
 ```
 
+[]{.down60}
+
 - Mit `as_hms()` die Uhrzeit heraussuchen (`library(hms)`)
+
+## Mit der Uhrzeit rechnen
+
+```{r}
+d_uni |> 
+  mutate(
+    Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
+    D15 = floor_date(Datum, "15 minutes"),
+    Uhrzeit = as_hms(Datum)
+  ) |> 
+select(Datum, Uhrzeit, D15)
+```
+
+[]{.down60}
+
+- `floor_date(x, unit)` rundet die Datums- oder Zeitangabe auf die angegebene Einheit (`unit`) ab (`floor`) (`library(lubridate)`)
 
 ## Alles in einem Rutsch {.smaller}
 
 ```{r}
 d_unistrasse <- read_excel("daten/unistrasse-2017-2.xlsx",sheet="raw(T)",range="B2:H20712") |>
-  select(Datum, Fahrzeug, L = `Länge (cm)`, Geschwindigkeit) |>
-  filter(!is.na(Fahrzeug)) |>
+  select(Datum, Fz = Fahrzeug, L = `Länge (cm)`, v = Geschwindigkeit) |>
+  filter(!is.na(Fz)) |>
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
     D15 = floor_date(Datum, "15 minutes"),
     Uhrzeit = as_hms(Datum)
   )
-d_unistrasse
+d_unistrasse |> select(Datum, Uhrzeit, D15, Fz, L, v)
 ```
+
+[]{.down40}
 
 - Mehrere Operationen nacheinander ausgeführt
 - Lesbarkeit: Jede Operation in eine eigene Zeile
 - Lange Operationen nochmal aufteilen
+- `select` gibt auch die Reihenfolge der Spalten an
 
 ## Damit: Plot Uhrzeit und Geschwindigkeit 
 
 ```{r}
 ggplot(data = d_unistrasse) +
-  geom_hex(mapping = aes(x = Uhrzeit, y = Geschwindigkeit)) 
+  geom_hex(mapping = aes(x = Uhrzeit, y = v)) 
 ```
+
+[]{.down60}
 
 - Histogramm der Geschwindigkeitsverteilung über Uhrzeit
 
 ## Bedingte Anweisung mit `if_else()`
 
 ```{r}
-d_uni |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein")) 
+d_uni |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein")) |> select(Datum, Fahrzeug, v = Geschwindigkeit, Raser)
 ```
+
+[]{.down60}
 
 - Erster Parameter ist Bedingung
 - Neue Variable `Raser` erhält Wert von zweitem Parameter, falls Bedingung erfüllt
@@ -373,12 +439,12 @@ d_uni |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein"))
 []{.down120}
 
 - Wenn man wissen will, wie oft eine bestimmte Beobachtung aufgetreten ist
-- Wenn Durschnittswerte oder ähnliches benötigt werden
+- Wenn Durchnittswerte oder ähnliches benötigt werden
 
 ## Nur `summarize()`
 
 ```{r}
-d_unistrasse |> summarise(n = n(), VMit = mean(Geschwindigkeit), VS = sd(Geschwindigkeit)) 
+d_unistrasse |> summarise(n = n(), VMit = mean(v), VS = sd(v)) 
 ```
 
 - Neue Merkmale wie bei `mutate()`
@@ -392,8 +458,8 @@ d_unistrasse |> summarise(n = n(), VMit = mean(Geschwindigkeit), VS = sd(Geschwi
 
 ```{r}
 d_unistrasse |> 
-  group_by(Fahrzeug) |> 
-  summarise(n = n(), VMit = mean(Geschwindigkeit), VS = sd(Geschwindigkeit)) 
+  group_by(Fz) |> 
+  summarise(n = n(), VMit = mean(v), VS = sd(v)) 
 ```
 
 - Daten zunächst mit `group_by()` nach einem (oder mehreren Kriterien) gruppieren
@@ -408,20 +474,20 @@ d_unistrasse |>
 ```{r}
 d_unistrasse_15m <- d_unistrasse |>
   group_by(D15) |>
-  summarise(VMit = mean(Geschwindigkeit))
+  summarise(VMit = mean(v))
 ggplot(data = d_unistrasse_15m, mapping = aes(x = D15, y = VMit)) + geom_line() + geom_point() 
 ```
 
-## Effekt von `group_by()`
+## Effekt von `group_by()` (notwendig?)
 
 ```{r}
 d_unistrasse |> str()
 ```
 
-## Effekt von `group_by()` - Attribute zur Gruppierung
+## Effekt von `group_by()` - Attribute zur Gruppierung (notwendig?)
 
 ```{r}
-d_unistrasse |> group_by(Fahrzeug) |> str()
+d_unistrasse |> group_by(Fz) |> str()
 ```
 
 # Zusammenfassen und verteilen mit `pivot_longer()` und `pivot_wider()`
@@ -518,7 +584,7 @@ d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbr
 - Schlüssel in zweiter Tabelle nicht vorhanden: NAs einsetzen
 - Schlüssel müssen in zweiter Tabelle eindeutig sein!
 
-## Umsetzung in R mit `left_join()`
+## Dataframe Mitarbeitende
 
 ```{r}
 d_mitarbeiter <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "B2:E7")
@@ -526,20 +592,22 @@ kable(d_mitarbeiter)
 ```
 
 
-## Umsetzung in R mit `left_join()`
+## Dataframe Abteilungen
 
 ```{r}
 d_abteilungen <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "G2:I7")
 kable(d_abteilungen)
 ```
 
-## Umsetzung in R mit `left_join()`
+## Verknüpfung der beiden Dataframes mit `left_join()`
 
 ```{r}
 #| message: false
 d_mitarbeiter_1 <- d_mitarbeiter |> left_join(d_abteilungen)
 kable(d_mitarbeiter_1)
 ```
+
+[]{.down40}
 
 - Dataframes müssen ein Merkmal gemeinsam haben
 - Gegebenenfalls Merkmal mit `rename()` umbenennen (wie `select()`)
@@ -729,8 +797,8 @@ d_unistrasse
 
 ```{r}
 d_unistrasse |> select(-D15) |>
-  group_by(Fahrzeug) |>
-  filter(Geschwindigkeit == max(Geschwindigkeit)) |>
+  group_by(Fz) |>
+  filter(v == max(v)) |>
   kable()
 ```
 
