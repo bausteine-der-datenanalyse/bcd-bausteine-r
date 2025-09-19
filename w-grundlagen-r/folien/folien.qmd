@@ -25,10 +25,12 @@ library(kableExtra)
 |   `^`    | Potenzieren    | 2\^0.5 = 1.414214 |
 |   `%%`   | Modulo bilden  | 7 %% 5 = 2        |
 
+- Modulo bilden = Bestimmung des Rests einer ganzzahligen Devision
+
 ## Beispiel
 
 ::: {.columns}
-::: {.column width=40%}
+::: {.column width=50%}
 ```{r}
 1e5 / 33
 pi %% 3
@@ -36,7 +38,7 @@ pi %% 3
 6^8
 ```
 :::
-::: {.column width=60%}
+::: {.column width=50%}
 - Werte werden ohne spezielle print-Anweisung ausgegeben
 - Standardmäßig werden Fließkommaoperationen durchgeführt
 - Lassen Sie Platz um die Operatoren (außer um \^)
@@ -45,33 +47,45 @@ pi %% 3
 
 ## Variablen 1/2
 
+::: {.columns}
+::: {.column width=50%}
 ```{r}
 x <- 32
 y <- 7 / 8
 x * y
 ```
-
-[]{.down40}
-
+:::
+::: {.column width=50%}
 - Daten und Berechnungsergebnisse werden in Variablen gespeichert
 - Der Zuweisungsoperator in R ist `<-` (Tastenkombination alt + -)
 - Variablen im *Environment* gelistet (RStudio oben rechts)
 - Namen von Variablen müssen mit einem Buchstaben beginnen
+:::
+:::
+
+
+
 
 ## Variablen 2/2
 
+
+::: {.columns}
+::: {.column width=50%}
 ```{r}
 X <- pi
 x <- 2
 a.b <- 100
 x * X * a.b
 ```
-
-[]{.down40}
-
+:::
+::: {.column width=50%}
 - `pi` ist eine vorbelegte Variable mit Näherung für $\pi$
 - Groß- und Kleinschreibung wird berücksichtigt
 - Der Punkt ist ein ganz normaler Buchstabe und kein Operator
+:::
+:::
+
+
 
 ## Weitere Zuweisungsoperatoren
 
@@ -107,11 +121,16 @@ x
 | double    | `1`, `1.75`, `1e10`  |
 | character | `"Hello World!"`     |
 
+: {tbl-colwidths="[40,60]"}
+
 []{.down40}
 
 - Datentypen werden nicht explizit angegeben (anders als in Java)
 - Voreinstellung für Zahlen ist `double`
 - Anderen Programmiersprachen: String statt Character
+- logical = Wahrheitswerte
+- integer = ganzzahlig
+- character = Zeichenkette
 
 ## Spezielle Konstanten
 
@@ -124,6 +143,8 @@ x
 | `NULL`           | Ein leeres Objekt                                   |
 | `NA`             | Unbekannter Datenwert (Not Available)               |
 
+: {tbl-colwidths="[40,60]"}
+
 ## Mathematische Funktion
 
 []{.down20}
@@ -134,6 +155,8 @@ x
 | `abs(x)`, `sqrt(x)`               | Absolutwert, Wurzel                             |
 | `log(x)`, `exp(x)`                | Natürlicher Logarithmus und Exponentialfunktion |
 | `log2(x)`, `log10(x)`             | Logarithmus mit anderen Basen                   |
+
+: {tbl-colwidths="[40,60]"}
 
 Beispiele
 
@@ -152,6 +175,10 @@ log2(4096)
 | `as.character(x)` | Konvertiert in eine Zeichenkette |
 | `as.logical(x)`   | In Wahrheitswert konvertieren    |
 
+: {tbl-colwidths="[40,60]"}
+
+- as.logical: alle Zahlenwerte = 0 sind FALSE, alle Zahlenwerte ungleich 0 sind TRUE
+
 ## Beispiele
 
 ```{r}
@@ -162,6 +189,7 @@ as.logical(0.1)
 ```
 
 ## Vergleichsoperatoren und Verknüpfungen
+[]{.down40}
 
 |    Operator        |           Bedeutung           |
 |--------------------|-------------------------------|
@@ -171,11 +199,17 @@ as.logical(0.1)
 |   `near(a, b)`     |          Fast gleich          |
 |    `is.na(x)`      |    Test of `x` gleich `NA`    |
 
+: {tbl-colwidths="[40,60]"}
+
+[]{.down40}
+
 | Verknüpfung   |   Bedeutung    |
 |-----------|----------------|
 |  `a & b`  | Logisches und  |
 |  `a | b`  | Logisches oder |
 |    `!a`   |    Negation    |
+
+: {tbl-colwidths="[40,60]"}
 
 ## Beispiele {.smaller}
 
@@ -208,7 +242,7 @@ sqrt(2) ^ 2 == 2
 1 / 49 * 49 == 1
 ```
 
-$\rightarrow$ Rundungsfehler, Computer rechnet mit 15 Nachkommastellen (grob gesagt)
+$\rightarrow$ Rundungsfehler, Computer rechnet mit (grob gesagt) 15 Nachkommastellen 
 
 Überprüfung in R
 
@@ -227,6 +261,8 @@ near(1/49*49, 1)
 | `paste(..., sep = " ")` | Wie paste0 aber mit Trennzeichen            |
 | `signif(x, digits = 6)` | Rundet auf Anzahl von signifikanten Stellen |
 | `round(x, digits = 0)`  | Runden auf Anzahl von Stellen               |
+
+: {tbl-colwidths="[40,60]"}
 
 
 ## Weitere nützliche Funktionen 2/2
@@ -280,7 +316,7 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
   - Oft werden verwandte Funktionen gemeinsam erklärt
   - Das fällt Ihnen mit der Zeit leichter
 
-## Richtig googeln
+## Richtig googeln und richtige Verwendung von KI
 
 ![](bilder/google.svg)
 
@@ -289,6 +325,7 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
 - Erst denken, dann googeln, dann nochmal denken
 - Nichts aus dem Internet abtippen, das Sie nicht verstehen
 - Meistens ist .org besser als .com
+- Hinweis wie mit KI/LLMs umgegangen wird
 
 # Datenstrukturen
 
@@ -305,6 +342,8 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
 | Array         | Wie Matrix aber beliebig viele Indizes               |
 | List          | Wie Vektor aber verschiedene Datentypen              |
 | **Dataframe** | Liste, jedes Element ein Vektor, Spalten haben Namen |
+
+: {tbl-colwidths="[40,60]"}
 
 → Dataframe = Datensatz einer Erhebung
 
@@ -330,10 +369,18 @@ Für uns wichtig
 | `rep(x, times = n)`         | Hängt das Array oder die Zahl `x` `n`-mal hintereinander |
 | `rep(x, each = n)`          | Wiederholt jedes Element in `x` `n`-mal                  |
 
+: {tbl-colwidths="[40,60]"}
+
+
+
 []{.down20}
 
 - `a:b` wie in Matlab (aber kein 1:0.1:2)
 - c steht für *combine*
+- Inkrement = Zunahme
+- seq wie Sequenz
+- rep wie repetition = Wiederholung
+
 
 ## Erzeugen von Vektoren 2/2 {.smaller}
 
@@ -389,6 +436,8 @@ c[1]
 | `unique(a)`         | Unterschiedliche Elemente                |
 | `a %in% b`          | Ist Wert `a` in Vektor `b` enthalten?    |
 
+: {tbl-colwidths="[40,60]"}
+
 ## Funktionen für Vektoren 2/2
 
 ```{r}
@@ -425,6 +474,8 @@ unique(a)
 | `cor(x, y)`                          | Korrelationskoeffizient              |
 | `quantile(x, probs = c(q1, q2, ...)` | Quantilwerte                         |
 | `summary(x)`                         | Gibt Fünf-Punkte-Zusammenfassung aus |
+
+: {tbl-colwidths="[50,50]"}
 
 Zum Beispiel
 
@@ -512,6 +563,7 @@ d$Z[4]
 
 - `d$X` liefert die Werte zum Merkmal `X` als Vektor
 - Auf einzelne Werte kann dann mit `[idx]` zugegriffen werden
+- idx wie Index
 - Indizierung beginnt bei 1
 
 ## Beispiel: Regressionsgerade/Bestimmtheitsmaß
@@ -558,7 +610,7 @@ Einfach(er) mit dem lubridate-Paket (zu Beginn laden)
 ```{r}
 now()                # date-time
 today()              # date
-hms::as.hms(now())   # time
+hms::as_hms(now())   # time
 ```
 
 ## *Date* mit `ymd` und Varianten
@@ -572,40 +624,56 @@ mdy("8/1/1998")
 dmy(30052015)
 ```
 :::
-::: {.column width=10%}
-:::
-::: {.column width=50%}
-Liest Datum aus Zeichenkette (Trennzeichen fast beliebig) oder
-Zahl - Wenn Zahl: Mit 0X angeben, falls X \< 10 - `ymd`, `dmy` oder `mdy` je nach Reihenfolge - In
-Deutschland meistens Tag/Monat/Jahr - Tipp beim Ausprobieren: Tag \> 12 verwenden um Fehler zu
-finden - Ausgabe in Schreibweise JJJJ-MM-TT
+
+::: {.column width=60%}
+- Liest Datum aus Zeichenkette (Trennzeichen fast beliebig) oder
+Zahl 
+- Wenn Zahl: Mit 0X angeben, falls X \< 10 - `ymd`, `dmy` oder `mdy` je nach Reihenfolge
+- In Deutschland meistens Tag/Monat/Jahr 
+- Tipp beim Ausprobieren: Tag \> 12 verwenden um Fehler zu
+finden 
+- Ausgabe in Schreibweise JJJJ-MM-TT
 :::
 :::
 
 ## *Date-time* mit `ymd_hms` und Varianten
 
+::: {.columns}
+::: {.column width=60%}
 ```{r}
 ymd_hms("2016-11-30 10:30:10", tz = "Europe/Berlin")
 dmy_hm("30 8 2012 12:59", tz = "Europe/Berlin")
 mdy_h(0226201304, tz = "Europe/Berlin")
 ```
+:::
 
+::: {.column width=40%}
 - Liest Datum und Uhrzeit aus Zeichenkette (Trennzeichen fast beliebig) oder Zahl
 - Wenn Zahl: Mit 0X angeben, falls X \< 10
 - Wieder je nach Reihenfolge
 - Zeitzone mit angeben (Voreinstellung ist UTC)
+:::
+:::
+
+
 
 ## *Time* mit `hms::as.hms` und Varianten
-
+::: {.columns}
+::: {.column width=60%}
 ```{r}
 hms::as.hms(85)
 hms::as.hms(dmy_hms("1:6:1987 13:17:01", tz = "Europe/Berlin"))
 hms::hms(hours = 1, minutes = 23, seconds = 15)
 ```
+:::
 
+::: {.column width=40%}
 - Zeit, die seit 0 Uhr verstrichen ist
 - Funktion `hms()` aus lubridate-Paket funktioniert nicht beim Plotten
 - Daher `hms::hms()` aus dem Paket hms (ggf. installieren)
+:::
+:::
+
 
 ## `make_date()` und `make_datetime()`
 
@@ -618,38 +686,61 @@ make_datetime(year = 2000, month = 10, day = 10, hour = 10, tz = "Europe/Berlin"
 ```
 
 ## Datumskomponenten: Jahr und Monat
-
+::: {.columns}
+::: {.column width=60%}
 ```{r}
-(d <- dmy_hms("1.11.2010 12:22:01")) # Zuweisung in Klammern: Wert wird ausgegeben
+(d <- dmy_hms("15.04.2025 12:22:01")) # Zuweisung in Klammern: Wert wird ausgegeben
 year(d)
 month(d)
 month(d, label = TRUE)
 ```
+:::
 
+::: {.column width=40%}
 - Namen des Monats mit `label = TRUE`
 - Levels: Richtige Sortierung (nicht alphabetisch)
+:::
+:::
+
+
+
+
 
 ## Datumskomponenten: Tag
-
+::: {.columns}
+::: {.column width=50%}
 ```{r}
 day(d)
 yday(d)
 wday(d)
 wday(d, label = TRUE)
 ```
+:::
 
+::: {.column width=50%}
+- day = Wievielter Tag im Monat
+- yday = Wievielter Tag im Jahr
+- wday = Wievielter Tag in der Woche (Sonntag = 1)
 - Namen des Tages mit `label = TRUE`
 - Hängt von Ländereinstellung des Computers ab
+:::
+:::
+
+
+
+
 
 ## Zeitdifferenzen 1/2
 
-Alter von Angela Merkal in Tagen am Tag `r today()`
+Alter von Friedrich Merz in Tagen am Tag `r today()`
 
 ```{r}
-today() - dmy("17.7.1954")
+today() - dmy("11.11.1955")
 ```
 
-Zeit zum Berechnen einer Wurzel
+[]{.down60}
+
+Zeit zwischen zwei Anweisungen: Wie lange braucht die Berechnung einer Wurzel?
 
 ```{r}
 d1 <- hms::as.hms(now())
@@ -667,6 +758,8 @@ Ende März um halb drei
 ```{r}
 (d <- dmy_hm("30.3.2019 14:30", tz = "Europe/Berlin"))
 ```
+
+[]{.down60}
 
 ::: {.columns}
 ::: {.column width=50%}
@@ -693,21 +786,32 @@ d + hours(23)
 
 $\rightarrow$ Vergleichen Sie die Zeiten!
 
-## 'Normal' rechnen mit Datum/Zeit
+# 'Normal' rechnen mit Datum/Zeit
 
 ## In Zahl konvertieren mit `as.numeric()`
 
+::: {.columns}
+::: {.column width=50%}
 ```{r}
 as.numeric(ymd_hms("1970-1-1 0:0:11", tz = "UTC"))
 as.numeric(ymd("1970-1-12"))
 as.numeric(hms::as.hms(ymd_hms("1988-11-11 0:0:11", tz="Europe/Berlin")))
 ```
+:::
 
+::: {.column width=50%}
 Welche Zahlen kommen dabei heraus?
 
 - Date-time: Sekunden seit Beginn des Jahres 1970 (in UTC)
 - Date: Tage seit Beginn des Jahres 1970
 - Time: Sekunden seit Beginn des Tages
+- 01.01.1970 00:00 Uhr entspricht dem "absoluten Nullpunkt" für die Zeitberechnung
+:::
+:::
+
+
+
+
 
 ## 'Normal' rechnen mit Zeitdifferenzen
 
@@ -716,6 +820,8 @@ d1 <- hms::as.hms(now())
 d2 <- hms::as.hms(now())
 d2 - d1
 ```
+
+[]{.down60}
 
 - Das Ergebnis ist vom Typ 'Time Difference' und keine Zahl
 
@@ -756,7 +862,7 @@ Den Wert von Variablen kann man auch in den Text einbauen. Hier ein Beispiel
 
 $$1 / 3 \approx `r x`$$
 
-mit einer Variablen in einer Formel
+mit einer Variablen in einer Formel.
 
 ## Das waren die Basics von R
 
