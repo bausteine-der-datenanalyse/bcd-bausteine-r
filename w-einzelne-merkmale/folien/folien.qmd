@@ -20,7 +20,7 @@ theme_set(theme_gray(base_size = 14))
 load("daten/einzelne-merkmale.Rdata")
 ```
 
-## Dataframes[^1] für diese Folien
+## Übersicht Dataframes für diese Folien
 
 []{.down100}
 
@@ -28,16 +28,17 @@ load("daten/einzelne-merkmale.Rdata")
 |---------------------|--------------------------------------------------|
 | d_wb_all            | Weltbank - Alle Länder, alle Jahre               |
 | d_wb_2012           | Wie `d_wb_all`, aber nur für das Jahr 2012       |
-| d_wb_countries      | Wie `d_wb_all`, aber nur Ausgewählte Länder      |
+| d_wb_countries      | Wie `d_wb_all`, aber nur ausgewählte Länder      |
 | d_wb_countries_2012 | Wie `d_wb_countries`, aber nur für das Jahr 2012 |
 | d_ns_bochum_tag     | Tageswerte für Niederschläge in Bochum           |
 | d_ns_bochum_monat   | Monatswerte für Niederschläge in Bochum          |
 
-[^1]: Quellen: https://data.worldbank.org und https://www.dwd.de
+Quellen: <https://data.worldbank.org> und <https://www.dwd.de>
 
-# 1. Werte plotten mit `geom_col()`
 
-Wenn die Werte vorliegen
+# Werte plotten mit `geom_col()`
+
+col wie column = Säule → Säulendiagramm
 
 ## Beispieldatensatz
 
@@ -207,6 +208,8 @@ ggplot(data=d_wb_countries_2012) + geom_col(mapping=aes(x=0, y=pop, fill=country
 
 Wie `geom_col()` aber mit Zählung
 
+- bar wie Balken → Balkendiagramm
+
 ## Beispieldatensatz
 
 ```{r}
@@ -269,6 +272,7 @@ ggplot(data=d) +
   geom_histogram(mapping=aes(x=X)) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
+- Hinweis vom Programm: Voreinstellung nicht gut
 
 ## Hilfetext zu geom_histogram
 
@@ -289,6 +293,7 @@ ggplot(data=d) +
   geom_histogram(mapping=aes(x=X), binwidth=0.5, boundary=0) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
+- Voreinstellung: Intervalle sind linksoffen (erstes Intervall geschlossen)
 
 ## Rechtsoffene Intervalle mit `closed="left"`
 
@@ -298,11 +303,11 @@ ggplot(data=d) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
 
-## Relative Häufigkeiten mit `y=stat(density)`
+## Relative Häufigkeiten mit `y=after_stat(density)`
 
 ```{r}
 ggplot(data=d) + 
-  geom_histogram(mapping=aes(x=X, y=stat(density)), binwidth=0.5, boundary=0, closed="left") +
+  geom_histogram(mapping=aes(x=X, y=after_stat(density)), binwidth=0.5, boundary=0, closed="left") +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
 
@@ -313,6 +318,7 @@ ggplot(data=d) +
   geom_histogram(mapping=aes(x=X,y=stat(density)), breaks=c(0, 1, 1.5, 1.75, 4)) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
+- Prinzip der Flächentreue
 
 ## Mit *echten* Daten...
 
@@ -331,6 +337,7 @@ ggplot(data=d_ns_bochum_monat) +
 ```
 
 - Klassenbreite mit `binwidth=w`, Klassengrenze mit `boundary=b`
+- hier zu sehen: eine unimodale, linkssteile Verteilung
 
 ## Niederschläge (Monat) in Bochum
 
@@ -351,6 +358,8 @@ ggplot(data=d_ns_bochum_monat) +
 - Nach Monaten eingefärbt
 
 # 4. Verteilungsfunktionen mit `geom_step()` und Transformation
+
+- step wie Stufe → Stufendiagramm
 
 ## Minimalbeispiel `geom_step()`
 
@@ -478,7 +487,7 @@ ggplot(data=d) +
 |--------------|----------------------------------------------|----------|
 | `x`          | Merkmal, das gezählt werden soll             | Nein     |
 | `y`          | Relative Häufigkeiten mit `y=stat(density))` | Ja       |
-| `fill`       | Merkmal für Füllfarbe                        |          |
+| `fill`       | Merkmal für Füllfarbe                        | Ja       |
 
 : {tbl-colwidths="[20,50,30]"}
 
