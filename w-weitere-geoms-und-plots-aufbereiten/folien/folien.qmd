@@ -51,7 +51,7 @@ ggplot(data = d_wb_countries) +
 
 ```{r}
 ggplot(data = d_wb_countries) + geom_line(
-    mapping = aes(x = year, y = gdp, color = country, size = pop), lineend = "round")
+    mapping = aes(x = year, y = gdp, color = country, linewidth = pop), lineend = "round")
 ```
 
 - `size = s` legt Linienstärke fest
@@ -81,6 +81,7 @@ ggplot(data = d) +
 []{.up20}
 
 - Notwendige AES: Mittelpunkt und Breite/Höhe
+- tile wie Fliese
 
 ## Rechtecke mit `geom_rect()`
 
@@ -94,6 +95,7 @@ ggplot(data = d) +
 []{.up20}
 
 - Notwendige AES: Koordinaten der Eckpunkte
+- rect wie rectangle = Rechteck
 
 # Plots aufbereiten
 
@@ -106,8 +108,9 @@ ggplot(data = filter(d_ns_bochum_tag, Jahr %in% 2014:2017)) +
 ```
 
 - `facet_wrap(~Merkmal)`: Für jede Ausprägung des Merkmals ein Plot
-- Anzahl der Zeilen oder Spalten mit `ncol =  nc` oder `nrow = nr`
-- Jahre 2014 - 2017 mit `filter()` (später)
+- facet wie Facette, Seite und wrap wie umbrechen
+- Anzahl der Zeilen (row) oder Spalten (col) mit `nrow = nr` oder `ncol =  nc` 
+- Jahre 2014 - 2017 mit `filter()` (später, Verweis)
 
 ## Sortierung nach Häufigkeit 1/3
 
@@ -124,6 +127,7 @@ ggplot(d_wb_all) + geom_bar(mapping = aes(x = fct_infreq(region)))
 ```
 
 - Nach Häufigkeit sortieren mit `fct_infreq()`
+- fct wie factor = Faktor und infreq wie in frequency order = der Häufigkeit nach sortiert
 
 ## Sortierung nach Häufigkeit 3/3
 
@@ -132,6 +136,7 @@ ggplot(d_wb_all) + geom_bar(mapping = aes(x = fct_rev(fct_infreq(region))))
 ```
 
 - Ansteigend mit `fct_rev()`
+- rev wie reverse = umgekehrt
 
 ## Sortierung nach Merkmal 1/3
 
@@ -168,15 +173,15 @@ Skalen regeln die Abbildung von Daten auf die Eigenschaften geometrischer Objekt
 :::
 :::
 
-Form der Angaben zu Skalen: `scale_XXX_YYY(<Arguments>)`
+Form der Angaben zu Skalen: `scale_AAA_BBB(<Arguments>)`
 
-XXX | YYY | Funktion
+AAA | BBB | Funktion
 -|-
 x,y | continuous, discrete | Koordinatenachsen konfigurieren
 x,y | reverse, sqrt, log10 | Koordinatenachsen transformieren
 color, fill | grey, hue, manual, brewer, ... | Farbe und Füllfarbe ändern
 
-## {}
+##
 
 []{.down120}
 
@@ -338,14 +343,14 @@ ggplot(data=mutate(d,Y=Y^16+1e-9))+geom_col(mapping=aes(x=X, y=Y, fill=Y))+
 
 Element | Argumente | Funktion
 -|-
-scale_XXX_gradient | low, high | Farbverlauf von low nach high
-scale_XXX_gradient2 | low, mid, high | Farbverlauf mit drei Farben
-scale_XXX_distiller | palette | Brewer-Farbpaletten
-scale_XXX_fermenter | palette | Brewer-Farbpaletten mit Klassen
+scale_AAA_gradient | low, high | Farbverlauf von low nach high
+scale_AAA_gradient2 | low, mid, high | Farbverlauf mit drei Farben
+scale_AAA_distiller | palette | Brewer-Farbpaletten
+scale_AAA_fermenter | palette | Brewer-Farbpaletten mit Klassen
 
 []{.down40}
 
-→ Für XXX je nach Anwendung entweder 'color' oder 'fill' einsetzen
+→ Für AAA je nach Anwendung entweder 'color' oder 'fill' einsetzen
 
 ## Optionen für alle kontinuierlichen Farbskalen
 
@@ -407,7 +412,7 @@ ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x=region, fill=region)) +
 
 ```{r}
 ggplot(data = d_ns_bochum_monat) + 
-  geom_histogram(mapping = aes(x = NS, binwidth = 15, boundary = 0)) +
+  geom_histogram(mapping = aes(x = NS), binwidth = 15, boundary = 0) +
   labs(                                               
     title = "Histogramm Niederschlag in Bochum", subtitle = "1951 - 2017", 
     x = "Monatlicher Niederschlag (mm)", y = "Anzahl der Monate",
@@ -611,11 +616,11 @@ Mit Hex-Wert
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x=gdp, y=gge, color=region, size=pop)) +
   scale_x_log10() + scale_y_log10() +
-  scale_size(guide = FALSE)
+  scale_size(guide = "none")
 ```
 
-- Argument `guide = FALSE` für die Skala
-- Farbskala entfernen mit `scale_color_discrete(guide = FALSE)`
+- Argument `guide = "none"` für die Skala
+- Farbskala entfernen mit `scale_color_discrete(guide = "none" (PRÜFEN!!))`
 
 ## Methode 2: Alle Legenden für ein Geom
 
