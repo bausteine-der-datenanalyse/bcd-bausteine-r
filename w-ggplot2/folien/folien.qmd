@@ -16,7 +16,7 @@ load("daten/data-lecture.Rdata")
 # Ein Beispiel
 
 
-## {}
+## Zusammenhang zwischen Wirtschaftskraft und Treibhausgasemissionen im Jahr 2012
 
 ```{r}
 ggplot(data = d_wb_2012) +
@@ -38,10 +38,10 @@ ggplot(data = d_wb_2012) +
 6.  Beschriftung (später)
 
 
-# 1. Was ist ggplot2?
+# Was ist ggplot2?
 
 
-## {}
+## Ursprung
 
 ![](bilder/ggplot.svg)
 
@@ -72,10 +72,10 @@ ggplot(data = <DATA>) +
 
 → Am Ende des Semesters werden Sie das verstehen!
 
-# 2. Datensatz für diese Folien
+# Datensatz für diese Folien
 
 
-## {}
+## Daten laden und anzeigen
 
 ### Daten aus Datei laden
 
@@ -108,10 +108,10 @@ show(d_wb_2012)
 : {tbl-colwidths="[20,40,40]"}
 
 
-# 3. Funktionsweise von ggplot
+# Funktionsweise von ggplot
 
 
-## Funktionsweise von ggplot
+## Wie funktioniert ggplot?
 
 ```{r}
 #| eval: false
