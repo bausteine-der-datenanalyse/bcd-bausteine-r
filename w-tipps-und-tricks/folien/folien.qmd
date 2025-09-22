@@ -18,10 +18,10 @@ der Fall sein, wenn die Daten zuerst aus dem Internet heruntergeladen werden mü
 macht es oft Sinn, das Projekt in zwei Dateien aufzuteilen:
 
 1. In der einen qmd-Datei werden die Daten geladen und aufbereitet. Die fertigen Daten können
-dann auf der Festplatte abgelegt werden
+dann auf der Festplatte abgelegt werden.
 
 1. In einer anderen qmd-Datei werden die aufbereiteten Daten von der Festplatte eingelesen und
-dann statistisch ausgewertet
+dann statistisch ausgewertet.
 
 Diese Vorgehensweise lässt sich mit wenig Aufwand durch die Funktionen `save` und `load` realisieren.
 
@@ -34,10 +34,13 @@ save(d, file = "daten/test.RData")
 rm(list = "d")
 ```
 
-Dataframe `d` 
-1. anlegen
-1. in der Datei `daten/test.RData` speichern
-1. löschen (nur für Demonstrationszwecke)
+Dataframe `d`
+
+1.  anlegen
+
+1.  in der Datei `daten/test.RData` speichern
+
+1.  löschen (nur für Demonstrationszwecke) (mit rm für remove = entfernen)
 
 
 ## Dataframe speichern und laden 3/3
