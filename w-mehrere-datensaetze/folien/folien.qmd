@@ -91,6 +91,6 @@ d <- list.files(path = "daten", pattern = "produkt_nieder_tag.*.txt", full.names
 
 - Ergebnis mit `bind_rows` in einem Dataframe kombinieren
 
-- Wichtig: Für `bind_rows` müssen Merkmale den selben Datentyp haben. Falls notwendig mit `mutate` und `as.character` oder `as.numeric` konertieren
+- Wichtig: Für `bind_rows` müssen Merkmale den selben Datentyp haben. Falls notwendig mit `mutate` und `as.character` oder `as.numeric` konvertieren
 
 - Empfohlen für große Anzahl an Dateien
