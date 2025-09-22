@@ -11,11 +11,9 @@ library(RcppRoll)
 library(tidyverse)
 ```
 
-# Arbeiten mit Zeitreihen
+# Zeitreihen
 
-## Zeitreihen {.smaller}
-
-### Begriff der Zeitreihe
+## Begriff der Zeitreihe
 
 Eine '''Zeitreihe''' ist eine zeitlich geordnete Folge von Beobachtungen, bei der sich die Anordnung der Merkmalsausprägungen zwingend aus dem Zeitablauf ergibt (etwa Aktienkurse, Bevölkerungsentwicklung, Wetterdaten).
 
@@ -23,7 +21,7 @@ Die einzelnen Zeitpunkte werden zu einer Menge von Beobachtungszeitpunkten $T$ z
 
 Quelle: <https://de.wikipedia.org/wiki/Zeitreihenanalyse>
 
-### Zeitreihen in R
+## Zeitreihen in R
 
 Das R-Paket `tsibble` stellt eine Datenstruktur (das `tsibble` - wie `tibble` aus dem tidyverserse wobei `ts` für Time Series steht) sowie verschiedene Funktionen bereit, die das Arbeiten mit Zeitreihen vereinfachen.
 
@@ -82,6 +80,8 @@ d_wind_raw_ts <- d_wind_raw |>
 d_wind_raw_ts
 ```
 
+[]{.down40}
+
 $\rightarrow$ Zusatzinformation zu Index und Schlüssel
 
 ## Plot der Rohdaten
@@ -90,6 +90,8 @@ $\rightarrow$ Zusatzinformation zu Index und Schlüssel
 ggplot(data = d_wind_raw_ts) + 
   geom_line(mapping = aes(x = Datum, y = Geschwindigkeit))
 ```
+
+[]{.down40}
 
 $\rightarrow$ Es gibt Lücken im Datensatz, erste Lücke mit Linie verbunden!
 
@@ -106,6 +108,8 @@ d_wind <- d_wind_raw_ts |> fill_gaps()
 d_wind 
 ```
 
+[]{.down40}
+
 $\rightarrow$ Es gibt alle 10 Minuten eine Beobachtung, `r nrow(d_wind) - nrow(d_wind_raw_ts)` neue Zeilen, Werte mit `NA` gekennzeichnet. Damit: Einfacheres Arbeiten!
 
 ## Plot
@@ -114,6 +118,8 @@ $\rightarrow$ Es gibt alle 10 Minuten eine Beobachtung, `r nrow(d_wind) - nrow(d
 ggplot(d_wind) + 
   geom_line(mapping = aes(x = Datum, y = Geschwindigkeit))
 ```
+
+[]{.down40}
 
 $\rightarrow$ Lücken werden als Lücken dargestellt
 
@@ -131,6 +137,8 @@ d_wind_stark <- d_wind |>
 d_wind_stark 
 ```
 
+[]{.down40}
+
 $\rightarrow$ Funktionen `roll_minr` und `roll_maxr` suchen aus `n = 12` Werten (aktuell und 11 vorangegangene) kleinsten und größten Wert heraus. Analog für Summe, Mittelwert und so weiter. 
 
 ## Plot
@@ -139,6 +147,8 @@ $\rightarrow$ Funktionen `roll_minr` und `roll_maxr` suchen aus `n = 12` Werten 
 ggplot(data = d_wind_stark) +
   geom_line(mapping = aes(x = Datum, y = v_min_120))
 ```
+
+[]{.down40}
 
 $\rightarrow$ Einzelne Ereignisse sind nicht zu unterscheiden!
 
@@ -152,6 +162,8 @@ d_wind_stark_g <- d_wind_stark |>
   )
 d_wind_stark_g 
 ```
+
+[]{.down40}
 
 $\rightarrow$ Neue Gruppe falls Abstand zwischen Beobachtungen größer 10 Minuten. Beim Zusammenzählen mit `cumsum` wird `FALSE=0` und `TRUE=1` verwendet.
 
@@ -176,6 +188,8 @@ d_starkwindereignisse <- d_wind_stark_g |>
 d_starkwindereignisse 
 ```
 
+[]{.down40}
+
 $\rightarrow$ Mit `as_tibble` wieder in 'normalen' Dataframe umwandeln damit `group_by` funktioniert wie gewohnt
 
 ## Histogramm Windgeschwindigkeiten
@@ -184,6 +198,8 @@ $\rightarrow$ Mit `as_tibble` wieder in 'normalen' Dataframe umwandeln damit `gr
 ggplot(data = d_starkwindereignisse) +
   geom_histogram(mapping = aes(x = v_max), binwidth = 0.5)
 ```
+
+[]{.down40}
 
 $\rightarrow$ [Orkan Oratia](https://www.wetteronline.de/extremwetter/orkan-oratia-ueber-nordeuropa-sachschaeden-in-millionenhoehe-2000-10-30-or)
 
