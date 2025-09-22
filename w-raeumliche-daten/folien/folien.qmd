@@ -73,7 +73,7 @@ p + coord_sf(crs = "+proj=longlat")
 
 ## Mercator-Projektion 2/2
 
-[![](bilder/mercator-projektion-film.png)](https://www.zdf.de/dokumentation/terra-x/weltkarte-von-mercator-creative-commons-100.html)
+[![](bilder/mercator-projektion-film.png)](https://commons.wikimedia.org/wiki/File:Die_Weltkarte_von_Mercator.webm)
 [Bild ist Link zum Film]{.imagesource}
 
 ## Robinson-Projektion
@@ -129,9 +129,9 @@ d_world <- ne_countries(returnclass = "sf") |>
   filter(adm0_a3 != "ATA")
 ```
 
-- Weltkarte mit `ne_countries()` (http://www.naturalearthdata.com) als `sf`-Objekt
+- Weltkarte mit `ne_countries()` [weitere Infos hier](http://www.naturalearthdata.com) als `sf`-Objekt
 - Benötigte Spalten mit `select()` auswählen
-  - ISO3-Codes der Länder (Eindeutig)
+  - ISO3-Codes der Länder (eindeutig)
   - Geometrie
 - Die Antarktis interessiert uns nicht
 
@@ -184,7 +184,7 @@ d_le <- wb_data(indicator = "SP.DYN.LE00.IN") |>
 ```
 
 - Dataframe zu Weltbankindikatoren mit `wb_data()` (Paket `wbstats`) herunterladen
-  - Indikator auf https://data.worldbank.org heraussuchen (Details)
+  - Indikator [hier] (https://data.worldbank.org heraussuchen) (Details)
 - Wichtige Merkmale auswählen und passend umbenennen
 - Für jedes Land den neuesten Wert heraussuchen
 
@@ -311,7 +311,7 @@ u1 <- add_osm_feature(q, key = "amenity", value = "university") |> osmdata_sf()
 ```
 
 - Mit `c` mehrere Objekte aus einer Kategorie kombinieren
-- Daten teilweise recht umfangreich, Download kann dauern
+- Daten teilweise recht umfangreich, Download kann dauern oder auch zu Abbrüchen oder Fehlermeldungen führen
 
 ## Karte von Bochum 2/3
 
@@ -354,7 +354,7 @@ if (!file.exists("daten/bab.RData")) {
 
 - Daten einmal herunterladen, aufbereiten und speichern, dann nur noch einlesen
 - Aufbereiten der Daten nicht trivial (zusammenfügen, auswählen und vereinfachen)
-- siehe auch https://github.com/spiegel-daten/2019-02-tempolimit
+- siehe auch [GitHub](https://github.com/spiegel-daten/2019-02-tempolimit) 
 
 ## Bundesautobahnen 2/2
 
@@ -388,11 +388,9 @@ ggplot() + geom_sf(data = s1$osm_lines)
 
 - Ausschnitt der Anfrage bei `opq` angeben (und nicht mittels `getbb`)
 
-## Weitere Quellen zu OSM
+## Weitere hilfreiche Quelle zu OSM
 
-- https://wiki.openstreetmap.org/wiki/Map_features
-- http://joshuamccrain.com/tutorials/maps/streets_tutorial.html
-- https://ggplot2tutor.com/streetmaps/streetmaps/
+- [OpenStreetMap Wiki] (https://wiki.openstreetmap.org/wiki/Map_features)
 
 # Shapefiles
 
@@ -405,5 +403,5 @@ ggplot(data = d_wkr) + geom_sf(mapping = aes(fill = Wkr), show.legend = FALSE)
 
 - Dateiformat Shapefile (Endung .shp): Ursprünglich für ArcView (ESRI) entwickeltes Format für vektorielle Geodaten
 - Einlesen in R mit `st_read()`
-- Quelle: https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016
+- [Quelle] (https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016)
 
