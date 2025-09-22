@@ -6,6 +6,9 @@ title: Das Paket rdwd verwenden
 #| echo: false
 library(rdwd)
 library(tidyverse)
+library(lubridate)
+library(data.table)
+library(kableExtra)
 ```
 
 
@@ -37,7 +40,7 @@ ggplot(data = d) + geom_col(mapping = aes(x = datum, y = RSK.Niederschlagshoehe)
 
 ```{r}
 data("geoIndex")
-geoIndex
+geoIndex |> kable() |> scroll_box(height = "400px")
 ```
 
 
@@ -45,7 +48,7 @@ geoIndex
 
 ```{r}
 data("metaIndex")
-metaIndex
+metaIndex |> slice_head(n = 8) |> kable() 
 ```
 
 
@@ -55,7 +58,24 @@ metaIndex
 ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
 metaIndex |>
   filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
-  select(Stationsname, von_datum, bis_datum)
+  select(Stationsname, von_datum, bis_datum) |> 
+  kable() |> 
+  scroll_box(height = "300px")
 ```
 
+[]{.down40}
 
+- Wir stellen fest, dass zwar alle Berliner Stationen ausgewählt wurden, aber auch zwei Stationen in Süddeutschland, deren Namen die Buchstabenfolge "berlin" enthalten (die letzten beiden)
+- Um diesem Fehler vorzubeugen ergänzen wir einen Filter, der sicherstellt, dass der Name der Station mit "Berlin-" beginnt (filter(grpl()))
+
+## Korrigierte Stationen raussuchen
+
+```{r}
+ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
+metaIndex |>
+  filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
+  select(Stationsname, von_datum, bis_datum) |> 
+  filter(grepl("^Berlin-", Stationsname))  |>
+  kable() |> 
+  scroll_box(height = "400px")
+```
