@@ -1,6 +1,5 @@
 ---
-title: "Statistik mit R und Quarto"
-subtitle: "Erste Schritte in RStudio"
+title: "Erste Schritte in RStudio"
 ---
 
 
