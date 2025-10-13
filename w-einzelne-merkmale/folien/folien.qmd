@@ -204,7 +204,7 @@ ggplot(data=d_wb_countries_2012) + geom_col(mapping=aes(x=0, y=pop, fill=country
 
 - Themes behandeln wir noch ausführlich
 
-# 2. Häufigkeitsverteilungen mit `geom_bar()`
+# Häufigkeitsverteilungen mit `geom_bar()`
 
 Wie `geom_col()` aber mit Zählung
 
@@ -255,7 +255,7 @@ ggplot(data=d_wb_2012) + geom_bar(mapping=aes(x=region, fill=region))
 
 - Balken nach Region eingefärbt (redundant mit Achsenbeschriftung)
 
-# 3. Histogramme mit `geom_histogram()`
+# Histogramme mit `geom_histogram()`
 
 ## Beispieldatensatz
 
@@ -357,7 +357,7 @@ ggplot(data=d_ns_bochum_monat) +
 
 - Nach Monaten eingefärbt
 
-# 4. Verteilungsfunktionen mit `geom_step()` und Transformation
+# Verteilungsfunktionen mit `geom_step()` und Transformation
 
 - step wie Stufe → Stufendiagramm
 
@@ -424,7 +424,7 @@ ggplot(data=d_ns_bochum_tag) +
 
 - Warum ganz anders als für die monatlichen Niederschläge?
 
-# 5. Zusammenfassung
+# Zusammenfassung
 
 ## Werte darstellen mit `geom_col()`
 

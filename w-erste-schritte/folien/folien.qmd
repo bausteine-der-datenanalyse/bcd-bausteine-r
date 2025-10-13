@@ -16,7 +16,7 @@ source("skripte/read-data-erste-schritte.R")
 ```
 
 
-# Beispiele zum Einstieg: Niederschläge in ausgewählten deutschen Städten {#sec-VL1-beispiele}
+# Beispiele zum Einstieg: Niederschläge in ausgewählten deutschen Städten
 
 
 ## Beispiel 1: Mittlerer jährlicher Niederschlag an verschiedenen Stationen in Deutschland
@@ -90,7 +90,7 @@ ggplot(data = d_ns_monat) +
 ```
 
 
-## Von den Daten zu den Folien {#sec-VL1-von-daten-zu-folien}
+## Von den Daten zu den Folien
 
 Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wetterdienst
 
@@ -120,8 +120,7 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 1. Arbeiten mit der Programmierumgebung RStudio
 
 
-# Was ist R und was ist RStudio? {#sec-VL1-R-und-RStudio}
-
+# Was ist R und was ist RStudio?
 
 ## R und RStudio
 
@@ -138,19 +137,16 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 - Grafische Oberfläche zur Datenanalyse mit R
 - Wir verwenden Quarto-Markdown für die Erstellung von Dokumenten
 
-
 ## Die Oberfläche von RStudio
 
 ![](bilder/rstudio.svg)
 
 1. Editor: Hier geben Sie ihren Text und Programmcode ein
-2. Umgebung (u.A.): Aktuell definierte Variablen
-3. Konsole (u.A.): Hier können Sie direkt R-Befehle eingeben
-4. Hilfe (u.A.): Hilfe zu Funktionen (nicht immer einfach zu verstehen)
+1. Umgebung (u.A.): Aktuell definierte Variablen
+1. Konsole (u.A.): Hier können Sie direkt R-Befehle eingeben
+1. Hilfe (u.A.): Hilfe zu Funktionen (nicht immer einfach zu verstehen)
 
-
-# Quarto-Markdown in RStudio {#sec-VL1-Quarto}
-
+# Quarto-Markdown in RStudio
 
 ## Reproduzierbare Statistik
 
@@ -170,7 +166,6 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 - Vorteile: Änderungen einfach, Methoden nachvollziehbar, reproduzierbar
 - Nachteile: Ungewohnte Arbeitsweise, Lernkurve
 
-
 ## Möglichkeiten mit Quarto
 
 []{.down100}
@@ -182,7 +177,6 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 - [Hier eine Sammlung von Beispielen](https://quarto.org/docs/gallery/)
 - [Video zur Einführung (englisch)](https://youtu.be/_f3latmOhew?si=bGnCJk9dwSYG6cLK)
 
-
 ## Ein einfaches Beispiel
 
 ![](bilder/quarto-hello-world.png)
@@ -192,14 +186,11 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 
 - [Quelle](https://quarto.org/docs/computations/r.html)
 
-
-
 ## Quarto konvertiert Quarto-Markdown
 
 []{.down140}
 
 ![](bilder/qmd-how-it-works.png)
-
 
 ## Quarto-Markdown-Dokumente
 
@@ -212,7 +203,6 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 - danach kommen
   - Blöcke mit R-Code, die so genannten 'Chunks'
   - Text in spezieller Markdown-Schreibweise
-
 
 ## Quarto-Markdown in RStudio
 
