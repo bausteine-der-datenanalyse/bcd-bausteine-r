@@ -195,7 +195,7 @@ ggplot(data = d_ns_m, mapping = aes(sample = Niederschlag)) +
 - Dann als Argument in `ggplot()`
 
 
-# 2. Approximierte Dichtefunktionen
+# Approximierte Dichtefunktionen
 
 
 ## Dichtefunktion Niederschläge {.smaller}
