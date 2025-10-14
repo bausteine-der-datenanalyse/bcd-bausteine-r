@@ -38,7 +38,7 @@ load("daten/kenngroessen.Rdata")
 Quellen: <https://www.dwd.de> und <https://www.gso.gov.vn>
 
 
-# 1. Kenngrößen von Verteilungen berechnen
+# Kenngrößen von Verteilungen berechnen
 
 
 ## Berechnung von Kenngrößen {.smaller}
@@ -188,7 +188,7 @@ sd(d_ns_m_2010$Niederschlag)
 (Zahlenwerte aus dem Skript)
 
 
-# 2. Bestimmte Werte darstellen mit `geom_vline()` und `geom_hline()`
+# Bestimmte Werte darstellen mit `geom_vline()` und `geom_hline()`
 
 
 ## Minimalbeispiel (mit Dataframe)
@@ -261,7 +261,7 @@ ggplot(data=d_ns_m_0810) +
 - Säulen nebeneinander mit `position = "dodge`
 
 
-# 3. Quantile berechnen mit `quantile()`
+# Quantile berechnen mit `quantile()`
 
 
 ## Funktion `quantile()`
@@ -344,7 +344,7 @@ ggplot(data = d_ns_m) +
 - Mit `factor(Jahr)` kennzeichnen, dass `Jahr` diskretes Merkmal
 
 
-# 5. Lorenzkurve
+# Lorenzkurve
 
 Aus dem Paket `ineq` (installieren)
 
@@ -391,7 +391,7 @@ kable(lc_to_tibble(lc_B))
 - Details hierzu später
 
 
-# 6. Bänder mit `geom_ribbon()`
+# Bänder mit `geom_ribbon()`
 
 
 ## Minimalbeispiel 1/2
@@ -499,7 +499,7 @@ Gini(d_ns_m_nha_trang_2015$Niederschlag)
 12/11*Gini(d_ns_m_nha_trang_2015$Niederschlag)
 ```
 
-# 8. Zusammenfassung
+# Zusammenfassung
 
 ## Linien: `geom_hline()` & `geom_vline()`
 
