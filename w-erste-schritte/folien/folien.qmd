@@ -16,7 +16,7 @@ source("skripte/read-data-erste-schritte.R")
 ```
 
 
-# Beispiele zum Einstieg: Niederschläge in ausgewählten deutschen Städten
+# Beispiele zum Einstieg
 
 
 ## Beispiel 1: Mittlerer jährlicher Niederschlag an verschiedenen Stationen in Deutschland
