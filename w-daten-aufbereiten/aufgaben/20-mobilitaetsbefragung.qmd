@@ -20,7 +20,7 @@ Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Date
 
 - Stellen Sie in einem nach den Häufigkeiten sortierten Balkendiagramm die verschiedenen Fachbereiche dar.
 - Zeigen Sie für jeden Fachbereich in einem Balkendiagramm die gewählten Verkehrsmittel.
-- Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere"
+- Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere".
 
 Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:
 
@@ -29,7 +29,7 @@ Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:
 
 ### Wegstrecke und Fahrzeit
 
-Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne , Wuppertal, Gelsenkirchen und Mülheim dar, ob ein Zusammenhang zwischen Strecke und Fahrzeit erkennbar ist.
+Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne, Wuppertal, Gelsenkirchen und Mülheim dar, ob ein Zusammenhang zwischen Strecke und Fahrzeit erkennbar ist.
 
 ### Reisezeit und Verkehrsmittel
 

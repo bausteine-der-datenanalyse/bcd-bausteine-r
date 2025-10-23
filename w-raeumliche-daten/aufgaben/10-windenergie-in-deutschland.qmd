@@ -2,7 +2,7 @@
 
 Die Bundesnetzagentur führt mit dem [Marktstammdatenregister (MaStR)](https://www.marktstammdatenregister.de/MaStR) ein umfassendes behördliches Register für Stammdaten des Strom- und Gasmarktes. Die erfassten Daten sind öffentlich zugänglich, dabei allerdings sehr umfangreich und in der Rohform (XML-Dateien) schwer auszuwerten.  
 
-In diesem Abschnitt sollen die Daten genutzt werden um den Stand des Windenergieausbaus in Deutschland zu untersuchen. Sie verwenden dabei einen Ausschnitt der Daten des Marktstammdatenregisters, der vorab aufbereitet wurden. Bei Interesse finden Sie die zugehörigen Programme im Unterordner `skripte`.
+In diesem Abschnitt sollen die Daten genutzt werden, um den Stand des Windenergieausbaus in Deutschland zu untersuchen. Sie verwenden dabei einen Ausschnitt der Daten des Marktstammdatenregisters, der vorab aufbereitet wurden. Bei Interesse finden Sie die zugehörigen Programme im Unterordner `skripte`.
 
 Eine vergleichbare Auswertung der Daten finden Sie auf der Webseite [Strom-Report](https://strom-report.com/windenergie/).
 
@@ -17,16 +17,15 @@ Werten Sie die Daten zur Windkraft zunächst ohne räumlichen Bezug aus. Erstell
 - Leistung pro Anlage
 - Welche Größen könnten noch von Interesse sein?
 
-Wählen Sie jeweils ein Darstellungsform, die Ihrer Meinung nach gut geeignet ist.
+Wählen Sie jeweils eine Darstellungsform, die Ihrer Meinung nach gut geeignet ist.
 
-Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Kernenergieanlagen zusammen mit dem Zuwach an Windenergie dar. Wie beurteilen Sie die politische Entscheidung, die Laufzeiten der Kernkraftwerke nicht zu verlängern?
+Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Kernenergieanlagen zusammen mit dem Zuwachs an Windenergie dar. Wie beurteilen Sie die politische Entscheidung, die Laufzeiten der Kernkraftwerke nicht zu verlängern?
 
 ### Auswertung mit räumlichem Bezug
 
-- Stellen Sie die Standorte der Anlagen auf einer Deutschlandkarte dar. Versuchen Sie zusätzliche Informationen wie
+- Stellen Sie die Standorte der Anlagen auf einer Deutschlandkarte dar. Versuchen Sie zusätzliche Informationen zu visualisieren wie
   - die Leistung
   - den Zeitpunkt der Inbetriebnahmen
-  zu visualisieren
 - Visualisieren Sie
   - die gesamte Anzahl der installierten Windkraftanlagen je Bundesland
   - die Gesamtleistung je Bundeslandes

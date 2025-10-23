@@ -4,13 +4,13 @@ Laden Sie das RStudio-Projekt [04-dichtekurven-und-normalverteilung-aufgaben.zip
 
 ### Normalverteilung
 
-Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2, 1, 2, 4$ in einem Plot dar.
+Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2,\, 1,\, 2 \, \text{ und } 4$ in einem Plot dar.
 
 Zusatzaufgabe: Füllen Sie die Bereiche unter den Kurven farbig und verwenden Sie hierfür transparente Flächen.
 
 ### Histogramm und Normalverteilung
 
-Plotten Sie das Histogramm der Geschwindigkeiten zusammen mit der zugehörigen Normalverteilung. Stellen Sie in dem Plot zusätzlich die Werte $\mu - \sigma, \mu, \mu + \sigma$ dar. Prüfen Sie mithilfe eines NQ-Plots, ob die Werte näherungsweise normalverteilt sind.
+Plotten Sie das Histogramm der Geschwindigkeiten zusammen mit der zugehörigen Normalverteilung. Stellen Sie in dem Plot zusätzlich die Werte $\mu - \sigma,\, \mu,\, \mu + \sigma$ dar. Prüfen Sie mithilfe eines NQ-Plots, ob die Werte näherungsweise normalverteilt sind.
 
 
 ### Histogramm und Dichtekurve

@@ -33,7 +33,7 @@ TODO: Hier die Erklärung
 
 # Aufgabe 3
 
--   Berechnen Sie für die Werte $0, 1, 2, \dots, 10$ Mittelwert und Standardabweichung ohne die Funktionen `mean`, `sd` und `var` zu verwenden
+-   Berechnen Sie für die Werte $0, \, 1,\, 2,\, \dots,\, 10$ Mittelwert und Standardabweichung ohne die Funktionen `mean`, `sd` und `var` zu verwenden
 
 ```{r}
 # TODO

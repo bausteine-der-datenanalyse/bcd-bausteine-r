@@ -1,6 +1,6 @@
 ## Korrelationskoeffizient und Ausgleichsgerade in R
 
-Sie untersuchen Messdaten von einer Windkraftanlage in Dortmund (Forschungsprojekt an der Ruhr-Universität Bochum). Die Daten wurden freundlicherweise von Prof. Rüdiger Höffer zur Verfügung gestellt.
+Sie untersuchen Messdaten von einer Windkraftanlage in Dortmund (Forschungsprojekt an der Ruhr-Universität Bochum) (daten/zwei-merkmale-aufgaben-2.Rdata). Die Daten wurden freundlicherweise von Prof. Rüdiger Höffer zur Verfügung gestellt.
 
 ![](bilder/wea-1.svg){width=60% fig-align="center"}
 

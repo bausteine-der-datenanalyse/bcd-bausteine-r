@@ -26,11 +26,11 @@ Bestimmen Sie die üblichen statistischen Kennwerte für den Abfluss.
 
 ### Standardabweichung für jedes Jahr
 
-Stellen sie die Standardabweichung des Abflusses für jedes Jahr in einer Tabelle dar.
+Stellen Sie die Standardabweichung des Abflusses für jedes Jahr in einer Tabelle dar.
 
 ### Standardabweichung über die Jahre
 
-Stellen sie die Standardabweichung des Abflusses grafisch in einem Plot dar. Bewerten Sie ,ob ein linearer Trend zu erkennen ist.
+Stellen Sie die Standardabweichung des Abflusses grafisch in einem Plot dar. Bewerten Sie, ob ein linearer Trend zu erkennen ist.
 
 ### Jahre mit kleinster/größter Standardabweichung
 
@@ -46,6 +46,6 @@ Stellen Sie die Mittelwerte sowie das obere und untere Quartil jedes Monats dar.
 
 ### Verteilung
 
-- Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar
-- Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung
-- Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis
+- Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar.
+- Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung.
+- Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis.
