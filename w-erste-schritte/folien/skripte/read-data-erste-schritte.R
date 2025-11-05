@@ -1,6 +1,5 @@
-library(dplyr)
-library(readr)
-library(lubridate)
+library(sf)
+library(tidyverse)
 
 
 # Datei mit Stationsdaten einlesen
