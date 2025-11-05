@@ -720,7 +720,7 @@ Niederschlagsdaten vom Deutschen Wetterdienst
 
 ```{r}
 d_ns <- read_delim(
-  "daten/produkt_nieder_monat_18910101_20171231_00555-2.txt",
+  "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
   delim = ";", , trim_ws=TRUE,
   locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
