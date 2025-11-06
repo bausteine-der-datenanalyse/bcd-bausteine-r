@@ -315,7 +315,7 @@ ggplot(data=d) +
 
 ```{r}
 ggplot(data=d) + 
-  geom_histogram(mapping=aes(x=X,y=stat(density)), breaks=c(0, 1, 1.5, 1.75, 4)) +
+  geom_histogram(mapping=aes(x=X,y=after_stat(density)), breaks=c(0, 1, 1.5, 1.75, 4)) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
 - Prinzip der Flächentreue
@@ -343,16 +343,16 @@ ggplot(data=d_ns_bochum_monat) +
 
 ```{r}
 ggplot(data=d_ns_bochum_monat) + 
-  geom_histogram(mapping=aes(x=Niederschlag, y=stat(density)), binwidth=15, boundary=0)
+  geom_histogram(mapping=aes(x=Niederschlag, y=after_stat(density)), binwidth=15, boundary=0)
 ```
 
-- Relative Häufigkeiten mit `y=stat(density)`
+- Relative Häufigkeiten mit `y=after_stat(density)`
 
 ## Niederschläge (Monat) in Bochum
 
 ```{r}
 ggplot(data=d_ns_bochum_monat) + 
-  geom_histogram(mapping=aes(x=Niederschlag, fill=Monat), binwidth=15, boundary=0)
+  geom_histogram(mapping=aes(x=Niederschlag, fill=Monat), binwidth=30, boundary=0)
 ```
 
 - Nach Monaten eingefärbt
@@ -402,7 +402,7 @@ ggplot(data=d) +
   geom_step(mapping=aes(x=X, y=nrow(d) * stat(y)), stat="ecdf")
 ```
 
-- In ggplot nicht vorgesehen und daher kompliziert (später)
+- In ggplot nicht vorgesehen und daher kompliziert
 
 ## Mit *echten* Daten...
 
@@ -434,6 +434,8 @@ ggplot(data=d) +
   geom_col(mapping=aes(x=<M>, y=<M>, fill=<M>, color=<M>), Parameter)
 ```
 
+[]{.down60}
+
 | Aesthetics   | Beschreibung                       | Optional           |
 |--------------|------------------------------------|--------------------|
 | `x`          | Merkmal für x-Position             | Nein               |
@@ -441,14 +443,16 @@ ggplot(data=d) +
 | `fill`       | Merkmal für Füllfarbe              | Ja                 |
 | `color`      | Merkmal für Linienfarbe            | Ja                 |
 
-: {tbl-colwidths="[20,50,30]"}
+: {tbl-colwidths="[20, 65, 15]"}
+
+[]{.down60}
 
 | Parameter    | Beschreibung                                            |
 |--------------|---------------------------------------------------------|
 | `position`   | Gesamte y-Achse mit `position="fill"`                   |
 |              | Balken nebeneinander mit `position="dodge"`             |
 
-: {tbl-colwidths="[20,80]"}
+: {tbl-colwidths="[20, 80]"}
 
 ## Zählen und darstellen mit `geom_bar()`
 
@@ -458,20 +462,25 @@ ggplot(data=d) +
   geom_bar(mapping=aes(x=<M>, fill=<M>, color=<M>), Parameter)
 ```
 
+[]{.down60}
+
+
 | Aesthetics   | Beschreibung                       | Optional           |
 |--------------|------------------------------------|--------------------|
 | `x`          | Merkmal für x-Achse (wird gezählt) | Nein               |
 | `fill`       | Füllfarbe                          | Ja                 |
 | `color`      | Linienfarbe                        | Ja                 |
 
-: {tbl-colwidths="[20,50,30]"}
+: {tbl-colwidths="[20, 65, 15]"}
+
+[]{.down60}
 
 | Parameter    | Beschreibung                                            |
 |--------------|---------------------------------------------------------|
 | `position`   | Gesamte y-Achse mit `position="fill"`                   |
 |              | Balken nebeneinander mit `position="dodge"`             |
 
-: {tbl-colwidths="[20,80]"}
+: {tbl-colwidths="[20, 80]"}
 
 $\rightarrow$ Wie `geom_col` aber ohne y
 
@@ -480,16 +489,20 @@ $\rightarrow$ Wie `geom_col` aber ohne y
 ```{r}
 #| eval: false
 ggplot(data=d) +
-  geom_histogram(mapping=aes(x=<M>,y=stat(density),fill=<M>), Parameter)
+  geom_histogram(mapping=aes(x=<M>,y=after_stat(density),fill=<M>), Parameter)
 ```
+
+[]{.down30}
 
 | Aesthetics   | Beschreibung                                 | Optional |
 |--------------|----------------------------------------------|----------|
 | `x`          | Merkmal, das gezählt werden soll             | Nein     |
-| `y`          | Relative Häufigkeiten mit `y=stat(density))` | Ja       |
+| `y`          | Relative Häufigkeiten mit `y=after_stat(density))` | Ja       |
 | `fill`       | Merkmal für Füllfarbe                        | Ja       |
 
-: {tbl-colwidths="[20,50,30]"}
+: {tbl-colwidths="[20, 65, 15]"}
+
+[]{.down30}
 
 | Parameter    | Beschreibung                                            |
 |--------------|---------------------------------------------------------|
@@ -500,7 +513,7 @@ ggplot(data=d) +
 | `breaks`     | Klassengrenzen                                          |
 | `closed`     | Intervalle geschlossen ("left" oder "right")            |
 
-: {tbl-colwidths="[20,80]"}
+: {tbl-colwidths="[20, 80]"}
 
 ## Empirische Verteilungsfunktion mit `geom_step()`
 
@@ -510,9 +523,11 @@ ggplot(data=d) +
   geom_step(mapping=aes(x=<M>, color=<M>), stat="ecdf")
 ```
 
+[]{.down60}
+
 | Aesthetics   | Beschreibung                                 | Optional |
 |--------------|----------------------------------------------|----------|
 | `x`          | Merkmal für empirische Verteilungsfunktion   | Nein     |
 | `color`      | Merkmal für Farbe                            | Ja       |
 
-: {tbl-colwidths="[20,50,30]"}
+: {tbl-colwidths="[20, 65, 15]"}
