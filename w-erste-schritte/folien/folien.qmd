@@ -58,23 +58,10 @@ p2 <- ggplot(data = d_ns_jahr) +
  labs(title = "Mittlerer jährlicher Niederschlag", x = NULL, y = NULL) +
  theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust = 1))
 
-# Speichern
-ggsave("../folien/bilder/beispiel1-p1.png", plot = p1)
-ggsave("../folien/bilder/beispiel1-p2.png", plot = p2)
+# Anzeigen
+p1 + p2
 ```
-::::: columns
-::: {.column width="47%"}
-![](bilder/beispiel1-p1.png)
-:::
 
-::: {.column width="6%"}
-:::
-
-::: {.column width="47%"}
-
-![](bilder/beispiel1-p2.png)
-:::
-:::::
 
 ## Beispiel 2: Monatlicher Niederschlag im Jahresverlauf (alle Stationen)
 
@@ -90,9 +77,9 @@ p3 <- ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
   coord_fixed(0.025) +
   labs(title = "Monatliche Niederschläge (alle Stationen)")
-ggsave("../folien/bilder/beispiel2.png", plot = p3)
+
+p3
 ```
-![](bilder/beispiel2.png)
 
 ## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf je Station
 
@@ -103,9 +90,8 @@ p4 <- ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
   coord_fixed(0.025) +
   labs(title = "Monatliche Niederschläge (nach Stationen)")
-ggsave("../folien/bilder/beispiel3.png", plot = p4)
+p4
 ```
-![](bilder/beispiel3.png)
 
 ## Von den Daten zu den Folien
 
