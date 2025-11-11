@@ -31,4 +31,6 @@ Verwenden Sie hierzu jeweils
 -   Violinenplots und
 -   Boxplots.
 
-Welche Darstellungsform scheint ihnen am besten geeignet?
+Hinweis: Für übereinander/untereinander angeordnete Dichtekurven brauchen Sie die library(ggridges).
+
+Welche Darstellungsform scheint Ihnen am besten geeignet?
