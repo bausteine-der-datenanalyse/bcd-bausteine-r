@@ -1,5 +1,10 @@
+project: 
+  output-dir: _output
+
 execute: 
   echo: true
+
+lang: de
 
 format: 
   revealjs:
