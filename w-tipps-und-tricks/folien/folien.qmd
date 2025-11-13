@@ -25,9 +25,9 @@ show_table <- function(d, h = NULL, p = FALSE) gt(d) |>
 
 Manchmal dauert es lange einen bestimmten Dataframe zu erzeugen. Dies kann zum Beispiel der Fall sein, wenn die Daten zuerst aus dem Internet heruntergeladen werden müssen. Dann macht es oft Sinn, das Projekt in zwei Dateien aufzuteilen:
 
-1.  In der einen qmd-Datei werden die Daten geladen und aufbereitet. Die fertigen Daten können dann auf der Festplatte abgelegt werden.
+1. In der einen qmd-Datei werden die Daten geladen und aufbereitet. Die fertigen Daten können dann auf der Festplatte abgelegt werden.
 
-2.  In einer anderen qmd-Datei werden die aufbereiteten Daten von der Festplatte eingelesen und dann statistisch ausgewertet.
+2. In einer anderen qmd-Datei werden die aufbereiteten Daten von der Festplatte eingelesen und dann statistisch ausgewertet.
 
 Diese Vorgehensweise lässt sich mit wenig Aufwand durch die Funktionen `save` und `load` realisieren.
 
@@ -76,8 +76,8 @@ d1 <- d |>
 show_table(d1)
 ```
 
--   Mit `str_replace` werden die Richtungen durch eine leere Zeichenkette ersetzt
--   Verschiedene zu ersetztende Zeichenketten mit `|` trennen
+- Mit `str_replace` werden die Richtungen durch eine leere Zeichenkette ersetzt
+- Verschiedene zu ersetztende Zeichenketten mit `|` trennen
 
 # Daten mit sehr vielen Merkmalen und/oder kryptischen und/oder langen Namen für Spalten
 
