@@ -67,8 +67,10 @@ ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
 ```{.r}
 ggplot(data = d_unistrasse, mapping = aes(x = Geschwindigkeit)) +
   geom_histogram(mapping = aes(y = stat(density)), binwidth = 2.5, boundary = 0.0) +
-  geom_density(color = 'red', fill = 'orange', alpha = 0.25)
+  geom_density(color = 'red', fill = 'orange', alpha = 0.25, bw=1)
 ```
+
+- Die Breite des Kerns legen Sie mit "bw" fest. Probieren Sie verschiedene Werte aus.
 
 #### Darstellungsformen
 
@@ -77,6 +79,7 @@ ggplot(data = d_unistrasse, mapping = aes(x = Geschwindigkeit)) +
 Dichtekurven übereinander
 
 ```{.r}
+library(ggridges)
 ggplot(data = d_unistrasse) +
   geom_density_ridges(mapping = aes(x = Geschwindigkeit, y = Tag), bandwidth = 1)
 ```

@@ -73,12 +73,10 @@ d_ns_monat <- d_ns |>
  group_by(Station, Jahr, Monat) |>
  summarise(n = n(), Niederschlag = sum(Niederschlag))
 
-p3 <- ggplot(data = d_ns_monat) +
+ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
   coord_fixed(0.025) +
   labs(title = "Monatliche Niederschläge (alle Stationen)")
-
-p3
 ```
 
 ## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf je Station
@@ -86,11 +84,10 @@ p3
 ```{r}
 #| echo: false
 
-p4 <- ggplot(data = d_ns_monat) +
+ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
   coord_fixed(0.025) +
   labs(title = "Monatliche Niederschläge (nach Stationen)")
-p4
 ```
 
 ## Von den Daten zu den Folien
