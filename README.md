@@ -1,12 +1,85 @@
 # Werkzeugbausteine R
 
+Die Grundlagen zum Programm R bestehen aus verschiedenen Werkzeugbausteinen, die als Gesamtdokument (https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/folien-r-alle/index.html) oder einzeln abrufbar sind. Alle Bausteine haben einen Foliensatz, manche haben zusätzlich noch Aufgaben.
+
 ## Dokumente
 
-### Erste Schritte
+Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der gearbeitet werden kann. TODO: Prüfen, ob diese nach jetzigem Stand mit zur Verfügung gestellt werden!
+
+### Erste Schritte in RStudio
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-erste-schritte/folien/folien.html)
-- Aufgaben
-  - [XXX](XXX)
+- Aufgabe
+  - [TODO Aufgabe Erste Schritte: Aufgabenstellungen beinhaltet Verweis zu moodle, anpassen oder weglassen](XXX)
 
-### TODO
-  
+### Grundlagen von ggplot2
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-ggplot2/folien/folien.html)
+
+### Untersuchung einzelner Merkmale in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/folien/folien.html)
+- Aufgabe
+  - [Untersuchung in R TODO auch hier ist ein moodle Bezug](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/aufgaben/10-untersuchung-in-r.html)
+
+### Kenngrößen und Beschreibung von Verteilungen in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/folien/folien.html)
+- Aufgabe
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/aufgaben/10-kenngroessen-in-r.html)
+
+### Dichtekurven und Normalverteilung in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/folien/folien.html)
+- Aufgabe
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/aufgaben/10-dichtekurven-und-normalverteilung-in-r.html)
+
+### Weitere Geoms und Aufbereiten von Plots
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/folien/folien.html)
+- Aufgabe
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html)
+
+### Grundlagen der Programmiersprache R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html)
+- Aufgabe
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html)
+
+### Daten einlesen
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-einlesen/folien/folien.html)
+
+### Daten aufbereiten
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/folien/folien.html)
+- Aufgaben
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/00-projekt.html)
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/10-donau-hofkirchen.html)
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/20-mobilitaetsbefragung.html)
+
+### Räumliche Daten in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/folien/folien.html)
+- Aufgabe
+  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html)
+
+### Mehrere Datensätze in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html)
+
+### Tipps und Tricks zu RStudio
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-tipps-und-tricks/folien/folien.html)
+
+### Das Paket rdwd (Deutscher Wetterdienst) verwenden
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-rdwd-verwenden/folien/folien.html)
+
+### Lineare Trends für viele Datensätze
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html)
+
+### Arbeiten mit Zeitreihen in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zeitreihen/folien/folien.html)
