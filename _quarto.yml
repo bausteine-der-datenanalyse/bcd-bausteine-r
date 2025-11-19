@@ -15,4 +15,4 @@ format:
     toc-depth: 1
     number-depth: 1
     theme: 
-    - style.scss
+    - bcd-slides.scss
