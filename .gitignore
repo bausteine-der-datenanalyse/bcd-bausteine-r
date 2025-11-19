@@ -16,3 +16,5 @@ w-*/*.pdf
 DWDdata
 
 **/*.quarto_ipynb
+w-tipps-und-tricks/folien/daten/test.RData
+w-zeitreihen/folien/daten/d_wind_raw.RData
