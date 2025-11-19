@@ -1,6 +1,6 @@
 # Werkzeugbausteine R
 
-Die Grundlagen zum Programm R bestehen aus verschiedenen Werkzeugbausteinen, die als Gesamtdokument (https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/folien-r-alle/index.html) oder einzeln abrufbar sind. Alle Bausteine haben einen Foliensatz, manche haben zusätzlich noch Aufgaben.
+Die Grundlagen zum Programm R bestehen aus verschiedenen Werkzeugbausteinen, deren Folien als Gesamtdokument (https://bausteine-der-datenanalyse.github.io/bcd-modul-bo-mathematik-b/folien-r-alle/index.html) oder einzeln abrufbar sind. Alle Bausteine haben einen Foliensatz, manche haben zusätzlich noch Aufgaben.
 
 ## Dokumente
 
