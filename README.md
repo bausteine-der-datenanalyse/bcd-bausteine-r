@@ -36,7 +36,7 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 ### Untersuchung von zwei Merkmalen in R
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/folien/folien.html) (xxx)
 - Aufgaben
   - [Streuplots sowie zweidimensionale Histogramme und Dichtefunktionen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/aufgaben/10-streuplots-histogramme-dichtefunktion-in-r.html) (xxx)
   - [Korrelationskoeffizient und Ausgleichsgerade in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/aufgaben/20-korrelationskoeffizient-und-ausgleichsgerade-in-r.html) (xxx)
