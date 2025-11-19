@@ -1,2 +1,2 @@
 clean:
-	rm -rf _output .quarto demo/folien/c demo/folien/.quarto */folien/folien.html */folien/folien_files */folien/.Rproj.user
+	rm -rf _output .quarto */folien/folien.html */folien/folien_files */folien/.Rproj.user */folien/folien.rmarkdown
