@@ -1,3 +1,0 @@
-project: 
-  output-dir: ../../_output/folien-r
-  pre-render: ../../../bcd-bausteine-montieren/collect-content.R
