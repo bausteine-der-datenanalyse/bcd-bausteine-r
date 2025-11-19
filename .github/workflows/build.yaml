@@ -35,8 +35,12 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: rcmdcheck
-      - name: Quarto render slides
+      - name: Render slides
         run: for f in w-*; do if test -d $f/folien; then quarto render $f/folien -t revealjs; fi; done
+      - name: Render w-praesentationen-mit-quarto
+        run: quarto render w-praesentationen-mit-quarto
+      - name: Render w-schreiben-mit-quarto
+        run: quarto render w-schreiben-mit-quarto
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
