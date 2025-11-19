@@ -32,19 +32,26 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/folien/folien.html)
 - Aufgabe
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/aufgaben/10-dichtekurven-und-normalverteilung-in-r.html)
+  - [Dichtekurven und Normalverteilung in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/aufgaben/10-dichtekurven-und-normalverteilung-in-r.html)
+
+### Untersuchung von zwei Merkmalen in R
+
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/folien/folien.html)
+- Aufgaben
+  - [Streuplots sowie zweidimensionale Histogramme und Dichtefunktionen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/aufgaben/10-streuplots-histogramme-dichtefunktion-in-r.html)
+  - [Korrelationskoeffizient und Ausgleichsgerade in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zwei-merkmale/aufgaben/20-korrelationskoeffizient-und-ausgleichsgerade-in-r.html)
 
 ### Weitere Geoms und Aufbereiten von Plots
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/folien/folien.html)
 - Aufgabe
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html)
+  - [Plots aufbereiten](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html)
 
 ### Grundlagen der Programmiersprache R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html)
 - Aufgabe
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html)
+  - [Grundlagen R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html)
 
 ### Daten einlesen
 
@@ -54,15 +61,15 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/folien/folien.html)
 - Aufgaben
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/00-projekt.html)
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/10-donau-hofkirchen.html)
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/20-mobilitaetsbefragung.html)
+  - [RStudio-Projekt zum Aufbereiten von Daten](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/00-projekt.html)
+  - [Abfluss der Donau bei Hofkirchen](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/10-donau-hofkirchen.html)
+  - [Mobilitätsbefragung an der Hochschule Bochum](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/20-mobilitaetsbefragung.html)
 
 ### Räumliche Daten in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/folien/folien.html)
 - Aufgabe
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html)
+  - [Ausbau der Windeinergie in Deutschland](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html)
 
 ### Mehrere Datensätze in R
 
