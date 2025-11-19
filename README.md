@@ -43,23 +43,23 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 ### Weitere Geoms und Aufbereiten von Plots
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/folien/folien.html) (xxx)
 - Aufgabe
   - [Plots aufbereiten](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html) (xxx)
 
 ### Grundlagen der Programmiersprache R
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html) (xxx)
 - Aufgabe
   - [Grundlagen R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html) (xxx)
 
 ### Daten einlesen
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-einlesen/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-einlesen/folien/folien.html) (xxx)
 
 ### Daten aufbereiten
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/folien/folien.html) (xxx)
 - Aufgaben
   - [RStudio-Projekt zum Aufbereiten von Daten](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/00-projekt.html) (xxx)
   - [Abfluss der Donau bei Hofkirchen](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-daten-aufbereiten/aufgaben/10-donau-hofkirchen.html) (xxx)
@@ -67,26 +67,26 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 ### Räumliche Daten in R
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/folien/folien.html) (xxx)
 - Aufgabe
   - [Ausbau der Windeinergie in Deutschland](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html) (xxx)
 
 ### Mehrere Datensätze in R
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html) (xxx)
 
 ### Tipps und Tricks zu RStudio
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-tipps-und-tricks/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-tipps-und-tricks/folien/folien.html) (xxx)
 
 ### Das Paket rdwd (Deutscher Wetterdienst) verwenden
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-rdwd-verwenden/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-rdwd-verwenden/folien/folien.html) (xxx)
 
 ### Lineare Trends für viele Datensätze
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html) (xxx)
 
 ### Arbeiten mit Zeitreihen in R
 
-- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zeitreihen/folien/folien.html)
+- [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-zeitreihen/folien/folien.html) (xxx)
