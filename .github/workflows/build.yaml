@@ -37,6 +37,8 @@ jobs:
           extra-packages: rcmdcheck
       - name: Render slides
         run: for f in w-*; do if test -d $f/folien; then quarto render $f/folien -t revealjs; fi; done
+      - name: Render assignments
+        run: for f in w-*; do if test -d $f/aufgaben; then quarto render $f/aufgaben -t html; fi; done
       - name: Render w-praesentationen-mit-quarto
         run: quarto render w-praesentationen-mit-quarto
       - name: Render w-schreiben-mit-quarto

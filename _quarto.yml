@@ -1,5 +1,8 @@
 project: 
   output-dir: _output
+  render:
+    - "*.qmd"
+    - "!aufgaben.qmd"
 
 execute: 
   echo: true
