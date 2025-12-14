@@ -260,6 +260,12 @@ $selection-bg: #26351c !default;
 
 /* code - maba */
 
+.reveal section img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .reveal div.sourceCode pre code {
   margin-left: 0.75em !important;
 }
