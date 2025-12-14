@@ -3,8 +3,8 @@ title: "Räumliche Daten"
 ---
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
+library(gt)
 library(sf)
 library(giscoR)
 library(lwgeom)
@@ -13,9 +13,6 @@ library(osmdata)
 library(wbstats)
 library(tidyverse)
 library(rnaturalearth)
-
-sf_use_s2(FALSE)
-# assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
 ```
 
 # Einführung
@@ -34,7 +31,7 @@ sf_use_s2(FALSE)
 
 ![](bilder/koordinaten.svg)
 
-**Koordinatensystem mit Breiten- und Längengraden**
+### Koordinatensystem mit Breiten- und Längengraden
 
 - Koordinaten eines Punktes mit Breitengrad (*latitute*) und Längengrad (*longitude*) 
   - Angaben im Winkelmaß
@@ -83,7 +80,7 @@ p + coord_sf(crs = "+proj=longlat")
 p + coord_sf(crs = "+proj=robin")
 ```
 
-- Breiten- und Längengrad in gekrümmtem Koordinatensystem aufgetragen
+- Breiten- und Längengrad in gekrümmtem Koordinatensystem
 - Keine Projektion im mathematischen Sinne
 
 ## Lambertsche Azimutalprojektion
@@ -100,7 +97,7 @@ p + coord_sf(crs = "+proj=laea")
 
 ![](bilder/sf-classes.svg)
 
-**Simple Features**
+### Simple Features
 
 - Offener Standard für geometrische Daten (ISO 19125-1:2004)
 - Entwickelt vom *Open Geospatial Consortium* (OGC)
@@ -110,7 +107,9 @@ p + coord_sf(crs = "+proj=laea")
 
 ![](bilder/simple-feature.png)
 
-**Paket sf: Simple Features in Dataframes**
+[]{.down10}
+
+### Paket sf: Simple Features in Dataframes
 
 - Beispiel oben: Dataframe der Weltkarte (Ausschnitt)
 - Ganz normaler Dataframe mit Spalten
@@ -124,12 +123,12 @@ p + coord_sf(crs = "+proj=laea")
 ## Daten: Die Welt als Dataframe
 
 ```{r}
-d_world <- ne_countries(returnclass = "sf") |>
+d_world <- ne_countries() |>
   select(admin, adm0_a3, geometry) |>
   filter(adm0_a3 != "ATA")
 ```
 
-- Weltkarte mit `ne_countries()` [weitere Infos hier](http://www.naturalearthdata.com) als `sf`-Objekt
+- Weltkarte mit `ne_countries()` als `sf`-Objekt ([weitere Infos hier](http://www.naturalearthdata.com))
 - Benötigte Spalten mit `select()` auswählen
   - ISO3-Codes der Länder (eindeutig)
   - Geometrie
@@ -151,14 +150,18 @@ ggplot() +
 
 ```{r}
 d_world_a <- d_world |>
+  st_transform(crs = "EPSG:8857") |>
   mutate(area = as.numeric(st_area(geometry)) * 1e-6)
 ```
 
 ![Welt mit Fläche](bilder/simple-feature-area-2.png)
 
+[]{.down10}
+
+- Flächentreue Projektion mit `EPSG:8857`
 - Berechnung der Flächen mit `st_area()`
-- Alle Funktionen im `sf`-Paket beginnen mit `st_` (man muss nicht alles verstehen)
-- Einheiten entfernen mit `as.numeric()` und in Quadratkilometern
+- Funktionen im `sf`-Paket beginnen mit `st_` (man muss nicht alles verstehen)
+- Einheiten entfernen mit `as.numeric()`, umrechnen in Quadratkilometer
 - Fläche Argentinien laut Wikipedia: 2.780.400 km<sup>2</sup> (Vermutung: Karte nicht sehr genau)
 
 ## Weltkarte mit Fläche der Länder 2/2 {.smaller}
@@ -175,7 +178,7 @@ ggplot(data = d_world_a) +
 
 ## Weltkarte mit der Lebenswerwartung
 
-```{r, warning = FALSE}
+```{r}
 d_le <- wb_data(indicator = "SP.DYN.LE00.IN") |>
   select(adm0_a3 = iso3c, date, le = SP.DYN.LE00.IN) |>
   filter(!is.na(le)) |> 
@@ -184,7 +187,7 @@ d_le <- wb_data(indicator = "SP.DYN.LE00.IN") |>
 ```
 
 - Dataframe zu Weltbankindikatoren mit `wb_data()` (Paket `wbstats`) herunterladen
-  - Indikator [hier] (https://data.worldbank.org heraussuchen) (Details)
+  - Indikator [hier](https://data.worldbank.org) heraussuchen
 - Wichtige Merkmale auswählen und passend umbenennen
 - Für jedes Land den neuesten Wert heraussuchen
 
@@ -203,10 +206,11 @@ d_world_le <- d_world |>
 ```{r}
 ggplot(data = d_world_le) + 
   geom_sf(mapping = aes(fill = le)) +
-  scale_fill_distiller(palette="RdPu") 
+  scale_fill_distiller(palette="RdPu") +
+  labs(fill = "Lebenserwartung")
 ```
 
-# Werte zu einzelnen Koordinaten plotten
+# Werte zu einzelnen Koordinaten
 
 ## Erste Möglichkeit: Mit `geom_point` {.smaller}
 
@@ -236,12 +240,12 @@ ggplot() + geom_sf(data = d_world) +
 
 # Landesgrenzen mit `giscoR`
 
-## Landesgrenzen 1/2 {.smaller}
+## Landesgrenzen Bundesrepublik 1/2 {.smaller}
 
 ```{r}
-d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
-d_bl <- gisco_get_nuts(country = "Germany", nuts_level = 2, resolution = 03)
-d_rb <- gisco_get_nuts(country = "Germany", nuts_level = 3, resolution = 03)
+d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 10)
+d_bl <- gisco_get_nuts(country = "Germany", nuts_level = 2, resolution = 10)
+d_rb <- gisco_get_nuts(country = "Germany", nuts_level = 3, resolution = 10)
 ```
 
 - GISCO: Geografisches Informationssystem der EU-Kommission
@@ -252,7 +256,7 @@ d_rb <- gisco_get_nuts(country = "Germany", nuts_level = 3, resolution = 03)
   - `resolution` Auflösung, siehe Dokumentation
   - [NUTS](https://en.wikipedia.org/wiki/Nomenclature_of_Territorial_Units_for_Statistics) ist ein System zur Bezeichnung von Ländern
 
-## Landesgrenzen 2/2 {.smaller}
+## Landesgrenzen Bundesrepublik 2/2 {.smaller}
 
 ```{r}
 ggplot() +
@@ -277,7 +281,7 @@ ggplot() +
 
 ```{r}
 q <- opq(getbb('Bochum, Germany'))
-s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
+s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf() 
 ```
 
 - Bereich festlegen mit `getbb` (bb steht für Bounding Box)
@@ -288,7 +292,7 @@ s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
   - https://wiki.openstreetmap.org/wiki/Map_features
 - Mit `osmdata_sf` zur Verwendung mit SF aufbereiten
   - Objekt enthält `osm_points`, `osm_lines`, `osm_polygons`, ...
-  - Dies sind die eigentlichen SF-Objekte
+  - Dies sind die eigentlichen SF-Dataframes
 
 ## Straßen in Bochum 2/2
 
@@ -309,7 +313,7 @@ if (!file.exists("daten/strassen-bochum.RData")) {
   s3 <- add_osm_feature(q, key = "highway", value = c("unclassified", "residential")) |> osmdata_sf()
   f1 <- add_osm_feature(q, key = "waterway", value = "river") |> osmdata_sf()
   u1 <- add_osm_feature(q, key = "amenity", value = "university") |> osmdata_sf()
-save(s1, s2, s3, f1, u1, file = "daten/strassen-bochum.RData")
+  save(s1, s2, s3, f1, u1, file = "daten/strassen-bochum.RData")
 } else {
   load(file = "daten/strassen-bochum.RData")
 }
@@ -337,30 +341,30 @@ p <- ggplot() +
 ## Karte von Bochum 3/3
 
 ```{r}
-# p
+p
 ```
 
 ## Bundesautobahnen 1/2
 
 ```{r}
 if (!file.exists("daten/bab.RData")) {
-  q <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600)
-  d_bab_raw <- (add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf())$osm_lines
-  d_bab <- d_bab_raw |>
-    filter(st_contains(d_de, d_bab_raw, sparse = FALSE)[1,]) |>
+  bab_raw <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600) |>
+    add_osm_feature(key = "highway", value = "motorway") |> 
+    osmdata_sf()
+  d_bab <- bab_raw$osm_lines |>
+    st_filter(d_de, .predicate = st_within) |>
     drop_na(ref) |>
     group_by(ref) |>
     summarise() |>
     st_simplify(dTolerance = 100) 
-  save(d_bab, d_bab_raw, file = "daten/bab.RData")
+  save(d_bab, file = "daten/bab.RData")
 } else {
   load(file = "daten/bab.RData")
 }
 ```
 
 - Daten einmal herunterladen, aufbereiten und speichern, dann nur noch einlesen
-- Aufbereiten der Daten nicht trivial (zusammenfügen, auswählen und vereinfachen)
-- siehe auch [GitHub](https://github.com/spiegel-daten/2019-02-tempolimit) 
+- Aufbereiten der Daten nicht ganz trivial (zusammenfügen, auswählen und vereinfachen)
 
 ## Bundesautobahnen 2/2
 
@@ -394,9 +398,10 @@ ggplot() + geom_sf(data = s1$osm_lines)
 
 - Ausschnitt der Anfrage bei `opq` angeben (und nicht mittels `getbb`)
 
-## Weitere hilfreiche Quelle zu OSM
+## Weitere hilfreiche Quellen zu OSM
 
-- [OpenStreetMap Wiki] (https://wiki.openstreetmap.org/wiki/Map_features)
+- [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Map_features)
+- [Hervorragendes Tutorial](https://jcoliver.github.io/learn-r/017-open-street-map.html)
 
 # Shapefiles
 
