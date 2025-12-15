@@ -619,8 +619,8 @@ ggplot(data = d_wb_2012) +
   scale_size(guide = "none")
 ```
 
-- Argument `guide = "none"` für die Skala
-- Farbskala entfernen mit `scale_color_discrete(guide = "none" (PRÜFEN!!))`
+- Argument `guide = "none"` für die Größenskala
+- Farbskala entfernen mit `scale_color_discrete(guide = "none")`
 
 ## Methode 2: Alle Legenden für ein Geom
 

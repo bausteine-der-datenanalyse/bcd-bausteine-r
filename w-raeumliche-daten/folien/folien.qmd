@@ -19,7 +19,7 @@ library(rnaturalearth)
 
 ## Räumliche Daten
 
-![GIS Layers](bilder/GISLayers.png) [Quelle: http//landportal.org]{.imagesource}
+![GIS Layer, Quelle: http//landportal.org](bilder/GISLayers.png)
 
 -   Viele Daten haben räumlichen Bezug
 -   Klassische Anwendung von Geoinformationssystemen (GIS)
@@ -412,7 +412,8 @@ d_wkr <- st_read("daten/Wkr_25833.shp", quiet = TRUE) |> st_transform(crs = "+pr
 ggplot(data = d_wkr) + geom_sf(mapping = aes(fill = Wkr), show.legend = FALSE)
 ```
 
-- Dateiformat Shapefile (Endung .shp): Ursprünglich für ArcView (ESRI) entwickeltes Format für vektorielle Geodaten
-- Einlesen in R mit `st_read()`
-- [Quelle] (https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016)
+- Dateiformat Shapefile (Endung .shp)
+  - Ursprünglich für ArcView (ESRI) entwickeltes Geodatenformat
+- Einlesen mit `st_read()`
+- [Quelle](https://daten.berlin.de/datensaetze/geometrien-der-wahlkreise-für-die-abgeordnetenhauswahl-berlin-2016)
 
