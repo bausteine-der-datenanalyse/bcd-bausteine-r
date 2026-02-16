@@ -8,7 +8,6 @@ author: "TODO: Namen eintragen"
 #| message: false
 library(sf)
 library(giscoR)
-library(lubridate)
 library(tidyverse)
 load("daten/mastr-data.RData")
 ```
