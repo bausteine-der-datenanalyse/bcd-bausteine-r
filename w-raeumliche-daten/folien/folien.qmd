@@ -280,7 +280,7 @@ ggplot() +
 ## Straßen in Bochum 1/2
 
 ```{r}
-q <- opq(getbb('Bochum, Germany'))
+q <- opq(getbb('Bochum, Germany'), timeout = 600)
 s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf() 
 ```
 
