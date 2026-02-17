@@ -280,6 +280,7 @@ ggplot() +
 ## Straßen in Bochum 1/2
 
 ```{r}
+#| eval: false
 q <- opq(getbb('Bochum, Germany'))
 s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf() 
 ```
@@ -295,6 +296,13 @@ s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
   - Dies sind die eigentlichen SF-Dataframes
 
 ## Straßen in Bochum 2/2
+
+```{r}
+#| echo: false
+# Heruntergeladene Daten einlesen - Download nicht zuverlässig
+load(file = "daten/strassen-bochum-download.RData")
+s1 <- s1a
+```
 
 ```{r}
 ggplot() + 
@@ -381,8 +389,15 @@ ggplot() +
 ## Ausschnitt festlegen: Möglichkeit 1/2
 
 ```{r}
+#| eval: false
 q <- opq(getbb('Bochum, Germany'))
 s1 <-  add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
+ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.17, 7.3), ylim = c(51.44, 51.5))
+```
+
+```{r}
+#| echo: false
+s1 <- s1a
 ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.17, 7.3), ylim = c(51.44, 51.5))
 ```
 
@@ -391,8 +406,15 @@ ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.17, 7.3), ylim = c
 ## Ausschnitt festlegen: Möglichkeit 2/2
 
 ```{r}
+#| eval: false
 q <- opq(c(7.17, 51.44, 7.3, 51.5))
 s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
+ggplot() + geom_sf(data = s1$osm_lines)
+```
+
+```{r}
+#| echo: false
+s1 <- s1b
 ggplot() + geom_sf(data = s1$osm_lines)
 ```
 
