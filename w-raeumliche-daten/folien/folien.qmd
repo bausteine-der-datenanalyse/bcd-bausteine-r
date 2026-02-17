@@ -280,7 +280,7 @@ ggplot() +
 ## Straßen in Bochum 1/2
 
 ```{r}
-q <- opq(getbb('Bochum, Germany'), timeout = 600)
+q <- opq(getbb('Bochum, Germany'))
 s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf() 
 ```
 
@@ -307,7 +307,7 @@ ggplot() +
 
 ```{r}
 if (!file.exists("daten/strassen-bochum.RData")) {
-  q  <- opq(getbb('Bochum, Germany'), timeout = 600)
+  q  <- opq(getbb('Bochum, Germany'))
   s1 <- add_osm_feature(q, key = "highway", value = c("motorway", "primary", "motorway_link", "primary_link")) |> osmdata_sf()
   s2 <- add_osm_feature(q, key = "highway", value = c("secondary", "tertiary", "secondary_link", "tertiary_link")) |> osmdata_sf()
   s3 <- add_osm_feature(q, key = "highway", value = c("unclassified", "residential")) |> osmdata_sf()
@@ -348,7 +348,7 @@ p
 
 ```{r}
 if (!file.exists("daten/bab.RData")) {
-  bab_raw <- opq(bbox = getbb("Deutschland", featuretype = "country"), timeout = 600) |>
+  bab_raw <- opq(bbox = getbb("Deutschland", featuretype = "country")) |>
     add_osm_feature(key = "highway", value = "motorway") |> 
     osmdata_sf()
   d_bab <- bab_raw$osm_lines |>
@@ -383,7 +383,7 @@ ggplot() +
 ```{r}
 q <- opq(getbb('Bochum, Germany'))
 s1 <-  add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
-ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.1, 7.3), ylim = c(51.41, 51.52))
+ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.17, 7.3), ylim = c(51.44, 51.5))
 ```
 
 - Ausschnitt mit `coord_sf` festlegen
@@ -391,7 +391,7 @@ ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.1, 7.3), ylim = c(
 ## Ausschnitt festlegen: Möglichkeit 2/2
 
 ```{r}
-q <- opq(c(7.1, 51.41, 7.3, 51.52))
+q <- opq(c(7.17, 51.44, 7.3, 51.5))
 s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
 ggplot() + geom_sf(data = s1$osm_lines)
 ```
