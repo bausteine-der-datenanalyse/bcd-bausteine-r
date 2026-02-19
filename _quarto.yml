@@ -23,15 +23,17 @@ format:
     overview: true
     slide-number: "c/t"
     code-line-numbers: false
-    footer: "Bausteine computergestützter Datenanalyse"
+    footer: "Bausteine Computergestützter Datenanalyse"
     theme: 
       - bcd-style-slides.scss
       - bcd-style-titlepage.scss
+    resources:
+      - _brand
 
 citation:
   type: document
-  title: "Bausteine Computergestützter Datenanalyse: Methodenbausteine Statistik"
-  url: https://github.com/bausteine-der-datenanalyse/a-energiedatenanalyse
+  title: "Bausteine Computergestützter Datenanalyse: Werkzeugbausteine R"
+  url: https://github.com/bausteine-der-datenanalyse/bcd-bausteine-r
   author:
     - Lukas Arnold
     - Simone Arnold

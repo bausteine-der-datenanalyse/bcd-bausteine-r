@@ -11,6 +11,7 @@ aufgaben.html
 
 w-*/*.html
 w-*/*.pdf
+w-test
 
 /.quarto/
 DWDdata

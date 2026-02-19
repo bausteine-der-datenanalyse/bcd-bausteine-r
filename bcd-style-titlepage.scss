@@ -1,7 +1,11 @@
 /*-- scss:mixins --*/
 
-#title-slide .quarto-title-authors:after {
-  content: url('_brand/logo.png') ;
+#title-slide .title:after {
+  content: url("https://raw.githubusercontent.com/bausteine-der-datenanalyse/bcd-brand/refs/heads/main/_brand/logo.svg");
+  scale: 0.4;
   display: block;
 }
 
+#title-slide .quarto-title-author-name {
+  font-size: 0.8em;
+}
