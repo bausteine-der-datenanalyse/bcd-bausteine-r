@@ -1,13 +1,19 @@
-project: 
-  output-dir: _output
-  render:
-    - "*.qmd"
-    - "!aufgaben.qmd"
+lang: de
+
+author:
+  - Lukas Arnold
+  - Simone Arnold
+  - Florian Bagemihl
+  - Matthias Baitsch
+  - Marc Fehr
+  - Franca Hollmann
+  - Maik Poetzsch
+  - Sebastian Seipel
+date: today
 
 execute: 
   echo: true
 
-lang: de
 toc-depth: 1
 number-depth: 1
 number-sections: true
@@ -17,5 +23,26 @@ format:
     overview: true
     slide-number: "c/t"
     code-line-numbers: false
+    footer: "Bausteine computergestützter Datenanalyse"
     theme: 
-    - bcd-style-slides.scss
+      - bcd-style-slides.scss
+
+citation:
+  type: document
+  title: "Bausteine Computergestützter Datenanalyse: Methodenbausteine Statistik"
+  url: https://github.com/bausteine-der-datenanalyse/a-energiedatenanalyse
+  author:
+    - Lukas Arnold
+    - Simone Arnold
+    - Florian Bagemihl
+    - Matthias Baitsch
+    - Marc Fehr
+    - Franca Hollmann
+    - Maik Poetzsch
+    - Sebastian Seipel
+  issued: 2025
+
+license: CC BY-SA
+
+project:
+  output-dir: __output
