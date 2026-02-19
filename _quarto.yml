@@ -26,6 +26,7 @@ format:
     footer: "Bausteine computergestützter Datenanalyse"
     theme: 
       - bcd-style-slides.scss
+      - bcd-style-titlepage.scss
 
 citation:
   type: document
