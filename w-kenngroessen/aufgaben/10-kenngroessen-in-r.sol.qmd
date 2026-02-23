@@ -1,6 +1,6 @@
 #### Lage- und Streumaße für Fahrzeiten
 
-```{.r}
+```{r}
 mean(d_bo_vm$Zeit)
 median(d_bo_vm$Zeit)
 max(d_bo_vm$Zeit)-min(d_bo_vm$Zeit)
@@ -10,7 +10,7 @@ sd(d_bo_vm$Zeit)
 
 #### Verteilung mit $\tilde x$ und $\tilde s$
 
-```{.r}
+```{r}
 m <- mean(d_bo_vm$Zeit)
 s <- sd(d_bo_vm$Zeit)
 ggplot(data = d_bo_vm) +
@@ -20,7 +20,7 @@ ggplot(data = d_bo_vm) +
 
 #### Emp. Verteilungsfunktion mit Werten
 
-```{.r}
+```{r}
 p <- c(0.25, 0.5, 0.75)
 q <- quantile(d_bo_vm$Zeit, probs=p, type=2)
 ggplot(data = d_bo_vm) + 
@@ -31,35 +31,35 @@ ggplot(data = d_bo_vm) +
 
 #### Boxplot aller Fahrzeiten
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(y = Zeit))
 ```
 
 #### Fahrzeiten und Fachbereiche
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x = Fachbereich, y = Zeit))
 ```
 
 #### Fahrzeiten und Verkehrsmittel
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x=Verkehrsmittel, y=Zeit), varwidth = TRUE)
 ```
 
 #### Fahrzeiten, Fachbereiche und Geschlecht
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping=aes(x=Fachbereich,y=Zeit,fill=Geschlecht), varwidth=TRUE)
 ```
 
 #### Lorenzkurve der Fahrzeiten
 
-```{.r}
+```{r}
 lcz <- Lc(d_bo_vm$Zeit)
 ggplot(data = lc_to_tibble(lcz)) +
   geom_ribbon(mapping=aes(x=u,ymin=v,ymax=u),color='black',fill='light blue')
@@ -67,7 +67,7 @@ ggplot(data = lc_to_tibble(lcz)) +
 
 #### Gini-Koeffizient
 
-```{.r}
+```{r}
 n <- nrow(d_bo_vm)
 Gini(d_bo_vm$Zeit)
 ```

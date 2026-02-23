@@ -31,7 +31,7 @@ ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
 
 ###### Boxplot
 
-```{.r}
+```{r}
 ggplot(data = d_donau) +
   geom_boxplot(
     mapping = aes(x = factor(Jahr), y = Abfluss), 
@@ -43,7 +43,7 @@ ggplot(data = d_donau) +
 
 #### Linearer Trend
 
-```{.r}
+```{r}
 x <- as.numeric(d_donau$Datum)
 y <- d_donau$Abfluss
 xmid <- mean(x)
@@ -74,14 +74,14 @@ paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 
 Kennwerte Abfluss
 
-```{.r}
+```{r}
 summary(d_donau$Abfluss)
 paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 ```
 
 #### Standardabweichung für jedes Jahr
 
-```{.r}
+```{r}
 d_donau_sd <- d_donau |> 
   group_by(Jahr) |>
   summarise(sd = sd(Abfluss))
@@ -90,7 +90,7 @@ kable(d_donau_sd)
 
 #### Standardabweichung über die Jahre
 
-```{.r}
+```{r}
 ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
   geom_line() +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
@@ -102,7 +102,7 @@ ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
 
 ###### Jahre mit kleinster Standardabweichung
 
-```{.r}
+```{r}
 jahre <- (d_donau_sd |> arrange(sd) |> head(3))$Jahr
 d_donau_max_sd <- d_donau |> filter(Jahr %in% jahre)
 ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
@@ -112,7 +112,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
 
 ###### Jahre mit größter Standardabweichung
 
-```{.r}
+```{r}
 jahre <- (d_donau_sd |> arrange(desc(sd)) |> head(3))$Jahr
 d_donau_max_sd <- d_donau |> filter(Jahr %in% jahre)
 ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
@@ -124,7 +124,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
 
 Jahre mit größtem und kleinsten Gesamtabfluss (Summe aller Tage)
 
-```{.r}
+```{r}
 d_donau_jahressumme <- d_donau |> 
   group_by(Jahr) |>
   summarise(Abfluss = sum(Abfluss)) |>
@@ -139,7 +139,7 @@ ggplot(data = d_donau_min_max, mapping = aes(x = Datum, y = Abfluss)) +
 
 #### Monats-Mittelwerte
 
-```{.r}
+```{r}
 dd2 <- d_donau |> 
   group_by(Monat) |>
   summarise(
@@ -163,21 +163,21 @@ ggplot(data = dd2, mapping = aes(group = 1)) +
 
 ###### Verteilung als Histogramm
 
-```{.r}
+```{r}
 ggplot(data = d_donau) + geom_histogram(mapping = aes(x = Abfluss), binwidth = 30) +
     labs(y = "", title = "Histogramm")
 ```
 
 ###### Empirische Verteilungsfunktion
 
-```{.r}
+```{r}
 ggplot(data = d_donau) + stat_ecdf(mapping = aes(x = Abfluss)) + 
     labs(y = "", title = "Empirische Verteilung")
 ```
 
 ###### Normalverteilung
 
-```{.r}
+```{r}
 ggplot(data = d_donau) +
   geom_histogram(mapping = aes(x = Abfluss, y = after_stat(density)), binwidth = 30) +
   stat_function(fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)), color = "red")
@@ -187,7 +187,7 @@ ggplot(data = d_donau) +
 
 ###### QQ-Plot
 
-```{.r}
+```{r}
 ggplot(data = d_donau, mapping = aes(sample = Abfluss)) +
   stat_qq() + stat_qq_line()
 ```

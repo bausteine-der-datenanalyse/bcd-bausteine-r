@@ -1,5 +1,5 @@
 
-```{.r}
+```{r}
 #| echo: false
 #| message: false
 library(sf)
@@ -10,7 +10,7 @@ load("daten/mastr-data.RData")
 ```
 
 #### Daten (ohne räumlichen Bezug) aufbereiten
-```{.r}
+```{r}
 data_wind = d_wind |>
   mutate(Inbetriebnahmedatum = ymd(Inbetriebnahmedatum)) |>
   mutate(Betriebsjahr = year(Inbetriebnahmedatum)) |>
@@ -19,7 +19,7 @@ data_wind = d_wind |>
 
 #### Anzahl der installierten Anlagen
 
-```{.r}
+```{r}
 data_wind2 = data_wind |>
   group_by(Betriebsjahr) |>
   summarise(Anzahl = n(), Leistung =sum(Nettonennleistung )) |>
@@ -28,7 +28,7 @@ data_wind2 = data_wind |>
 
 Anzahl neu installierter Anlagen pro Jahr:
 
-```{.r}
+```{r}
 ggplot(data_wind ,aes(x = Betriebsjahr)) +
   geom_bar() +
   labs(y = "Anzahl neu installierter Anlagen")
@@ -36,7 +36,7 @@ ggplot(data_wind ,aes(x = Betriebsjahr)) +
 
 Kumulierter Zuwachs über die Jahre:
 
-```{.r}
+```{r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Anzahl)) +
   geom_line() + 
   labs(y = "Anzahl von Anlagen")
@@ -46,7 +46,7 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Anzahl)) +
 
 Zuwachs an installierter Leistung pro Jahr:
 
-```{.r}
+```{r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr , y = Leistung)) +
   geom_line() +
   labs (y = "Zuwachs an Leistung pro Jahr")
@@ -54,7 +54,7 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr , y = Leistung)) +
 
 Kumulierte Leistung über die Jahre:
 
-```{.r}
+```{r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Leistung)) +
   geom_line() +
   labs (y = "Gesamtleistung von Windkraftanlagen")
@@ -62,12 +62,12 @@ ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Leistung)) +
 
 #### Leistung pro Anlage
 
-```{.r}
+```{r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr , y = Leistung_pro_Anlage)) +
   geom_line()
 ```
 
-```{.r}
+```{r}
 ggplot(data_wind2 ,aes(x = Betriebsjahr, y = Kum_Leistung_pro_Anlage)) +
   geom_line() +
   labs(y = "Kumulierter Anstieg der Leistung pro Anlage")
@@ -81,7 +81,7 @@ Hier eigenständig nachdenken!
 
 Deutschlandkarte:
 
-```{.r}
+```{r}
 d_deu_0 <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
 d_deu_1 <- gisco_get_nuts(country = "Germany", nuts_level = 1, resolution = 03) |>
   rename(Bundesland = "NAME_LATN")
@@ -95,7 +95,7 @@ Anmerkungen:
 
 - Datensatz führt Windkraft auf See als "Ausschließliche Wirtschaftszone". Könnte man dem nächsten Bundesland zuordnen (umständlich) oder man verwirft diese Daten.
 
-```{.r}
+```{r}
 d_wind_sf = d_wind |>
   filter(!is.na(Breitengrad & Bundesland != "Ausschließliche Wirtschaftszone")) |>
   st_as_sf(coords = c("Laengengrad", "Breitengrad"), crs = "+proj=longlat") |>
@@ -108,7 +108,7 @@ d_wind2 = d_wind_sf |>
 
 Filter für Bundesländer:
 
-```{.r}
+```{r}
 bl = d_wind |>
   group_by(Bundesland) |>
   summarise(Leistung = sum(Nettonennleistung) , Anzahl = n()) 
@@ -116,7 +116,7 @@ bl = d_wind |>
 
 Dataframe für Fläche der Bundesländer (in km²) von statista:
 
-```{.r}
+```{r}
 laender = tibble(
   Bundesland = c("Bayern", "Niedersachsen", "Baden-Württemberg", "Nordrhein-Westfalen", "Brandenburg", "Mecklenburg-Vorpommern", "Hessen", "Sachsen-Anhalt", "Rheinland-Pfalz", "Sachsen", "Thüringen","Schleswig-Holstein", "Saarland", "Berlin", "Hamburg", "Bremen"),
   Flaeche = c(70452,47710,35748,34113,29654,23295,21116,20467,19858,18450,16202,15804,2572,891,755,420)
@@ -125,7 +125,7 @@ laender = tibble(
 
 ACHTUNG: Joinen ist case-sensitive!
 
-```{.r}
+```{r}
 data_bl = left_join(bl, laender) |>
   mutate(Bundesland = toupper(Bundesland)) # mit toupper Case-Sensitivität umgehen
 
@@ -137,7 +137,7 @@ data_bl_sf = left_join(d_deu_1, data_bl)
 
 Leistung farblich dargestellt:
 
-```{.r}
+```{r}
 ggplot() +
   geom_sf(data = d_deu_0, fill = NA, size = 0.5) +
   geom_sf(data = d_deu_1, size = 0.5,  fill = NA, color = 'black') +
@@ -147,7 +147,7 @@ ggplot() +
 
 #### Inbetriebnahme Anlage
 
-```{.r}
+```{r}
 ggplot() +
   geom_sf(data = d_deu_0, fill = NA, size = 0.5) +
   geom_sf(data = d_deu_1, size = 0.5,  fill = NA, color = 'black') +
@@ -157,7 +157,7 @@ ggplot() +
 
 #### Anzahl pro BL
 
-```{.r}
+```{r}
 ggplot() +
   geom_sf(data = d_deu_0, fill = NA, size = 0.5) +
   geom_sf(data = data_bl_sf, size = 0.5,  mapping = aes(fill = Anzahl), color = 'black') +
@@ -166,7 +166,7 @@ ggplot() +
 
 #### Leistung pro BL
 
-```{.r}
+```{r}
 ggplot() +
   geom_sf(data = d_deu_0, fill = NA, size = 0.5) +
   geom_sf(data = data_bl_sf, size = 0.5,  mapping = aes(fill = Leistung), color = 'black') +
@@ -175,7 +175,7 @@ ggplot() +
 
 #### Leistung pro Fläche pro BL
 
-```{.r}
+```{r}
 ggplot() +
   geom_sf(data = d_deu_0, fill = NA, size = 0.5) +
   geom_sf(data = data_bl_sf, size = 0.5,  mapping = aes(fill = Leistung/Flaeche), color = 'black') +

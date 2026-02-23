@@ -1,5 +1,5 @@
 
-```{.r}
+```{r}
 load("daten/data-exercise-03.Rdata")
 load("daten/data-exercise-05.Rdata")
 load("daten/data-exercise-06.Rdata")
@@ -12,7 +12,7 @@ d_bo_entfernung <- tibble(
 
 ### Entfernungen in andere Städte
 
-```{.r}
+```{r}
 ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung)) + 
     theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1), legend.position="none") +
   labs(x = NULL)
@@ -23,7 +23,7 @@ ggplot(data=d_bo_entfernung) + geom_col(mapping=aes(x=Stadt, y=Entfernung)) +
 
 ### Studierende an der BO: Geschlecht
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Geschlecht, fill = Geschlecht)) +
   scale_fill_manual(values = c("m" = "orange", "w" = "blue")) +
@@ -34,7 +34,7 @@ ggplot(data = d_bo_vm) +
 
 ### Studierende an der BO: Fachbereiche
 
-```{.r}
+```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = 0, fill = Fachbereich)) +
   coord_polar(theta = "y") +
@@ -46,7 +46,7 @@ ggplot(data = d_bo_vm) +
 
 ### Histogramm mit Uhrzeit (Rechtecke)
 
-```{.r}
+```{r}
 ggplot(data = d_unistrasse) + 
   geom_bin2d(aes(x = Uhrzeit, y = Geschwindigkeit), binwidth = c(0.5, 3)) +
   scale_fill_distiller(palette = "Purples", direction = 1, trans = "log10", guide = "legend")

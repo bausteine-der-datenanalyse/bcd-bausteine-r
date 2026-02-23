@@ -1,7 +1,7 @@
 
 ####  Einlesen und Aufbereiten der Daten
 
-```{.r}
+```{r}
 library(readxl)
 library(tidyverse)
 
@@ -39,7 +39,7 @@ d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
 
 ###### Angehörige der Fachbereiche
 
-```{.r}
+```{r}
 ggplot(data = d_mb) +
   geom_bar(
     mapping = aes(x = fct_infreq(fachbereich), fill = fachbereich), 
@@ -52,7 +52,7 @@ ggplot(data = d_mb) +
 
 ###### Fachbereiche und Verkehrsmittel
 
-```{.r}
+```{r}
 ggplot(data = d_mb) +
   geom_bar(
     mapping = aes(x = fct_infreq(fachbereich), fill = vm_heute), 
@@ -65,7 +65,7 @@ ggplot(data = d_mb) +
 
 ###### Häufigste Orte
 
-```{.r}
+```{r}
 orte <- (d_mb |> group_by(ort) |> summarise(n = n()) |> arrange(desc(n)) |> filter(!is.na(ort)) |> head(5))$ort
 d_mb <- d_mb |> 
   mutate(
@@ -84,21 +84,21 @@ ggplot(data = d_mb) +
 
 ###### Fahrzeiten und Ort
 
-```{.r}
+```{r}
 ggplot(data = d_mb) + 
   geom_boxplot(mapping = aes(x = ort2, y = zeit))
 ```
 
 ###### Fahrzeiten und Verkehrsmittel
 
-```{.r}
+```{r}
 ggplot(data = d_mb) + 
   geom_boxplot(mapping = aes(x = vm_heute, y = zeit))
 ```
 
 #### Wegstrecke und Fahrzeit
 
-```{.r}
+```{r}
 d_e <- tibble(
   ort = c("Essen", "Dortmund", "Herne", "Wuppertal", "Gelsenkirchen", "Mühlheim"),
   entfernung = c(17.8, 15.4, 10.7, 21.4, 14.1, 27.2)
@@ -113,7 +113,7 @@ ggplot(data = d_mb_e) +
 
 #### Reisezeit und Verkehrsmittel
 
-```{.r}
+```{r}
 ggplot(data = d_mb) +
   geom_boxplot(mapping = aes(x = vm_heute, y = zeit), varwidth = TRUE)
 ```
