@@ -1,6 +1,6 @@
 ## 
 
-1. Datei erste-schritte.zip von Moodle herunterladen und entpacken
+1. Datei [01-erste-schritte-aufgaben.zip](01-erste-schritte-aufgaben.zip) von Moodle herunterladen und entpacken
 1. Projektdatei erste-schritte.Rproj doppelklicken, jetzt sollte RStudio starten
 1. Datei erste-schritte.qmd öffnen
 1. Dokument durchschauen

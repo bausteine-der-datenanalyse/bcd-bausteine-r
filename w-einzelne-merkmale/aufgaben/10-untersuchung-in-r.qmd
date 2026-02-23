@@ -4,7 +4,7 @@ In dieser Übungsaufgabe verwenden Sie die Ergebnisse eine Mobilitätsbefragung,
 
 ### Projekt herunterladen und Dataframe anzeigen
 
-Öffnen Sie im RStudio-Projekt zu den Aufgaben (von Moodle herunterladen) das Dokument `einzelne-merkmale-aufgaben.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
+Laden Sie [02-einzelne-merkmale.zip](02-einzelne-merkmale.zip) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Projektdatei `einzelne-merkmale-aufgaben.Rproj` und öffnen Sie dann in RStudio das Dokument `einzelne-merkmale-aufgaben.qmd`. Führen Sie die Datei aus und zeigen Sie in einer eigenen Folie den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` die html-Folien und überprüfen Sie das Ergebnis.
 
 ### Entfernungen zu umliegenden Städten
 
