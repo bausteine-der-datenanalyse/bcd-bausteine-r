@@ -1,7 +1,8 @@
 
 #### Einlesen und Aufbereiten der Daten
 
-```{.r}
+```{r}
+#| output: false
 library(readxl)
 library(tidyverse)
 library(kableExtra)
@@ -22,7 +23,7 @@ d_donau <- read_delim(
 
 ###### Streuplot
 
-```{.r}
+```{r}
 ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) + 
   geom_point(alpha = 1/3) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)

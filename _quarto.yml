@@ -17,6 +17,7 @@ execute:
 toc-depth: 1
 number-depth: 1
 number-sections: true
+format-links: false
 
 format: 
   revealjs:
@@ -29,6 +30,7 @@ format:
       - bcd-style-titlepage.scss
     resources:
       - _brand
+  html: default
 
 citation:
   type: document
