@@ -1,3 +1,11 @@
+```{r}
+#| include: false
+library(ineq)
+library(tidyverse)
+load("daten/kenngroessen-aufgaben.Rdata")
+lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
+```
+
 #### Lage- und Streumaße für Fahrzeiten
 
 ```{r}

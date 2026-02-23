@@ -3,8 +3,7 @@ title: "Daten einlesen"
 ---
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 library(tidyverse)
 library(kableExtra)
 ```

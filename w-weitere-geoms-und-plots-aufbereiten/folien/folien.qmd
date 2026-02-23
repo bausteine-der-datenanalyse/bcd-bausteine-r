@@ -3,8 +3,7 @@ title: "Weitere Geoms und Aufbereiten von Plots"
 ---
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 library(tidyverse)
 load("daten/plots-aufbereiten.Rdata")
 ```

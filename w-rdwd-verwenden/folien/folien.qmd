@@ -3,10 +3,9 @@ title: Das Paket rdwd verwenden
 ---
 
 ```{r}
-#| echo: false
+#| include: false
 library(rdwd)
 library(tidyverse)
-library(lubridate)
 library(data.table)
 library(kableExtra)
 ```

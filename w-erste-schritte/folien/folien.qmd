@@ -4,12 +4,10 @@ title: "Erste Schritte in RStudio"
 
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 #| message: false
 library(sf)
 library(giscoR)
-library(lubridate)
 library(patchwork)
 library(tidyverse)
 source("skripte/read-data-erste-schritte.R")

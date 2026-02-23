@@ -1,15 +1,13 @@
-
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 library(sf)
 library(giscoR)
-library(lubridate)
 library(tidyverse)
 load("daten/mastr-data.RData")
 ```
 
 #### Daten (ohne räumlichen Bezug) aufbereiten
+
 ```{r}
 data_wind = d_wind |>
   mutate(Inbetriebnahmedatum = ymd(Inbetriebnahmedatum)) |>

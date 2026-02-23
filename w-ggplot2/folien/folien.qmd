@@ -4,8 +4,7 @@ title: "Grundlagen von ggplot2"
 
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 #| message: false
 library(tidyverse)
 library(kableExtra)

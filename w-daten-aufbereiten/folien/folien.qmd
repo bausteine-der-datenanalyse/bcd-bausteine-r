@@ -3,8 +3,7 @@ title: "Daten aufbereiten"
 ---
 
 ```{r setup}
-#| echo: false
-#| message: false
+#| include: false
 library(hms)
 library(readxl)
 library(tidyverse)
@@ -386,7 +385,7 @@ select(Datum, Uhrzeit, D15)
 
 []{.down60}
 
-- `floor_date(x, unit)` rundet die Datums- oder Zeitangabe auf die angegebene Einheit (`unit`) ab (`floor`) (`library(lubridate)`)
+- `floor_date(x, unit)` rundet die Datums- oder Zeitangabe auf die angegebene Einheit (`unit`) ab
 
 ## Alles in einem Rutsch {.smaller}
 

@@ -3,8 +3,7 @@ title: "Arbeiten mit Zeitreihen"
 ---
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 library(rdwd)
 library(tsibble)
 library(RcppRoll)

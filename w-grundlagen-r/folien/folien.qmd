@@ -4,8 +4,7 @@ subtitle: "Kurz und (fast) schmerzlos"
 ---
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 library(tidyverse)
 library(kableExtra)
 ```
@@ -597,11 +596,7 @@ Komplizierter als man auf den ersten Blick vielleicht denkt
 - Hat jeder Tag 24 Stunden?
 - An welchem Wochentag sind Sie geboren?
 
-Einfach(er) mit dem lubridate-Paket (zu Beginn laden)
-
-```{r}
-  library(lubridate)
-```
+Einfach(er) mit dem lubridate-Paket (in tidyverse enthalten)
 
 ## Date, Time und Date-Time
 

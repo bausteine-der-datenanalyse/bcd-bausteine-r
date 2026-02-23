@@ -4,8 +4,7 @@ author: "TODO: Namen eintragen"
 ---
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 library(sf)
 library(giscoR)
 library(tidyverse)

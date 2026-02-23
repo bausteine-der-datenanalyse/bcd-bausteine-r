@@ -4,8 +4,7 @@ author: "TODO"
 ---
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 library(tidyverse)
 load("daten/data-exercise-03.Rdata")
 load("daten/data-exercise-05.Rdata")

@@ -3,8 +3,7 @@ title: "Lineare Trends für viele Datensätze"
 ---
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 library(trend)
 library(readxl)
 library(modelr)

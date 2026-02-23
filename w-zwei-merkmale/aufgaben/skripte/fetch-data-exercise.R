@@ -1,5 +1,4 @@
 library(readxl)
-library(lubridate)
 library(tidyverse)
 Sys.setlocale("LC_ALL", "de_DE")
 

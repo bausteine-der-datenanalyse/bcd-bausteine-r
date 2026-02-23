@@ -2,7 +2,6 @@ library(readxl)
 library(cowplot)
 library(ggplot2)
 library(tidyverse)
-library(lubridate)
 library(kableExtra)
 
 fill_box_color <- "lightblue"

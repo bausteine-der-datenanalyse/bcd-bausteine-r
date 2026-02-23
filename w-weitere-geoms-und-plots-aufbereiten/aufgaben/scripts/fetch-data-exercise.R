@@ -1,7 +1,6 @@
 library(padr)
 library(readxl)
 library(tidyverse)
-library(lubridate)
 
 d_sum <- function(ti) {
   d_all |>

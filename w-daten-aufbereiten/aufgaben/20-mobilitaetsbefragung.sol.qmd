@@ -1,10 +1,12 @@
+```{r}
+#| include: false
+library(readxl)
+library(tidyverse)
+```
 
 ####  Einlesen und Aufbereiten der Daten
 
 ```{r}
-library(readxl)
-library(tidyverse)
-
 d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
   select(
     geschlecht_id = V1_Ge,

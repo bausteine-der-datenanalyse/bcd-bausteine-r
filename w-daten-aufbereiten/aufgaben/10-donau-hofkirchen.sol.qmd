@@ -1,12 +1,13 @@
+```{r}
+#| include: false
+library(readxl)
+library(tidyverse)
+library(kableExtra)
+```
 
 #### Einlesen und Aufbereiten der Daten
 
 ```{r}
-#| output: false
-library(readxl)
-library(tidyverse)
-library(kableExtra)
-
 d_donau <- read_delim(
     "daten/6342800.day",
     locale = locale(decimal_mark = ".", grouping_mark = ","),

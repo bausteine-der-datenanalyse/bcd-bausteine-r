@@ -4,8 +4,7 @@ author: "TODO: Namen eintragen"
 ---
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
