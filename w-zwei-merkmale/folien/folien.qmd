@@ -4,32 +4,28 @@ title: "Untersuchung von zwei Merkmalen in R"
 
 ```{r}
 #| include: false
-#| message: false
+library(gt)
 library(plotly)
-library(kableExtra)
 library(tidyverse)
-library(hexbin)
 load("daten/zwei-merkmale-1.Rdata")
 ```
 
 
 ## Übersicht Dataframes für diese Folien
 
-<br/><br/>
+[]{.down50}
 
-| Name          | Inhalt                                                                                   |
-|---------------|------------------------------------------------------------------------------------------|
-| `d_svrw`      | Jahreswerte für Wirtschaftswachstum und -prognosen vom Sachverständigenrat für Wirtschaft|
-| `d_le_latest` | Lebenserwartung und Entwicklungsindikatoren in verschiedenen Ländern von der Weltbank    |
-| `d_pisa`      | Pisa-Studie vom OECD                                                                     |
-
-<br/><br/>
+| Name          | Inhalt                                                                                    |
+|---------------|-------------------------------------------------------------------------------------------|
+| `d_svrw`      | Jahreswerte für Wirtschaftswachstum und -prognosen vom Sachverständigenrat für Wirtschaft |
+| `d_le_latest` | Lebenserwartung und Entwicklungsindikatoren in verschiedenen Ländern von der Weltbank     |
+| `d_pisa`      | Pisa-Studie vom OECD                                                                      |
 
 Quellen: Fahrmeir et al. (2023): Statistik - Der Weg zur Datenanalyse, Weltbank, OECD
 
-##
+## Sachverständigenrat für Wirtschaft
 
-### Sachverständigenrat für Wirtschaft
+[]{.down50}
 
 | Variable      | Inhalt                                                        |
 |---------------|---------------------------------------------------------------|
@@ -37,41 +33,41 @@ Quellen: Fahrmeir et al. (2023): Statistik - Der Weg zur Datenanalyse, Weltbank,
 | `Prognose`    | Vom Sachverständigenrat prognostiziertes Wirtschaftswachstum  |
 | `Wachstum`    | Tatsächlich eingetretenes Wirtschaftswachstum                 |
 
+##
+
+Daten Sachverständigenrat Wirtschaft
 
 ```{r}
 #| echo: false
-kable(d_svrw) |> scroll_box(height="300px")
+d_svrw |> gt() |> opt_interactive()
 ```
 
-[]{.down10}
+## Weltbank
+
+[]{.down50}
+
+| Variable      | Inhalt                                                                                                                      |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `year`        | Jahr                                                                                                                        |
+| `country`     | Land                                                                                                                        |
+| `le`          | Life expectancy at birth, total (years) [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)               |
+| `gdppc`       | GDP per capita (current US\$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)                       |
+| `edu`         | Gov. expenditure on education (% of GDP) - [SE.XPD.TOTL.GD.ZS](https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS)      |
+| `he`          | Current health expenditure (% of GDP) - [SH.XPD.CHEX.GD.ZS](https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS)         |
+| `gini`        | GINI index - [SI.POV.GINI](https://data.worldbank.org/indicator/SI.POV.GINI)                                                |
 
 ##
 
-### Weltbank
-
-| Variable      | Inhalt                                                                        |
-|---------------|-------------------------------------------------------------------------------|
-| `year`        | Jahr                                                                          |
-| `country`     | Land                                                                          |
-| `le`          | Life expectancy at birth, total (years) [SP.DYN.LE00.IN](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)                           |
-| `gdppc`       | GDP per capita (current US\$) - [NY.GDP.PCAP.CD](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)                           |
-| `edu`         | Gov. expenditure on education (% of GDP) - [SE.XPD.TOTL.GD.ZS](https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS)                     |
-| `he`          | Current health expenditure (% of GDP) - [SH.XPD.CHEX.GD.ZS](https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS)                     |
-| `gini`        | GINI index - [SI.POV.GINI](https://data.worldbank.org/indicator/SI.POV.GINI)  |
-
-
-[]{.down10}
+Daten Weltbank
 
 ```{r}
 #| echo: false
-kable(d_le_latest) |> scroll_box(height="200px")
+d_le_latest |> gt() |> fmt_number(decimals = 3) |> opt_interactive()
 ```
 
-[]{.down10}
+## Pisa-Studie
 
-##
-
-### Pisa-Studie
+[]{.down50}
 
 | Variable      | Inhalt                                    |
 |---------------|-------------------------------------------|
@@ -79,20 +75,20 @@ kable(d_le_latest) |> scroll_box(height="200px")
 | `math`        | PISA-Score im Fach Mathematik             |
 | `read`        | PISA-Score im Bereich Lesekompetenz       |
 
-[]{.down10}
-
-```{r}
-#| echo: false
-kable(d_pisa) |> scroll_box(height="175px")
-```
-
-[]{.down10}
-
 - PISA-Ergebnisse sind Punktwerte auf einer künstlichen Skala, die für sich genommen keine direkte Bedeutung haben
 - Aussagekraft entsteht erst durch den Vergleich zwischen Länder
 - OECD-Berichte stellen daher häufig Länderranglisten in den Mittelpunkt
 
-# Streudiagramme und Blasendiagramme
+##
+
+Date Pisa-Studie
+
+```{r}
+#| echo: false
+d_pisa |> gt() |> opt_interactive()
+```
+
+# Streu- und Blasendiagramme
 
 ## Prognosen Sachverständigenrat
 
@@ -107,6 +103,7 @@ ggplot(data = d_svrw) +
 ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +   
   geom_point(size = 2) + geom_abline(intercept = 0, slope = 1, color = 'red') + geom_rug(color = 'blue')
 ```
+
 ## Prognosen Sachverständigenrat erweitert erklärt
 
 - Gerade mit `geom_abline()` und `intercept` sowie `slope`
@@ -128,7 +125,6 @@ ggplot(data = d_le_latest) +
 ggplot(data = d_le_latest) +
   geom_point(mapping = aes(x = he, y = le), shape = 21, fill = 'orange')
 ```
-- Farbe und Form der Punkte verändert
 
 ## `geom_point()`: Shapes
 
@@ -155,9 +151,7 @@ ggplotly(p, width = 800, height = 400)
 - Weitere Informationen anzeigen mit `label=<M>`
 - Funktioniert nur in HTML (und nicht auf Papier)
 
-## Ausgaben Gesundheitswesen und Lebenserwartung mit Beschriftung, Schritt 1
-
-[]{.down20}
+## Beschriftung: Schritt 1
 
 ```{r}
 countries <- c("United States", "Sierra Leone", "Sri Lanka")
@@ -165,14 +159,12 @@ d_le_latest <- d_le_latest |> mutate(highlight = country %in% countries)
 d_le_labels <- d_le_latest |> filter(country %in% countries)
 ```
 
-[]{.down20}
-
 - Array (verweis zu Basics) mit interessanten/markanten/... Ländern
 - `mutate()`: Länder hervorheben mit Merkmal `highlight`
 - `filter()`: Zeilen mit anderen Ländern herausfiltern
 - Dazu später mehr (Verweis auf Stelle)
 
-## Ausgaben Gesundheitswesen und Lebenserwartung mit Beschriftung, Schritt 2
+## Beschriftung: Schritt 2
 
 ```{r}
 p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
@@ -185,7 +177,7 @@ p <- ggplot(mapping = aes(x = he, y = le, label = country)) +
 - Beschriftung hinzufügen mit `geom_label()` (Dokumentation!)
 - Details später (Verweis)
 
-## Ausgaben Gesundheitswesen und Lebenserwartung mit Beschriftung, Darstellung
+## Beschriftung: Darstellung
 
 ```{r}
 p
@@ -218,7 +210,7 @@ ggplot(data = d_le_latest) +
   geom_bin2d(mapping = aes(x = he, y = le))
 ```
 
-- Histogramm für zwei Merkmale mit `geom_bin2d()`
+- Histogramm für zwei Merkmale mit `geom_bin2d(...)`
 - bin wie Feld, Zelle, Klasse + 2D (zweidimensional)
 
 ## Histogramm 2D (mit Klassenbreiten)
@@ -228,7 +220,8 @@ ggplot(data = d_le_latest) +
   geom_bin2d(mapping = aes(x = he, y = le), binwidth = c(1, 4))
 ```
 
-- Klassenbreiten mit `binwidth()` und Werten für jede Richtung
+- Klassenbreite mit `binwidth`
+- Werte für beide Richtungen
 
 ## Alternativ mit Sechsecken
 
@@ -237,7 +230,7 @@ ggplot(data = d_le_latest) +
   geom_hex(mapping = aes(x=he, y=le), binwidth = c(1, 4))
 ```
 
-- Unterschied zu vorher: `geom_hex` statt `geom_bin2d`
+- Unterschied zu vorher: `geom_hex(...)` statt `geom_bin2d(...)`
 - hex wie hexagonal
 
 ## Dichtefunktion
@@ -247,7 +240,7 @@ ggplot(data = d_le_latest) +
   geom_density_2d(mapping = aes(x = he, y = le))
 ```
 
-- `geom_density_2d()` erzeugt Höhenlinien der geschätzten Dichtefunktion
+- Höhenlinien geschätzte Dichtefunktion mit `geom_density_2d(...)`
 
 ## Dichtefunktion gefüllt
 
@@ -256,7 +249,7 @@ ggplot(data = d_le_latest) +
   geom_density_2d_filled(mapping = aes(x = he, y = le))
 ```
 
-- `geom_density_2d_filled()` färbt nach der geschätzten Dichtefunktion
+- Farben nach Dichtefunktion mit `geom_density_2d_filled(...)`
 
 # Korrelationskoeffizient
 
@@ -267,7 +260,7 @@ d <- tibble(X = c(1, 3, 4, 8), Y = c(2, 3, 3.5, 5.5))
 cor(d$X, d$Y)
 ```
 
-- Mit `cor(x, y)` wird der Korrelationkoeffizient $r$ für die Werte in `x` und `y` berechnet
+- Korrelationkoeffizient $r$ für Werte `x` und `y` mit `cor(x, y)`
 
 ## Zugehöriger Plot
 
@@ -279,7 +272,7 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
   geom_point(size = 3)
 ```
 
-## Korrelationskoeffizienten von Beispieldaten berechnen  (1/3)
+## Korrelationskoeffizienten von Beispieldaten (1/3)
 
 []{.down40}
 
@@ -301,7 +294,7 @@ cor(d_pisa$read, d_pisa$math)
 
 $\rightarrow$ Starke positive Korrelation
 
-## Korrelationskoeffizienten von Beispieldaten berechnen  (2/3)
+## Korrelationskoeffizienten von Beispieldaten (2/3)
 
 []{.down40}
 
@@ -319,7 +312,7 @@ cor(d_le_latest$gini, d_le_latest$le)
 ```
 $\rightarrow$ Mittlere negative Korrelation
 
-## Korrelationskoeffizienten von Beispieldaten berechnen  (3/3)
+## Korrelationskoeffizienten von Beispieldaten (3/3)
 
 []{.down40}
 
@@ -375,9 +368,9 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
   geom_point(size = 3)
 ```
 
-- smooth wie glätten $\rightarrow$ Glättende Gerade
+##
 
-## Ausgleichskurven mit LOESS, Beispiel 1
+### Ausgleichskurven mit LOESS, Beispiel 1
 
 ```{r}
 d <- tibble( X = 10 * runif(300), Y = sin(2 * pi * X / 10) + 0.2 * rnorm(300))
@@ -385,7 +378,9 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
   geom_point() + geom_smooth(formula = y ~ x, method = "loess", se = FALSE) 
 ```
 
-## Ausgleichskurven mit LOESS, Beispiel 2
+##
+
+### Ausgleichskurven mit LOESS, Beispiel 2
 
 ```{r}
 d <- tibble(X = 10 * runif(20), Y = sin(2 * pi * X / 10) + 0.2 * rnorm(20))
