@@ -9,8 +9,6 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 ### Erste Schritte in RStudio
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-erste-schritte/folien/folien.html)
-- Aufgabe
-  - [TODO Aufgabe Erste Schritte: Aufgabenstellungen beinhaltet Verweis zu moodle, anpassen oder weglassen](XXX)
 
 ### Grundlagen von ggplot2
 
@@ -19,20 +17,17 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 ### Untersuchung einzelner Merkmale in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/folien/folien.html)
-- Aufgabe
-  - [Untersuchung in R TODO auch hier ist ein moodle Bezug](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/aufgaben/10-untersuchung-in-r.html) (xxx)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/aufgaben/10-untersuchung-in-r.html)
   ´
 ### Kenngrößen und Beschreibung von Verteilungen in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/folien/folien.html)
-- Aufgabe
-  - [Kenngrößen in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/aufgaben/10-kenngroessen-in-r.html)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/aufgaben/10-kenngroessen-in-r.html)
 
 ### Dichtekurven und Normalverteilung in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/folien/folien.html)
-- Aufgabe
-  - [Dichtekurven und Normalverteilung in R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/aufgaben/10-dichtekurven-und-normalverteilung-in-r.html)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-dichtekurven-und-normalverteilung/aufgaben/10-dichtekurven-und-normalverteilung-in-r.html)
 
 ### Untersuchung von zwei Merkmalen in R
 
@@ -44,14 +39,12 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 ### Weitere Geoms und Aufbereiten von Plots
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/folien/folien.html)
-- Aufgabe
-  - [Plots aufbereiten](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-weitere-geoms-und-plots-aufbereiten/aufgaben/10-plots-aufbereiten.html)
 
 ### Grundlagen der Programmiersprache R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html)
-- Aufgabe
-  - [Grundlagen R](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html) (xxx)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html) (xxx)
 
 ### Daten einlesen
 
@@ -68,8 +61,7 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 ### Räumliche Daten in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/folien/folien.html)
-- Aufgabe
-  - [Ausbau der Windeinergie in Deutschland](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-raeumliche-daten/aufgaben/10-windenergie-in-deutschland.html)
 
 ### Mehrere Datensätze in R
 
