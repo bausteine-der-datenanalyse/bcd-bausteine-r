@@ -13,7 +13,7 @@ Anmerkungen:
 
 ### Linienplot
 
-Plotten Sie die Windgeschwindigkeit über die Zeit in einem Linienplot (`geom_line()`). Welche der Merkmale `datum` oder `zeit` ist ihrer Meinung nach besser geeignet?
+Plotten Sie die Windgeschwindigkeit über die Zeit in einem Linienplot (`geom_line()`). Welche der Merkmale `datum` oder `zeit` ist Ihrer Meinung nach besser geeignet?
 
 Zusatzfrage: Die Windgeschwindigkeit ist in Meter pro Sekunde angegeben. War es in dem Messzeitraum sehr windig?
 

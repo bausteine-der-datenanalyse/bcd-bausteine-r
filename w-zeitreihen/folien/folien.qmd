@@ -14,7 +14,7 @@ library(tidyverse)
 
 ## Begriff der Zeitreihe
 
-Eine '''Zeitreihe''' ist eine zeitlich geordnete Folge von Beobachtungen, bei der sich die Anordnung der Merkmalsausprägungen zwingend aus dem Zeitablauf ergibt (etwa Aktienkurse, Bevölkerungsentwicklung, Wetterdaten).
+Eine "Zeitreihe" ist eine zeitlich geordnete Folge von Beobachtungen, bei der sich die Anordnung der Merkmalsausprägungen zwingend aus dem Zeitablauf ergibt (etwa Aktienkurse, Bevölkerungsentwicklung, Wetterdaten).
 
 Die einzelnen Zeitpunkte werden zu einer Menge von Beobachtungszeitpunkten $T$ zusammengefasst, bei der für jeden Zeitpunkt $t \in T$ genau eine Beobachtung vorliegt. Zeitreihen treten in allen Bereichen der Wissenschaft auf.
 
@@ -22,7 +22,7 @@ Quelle: <https://de.wikipedia.org/wiki/Zeitreihenanalyse>
 
 ## Zeitreihen in R
 
-Das R-Paket `tsibble` stellt eine Datenstruktur (das `tsibble` - wie `tibble` aus dem tidyverserse wobei `ts` für Time Series steht) sowie verschiedene Funktionen bereit, die das Arbeiten mit Zeitreihen vereinfachen.
+Das R-Paket `tsibble` stellt eine Datenstruktur (das `tsibble` - wie `tibble` aus dem tidyverse wobei `ts` für Time Series steht) sowie verschiedene Funktionen bereit, die das Arbeiten mit Zeitreihen vereinfachen.
 
 ## Datenstruktur `tsibble`
 

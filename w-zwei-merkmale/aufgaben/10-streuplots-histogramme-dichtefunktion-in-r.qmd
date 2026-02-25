@@ -14,4 +14,4 @@ Erstellen Sie ein zweidimensionales Histogramm der Geschwindigkeiten über die U
 
 ### Dichtefunktionsplot
 
-Erstellen Sie einen Plot der approximierten Dichtefunktion (Kontourlinien) zusammen mit den Messpunkten. Plotten Sie die Dichtefunktion darüber hinaus als ausgefüllte Fläche.
+Erstellen Sie einen Plot der approximierten Dichtefunktion (Konturlinien) zusammen mit den Messpunkten. Plotten Sie die Dichtefunktion darüber hinaus als ausgefüllte Fläche.

@@ -317,6 +317,7 @@ ggplot(data=d) +
   geom_histogram(mapping=aes(x=X,y=after_stat(density)), breaks=c(0, 1, 1.5, 1.75, 4)) +
   geom_point(mapping=aes(x=X), y=0, color='red')
 ```
+
 - Prinzip der Flächentreue
 
 ## Mit *echten* Daten...

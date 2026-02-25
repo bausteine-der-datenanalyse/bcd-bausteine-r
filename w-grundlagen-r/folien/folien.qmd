@@ -24,7 +24,7 @@ library(kableExtra)
 |   `^`    | Potenzieren    | 2\^0.5 = 1.414214 |
 |   `%%`   | Modulo bilden  | 7 %% 5 = 2        |
 
-- Modulo bilden = Bestimmung des Rests einer ganzzahligen Devision
+- Modulo bilden = Bestimmung des Rests einer ganzzahligen Division
 
 ## Beispiel
 
@@ -872,4 +872,4 @@ Nicht behandelt
     - Für unsere Zwecke nicht notwendig
     - Es gibt elegantere Alternativen
 - Eigene Funktionen erstellen
-    - Wir schaffen das (erstmal ohne)
+    - Wir schaffen das (erst einmal ohne)

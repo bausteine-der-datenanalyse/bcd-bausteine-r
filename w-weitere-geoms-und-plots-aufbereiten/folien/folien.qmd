@@ -341,7 +341,7 @@ ggplot(data=mutate(d,Y=Y^16+1e-9))+geom_col(mapping=aes(x=X, y=Y, fill=Y))+
 []{.down40}
 
 Element | Argumente | Funktion
--|-
+-|-|-
 scale_AAA_gradient | low, high | Farbverlauf von low nach high
 scale_AAA_gradient2 | low, mid, high | Farbverlauf mit drei Farben
 scale_AAA_distiller | palette | Brewer-Farbpaletten

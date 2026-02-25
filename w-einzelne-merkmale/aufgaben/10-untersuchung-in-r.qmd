@@ -26,7 +26,7 @@ Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und st
 
 Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folgenden Fragen jeweils mit einem geeigneten Plot:
 
-1.  Wie viele der befragten Personen sind weiblich, wieviele männlich?
+1.  Wie viele der befragten Personen sind weiblich, wie viele männlich?
 1.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
 1.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
 

@@ -324,7 +324,7 @@ ggplot() +
   )
 ```
 
-- Mapping mit Werten, die das Stat berechnet (hier: `x` und `y`)
+- Mapping mit Werten, die das stat berechnet (hier: `x` und `y`)
 - Sonst wie `geom_function()`
 
 
@@ -350,8 +350,6 @@ ggplot(data = <DATAFRAME>) +
 | alpha         | Transparenz der Füllfarbe | Ja       |
 
 : {tbl-colwidths="[20,60,20]"}
-
-Aesthetics und Argumente synonym verwendet, sinnvoll?
 
 []{.down20}
 
