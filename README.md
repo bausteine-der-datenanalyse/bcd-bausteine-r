@@ -18,7 +18,7 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/folien/folien.html)
 - [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-einzelne-merkmale/aufgaben/10-untersuchung-in-r.html)
-  ´
+  
 ### Kenngrößen und Beschreibung von Verteilungen in R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-kenngroessen/folien/folien.html)
