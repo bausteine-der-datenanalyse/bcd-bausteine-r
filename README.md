@@ -44,7 +44,7 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 ### Grundlagen der Programmiersprache R
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/folien/folien.html)
-- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html) (xxx)
+- [Aufgabe](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-grundlagen-r/aufgaben/10-grundlagen-r.html)
 
 ### Daten einlesen
 
