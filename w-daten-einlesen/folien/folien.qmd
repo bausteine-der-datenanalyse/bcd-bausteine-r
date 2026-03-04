@@ -53,14 +53,15 @@ sheet = "Name"  | Tabellenblatt, das gelesen werden soll      | Ja
 
 ## Beispiel 1: Einfache Tabelle
 
-::: {layout-ncol=2}
-
+::: {.columns}
+::: {.column width="45%"}
 ![](bilder/tabelle.png)
-
+:::
+::: {.column}
 ```{r}
-d <- read_excel("daten/tabelle.xlsx")
-d
+read_excel("daten/tabelle.xlsx")
 ```
+:::
 :::
 
 - `read_excel(...)` liest [Excel-Datei](daten/tabelle.xlsx) und gibt Dataframe zurück
@@ -89,8 +90,7 @@ Wo liegt das Problem?
 ## Importassistent 3/3
 
 ```{r}
-d <- read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
-d
+read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
 ```
 
 - Einstellung in Excel unvollständig, daher Datum nicht richtig gelesen
@@ -109,25 +109,36 @@ d
   - Zahlen mit oder ohne Dezimaltrenner (Punkt oder Komma)
   - Spezielle Kennzeichnung von fehlenden Werten
 
-## Amerikanische Konvention {.smaller}
+## Amerikanische Konvention
 
 Datei `beispiel-1.csv`
 
+:::: {.columns}
+::: {.column width="50%"}
 ```{raw}
 {{< include daten/beispiel-1.csv >}}
 ```
-
-- Einträge durch "`,`" getrennt, Dezimaltrenner ist "`.`"
+:::
+::: {.column width="50%"}
+- Einträge durch "`,`" getrennt
+- Dezimaltrenner ist "`.`"
 - Datum mit Jahr/Monat/Tag
+:::
+::::
 
 Einlesen mit `read_csv(...)`
 
+:::: {.columns}
+::: {.column width="50%"}
 ```{r}
 #| message: false
 read_csv("daten/beispiel-1.csv")
 ```
-
-- Datum wird erkannt
+:::
+::: {.column width="50%"}
+- Datentypen richtig erkannt
+:::
+:::
 
 ## Deutsche Konvention {.smaller}
 
