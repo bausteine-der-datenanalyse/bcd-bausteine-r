@@ -2,28 +2,23 @@
 title: "Grundlagen von ggplot2"
 ---
 
-
 ```{r}
 #| include: false
-#| message: false
+library(gt)
 library(tidyverse)
-library(kableExtra)
 load("daten/data-lecture.Rdata")
 ```
 
-
 # Ein Beispiel
 
-
-## Zusammenhang zwischen Wirtschaftskraft und Treibhausgasemissionen im Jahr 2012
+## Wirtschaftskraft und Treibhausgasemissionen
 
 ```{r}
 ggplot(data = d_wb_2012) +
-  geom_point(mapping = aes(x=gdp, y=gge, fill=region, size=pop), shape=21) +
+  geom_point(mapping = aes(x = gdp, y = gge, fill = region, size = pop), shape = 21) +
   scale_x_log10() + scale_y_log10() +
-  labs(x="Bruttoinlandsprodukt", y="Treibhausgasemissionen", title="Jahr 2012")
+  labs(x = "Bruttoinlandsprodukt", y = "Treibhausgasemissionen", title = "Jahr 2012")
 ```
-
 
 ## Aufbau der Anweisung
 
@@ -36,9 +31,7 @@ ggplot(data = d_wb_2012) +
 5.  Skalen (später)
 6.  Beschriftung (später)
 
-
 # Was ist ggplot2?
-
 
 ## Ursprung
 
@@ -51,10 +44,7 @@ ggplot(data = d_wb_2012) +
 - Mit Quellcode frei verfügbar
 - Eine schöne Sammlung von Beispielen gibt es [hier](https://www.r-graph-gallery.com)
 
-
 ## Genereller Aufbau einer ggplot2 Anweisung
-
-<br/><br/>
 
 ```{r}
 #| eval: false
@@ -67,57 +57,44 @@ ggplot(data = <DATA>) +
   theme(<THEME SETTINGS>)
 ```
 
-<br/><br/>
-
 → Am Ende des Semesters werden Sie das verstehen!
 
 # Datensatz für diese Folien
 
+## Dataframe `d_wb_2012`
 
-## Daten laden und anzeigen
+| Spalte                 | Deutsch                                  | Englisch (Originaltitel)                            |
+|------------------------|------------------------------------------|-----------------------------------------------------|
+| `year`                 | Jahr                                     | Year                                                |   
+| `country`              | Land                                     | Country                                             |
+| `pop`                  | Bevölkerung                              | Population, total                                   |
+| `gge`                  | Treibhausgasemissionen kt CO2 äquivalent | Total greenhouse gas emissions kt of CO2 equivalent |
+| `gdp`                  | Bruttoinlandsprodukt                     | GDP (current US\$)                                  |
+| `region`               | Region                                   | Region                                              |
+| `ig`                   | Einkommensgruppe                         | Income group                                        |
 
-### Daten aus Datei laden
+##
 
 ```{r}
-#| eval: false
+#| echo: false
 load("daten/data-lecture.Rdata")
+gt(d_wb_2012) |> fmt_number(decimals = 0, use_seps = FALSE) |> opt_interactive()
 ```
-
-<br/>
-
-### Dataframe anzeigen
-
-```{r}
-show(d_wb_2012)
-```
-
-
-## Inhalt von Dataframe `d_wb_2012`
-
-| Spalte | Deutsch | Englisch (Originaltitel) |
-|------------------------|------------------------|------------------------|
-| year | Jahr | Year |
-| country | Land | Country |
-| pop | Bevölkerung | Population, total |
-| gge | Treibhausgasemissionen kt CO2 äquivalent | Total greenhouse gas emissions kt of CO2 equivalent |
-| gdp | Bruttoinlandsprodukt | GDP (current US\$) |
-| region | Region | Region |
-| ig | Einkommensgruppe | Income group |
-
-: {tbl-colwidths="[20,40,40]"}
-
 
 # Funktionsweise von ggplot
-
 
 ## Wie funktioniert ggplot?
 
 ```{r}
 #| eval: false
 ggplot(data = d_wb_2012) +
-  geom_point(mapping = aes(x=gdp, y=gge, fill=region, size=pop), shape=21) +
-  scale_x_log10() + scale_y_log10() +
-  labs(x="Bruttoinlandsprodukt", y="Treibhausgasemissionen", title="2012")
+  geom_point(
+    mapping = aes(x = gdp, y = gge, fill = region, size = pop),
+    shape = 21
+  ) +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(x = "Bruttoinlandsprodukt", y = "Treibhausgasemissionen", title = "2012")
 ```
 
 - Plot setzt sich aus Elementen zusammen, die mit `+` verbunden werden
@@ -128,7 +105,6 @@ ggplot(data = d_wb_2012) +
   - Das Mapping verknüpft Daten mit visuellen Eigenschaften der Objekte
 - Es folgen Einstellungen für Achsen, Beschriftungen, etc.
 
-
 ## Daten und visuelle Eigenschaften
 
 ![](bilder/mapping.svg)
@@ -138,25 +114,23 @@ ggplot(data = d_wb_2012) +
 goem_point(mapping = aes(x = A, y = B, color = C, size = D))
 ```
 
--   Punkt hat visuelle Eigenschaften: x, y, Größe, Farbe
--   Mapping legt fest, welches Merkmal auf welche visuelle Eigenschaft abgebildet wird
+- Punkt hat visuelle Eigenschaften: x, y, Größe, Farbe
+- Mapping legt fest, welches Merkmal auf welche visuelle Eigenschaft abgebildet wird
 
 → Visuelle Eigenschaften heißen in ggplot Aesthetics (AES)
-
 
 ## Datensatz für Beispiel erstellen und anzeigen
 
 ```{r}
 d_bsp <- tibble(
-  A = c(1, 3, 2), 
-  B = c(1, 2, 3), 
-  C = c('u', 'v', 'u'), 
+  A = c(1, 3, 2),
+  B = c(1, 2, 3),
+  C = c('u', 'v', 'u'),
   D = c(5, 2, 4)
 )
 
-kable(d_bsp)
+gt(d_bsp)
 ```
-
 
 ## Datensatz für Beispiel Plotten
 
@@ -165,28 +139,23 @@ ggplot(data = d_bsp) +
   geom_point(mapping = aes(x = A, y = B, color = C, size = D))
 ```
 
-
-## _Geoms_ und _Aesthetics_
-
-<br/><br/>
+## *Geoms* und *Aesthetics*
 
 ![](bilder/aesthetics.svg)
-
 
 ## Beispiel mit Weltbankdaten
 
 ```{r}
 ggplot(data = d_wb_2012) +
-  geom_point(mapping = aes(x=gdp, y=gge, color=region, size=pop))
+  geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop))
 ```
-
 
 ## Beispiel mit Weltbankdaten
 
 ```{r}
 #| eval: false
 ggplot(data = d_wb_2012) +
-  geom_point(mapping = aes(x=gdp, y=gge, color=region, size=pop))
+  geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop))
 ```
 
 - `geom_point(...)` sagt, dass Punkte geplottet werden sollen
@@ -196,11 +165,11 @@ ggplot(data = d_wb_2012) +
   - Farbe nach Region (`region`)
   - Größe entsprechend Bevölkerung (`pop`)
 
-
 ## Beispiel mit Weltbankdaten (logarithmische Skala)
 
 ```{r}
 ggplot(data = d_wb_2012) +
-  geom_point(mapping = aes(x=gdp, y=gge, color=region, size=pop)) +
-  scale_x_log10() + scale_y_log10()
+  geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop)) +
+  scale_x_log10() +
+  scale_y_log10()
 ```

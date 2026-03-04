@@ -29,19 +29,19 @@ library(gt)
 
 ## Funktion `read_excel(...)`
 
-Paket laden
+### Paket laden
 
 ```{r}
 library(readxl)
 ```
 
-Tabelle einlesen
+### Tabelle einlesen
 
 ```{.r}
 d <- read_excel(Dateiname, Parameter...)
 ```
 
-Die wichtigsten Parameter
+### Die wichtigsten Parameter
 
 Parameter       | Bedeutung                                   | Optional
 ----------------|---------------------------------------------|---------
@@ -49,15 +49,14 @@ skip = 5        | Anzahl zeilen, die überlesen werden sollten | Ja
 range = "B2:G5" | Einzulesender Bereich (ersetzt `skip`)      | Ja
 sheet = "Name"  | Tabellenblatt, das gelesen werden soll      | Ja
 
-: {tbl-colwidths="[20,50,30]"}
-
 ## Beispiel 1: Einfache Tabelle
 
 ::: {.columns}
 ::: {.column width="45%"}
+[]{.up10}
 ![](bilder/tabelle.png)
 :::
-::: {.column}
+::: {.column width="55%"}
 ```{r}
 read_excel("daten/tabelle.xlsx")
 ```
@@ -111,15 +110,15 @@ read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
 
 ## Amerikanische Konvention
 
-Datei `beispiel-1.csv`
+Datei [beispiel-1.csv](daten/beispiel-1.csv){download=""}
 
 :::: {.columns}
-::: {.column width="50%"}
+::: {.column width="45%"}
 ```{raw}
 {{< include daten/beispiel-1.csv >}}
 ```
 :::
-::: {.column width="50%"}
+::: {.column width="55%"}
 - Einträge durch "`,`" getrennt
 - Dezimaltrenner ist "`.`"
 - Datum mit Jahr/Monat/Tag
@@ -128,80 +127,137 @@ Datei `beispiel-1.csv`
 
 Einlesen mit `read_csv(...)`
 
-:::: {.columns}
-::: {.column width="50%"}
 ```{r}
+#| eval: false
+read_csv("daten/beispiel-1.csv")
+```
+
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+#| echo: false
 #| message: false
 read_csv("daten/beispiel-1.csv")
 ```
 :::
-::: {.column width="50%"}
+::: {.column width="55%"}
 - Datentypen richtig erkannt
 :::
 :::
 
-## Deutsche Konvention {.smaller}
+## Deutsche Konvention
 
-Datei `beispiel-2.csv`
+Datei [beispiel-2.csv](daten/beispiel-2.csv){download=""}
 
-```{}
+:::: {.columns}
+::: {.column width="45%"}
+```{raw}
 {{< include daten/beispiel-2.csv >}}
 ```
-
-- Einträge durch "`;`" getrennt, Dezimaltrenner ist "`,`", Tausender mit "`.`" 
+:::
+::: {.column width="55%"}
+- Einträge durch "`;`" getrennt
+- Dezimaltrenner "`,`", Tausender "`.`" 
 - Datum mit Tag/Monat/Jahr
+:::
+::::
 
 Einlesen mit `read_csv2(...)`
 
 ```{r}
-#| message: false
+#| eval: false
 read_csv2("daten/beispiel-2.csv")
 ```
 
-- Datum wird nicht erkannt
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+#| echo: false
+#| message: false
+read_csv2("daten/beispiel-2.csv")
+```
+:::
+::: {.column width="55%"}
+- Datum nicht richtig erkannt
+:::
+:::
 
-## Gemischte Konvention {.smaller}
+## Gemischte Konvention
 
-Datei `beispiel-3.csv`
+Datei [beispiel-3.csv](daten/beispiel-3.csv){download=""}
 
-```{}
+:::: {.columns}
+::: {.column width="45%"}
+```{raw}
 {{< include daten/beispiel-3.csv >}}
 ```
-
-- Einträge durch "`;`" getrennt, Dezimaltrenner ist "`.`", Tausender mit "`,`" 
+:::
+::: {.column width="55%"}
+- Einträge durch "`;`" getrennt
+- Dezimaltrenner "`.`", Tausender "`,`" 
 - Datum mit Tag/Monat/Jahr
+:::
+::::
 
-Einlesen mit `read_delim(...)`, 
+Einlesen mit `read_delim(...)`
 
 ```{r}
-#| message: false
-read_delim("daten/beispiel-3.csv", delim=";", trim_ws=TRUE, locale=locale(decimal_mark=".", grouping_mark=","))
+#| eval: false
+read_delim("daten/beispiel-3.csv", delim = ";", trim_ws = TRUE, locale = locale(decimal_mark = ".", grouping_mark = ","))
 ```
 
-- `delim` wie delimiter = Trennzeichen
-- `locale` enthält länderspezifische Einstellungen
-- `trim_ws` wie trim whitespace = entfernt Leerzeichen (wichtig!)
-- Datum wird nicht erkannt
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+#| echo: false
+#| message: false
+read_delim("daten/beispiel-3.csv", delim = ";", trim_ws = TRUE, locale = locale(decimal_mark = ".", grouping_mark = ","))
+```
+:::
+::: {.column width="55%"}
+- `delim`: *Delimiter* ist das Trennzeichen
+- `locale`: Länderspezifische Dinge
+- `trim_ws`: Entfernt Leerzeichen
+- Datum nicht richtig erkannt
+:::
+:::
 
+## Kodierung
 
-## Kodierung {.smaller}
+Datei [beispiel-4.csv](daten/beispiel-4.csv){download=""}
 
-Datei `beispiel-4.csv`
-
-```{}
+:::: {.columns}
+::: {.column width="45%"}
+```{raw}
 {{< include daten/beispiel-4.csv >}}
 ```
-
-- Datei ist ISO-8859-1 kodiert, Grundeinstellung in R ist UTF-8
+:::
+::: {.column width="55%"}
+- Datei ISO-8859-1 [kodiert](https://de.wikipedia.org/wiki/Zeichenkodierung)
+- Grundeinstellung in R ist UTF-8
+- Sonst deutsche Konvention
+:::
+::::
 
 Einlesen mit `read_csv2(...)`
 
 ```{r}
-#| message: false
-read_csv2("daten/beispiel-4.csv", locale=locale(encoding="iso-8859-1"))
+#| eval: false
+read_csv2("daten/beispiel-4.csv", locale = locale(encoding = "iso-8859-1"))
 ```
 
-- Kodierung beim Einlesen explizit angeben
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+#| echo: false
+#| message: false
+read_csv2("daten/beispiel-4.csv", locale = locale(encoding = "iso-8859-1"))
+```
+:::
+::: {.column width="55%"}
+- Kodierung beim Einlesen angeben
+:::
+:::
 
 ## Beispiel: Niederschlagsdaten Bochum
 
@@ -214,20 +270,18 @@ read_delim(
 )
 ```
 
-
 ## CSV-Dateien Zusammenfassung
 
-[]{.down60}
+### Funktionen
 
-```{.r}
+```{r}
+#| eval: false
 read_csv(Dateiname, Parameter...)   # Amerikanische Konvention
 read_csv2(Dateiname, Parameter...)  # Deutsche Konvention
 read_delim(Dateiname, locale=locale(decimal_mark=".", grouping_mark=","), Parameter...)
 ```
 
-[]{.down60}
-
-Die wichtigsten Parameter
+### Die wichtigsten Parameter
 
 Parameter              | Bedeutung                                   | Optional
 -----------------------|---------------------------------------------|---------
@@ -235,40 +289,36 @@ skip = 5               | Anzahl zeilen, die überlesen werden sollten | Ja
 trim_ws = TRUE         | Leerzeichen entfernen (für `read_delim`)    | Ja
 show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
 
-: {tbl-colwidths="[30,50,20]"}
-
 # Rohdaten
 
-## Hände weg von den Rohdaten! {.smaller}
+## Hände weg von den Rohdaten!
 
 ![](bilder/haende-weg.svg)
 
-:::: {.columns}
-::: {.column width=45%}
-**Rohdaten dürfen nicht verändert werden**
+::: {.columns}
+::: {.column}
+### Rohdaten nicht verändern
 
-[]{.down40}
+- Schwer nachvollziehbar
+- Nicht rückgängig zu machen
+- Schlimmstenfalls Datenverlust
+:::
+::: {.column}
+### Stattdessen
 
-- 'Von Hand' durchgeführte Änderungen sind später nicht mehr nachvollziehbar
-- Änderungen nur schwer einzeln rückgängig zu machen
+- Rohdaten unverändert einlesen
+- In R aufbereiten
+- R-Code dokumentiert Änderungen
+:::
 :::
 
-::: {.column width=10%}
-
-:::
-
-::: {.column width=45%}
-**Stattdessen: Rohdaten einlesen und in R aufbereiten**
-
-- R-Code dokumentiert was verändert wurde
-- Wird bei der Benotung berücksichtigt
-:::
-::::
+$\rightarrow$ Relevant für Benotung!
 
 ## Beim Einlesen von Daten gilt immer
 
-[]{.down120}
+- In der Regel funktioniert es nicht auf Anhieb
 
-- Vorsicht: Eingelesene Daten sehr sorgfältig anschauen!
+- Eingelesene Daten sehr sorgfältig anschauen!
+
 - Überblick verschaffen mit `summary(d)` und/oder `str(d)`
 

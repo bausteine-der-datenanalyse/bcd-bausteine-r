@@ -24,18 +24,22 @@ $link-color: $accent !default;
 $selection-bg: #26351c !default;
 
 
+// Borders for other things
 
 .reveal .framed {
     border: 1px solid black;
-    border-radius: 4px;
-    padding: 5px;
+    // border-radius: 4px;
+    // padding: 5px;
 }
 
 .reveal .raw {
     border: 1px solid black;
-    border-radius: 4px;
-    padding: 5px;
+    // border-radius: 4px;
+    // padding: 5px;
 }
+
+
+// Things in columns
 
 .reveal div.columns div.sourceCode {
   margin-top: 0px !important;
@@ -45,6 +49,13 @@ $selection-bg: #26351c !default;
   margin-top: 0em;
   margin-bottom: 0.2em;
 }
+
+.reveal div.columns p {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+// Original ???
 
 .reveal a {
   line-height: 1.25em;
@@ -112,18 +123,18 @@ $selection-bg: #26351c !default;
   font-size: 2em;
 }
 
-.reveal h2 {
+.reveal .slides h2 {
   font-weight: light;
   font-size: 1.4em;
 }
 
-.reveal h3 {
-  color: $accent;
+.reveal .slides h3 {
+  // color: $accent;
   font-weight: lighter;
   font-size: 1em;
 }
 
-.reveal h4 {
+.reveal .slides h4 {
   color: $accent2;
   font-weight: lighter;
   font-size: 1em;
@@ -145,6 +156,10 @@ $selection-bg: #26351c !default;
 }
 
 // lists
+
+.reveal ul li ul {
+  list-style-type: none;
+}
 
 .reveal ul {
   font-weight: lighter;
