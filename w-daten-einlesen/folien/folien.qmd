@@ -5,7 +5,8 @@ title: "Daten einlesen"
 ```{r}
 #| include: false
 library(tidyverse)
-library(kableExtra)
+library(kableExtra) # XXX
+library(gt)
 ```
 
 # Tidyverse
@@ -50,21 +51,21 @@ sheet = "Name"  | Tabellenblatt, das gelesen werden soll      | Ja
 
 : {tbl-colwidths="[20,50,30]"}
 
-## Beispiel 1: Einfache Tabelle {.smaller}
+## Beispiel 1: Einfache Tabelle
 
 ::: {layout-ncol=2}
 
-![](bilder/tabelle.svg)
+![](bilder/tabelle.png)
 
 ```{r}
 d <- read_excel("daten/tabelle.xlsx")
-kable(d)
+d
 ```
 :::
 
-- `read_excel(...)` liest Excel-Datei und gibt Dataframe zurück
-- Im einfachsten Fall nur Datei angeben, Inhalt von erstem Sheet
-- Datum wird manchmal korrekt als date-time eingelesen
+- `read_excel(...)` liest [Excel-Datei](daten/tabelle.xlsx) und gibt Dataframe zurück
+- Im einfachsten Fall nur Datei angeben, Inhalt von erstem Tabellenblatt
+- Datentypen der Spalten werden korrekt erkannt
 
 ## Leider nicht immer so einfach
 
@@ -88,20 +89,19 @@ Wo liegt das Problem?
 ## Importassistent 3/3
 
 ```{r}
-d<-read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
+d <- read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
 d
 ```
 
 - Einstellung in Excel unvollständig, daher Datum nicht richtig gelesen
-- Anmerkung: Große Dataframes nicht mit `kable` ausgeben
 
 # CSV-Dateien einlesen
 
 ## Aufbau und Inhalt von CSV-Dateien
 
-![](bilder/csv.svg)
+![](bilder/csv.png){.framed}
 
-- csv = Comma Separated Values, weit verbreitet, nicht standardisiert
+- CSV: Comma Separated Values, weit verbreitet, nicht standardisiert
 - Häufig Kopfzeile(n) mit Beschreibung des Inhalts
 - Inhalt in der Regel mit
   - Datenfeldern getrennt z.B. durch Komma, Semikolon, Leerzeichen...
@@ -113,7 +113,7 @@ d
 
 Datei `beispiel-1.csv`
 
-```{}
+```{raw}
 {{< include daten/beispiel-1.csv >}}
 ```
 
