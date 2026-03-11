@@ -1,5 +1,3 @@
-library(stringr)
-
 tibble(c=colors()) |>
   filter(!str_detect(c, "gray|grey")) |>
   mutate(y = row_number() %/% 5, x = row_number() %% 5) -> d

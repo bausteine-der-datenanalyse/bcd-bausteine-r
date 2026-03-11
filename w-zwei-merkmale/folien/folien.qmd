@@ -39,7 +39,7 @@ Daten Sachverständigenrat Wirtschaft
 
 ```{r}
 #| echo: false
-d_svrw |> gt() |> opt_interactive()
+gt(d_svrw) |> opt_interactive()
 ```
 
 ## Weltbank
@@ -62,7 +62,7 @@ Daten Weltbank
 
 ```{r}
 #| echo: false
-d_le_latest |> gt() |> fmt_number(decimals = 3) |> opt_interactive()
+gt(d_le_latest) |> fmt_number(decimals = 3) |> opt_interactive()
 ```
 
 ## Pisa-Studie

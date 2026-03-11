@@ -6,9 +6,9 @@ library(tidyverse)
 rm(list = ls())
 
 # Datenssätze heraussuchen
-wbsearch(pattern = "total population")
-wbsearch(pattern = "greenhouse")
-wbsearch(pattern = "GDP")
+wb_search(pattern = "total population")
+wb_search(pattern = "greenhouse")
+wb_search(pattern = "GDP")
 # https://datahelpdesk.worldbank.org/knowledgebase/articles/906519
 
 #
@@ -16,11 +16,11 @@ wbsearch(pattern = "GDP")
 #
 
 # Bevölkerung
-pop <- as.tibble(wb(indicator = "SP.POP.TOTL"))
+pop <- wb_data(indicator = "SP.POP.TOTL")
 pop
 
 # Treibhausgasemissionen
-gge <- as.tibble(wb(indicator = "EN.ATM.GHGT.KT.CE"))
+gge <- wb_data(indicator = "EN.ATM.GHGO.KT.CE")
 gge
 
 # Bruttosozialprodukt
