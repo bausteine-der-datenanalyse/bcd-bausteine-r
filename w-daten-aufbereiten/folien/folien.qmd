@@ -2,12 +2,26 @@
 title: "Daten aufbereiten"
 ---
 
-```{r setup}
+```{r}
 #| include: false
+library(gt)
 library(hms)
+library(knitr)
 library(readxl)
 library(tidyverse)
-library(kableExtra)
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Ziel bei der Aufbereitung von Daten
@@ -46,7 +60,7 @@ Tidy data (aufgeräumte Daten)
 sin(sqrt(exp(1.5)))
 ```
 
-→ Zuerst wird $e^x$ berechnet, dann die Wurzel gezogen und danach der Sinus ermittelt
+→ Zuerst wird $e^{1.5}$ berechnet, dann die Wurzel gezogen und danach der Sinus ermittelt
 
 **Mit Pipe-Operator**
 
@@ -69,94 +83,88 @@ sin(sqrt(exp(1.5)))
 - In der Datenquelle stehen mehr Informationen als benötigt
 - Die Namen der Merkmale sind in der Datei nicht gut gewählt
 
-## Beispieldatensatz
+## Beispieldatensatz: Geschwindigkeitsmessung
 
 ```{r}
 d_uni <- read_excel("daten/unistrasse-2017-2.xlsx", sheet = "raw(T)", range = "B2:H20712")
+```
+
+```{r}
+#| echo: false
 d_uni
 ```
 
 ## Variablen auswählen mit `select()`
 
 ```{r}
-d_uni |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d_uni |> select(Datum, Geschwindigkeit, "Länge (cm)", Fahrzeug)
 ```
 
-[]{.down60}
-
-- Alle Merkmale angeben, die ausgewählt werden sollen
-- Anführungszeichen bei Spaltennamen mit Leerzeichen
-
+- Variablen angeben, die beibehalten werden sollen
+- Anführungszeichen bei Namen mit Leerzeichen
 
 ## Variablen entfernen mit `select()`
 
 ```{r}
-d_uni |> select(-Fahrtrichtung, -ends_with("(Radar)"))
+d_uni |> select(-Fahrtrichtung, -Abstand, -"Länge (Radar)")
 ```
 
-[]{.down60}
-
-- Hier: Merkmale angegeben, die nicht ausgewählt werden sollen
-- Anführungszeichen bei Spaltennamen mit Leerzeichen
-- Wird einer Variablen ein `-` vorangestellt, dann wird die Spalte entfernt
-- Alle anderen Variablen werden beibehalten
-
+- Variablen mit vorangestelltem `-` werden entfernt
+- Anführungszeichen bei Namen mit Leerzeichen
 
 ## Variablen umbenennen mit `select()`
 
 ```{r}
-d_uni |> select(Datum, FZ = Fahrzeug, v = Geschwindigkeit, L = "Länge (cm)")
+d_uni |> select(Datum, v = Geschwindigkeit, L = "Länge (cm)", Fahrzeug)
 ```
 
-[]{.down60}
-
-- Umbenennen mit `neuer_name = alter_name` 
-
-
-## Beispieldatensatz 2
-
-```{r}
-d <- tibble(A_X = 1:2, B_X = 1:2, X_A = 1:2, X_B = 1:2, Datum = 1:2)
-d |> kable()
-```
-
+- Auswählen und umbenennen mit `neuer_name = alter_name` 
+- Andere Variablen einfach beibehalten
 
 ## Variablen nach Muster auswählen
 
+```{r}
+d <- tibble(A_X = 1:2, B_X = 3:4, C_X = 5:6, X_A = 7:8, X_B = 9:10, X_C = 11:12, ABC = 13:14)
+```
+
+```{r}
+#| echo: false
+d
+```
+
 :::: {.columns}
-::: {.column width=45%}
+::: {.column width=50%}
+
 ```{r}
-d |> select(starts_with("X")) |> kable()
+d |> select(starts_with("X_"))
 ```
 
 ```{r}
-d |> select(ends_with("X")) |> kable()
+d |> select(ends_with("_X"))
 ```
-:::
-
-::: {.column width=10%}
 
 :::
+::: {.column width=50%}
 
-::: {.column width=45%}
 ```{r}
-d |> select(-starts_with("X")) |> kable()
+d |> select(-starts_with("X_"))
 ```
 
-- Mit `starts_with()` und `ends_with()` ein Muster für Namen festlegen
-- Funktioniert auch wieder mit `-`
+```{r}
+d |> select(-ends_with("_X"))
+```
 
 :::
 ::::
 
+- Mit `starts_with()` und `ends_with()` Muster für Namen festlegen
+- Funktioniert auch wieder mit `-`
 
 ## Variablen umbenennen mit `rename()`
 
 ```{r}
-d_uni |> rename(v = Geschwindigkeit) 
+d_uni |> rename(v = Geschwindigkeit, laenge = "Länge (Radar)")
 ```
-
-[]{.down60}
 
 - Variable umbenennen mit `neuer_name = alter_name`
 - Alle anderen Variablen werden beibehalten
@@ -170,114 +178,105 @@ d_uni |> rename(v = Geschwindigkeit)
 - Wenn einzelne Werte aussortiert werden sollen
 - Wenn man sich nur für bestimmte Beobachtungen interessiert
 
-## Wieder Beispieldatensatz
+## Beispieldatensatz
 
 ```{r}
-d_uni |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d <- d_uni |> select(Datum, Fahrzeug, Abstand, Geschwindigkeit)
+```
+
+```{r}
+#| echo: false
+d
 ```
 
 ## Filter: Nur LKW
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW") |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(Fahrzeug == "LKW")
 ```
-
-[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 
-## Filter: Nur LKW, die schneller als 60km/h gefahren sind
+## Filter: Nur LKW schneller als 60km/h
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW" & Geschwindigkeit > 60) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(Fahrzeug == "LKW" & Geschwindigkeit > 60)
 ```
-
-[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 - Logisches und: `&` 
 
-## Filter: Nur LKW oder Fahrzeuge, die schneller als 80km/h gefahren sind
+## Filter: Nur LKW oder Fahrzeuge schneller 80km/h
 
 ```{r}
-d_uni |> filter(Fahrzeug == "LKW" | Geschwindigkeit > 80) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(Fahrzeug == "LKW" | Geschwindigkeit > 80)
 ```
-
-[]{.down60}
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
 - Logisches oder: `|` 
 
-## Filter: Alle Fahrzeuge, deren Fahrzeugtyp nicht erkannt wurde
+## Filter: Fahrzeugtyp nicht erkannt
 
 ```{r}
-d_uni |> filter(is.na(Fahrzeug)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(is.na(Fahrzeug))
 ```
 
 ## Filter: Zeilen mit `NA` entfernen
 
 ```{r}
-d_uni |> filter(!is.na(Fahrzeug)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(!is.na(Fahrzeug))
 ```
 
 ## Filter: Kriterium in Vektor
 
 ```{r}
-d_uni |> filter(Fahrzeug %in% c("Zweirad", "LKW")) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> filter(Fahrzeug %in% c("Zweirad", "LKW"))
 ```
-
-[]{.down60}
 
 - Werte für Merkmal aus Vektor
 
-## Auswahl von Beobachtungen nach Zeilennummer mit `slice()`
+## Auswahl nach Zeilennummer mit `slice()`
 
 ```{r}
-d_uni |> slice(c(10, 30, 700)) |> select(Datum, Fahrzeug, Geschwindigkeit, "Länge (cm)")
+d |> slice(c(10, 30, 700))
 ```
-
-[]{.down60}
 
 - Beobachtungen nach Position auswählen
 
-## Auswahl von Beobachtungen am Anfang oder Ende mit `slice()`
+## Auswahl am Anfang oder am Ende
 
 ::: {.columns}
 ::: {.column}
 ```{r}
-d_uni |> slice_head(n = 10) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> slice_head(n = 10)
 ```
 :::
 ::: {.column}
 ```{r}
-d_uni |> slice_tail(n = 10) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> slice_tail(n = 10)
 ```
 :::
 :::
 
-[]{.down60}
+- Erste oder letzte `n` (Anzahl) Beobachtungen auswählen
+- Dabei: `head` wie Kopf und `tail` wie Schwanz oder Ende
 
-- Die ersten und letzten n (Anzahl) Beobachtungen auswählen
-- `Head` wie Kopf und `tail` wie Schwanz oder Ende
-
-## Auswahl von kleinsten oder größten Beobachtungen mit `slice()`
+## Auswahl kleinste oder größte Beobachtungen
 
 ::: {.columns}
 ::: {.column}
 ```{r}
-d_uni |> slice_min(Geschwindigkeit, n = 8) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> slice_min(Geschwindigkeit, n = 10)
 ```
 :::
 ::: {.column}
 ```{r}
-d_uni |> slice_max(Geschwindigkeit, n = 8) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> slice_max(Geschwindigkeit, n = 10)
 ```
 :::
 :::
 
-[]{.down60}
-
-- Die kleinsten und größten n (Anzahl) Beobachtungen für ein Merkmal auswählen
+- Die kleinsten und größten `n` (Anzahl) Beobachtungen auswählen
 - `min` wie Minimum und `max` wie Maximum
 
 
@@ -290,24 +289,27 @@ d_uni |> slice_max(Geschwindigkeit, n = 8) |> select(Datum, Fahrzeug, v = Geschw
 - Wenn man sich für die größten oder kleinsten Werte interessiert
 - Um die Reihenfolge beim Plotten zu ändern, so dass bestimmte Objekte über anderen liegen
 
-## Übersicht der langsamsten Fahrzeuge
+## Beobachtungen mit kleinster Geschwindigkeit
 
 ```{r}
-d_uni |> arrange(Geschwindigkeit) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> arrange(Geschwindigkeit)
 ```
 
-[]{.down60}
-
 - Sortiert aufsteigend nach dem angegebenen Merkmal
-- Schnellste Fahrer mit `desc(merkmal)` (sortiert absteigend)
+
+## Beobachtungen mit größter Geschwindigkeit
+
+```{r}
+d |> arrange(desc(Geschwindigkeit))
+```
+
+- Mit `desc()` absteigend sortieren
 
 ## Nach mehreren Kriterien sortieren (1/2)
 
 ```{r}
-d_uni |> arrange(Fahrzeug, Geschwindigkeit) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> arrange(Fahrzeug, Geschwindigkeit)
 ```
-
-[]{.down60}
 
 - Zuerst nach Fahrzeugen sortieren
 - Innerhalb einer Fahrzeuggruppe nach Geschwindigkeit angeordnet
@@ -315,10 +317,8 @@ d_uni |> arrange(Fahrzeug, Geschwindigkeit) |> select(Datum, Fahrzeug, v = Gesch
 ## Nach mehreren Kriterien sortieren (2/2)
 
 ```{r}
-d_uni |> arrange(Geschwindigkeit, Fahrzeug) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> arrange(Geschwindigkeit, Fahrzeug)
 ```
-
-[]{.down60}
 
 - Zuerst nach der Geschwindigkeit sortieren
 - Innerhalb einer Geschwindigkeiten nach Fahrzeugen angeordnet
@@ -335,78 +335,68 @@ d_uni |> arrange(Geschwindigkeit, Fahrzeug) |> select(Datum, Fahrzeug, v = Gesch
 ## Geschwindigkeit runden
 
 ```{r}
-d_uni |> mutate(V10 = signif(Geschwindigkeit, digits = 1))|> select(Datum, Fahrzeug, v = Geschwindigkeit, V10)
+d |> mutate(V10 = signif(Geschwindigkeit, digits = 1))
 ```
-
-[]{.down60}
 
 - `neue_variable = Ausdruck(alte_variablen)`
-- Mehrere Variablen sind möglich
 - Mit `signif()` auf eine signifikante Stellte gerundet
 
-## Datum konvertieren
+## Datum konvertieren 1/2
 
 ```{r}
-d_uni |> mutate(Datum = dmy_hms(Datum, tz = "Europe/Berlin")) |> select(Datum, Fahrzeug, v = Geschwindigkeit)
+d |> show()
 ```
 
-[]{.down60}
-
 - Nach dem Einlesen ist das Merkmal Datum eine Zeichenkette
-- Alter Wert von Datum wird überschrieben
-- Mit `dmy_hms()` in date-time konvertiert, Zeitzone angeben
-- Jetzt können wir mit dem Datum arbeiten
 
-## Datum und Uhrzeit konvertieren
+## Datum konvertieren 2/2
 
 ```{r}
-d_uni |> 
+d |> mutate(Datum = dmy_hms(Datum, tz = "Europe/Berlin")) |> show()
+```
+
+- In date-time konvertieren mit `dmy_hms()`, ggf. Zeitzone angeben
+
+## Zusätzlich mit Uhrzeit
+
+```{r}
+d |>
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
     Uhrzeit = as_hms(Datum)
-  ) |> select(Datum, Uhrzeit, Fahrzeug, v = Geschwindigkeit)
+  )
 ```
-
-[]{.down60}
 
 - Mit `as_hms()` die Uhrzeit heraussuchen (`library(hms)`)
 
-## Mit der Uhrzeit rechnen
+## Datum runden
 
 ```{r}
-d_uni |> 
+d |> 
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
-    D15 = floor_date(Datum, "15 minutes"),
-    Uhrzeit = as_hms(Datum)
-  ) |> 
-select(Datum, Uhrzeit, D15)
+    D15 = floor_date(Datum, "15 minutes")
+  )
 ```
 
-[]{.down60}
-
-- `floor_date(x, unit)` rundet die Datums- oder Zeitangabe auf die angegebene Einheit (`unit`) ab
+- `floor_date(x, unit)` rundet ab auf angegebene Einheit
 
 ## Alles in einem Rutsch {.smaller}
 
 ```{r}
 d_unistrasse <- read_excel("daten/unistrasse-2017-2.xlsx",sheet="raw(T)",range="B2:H20712") |>
-  select(Datum, Fz = Fahrzeug, L = `Länge (cm)`, v = Geschwindigkeit) |>
-  filter(!is.na(Fz)) |>
+  select(Datum, Fahrzeug = Fahrzeug, L = `Länge (cm)`, v = Geschwindigkeit) |>
+  filter(!is.na(Fahrzeug)) |>
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
     D15 = floor_date(Datum, "15 minutes"),
     Uhrzeit = as_hms(Datum)
   )
-d_unistrasse |> select(Datum, Uhrzeit, D15, Fz, L, v)
+d_unistrasse
 ```
-
-[]{.down40}
 
 - Mehrere Operationen nacheinander ausgeführt
 - Lesbarkeit: Jede Operation in eine eigene Zeile
-- Lange Operationen nochmal aufteilen
-- `select` gibt auch die Reihenfolge der Spalten an
 
 ## Damit: Plot Uhrzeit und Geschwindigkeit 
 
@@ -415,21 +405,17 @@ ggplot(data = d_unistrasse) +
   geom_hex(mapping = aes(x = Uhrzeit, y = v)) 
 ```
 
-[]{.down60}
-
 - Histogramm der Geschwindigkeitsverteilung über Uhrzeit
 
 ## Bedingte Anweisung mit `if_else()`
 
 ```{r}
-d_uni |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein")) |> select(Datum, Fahrzeug, v = Geschwindigkeit, Raser)
+d |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein"))
 ```
 
-[]{.down60}
-
-- Erster Parameter ist Bedingung
-- Neue Variable `Raser` erhält Wert von zweitem Parameter, falls Bedingung erfüllt
-- Falls Bedingung nicht erfüllt wird dritter Parameter verwendet
+- Erster Parameter: Bedingung als logischer Ausdruck
+- Zweiter Parameter: Wert falls Bedingung erfüllt
+- Dritter Parameter: Wert falls Bedingung nicht erfüllt
 
 # Zusammenfassen mit `summarize()` und `group_by()`
 
@@ -437,78 +423,77 @@ d_uni |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein")) |> select(
 
 []{.down120}
 
-- Wenn man wissen will, wie oft eine bestimmte Beobachtung aufgetreten ist
-- Wenn Durchnittswerte oder ähnliches benötigt werden
+- Um Ausprägungen zu zählen
+- Wenn Kenngrößen von Verteilungen benötigt werden
 
 ## Nur `summarize()`
 
 ```{r}
-d_unistrasse |> summarise(n = n(), VMit = mean(v), VS = sd(v)) 
+d_unistrasse |> 
+  summarise(Anzahl = n(), Mittelwert = mean(v), Standardabweichung = sd(v))
 ```
 
-- Neue Merkmale wie bei `mutate()`
-- Unterschied: Funktionen werden auf alle Werte angewendet
-- Mit `n()` werden Zeilen gezählt
+- Wie `mutate()`, aber Funktionen werden auf alle Werte angewendet
+- Beobachtungen zählen mit `n()`
 - Funktionen `mean()` und `sd()` wie gehabt
 
-→ In dieser Form nicht besonders nützlich (und das können wir auch anders)
+→ In dieser Form nicht besonders nützlich
 
-## Kombi `group_by()` und `summarize()`
+## Kombination `group_by()` und `summarize()`
 
 ```{r}
 d_unistrasse |> 
-  group_by(Fz) |> 
-  summarise(n = n(), VMit = mean(v), VS = sd(v)) 
+  group_by(Fahrzeug) |> 
+  summarise(Anzahl = n(), Mittelwert = mean(v), Standardabweichung = sd(v))
 ```
 
-- Daten zunächst mit `group_by()` nach einem (oder mehreren Kriterien) gruppieren
+- Daten mit `group_by()` nach Kriterium gruppieren
 - Danach wird mit `summarize()` zusammenfassen
   * Gruppierungsmerkmal(e) bleiben erhalten
-  * Funktionen in `summarize()` werden auf jede Gruppe einzeln angewendet
+  * Funktionen in `summarize()` werden auf Gruppen angewendet
 
-→ In dieser Kombination **sehr** flexibel einsetzbar
+→ In Kombination **sehr** flexibel einsetzbar
 
 ## Beispiel: 15-Minuten Geschwindigkeit
 
 ```{r}
-d_unistrasse_15m <- d_unistrasse |>
+d <- d_unistrasse |>
   group_by(D15) |>
   summarise(VMit = mean(v))
-ggplot(data = d_unistrasse_15m, mapping = aes(x = D15, y = VMit)) + geom_line() + geom_point() 
+ggplot(data = d, mapping = aes(x = D15, y = VMit)) + geom_line() + geom_point() 
 ```
 
-## Effekt von `group_by()` (notwendig?)
+## Effekt von `group_by()`
 
 ```{r}
 d_unistrasse |> str()
 ```
 
-## Effekt von `group_by()` - Attribute zur Gruppierung (notwendig?)
+## Effekt von `group_by()` - Attribute zur Gruppierung
 
 ```{r}
-d_unistrasse |> group_by(Fz) |> str()
+d_unistrasse |> group_by(Fahrzeug) |> str()
 ```
 
-# Zusammenfassen und verteilen mit `pivot_longer()` und `pivot_wider()`
+# Daten umordnen mit `pivot_longer()` und `pivot_wider()`
 
 ## Wann braucht man das?
 
 []{.down120}
 
-- Zusammenfassen: Wenn Namen von Spalten Werte sein sollten
-- Verteilen: Wenn Werte Namen von Spalten sein sollten
+- `pivot_longer()`: Wenn Namen von Variablen Werte sein sollten
+- `pivot_wider()`: Wenn Werte Namen von Variablen sein sollten
 
-→ Manchmal sind auch beide Darstellungen notwendig
+→ Manchmal sind auch beide Varianten notwendig
 
 ## Breite und lange Tabellen
 
 ![](bilder/table-wide-long.svg)
 
-- Man spricht von breiten und langen Tabellenformaten
-- Englisch: *Wide and long data* 
+- Man spricht von breiten (*wide*) und langen (*long*) Tabellenformaten
 - Aufgeräumte Daten *(tidy data)* sind meistens lang
 
-→ Immer auch abhängig von der konkreten Situation
+→ Was man wirklich braucht hängt von der konkreten Situation ab
 
 ## Beispiel: Energieträger (Quelle: BMWi)
 
@@ -517,34 +502,48 @@ d_unistrasse |> group_by(Fz) |> str()
 - Unpraktisch zum Plotten und Weiterverarbeiten
 - Wir würden gerne
   - Die Spalte Energieträger beibehalten
-  - Aus den Spaltenüberschriften 1990 bis 2017 das Merkmal Jahr machen
+  - Aus den Variablennamen 1990-2017 das Merkmal Jahr machen
   - Die Werte in einem Merkmal Verbrauch speichern
 
 ## Einlesen der Daten (Quelle: BMWi)
 
 ```{r}
-d_et <- read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet="4", range="A8:AC17")
-d_et
+d_et_wide <- read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet="4", range="A8:AC17")
 ```
-
-## Transformation mit `pivot_longer()`
 
 ```{r}
-d_et |> pivot_longer(!Energieträger, names_to = "Jahr", values_to = "Verbrauch")
+#| echo: false
+d_et_wide
 ```
 
-- Spalte(n), die beibehalten werden sollen, mit `!Name` angeben
-- `names_to = Name`: Spalte für alte Spaltenüberschriften 
-- `values_to = Name`: Spalte für Werte
+## Transformation mit `pivot_longer()` 1/2
+
+```{r}
+d_et_wide |> pivot_longer(cols = "1990":"2017", names_to = "Jahr", values_to = "Verbrauch")
+```
+
+- Variablen `1990` bis `2017` umordnen
+- `names_to = Name`: Variable für alte Variablennamen 
+- `values_to = Name`: Variable für Werte
+
+## Transformation mit `pivot_longer()` 2/2
+
+```{r}
+d_et_wide |> pivot_longer(cols = !Energieträger, names_to = "Jahr", values_to = "Verbrauch")
+```
+
+- Alle Variablen außer `Energieträger` umordnen
+- `names_to = Name`: Variable für alte Variablennamen 
+- `values_to = Name`: Variable für Werte
 
 ## Beispiel vollständig
 
 ```{r}
-d_energietraeger <- 
+d_et_long <- 
   read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet="4", range="A8:AC17") |>
   pivot_longer(!Energieträger, names_to = "Jahr", values_to = "Verbrauch") |>
   mutate(Jahr = as.numeric(Jahr))
-ggplot(data = d_energietraeger) +
+ggplot(data = d_et_long) +
   geom_line(mapping = aes(x = Jahr, y = Verbrauch, color = Energieträger))
 ```
 
@@ -554,11 +553,11 @@ ggplot(data = d_energietraeger) +
 ## Werte verteilen mit `pivot_wider()`
 
 ```{r}
-d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbrauch)
+d_et_long |> pivot_wider(names_from = Energieträger, values_from = Verbrauch)
 ```
 
-- `names_from = Name`: Spalte mit neuen Spaltenüberschriften
-- `values_from = Name`: Spalte mit Werten, die verteilt werden sollen
+- `names_from = Name`: Variable mit neuen Variablennamen
+- `values_from = Name`: Variable mit Werten, die verteilt werden sollen
 - Damit transponierte der ursprünglichen Tabelle
 
 # Dataframes verknüpfen mit `left_join()`
@@ -567,14 +566,14 @@ d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbr
 
 []{.down120}
 
+- Wenn zwei Dataframes kombiniert werden sollen
 - Wenn in einer Spalte Kürzel stehen, die in einem anderen Dataframe hinterlegt sind
-- Wenn zwei Dataframes aneinandergehängt werden sollen
 
 ## Dataframes über einen Schlüssel miteinander verknüpfen
 
 []{.down60}
 
-![](bilder/mitarbeiter-beispiel.svg)
+![](bilder/mitarbeitende-beispiel.svg)
 
 []{.down40}
 
@@ -583,30 +582,32 @@ d_energietraeger |> pivot_wider(names_from = Energieträger, values_from = Verbr
 - Schlüssel in zweiter Tabelle nicht vorhanden: NAs einsetzen
 - Schlüssel müssen in zweiter Tabelle eindeutig sein!
 
-## Dataframe Mitarbeitende
+## Dataframes
 
 ```{r}
-d_mitarbeiter <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "B2:E7")
-kable(d_mitarbeiter)
+d_mitarbeitende <- read_excel("daten/mitarbeitende-beispiel.xlsx", range = "B2:E7")
 ```
-
-
-## Dataframe Abteilungen
 
 ```{r}
-d_abteilungen <- read_excel("daten/mitarbeiter-beispiel.xlsx", range = "G2:I7")
-kable(d_abteilungen)
+#| echo: false
+d_mitarbeitende
 ```
 
-## Verknüpfung der beiden Dataframes mit `left_join()`
+```{r}
+d_abteilungen <- read_excel("daten/mitarbeitende-beispiel.xlsx", range = "G2:I7")
+```
+
+```{r}
+#| echo: false
+d_abteilungen
+```
+
+## Verknüpfung der Dataframes mit `left_join()`
 
 ```{r}
 #| message: false
-d_mitarbeiter_1 <- d_mitarbeiter |> left_join(d_abteilungen)
-kable(d_mitarbeiter_1)
+d_mitarbeitende |> left_join(d_abteilungen)
 ```
-
-[]{.down40}
 
 - Dataframes müssen ein Merkmal gemeinsam haben
 - Gegebenenfalls Merkmal mit `rename()` umbenennen (wie `select()`)
@@ -614,7 +615,7 @@ kable(d_mitarbeiter_1)
 - Andere Varianten (`inner_join()` etc.) für Spezialfälle
 - Ausgabe von `left_join` unterdrücken mit `#| message: false`
 
-## Anwendung: Kodierte Werte 1/4
+## Anwendung: Kodierte Werte 1/3
 
 ![](bilder/kodierte-werte.svg)
 
@@ -624,38 +625,54 @@ kable(d_mitarbeiter_1)
   - Speicherplatz sparen bei umfangreichen Tabellen
 - Für statistische Auswertung: Dataframe mit Werten
 
-## Anwendung: Kodierte Werte 2/4
+## Anwendung: Kodierte Werte 2/3
+
+[]{.down50}
 
 ```{r}
 d_ud <- read_excel("daten/beispiel-kodierung.xlsx", range="B2:D5")
-kable(d_ud)
 ```
 
-## Anwendung: Kodierte Werte 3/4
+```{r}
+#| echo: false
+d_ud
+```
 
+[]{.down50}
+
+::: {.columns}
+::: {.column}
 ```{r}
 d_ud_k1 <- read_excel("daten/beispiel-kodierung.xlsx", range="F2:G5")
-kable(d_ud_k1)
 ```
-
+```{r}
+#| echo: false
+d_ud_k1
+```
+:::
+::: {.column}
 ```{r}
 d_ud_k2 <- read_excel("daten/beispiel-kodierung.xlsx", range="I2:J5")
-kable(d_ud_k2)
 ```
+```{r}
+#| echo: false
+d_ud_k2
+```
+:::
+:::
 
-## Anwendung: Kodierte Werte 4/4
+## Anwendung: Kodierte Werte 3/3
 
 ```{r}
 #| message: false
 d_ud |>
   left_join(d_ud_k1) |>
   left_join(d_ud_k2) |>
-  select(-ends_with("_code")) |>
-  kable()
+  select(-ends_with("_code"))
 ```
 
 - Unfalldaten mit beiden Kodierungstabellen verknüpfen
-- Spalten mit den Codes löschen
+- Variable mit den Codes löschen
 
 # Dataframes aneinanderhängen `bind_rows()`/`bind_cols()`
 
@@ -663,46 +680,41 @@ d_ud |>
 
 ```{r}
 d1 <- tibble(X = c("A", "B"), Y = c(1, 2))
-d2 <- tibble(X = "C", Y = 3)
-d3 <- tibble(Z = c(1.7, 2.9))
+d2 <- tibble(Y = c(3, 1), Z = c(98, 99))
 ```
 
 ::::: columns
 ::: {.column}
 ```{r}
-kable(d1)
+d1
 ```
 :::
 ::: {.column}
 ```{r}
-kable(d2)
-```
-:::
-::: {.column}
-```{r}
-kable(d3)
+d2
 ```
 :::
 :::::
 
 ::::: columns
 ::: {.column}
-```{r}
-d1 |> bind_cols(d3) |> kable()
-```
-:::
+### Nebeneinander
 
-::: {.column}
 ```{r}
-d1 |> bind_rows(d2) |> kable()
+d1 |> bind_cols(d2)
 ```
+- Wichtig: Anzahl der Beobachtungen gleich
+- Doppelte Merkmale mit `...`
+:::
+::: {.column}
+### Untereinander
+
+```{r}
+d1 |> bind_rows(d2)
+```
+- Fehlende Merkmale mit `NA`
 :::
 :::::
-
--   Mit `bind_cols()` Dataframes nebeneinander *(column-bind)*
-    -   Anzahl der Beobachtungen müssen gleich sein!
--   Mit `bind_rows()` Dataframes hintereinander *(row-bind)*
-    -   Merkmale müssen gleich sein!
 
 # Verschiedenes
 
@@ -720,33 +732,48 @@ Niederschlagsdaten vom Deutschen Wetterdienst
 ```{r}
 d_ns <- read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
-  delim = ";", , trim_ws=TRUE,
-  locale = locale(decimal_mark = ".", grouping_mark = ",")
+  delim = ";", , trim_ws=TRUE, locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
 ```
 
-## Werte durch NAs ersetzen 3/4
-
 ```{r}
+#| echo: false
 d_ns
 ```
 
-- Wert -999 in fast allen Spalten
-- Damit kann man nicht arbeiten
+- Wert -999 in fast allen Variablen
 
-## Werte durch NAs ersetzen 4/4
+## Werte durch NAs ersetzen (eine Variable) 3/4
 
 ```{r}
-d_ns |> mutate(MO_NSH = na_if(MO_NSH, -999)) 
+d_ns |> 
+  mutate(
+    MO_NSH = na_if(MO_NSH, -999)
+  ) 
 ```
 
-- Mit `na_if(Y, x)` alle Werte `x` in Spalte `Y` durch `NA` ersetzen
+- Mit `na_if(Y, x)` alle Werte `x` in Variable `Y` durch `NA` ersetzen
+
+## Werte durch NAs ersetzen (mehrere Variablen) 4/4
+
+```{r}
+d_ns |> 
+  mutate(
+    across(c(MO_NSH, MO_RR, MO_SH_S, MX_RS), ~na_if(.x, -999))
+  )
+```
+
+- Mit `across` die Formel `~na_if(., -999)` auf mehrere Variablen anwenden
 
 ## Werte auftrennen 1/2
 
 ```{r}
 d_z <- tibble(X = c("10, A, 4.3", "11, X, 1.9", "2, R, 3.3"))
-kable(d_z)
+```
+
+```{r}
+#| echo: false
+d_z
 ```
 
 - Drei Werte in jeder Beobachtung
@@ -754,37 +781,50 @@ kable(d_z)
 ## Werte auftrennen 2/2
 
 ```{r}
-d_z |> separate(col=X, into=c("Wert", "Name", "Laenge"), sep=",") |> kable()
+d_z |> separate(X, c("Wert", "Name", "Laenge"))
 ```
 
-- Funktion `separate(...)` verteilt Werte auf Spalten
-- Spalte mit Ausgangswerten angeben mit `col`
-- Neue Spalten in Parameter `into` (Namen als Zeichenkette)
-- Mit `sep` angeben, welches Zeichen die Einträge trennt
+- Funktion `separate(...)` verteilt Werte auf Variablen
+- Erster Parameter: Variable mit Ausgangswerten
+- Zweiter Parameter: Vektor mit neuen Namen
 
-## Gruppiertes `mutate()` 1/2
+## Gruppiertes `mutate()` 1/3
 
 ```{r}
-d_energietraeger |> kable() |> scroll_box(height = "400px")
+d_et_long
 ```
 
-- Ziel: Neue Variable mit dem anteiligen Energieverbrauch
-  - 100 x Energieverbrauch / Gesamtverbrauch im Jahr
+- Gesucht: Neue Variable mit dem anteiligen Energieverbrauch
+- Wert ist 100 x Energieverbrauch / Gesamtverbrauch im Jahr
 
-## Gruppiertes `mutate()` 2/2
+## Gruppiertes `mutate()` 2/3
 
 ```{r}
-d_energietraeger |>
+d <- d_et_long |>
   group_by(Jahr) |>
-  mutate(Anteil = 100 * Verbrauch / sum(Verbrauch)) |>
-  kable() |> scroll_box(height = "300px")
+  mutate(Anteil = 100 * Verbrauch / sum(Verbrauch))
+```
+
+```{r}
+#| echo: false
+d <- d |> ungroup()
+d
 ```
 
 - Daten nach Jahren gruppieren
-- Dann berechnet `sum()` die Summe in einer Gruppe
-- Ergebnis auf jeden Fall kontrollieren
+- Mit `sum()` die Summe in einer Gruppe berechnen
 
-## Gruppiertes `filter()` 1/2
+## Gruppiertes `mutate()` 3/3
+
+```{r}
+d |>
+  filter(Jahr == 2000)
+```
+
+- Kontrolle: Die Anteile müssen sich zu 100% addieren
+- 38 + 14 + 11 + 21 + 13 + 1 + 2 = 100, passt also! 
+
+## Gruppiertes `slice()` 1/2
 
 ```{r}
 d_unistrasse
@@ -792,40 +832,55 @@ d_unistrasse
 
 - Gesucht ist das schnellste Fahrzeug aus jeder Gruppe
 
-## Gruppiertes `filter()` 2/2
+## Gruppiertes `slice()` 2/2
 
 ```{r}
 d_unistrasse |> select(-D15) |>
-  group_by(Fz) |>
-  filter(v == max(v)) |>
-  kable()
+  group_by(Fahrzeug) |>
+  slice_max(v, n = 1) |> ungroup()
 ```
 
 - Nach Fahrzeugtyp gruppieren
-- Mit `max(Geschwindigkeit)` die schnellste Messung pro Gruppe heraussuchen
-- Beobachtung mit der größten Geschwindigkeit herausfiltern
+- Mit `slice_max(v, n = 1)` schnellstes Fahrzeug heraussuchen
+- Alternativ mit `summarize()`
 
 ## Werte ersetzen mit `recode()` 1/2 {.smaller}
 
 ```{r}
-kable(d_et)
+d_et_wide
 ```
 
 - Bezeichnungen teilweise zu lang
 - Verweise auf Erläuterungen für statistische Auswertung nicht hilfreich
 
-## Werte ersetzen mit `recode()` 2/2 {.smaller}
+## Werte ersetzen mit `recode()` 2/3 {.smaller}
 
 ```{r}
-d_et |> mutate(
-    Energieträger = recode(
-      Energieträger, 
-      "Erdgas, Erdölgas" = "Gas",
-      "Wasser- und Windkraft 1) 3)" = "Wasser/Wind",
-      "andere Erneuerbare 2)" = "andere Erneuerbare"
+d_et_wide |>
+  mutate(
+    Energieträger = replace_values(
+      Energieträger,
+      "Erdgas, Erdölgas" ~ "Gas",
+      "Wasser- und Windkraft 1) 3)" ~ "Wasser/Wind",
+      "andere Erneuerbare 2)" ~ "andere Erneuerbare"
     )
-  ) |>
-  kable()
+  )
 ```
 
-- Spalte und Ersetzungen angeben
+- Ersetzen mit `"Alter Wert" ~ "Neuer Wert"`
+
+## Werte ersetzen mit `recode()` 3/3 {.smaller}
+
+```{r}
+alt <- c("Erdgas, Erdölgas", "Wasser- und Windkraft 1) 3)", "andere Erneuerbare 2)")
+neu <- c("Gas",              "Wasser/Wind",                 "andere Erneuerbare")
+
+d_et_wide |>
+  mutate(
+    Energieträger = replace_values(
+      Energieträger, from = alt, to = neu
+    )
+  )
+```
+
+- Alternative mit Vektoren
