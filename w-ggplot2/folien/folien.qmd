@@ -5,8 +5,22 @@ title: "Grundlagen von ggplot2"
 ```{r}
 #| include: false
 library(gt)
+library(knitr)
 library(tidyverse)
 load("daten/data-lecture.Rdata")
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Ein Beispiel
@@ -63,22 +77,21 @@ ggplot(data = <DATA>) +
 
 ## Dataframe `d_wb_2012`
 
-| Spalte                 | Deutsch                                  | Englisch (Originaltitel)                            |
-|------------------------|------------------------------------------|-----------------------------------------------------|
-| `year`                 | Jahr                                     | Year                                                |   
-| `country`              | Land                                     | Country                                             |
-| `pop`                  | Bevölkerung                              | Population, total                                   |
-| `gge`                  | Treibhausgasemissionen kt CO2 äquivalent | Total greenhouse gas emissions kt of CO2 equivalent |
-| `gdp`                  | Bruttoinlandsprodukt                     | GDP (current US\$)                                  |
-| `region`               | Region                                   | Region                                              |
-| `ig`                   | Einkommensgruppe                         | Income group                                        |
+| Spalte    | Deutsch                                  | Englisch (Originaltitel)                            |
+|-----------|------------------------------------------|-----------------------------------------------------|
+| `year`    | Jahr                                     | Year                                                |   
+| `country` | Land                                     | Country                                             |
+| `pop`     | Bevölkerung                              | Population, total                                   |
+| `gge`     | Treibhausgasemissionen kt CO2 äquivalent | Total greenhouse gas emissions kt of CO2 equivalent |
+| `gdp`     | Bruttoinlandsprodukt                     | GDP (current US\$)                                  |
+| `region`  | Region                                   | Region                                              |
+| `ig`      | Einkommensgruppe                         | Income group                                        |
 
 ##
 
 ```{r}
-#| echo: false
 load("daten/data-lecture.Rdata")
-gt(d_wb_2012) |> fmt_number(decimals = 0, use_seps = FALSE) |> opt_interactive()
+d_wb_2012
 ```
 
 # Funktionsweise von ggplot
@@ -86,23 +99,28 @@ gt(d_wb_2012) |> fmt_number(decimals = 0, use_seps = FALSE) |> opt_interactive()
 ## Wie funktioniert ggplot?
 
 ```{r}
+ggplot(data = d_wb_2012) +
+  geom_point(mapping = aes(x = gdp, y = gge, fill = region, size = pop), shape = 21) +
+  scale_x_log10() + scale_y_log10() +
+  labs(x = "Bruttoinlandsprodukt", y = "Treibhausgasemissionen", title = "2012")
+```
+
+## Wie funktioniert ggplot?
+
+```{r}
 #| eval: false
 ggplot(data = d_wb_2012) +
-  geom_point(
-    mapping = aes(x = gdp, y = gge, fill = region, size = pop),
-    shape = 21
-  ) +
-  scale_x_log10() +
-  scale_y_log10() +
+  geom_point(mapping = aes(x = gdp, y = gge, fill = region, size = pop), shape = 21) +
+  scale_x_log10() + scale_y_log10() +
   labs(x = "Bruttoinlandsprodukt", y = "Treibhausgasemissionen", title = "2012")
 ```
 
 - Plot setzt sich aus Elementen zusammen, die mit `+` verbunden werden
 - `ggplot(...)` erzeugt leere Zeichenfläche
   - Dabei wird angegeben, welche Daten geplottet werden sollen
-- `geom_point(...)` fügt Ebene (Layer) mit Punkten (geometrische Objekte) hinzu
+- `geom_point(...)` fügt Punkte (`geom`etrische Objekte) hinzu
   - Es gibt viele andere geometrische Objekte (Linien, Balken, Text, ...)
-  - Das Mapping verknüpft Daten mit visuellen Eigenschaften der Objekte
+  - Mapping verknüpft Daten mit visuellen Eigenschaften der Objekte
 - Es folgen Einstellungen für Achsen, Beschriftungen, etc.
 
 ## Daten und visuelle Eigenschaften
@@ -115,11 +133,11 @@ goem_point(mapping = aes(x = A, y = B, color = C, size = D))
 ```
 
 - Punkt hat visuelle Eigenschaften: x, y, Größe, Farbe
-- Mapping legt fest, welches Merkmal auf welche visuelle Eigenschaft abgebildet wird
+- Mapping ordnet Merkmal einer visuellen Eigenschaft zu
 
 → Visuelle Eigenschaften heißen in ggplot Aesthetics (AES)
 
-## Datensatz für Beispiel erstellen und anzeigen
+## Datensatz für Beispiel erstellen
 
 ```{r}
 d_bsp <- tibble(
@@ -128,11 +146,14 @@ d_bsp <- tibble(
   C = c('u', 'v', 'u'),
   D = c(5, 2, 4)
 )
-
-gt(d_bsp)
 ```
 
-## Datensatz für Beispiel Plotten
+```{r}
+#| echo: false
+d_bsp
+```
+
+## Datensatz für Beispiel plotten
 
 ```{r}
 ggplot(data = d_bsp) +
@@ -170,6 +191,5 @@ ggplot(data = d_wb_2012) +
 ```{r}
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop)) +
-  scale_x_log10() +
-  scale_y_log10()
+  scale_x_log10() + scale_y_log10()
 ```
