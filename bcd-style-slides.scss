@@ -129,9 +129,8 @@ $selection-bg: #26351c !default;
 }
 
 .reveal .slides h3 {
-  // color: $accent;
-  font-weight: lighter;
-  font-size: 1em;
+  color: $accent;
+  font-size: 1.2em;
 }
 
 .reveal .slides h4 {
@@ -195,13 +194,10 @@ $selection-bg: #26351c !default;
 }
 
 .reveal .slide-menu-button {
-  position: fixed;
-  top: 6px;
-  right: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  pointer-events: none;
+  top: auto;
+  bottom: 14px;
+  left: 14px;
+  right: auto;
 }
 
 .reveal .slide-menu-button > * {
