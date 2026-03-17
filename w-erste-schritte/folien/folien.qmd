@@ -5,7 +5,6 @@ title: "Erste Schritte in RStudio"
 
 ```{r}
 #| include: false
-#| message: false
 library(sf)
 library(giscoR)
 library(patchwork)
@@ -13,9 +12,7 @@ library(tidyverse)
 source("skripte/read-data-erste-schritte.R")
 ```
 
-
 # Beispiele zum Einstieg
-
 
 ## Beispiel 1: Mittlerer jährlicher Niederschlag an verschiedenen Stationen in Deutschland
 
@@ -60,8 +57,7 @@ p2 <- ggplot(data = d_ns_jahr) +
 p1 + p2
 ```
 
-
-## Beispiel 2: Monatlicher Niederschlag im Jahresverlauf (alle Stationen)
+## Beispiel 2: Monatlicher Niederschlag im Jahresverlauf
 
 ```{r}
 #| echo: false
@@ -77,7 +73,7 @@ ggplot(data = d_ns_monat) +
   labs(title = "Monatliche Niederschläge (alle Stationen)")
 ```
 
-## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf je Station
+## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf
 
 ```{r}
 #| echo: false
@@ -90,13 +86,13 @@ ggplot(data = d_ns_monat) +
 
 ## Von den Daten zu den Folien
 
-Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wetterdienst
+[Tageswerte der Niederschläge](daten/produkt_nieder_tag_18900101_20231231_04625.txt) an den verschiedenen Stationen vom Deutschen Wetterdienst
 
 []{.down20}
 
 ### Wie entstehen daraus die Folien? 
 
-1. Daten aus CVS-Datei einlesen
+1. Daten aus Datei einlesen
 1. Jahres- und Monatswerte ermitteln
 1. Grafiken erstellen
 1. Daraus zusammen mit Text das HTML-Dokument erzeugen
@@ -105,7 +101,6 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 
 1. Wir schreiben Text und R-Anweisungen in Quarto-Markdown-Datei
 1. [Quarto](https://quarto.org) erstellt daraus das HTML-Dokument
-
 
 ## Was wir uns hierzu anschauen werden
 
@@ -116,7 +111,6 @@ Tageswerte der Niederschläge an den verschiedenen Stationen vom Deutschen Wette
 1. Daten einlesen und aufbereiten
 1. Basics der Programmiersprache R
 1. Arbeiten mit der Programmierumgebung RStudio
-
 
 # Was ist R und was ist RStudio?
 
