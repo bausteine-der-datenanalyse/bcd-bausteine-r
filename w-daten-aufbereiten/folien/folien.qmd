@@ -20,7 +20,6 @@ show_dataframe <- function(d, options, ...) {
     ) |>
     knitr::knit_print(options, ...)
 }
-
 registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
