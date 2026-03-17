@@ -4,9 +4,21 @@ title: "Daten einlesen"
 
 ```{r}
 #| include: false
-library(tidyverse)
-library(kableExtra) # XXX
 library(gt)
+library(knitr)
+library(tidyverse)
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Tidyverse
@@ -38,12 +50,12 @@ library(readxl)
 ### Tabelle einlesen
 
 ```{.r}
-d <- read_excel(Dateiname, Parameter...)
+d <- read_excel(Dateiname, Argumente...)
 ```
 
-### Die wichtigsten Parameter
+### Die wichtigsten Argumente
 
-Parameter       | Bedeutung                                   | Optional
+Argument        | Bedeutung                                   | Optional
 ----------------|---------------------------------------------|---------
 skip = 5        | Anzahl zeilen, die überlesen werden sollten | Ja
 range = "B2:G5" | Einzulesender Bereich (ersetzt `skip`)      | Ja
@@ -51,17 +63,22 @@ sheet = "Name"  | Tabellenblatt, das gelesen werden soll      | Ja
 
 ## Beispiel 1: Einfache Tabelle
 
+[]{.down50}
+
 ::: {.columns}
-::: {.column width="45%"}
+::: {.column width="42%"}
 []{.up10}
 ![](bilder/tabelle.png)
 :::
-::: {.column width="55%"}
+::: {.column width="58%"}
+[]{.up20}
 ```{r}
 read_excel("daten/tabelle.xlsx")
 ```
 :::
 :::
+
+[]{.down50}
 
 - `read_excel(...)` liest [Excel-Datei](daten/tabelle.xlsx) und gibt Dataframe zurück
 - Im einfachsten Fall nur Datei angeben, Inhalt von erstem Tabellenblatt
@@ -69,7 +86,11 @@ read_excel("daten/tabelle.xlsx")
 
 ## Leider nicht immer so einfach
 
+[]{.down50}
+
 ![](bilder/excel-screenshot.svg)
+
+[]{.down50}
 
 Wo liegt das Problem?
 
@@ -119,6 +140,8 @@ Datei [beispiel-1.csv](daten/beispiel-1.csv){download=""}
 ```
 :::
 ::: {.column width="55%"}
+[]{.up10}
+
 - Einträge durch "`,`" getrennt
 - Dezimaltrenner ist "`.`"
 - Datum mit Jahr/Monat/Tag
@@ -156,6 +179,8 @@ Datei [beispiel-2.csv](daten/beispiel-2.csv){download=""}
 ```
 :::
 ::: {.column width="55%"}
+[]{.up10}
+
 - Einträge durch "`;`" getrennt
 - Dezimaltrenner "`,`", Tausender "`.`" 
 - Datum mit Tag/Monat/Jahr
@@ -193,6 +218,8 @@ Datei [beispiel-3.csv](daten/beispiel-3.csv){download=""}
 ```
 :::
 ::: {.column width="55%"}
+[]{.up10}
+
 - Einträge durch "`;`" getrennt
 - Dezimaltrenner "`.`", Tausender "`,`" 
 - Datum mit Tag/Monat/Jahr
@@ -233,6 +260,8 @@ Datei [beispiel-4.csv](daten/beispiel-4.csv){download=""}
 ```
 :::
 ::: {.column width="55%"}
+[]{.up10}
+
 - Datei ISO-8859-1 [kodiert](https://de.wikipedia.org/wiki/Zeichenkodierung)
 - Grundeinstellung in R ist UTF-8
 - Sonst deutsche Konvention
@@ -272,22 +301,28 @@ read_delim(
 
 ## CSV-Dateien Zusammenfassung
 
+[]{.down40}
+
 ### Funktionen
 
 ```{r}
 #| eval: false
-read_csv(Dateiname, Parameter...)   # Amerikanische Konvention
-read_csv2(Dateiname, Parameter...)  # Deutsche Konvention
-read_delim(Dateiname, locale=locale(decimal_mark=".", grouping_mark=","), Parameter...)
+read_csv(Dateiname, Argumente...)   # Amerikanische Konvention
+read_csv2(Dateiname, Argumente...)  # Deutsche Konvention
+read_delim(Dateiname, locale=locale(decimal_mark=".", grouping_mark=","), Argumente...)
 ```
 
-### Die wichtigsten Parameter
+[]{.down80}
 
-Parameter              | Bedeutung                                   | Optional
------------------------|---------------------------------------------|---------
-skip = 5               | Anzahl zeilen, die überlesen werden sollten | Ja
-trim_ws = TRUE         | Leerzeichen entfernen (für `read_delim`)    | Ja
-show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
+### Die wichtigsten Argumente
+
+Argument                 | Bedeutung                                   | Optional
+-------------------------|---------------------------------------------|---------
+`skip = 5`               | Anzahl Zeilen, die überlesen werden sollten | Ja
+`trim_ws = TRUE`         | Leerzeichen entfernen (für `read_delim`)    | Ja
+`show_col_types = FALSE` | Ausgabe unterdrücken                        | Ja
+
+: {tbl-colwidths="[35, 55, 10]"}
 
 # Rohdaten
 
@@ -312,13 +347,13 @@ show_col_types = FALSE | Ausgabe unterdrücken                        | Ja
 :::
 :::
 
-$\rightarrow$ Relevant für Benotung!
+→ Relevant für Benotung!
 
 ## Beim Einlesen von Daten gilt immer
 
+[]{.down120}
+
 - In der Regel funktioniert es nicht auf Anhieb
-
 - Eingelesene Daten sehr sorgfältig anschauen!
-
 - Überblick verschaffen mit `summary(d)` und/oder `str(d)`
 

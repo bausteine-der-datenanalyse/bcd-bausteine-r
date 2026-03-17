@@ -28,32 +28,41 @@ $selection-bg: #26351c !default;
 
 .reveal .framed {
     border: 1px solid black;
-    // border-radius: 4px;
-    // padding: 5px;
 }
 
 .reveal .raw {
     border: 1px solid black;
-    // border-radius: 4px;
-    // padding: 5px;
 }
 
 
 // Things in columns
 
-.reveal div.columns div.sourceCode {
-  margin-top: 0px !important;
-}
+// .reveal div.columns div.sourceCode {
+//   margin-top: 0px !important;
+// }
 
-.reveal div.columns ul li {
+.reveal div.columns :is(ul, ol) ul li {
   margin-top: 0em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.0em;
 }
 
 .reveal div.columns p {
   margin-top: 0em;
   margin-bottom: 0em;
 }
+
+// Tighter
+
+.reveal .slide :is(ul, ol) {
+  margin-top: 0em !important;
+  margin-bottom: 0em !important;
+}
+
+.reveal .slide :is(ul, ol) li {
+  margin-top: 0.2em !important;
+  margin-bottom: 0.2em !important;
+}
+
 
 // Original ???
 
