@@ -4,10 +4,22 @@ title: Das Paket rdwd verwenden
 
 ```{r}
 #| include: false
+library(gt)
 library(rdwd)
+library(knitr)
 library(tidyverse)
-library(data.table)
-library(kableExtra)
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 
@@ -39,7 +51,7 @@ ggplot(data = d) + geom_col(mapping = aes(x = datum, y = RSK.Niederschlagshoehe)
 
 ```{r}
 data("geoIndex")
-geoIndex |> kable() |> scroll_box(height = "400px")
+geoIndex |> select(-display)
 ```
 
 
@@ -47,34 +59,32 @@ geoIndex |> kable() |> scroll_box(height = "400px")
 
 ```{r}
 data("metaIndex")
-metaIndex |> slice_head(n = 8) |> kable() 
+metaIndex
 ```
 
 
-## Stationen raussuchen
+## Stationen mit `findID`
 
 ```{r}
 ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
 metaIndex |>
   filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
-  select(Stationsname, von_datum, bis_datum) |> 
-  kable() |> 
-  scroll_box(height = "300px")
+  select(Stationsname, von_datum, bis_datum)
 ```
 
 []{.down40}
 
-- Wir stellen fest, dass zwar alle Berliner Stationen ausgewählt wurden, aber auch zwei Stationen in Süddeutschland, deren Namen die Buchstabenfolge "berlin" enthalten (die letzten beiden)
-- Um diesem Fehler vorzubeugen ergänzen wir einen Filter, der sicherstellt, dass der Name der Station mit "Berlin-" beginnt (filter(grpl()))
+- Zwei Stationen in Süddeutschland ausgewählt
 
-## Korrigierte Stationen raussuchen
+## Stationen filtern
 
 ```{r}
-ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
 metaIndex |>
-  filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
-  select(Stationsname, von_datum, bis_datum) |> 
-  filter(grepl("^Berlin-", Stationsname))  |>
-  kable() |> 
-  scroll_box(height = "400px")
+  filter(str_starts(Stationsname, "Berlin"), res == 'daily', var == 'kl', per == 'historical') |>
+  select(Stationsname, von_datum, bis_datum)
 ```
+
+[]{.down40}
+
+- Nur Berliner Stationen ausgewählt
+
