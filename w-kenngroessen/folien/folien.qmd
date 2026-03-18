@@ -4,21 +4,23 @@ title: "Kenngrößen und Beschreibung von Verteilungen in R"
 
 ```{r}
 #| include: false
-#| message: false
-library(tidyverse)
-library(kableExtra)
+library(gt)
 library(ineq)
-
-# TODO: source("_common.R")
-outline_color <- "black"
-update_geom_defaults("bar", list(color = outline_color))
-update_geom_defaults("point", list(color = outline_color))
-update_geom_defaults("boxplot", list(color = outline_color))
-update_geom_defaults("dotplot", list(color = outline_color))
-update_geom_defaults("ribbon", list(color = outline_color))
-theme_set(theme_gray(base_size = 14))
-
+library(knitr)
+library(tidyverse)
 load("daten/kenngroessen.Rdata")
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 
@@ -40,9 +42,9 @@ Quellen: <https://www.dwd.de> und <https://www.gso.gov.vn>
 # Kenngrößen von Verteilungen berechnen
 
 
-## Berechnung von Kenngrößen {.smaller}
+## Berechnung von Kenngrößen
 
-[]{.down40}
+[]{.down30}
 
 ### Lagemaße
 
@@ -51,9 +53,9 @@ Quellen: <https://www.dwd.de> und <https://www.gso.gov.vn>
 | `mean(x)`   | Arithmetisches Mittel |
 | `median(x)` | Median                |
 
-Keine eingebauten Funktionen für Modus und geometrisches/harmonisches Mittel (selber definieren)
+Keine Funktionen für Modus und geometrisches/harmonisches Mittel
 
-[]{.down40}
+[]{.down30}
 
 ### Streumaße
 
@@ -63,15 +65,15 @@ Keine eingebauten Funktionen für Modus und geometrisches/harmonisches Mittel (s
 | `var(x)`          | Empirische Varianz $\tilde{s}^2$          |
 | `sd(x)`           | Empirische Standardabweichung $\tilde{s}$ |
 
-Variationskoeffizient $v$ aus `sd(x)/mean(x)` berechnen, keine eingebaute Funktion für AD-Streuung
+Keine Funktion für AD-Streuung
 
-
-## Spalten von Dataframes mit `$` {.smaller}
+## Spalten von Dataframes mit `$`
 
 ### Dataframe
 
-::::: columns
-::: {.column width="50%"}
+::: columns
+::: {.column}
+[]{.up10}
 ```{r}
 d <- tibble(
   A = c(1, 2, 3, 4, 5, 6), 
@@ -80,36 +82,37 @@ d <- tibble(
 ```
 :::
 
-::: {.column width="50%"}
+::: {.column}
 ```{r}
-kable(d)
+#| echo: false
+d
 ```
 :::
-:::::
+:::
 
 ### Spalten der beiden Merkmale
 
-::::: columns
-::: {.column width="50%"}
+::: columns
+::: {.column}
 ```{r}
 d$A
 ```
 :::
 
-::: {.column width="50%"}
+::: {.column}
 ```{r}
 d$B
 ```
 :::
-:::::
+:::
 
 $\rightarrow$ Merkmal `X` von Dataframe `d` als Array mit `d$X`
 
 
 ## Kenngrößen für Merkmale {.smaller}
 
-::::: columns
-::: {.column width="50%"}
+::: columns
+::: {.column}
 ### Merkmal A
 
 #### Lagemaße
@@ -128,7 +131,7 @@ sd(d$A)
 ```
 :::
 
-::: {.column width="50%"}
+::: {.column}
 ### Merkmal B
 
 #### Lagemaße
@@ -146,11 +149,9 @@ var(d$B)
 sd(d$B)
 ```
 :::
-:::::
+:::
 
-
-# Mit *echten* Daten...
-
+## Mit *echten* Daten...
 
 ## Niederschlag in Bochum {.smaller}
 
@@ -162,8 +163,8 @@ max(d_ns_m$Jahr) - min(d_ns_m$Jahr)
 
 ### Mittelwert, Median und Standardabweichung
 
-::::: columns
-::: {.column width="50%"}
+::: columns
+::: {.column}
 #### Im Jahr 2008
 
 ```{r}
@@ -172,23 +173,19 @@ median(d_ns_m_2008$Niederschlag)
 sd(d_ns_m_2008$Niederschlag)
 ```
 :::
-
-::: {.column width="50%"}
+::: {.column}
 #### Im Jahr 2010
-
 ```{r}
 mean(d_ns_m_2010$Niederschlag)
 median(d_ns_m_2010$Niederschlag)
 sd(d_ns_m_2010$Niederschlag)
 ```
 :::
-:::::
+:::
 
 (Zahlenwerte aus dem Skript)
 
-
-# Bestimmte Werte darstellen mit `geom_vline()` und `geom_hline()`
-
+## Bestimmte Werte darstellen mit `geom_vline()` und `geom_hline()`
 
 ## Minimalbeispiel (mit Dataframe)
 
@@ -200,7 +197,6 @@ ggplot(data = d) +
 
 - Schnittpunkte mit Achsen via `xintercept` bzw. `yintercept`
 
-
 ## Minimalbeispiel (mit Zahlenwerten)
 
 ```{r}
@@ -211,9 +207,7 @@ ggplot() +
 - Werte können auch direkt angegeben werden (anstatt aus Dataframe)
 - Dann kein Mapping erforderlich
 
-
-# Mit *echten* Daten...
-
+## Mit *echten* Daten...
 
 ## Histogramm mit Mittelwert
 
@@ -226,7 +220,6 @@ ggplot(data = d_ns_m) +
 - Ohne `c(...)` wenn nur ein Wert dargestellt werden soll
 - Linienfarbe mit `color`
 
-
 ## Mit emp. Verteilungsfunktion
 
 ```{r}
@@ -235,39 +228,37 @@ ggplot(data = d_ns_m) +
   geom_hline(yintercept = c(0.2, 0.5, 0.9), color = 'blue')
 ```
 
-
 ## Monatsniederschläge mit Mittelwert
 
-```{r, out.width="80%", fig.height=2.25}
-ggplot(data=d_ns_m_0810) + 
+```{r}
+#| fig-asp: 0.4
+ggplot(data = d_ns_m_0810, mapping = aes(x = Monat, y = Niederschlag, group = Jahr, color = Jahr)) +
   geom_hline(yintercept = mean(d_ns_m_0810$Niederschlag)) +
-  geom_line(mapping=aes(x=Monat,y=Niederschlag,group=Jahr,color=Jahr)) + 
-  geom_point(mapping=aes(x=Monat, y=Niederschlag, color=Jahr))
+  geom_line() + geom_point()
 ```
 
 - 3 Layer übereinander, Reihenfolge beachten
 - Linien mit `geom_line()` (später im Detail)
 
-
 ## Abweichungen vom Mittelwert
 
-```{r, out.width="80%", fig.height=2.25}
+```{r}
+#| fig-asp: 0.4
 nmw <- mean(d_ns_m_0810$Niederschlag)
-ggplot(data=d_ns_m_0810) + 
+ggplot(data = d_ns_m_0810) +
   geom_col(mapping = aes(x = Monat, y = Niederschlag - nmw, fill = Jahr))
 ```
 
+- Mittelwert abziehen
 - Säulen nebeneinander mit `position = "dodge`
 
-
 # Quantile berechnen mit `quantile()`
-
 
 ## Funktion `quantile()`
 
 ```{r}
-d <- tibble(X = c(1,2,2,4,4,6,6,6,9,10,10,12,13,13,13,16,17,18,19,20))
-quantile(d$X, probs = c(0.2, 0.25, 0.5, 0.9), type=2)
+d <- tibble(X = c(1, 2, 2, 4, 4, 6, 6, 6, 9, 10, 10, 12, 13, 13, 13, 16, 17, 18, 19, 20))
+quantile(d$X, probs = c(0.2, 0.25, 0.5, 0.9), type = 2)
 ```
 
 []{.down40}
@@ -283,34 +274,30 @@ quantile(d$X, probs = c(0.2, 0.25, 0.5, 0.9), type=2)
 
 ```{r}
 p <- c(0.2, 0.25, 0.5, 0.9)
-q <- quantile(d$X, p, type=2)
+q <- quantile(d$X, p, type = 2)
 ggplot(data = d) +
-  geom_hline(yintercept = p,color = 'blue') + geom_vline(xintercept = q, color = 'red') +
-  geom_step(mapping = aes(x = X), stat = "ecdf") 
+  geom_hline(yintercept = p, color = 'blue') + geom_vline(xintercept = q, color = 'red') +
+  geom_step(mapping = aes(x = X), stat = "ecdf")
 ```
 
 - Werte und Quantile in Variablen `p` und `q`
 
+# Boxplots mit `geom_boxplot()`
 
-# 4 Boxplots mit `geom_boxplot()`
+## Monatliche Niederschläge Bochum (alle Jahre)
 
-
-## Niederschlag Bochum
-
-
-## Monatliche Niederschläge (alle Jahre)
-
-```{r, fig.height = 3}
+```{r}
+#| fig-asp: 0.3
 ggplot(data = d_ns_m) +
   geom_boxplot(mapping = aes(y = Niederschlag))
 ```
 
 - Merkmal für y-Koordinate
 
+## Monatliche Niederschläge Bochum (2008 und 2010)
 
-## Monatliche Niederschläge (Jahre 2008 und 2010)
-
-```{r, fig.height = 3}
+```{r}
+#| fig-asp: 0.3
 ggplot(data = d_ns_m_0810) +
   geom_boxplot(mapping = aes(x = Jahr, y = Niederschlag))
 ```
@@ -318,10 +305,10 @@ ggplot(data = d_ns_m_0810) +
 - Mehrere Boxplots mit Angabe von Merkmal für x-Koordinate
 - Funktioniert nur für diskretes Merkmal (Details später)
 
-
 ## Monatliche Niederschläge (alle Jahre einzeln) 1/2
 
-```{r, fig.height = 3}
+```{r}
+#| fig-asp: 0.3
 ggplot(data = d_ns_m) +
   geom_boxplot(mapping = aes(x = Jahr, y = Niederschlag))
 ```
@@ -332,21 +319,19 @@ ggplot(data = d_ns_m) +
 - Für ggplot ist das dann ein kontinuierliches Merkmal
 - Angabe von `x` wird ignoriert, nur eine Box!
 
-
 ## Monatliche Niederschläge (alle Jahre einzeln) 2/2
 
-```{r, fig.height = 3}
+```{r}
+#| fig-asp: 0.3
 ggplot(data = d_ns_m) +
   geom_boxplot(mapping = aes(x = factor(Jahr), y = Niederschlag))
 ```
 
 - Mit `factor(Jahr)` kennzeichnen, dass `Jahr` diskretes Merkmal
 
-
-# Lorenzkurve
+# Lorenzkurve und Gini-Koeffizient
 
 Aus dem Paket `ineq` (installieren)
-
 
 ## Beispiel aus dem Skript
 
@@ -372,36 +357,31 @@ lc_B$L
 
 ## Als Dataframe (Details später)
 
-Funktion um Ergebnis von `Lc` in Dataframe zu konvertieren
+Eigene Funktion um Ergebnis von `Lc` in Dataframe zu konvertieren
 
 ```{r}
-lc_to_tibble <- function(lc) {
-  tibble(u = lc$p, v = lc$L)
-}
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
 
 Beispiel
 
 ```{r}
-kable(lc_to_tibble(lc_B))
+lc_to_tibble(lc_B)
 ```
 
 - Eigene Funktion um Dataframe aus Ergebnis von `Lc` zu erzeugen
 - Details hierzu später
 
-
-# Bänder mit `geom_ribbon()`
-
+## Bänder mit `geom_ribbon()`
 
 ## Minimalbeispiel 1/2
 
 ```{r}
-d <- tibble(A = c(1, 2, 3, 4), B = c(0, 0, 1, 2), C = c(3, 5, 6, 6))
+d <- tibble(A = c(1, 2, 3, 4), B = c(1, 0, 1, 3), C = c(3, 5, 6, 5))
 ggplot(data = d) + geom_ribbon(mapping = aes(x = A, ymin = B, ymax = C))
 ```
 
-- Plottet Bereich zwischen Wertepaaren
-
+- Plottet Bereich zwischen Wertepaaren `ymin` und `ymax`
 
 ## Minimalbeispiel 2/2
 
@@ -411,19 +391,18 @@ ggplot(data = d) +
 ```
 
 - Es kann auch ein fester Wert angegeben werden
-- Anmerkung: Das geht auch mit anderen Geoms
 
-## Lorenzkurve Merkmal A (Skript S.45)
+## Lorenzkurve Merkmal A (Skript)
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_A)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'light blue') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
 - Farben mit `color` und `fill`
 
-## Lorenzkurve Merkmal B (Skript S.45)
+## Lorenzkurve Merkmal B (Skript)
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_B)) +
@@ -433,7 +412,7 @@ ggplot(data = lc_to_tibble(lc_B)) +
 
 - Farben mit `color` und `fill`
 
-## Lorenzkurve Merkmal C (Skript S.45)
+## Lorenzkurve Merkmal C (Skript)
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_C)) +
@@ -443,13 +422,13 @@ ggplot(data = lc_to_tibble(lc_C)) +
 
 - Farben mit `color` und `fill`
 
-# Mit *echten* Daten...
+## Mit *echten* Daten...
 
 ## Niederschläge Bochum (2008)
 
 ```{r}
-lc_bochum <- Lc(d_ns_m_2008$Niederschlag)
-ggplot(data = lc_to_tibble(lc_bochum)) +
+d <- Lc(d_ns_m_2008$Niederschlag)
+ggplot(data = lc_to_tibble(d)) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -457,13 +436,13 @@ ggplot(data = lc_to_tibble(lc_bochum)) +
 ## Niederschläge Nha Trang (2015)
 
 ```{r}
-lc_nha_trang <- Lc(d_ns_m_nha_trang_2015$Niederschlag)
-ggplot(data = lc_to_tibble(lc_nha_trang)) +
+d <- Lc(d_ns_m_nha_trang_2015$Niederschlag)
+ggplot(data = lc_to_tibble(d)) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
-# Gini-Koeffizient
+## Gini-Koeffizient
 
 ## Wieder aus dem Paket `ineq` (jetzt installiert)
 
@@ -473,12 +452,12 @@ ggplot(data = lc_to_tibble(lc_nha_trang)) +
 Gini(c(0, 0, 0, 0, 1))
 Gini(c(1, 1, 1, 2, 3))
 Gini(c(1, 1, 1, 1, 1))
-Gini(c(1, 1, 1, 1, 1))
+Gini(c(10, 10, 10, 10, 10))
 ```
 
 - Berechnung des Gini-Koeffizienten mit `Gini(<Werte>)`
 - Der Wert wird **nicht** normiert
-- Normierung auf $G^*$ falls notwendig mit Faktor `n/(n-1)`
+- Normierung auf $G^*$ falls notwendig mit Faktor $n / (n - 1)$
 
 ## Niederschläge
 
@@ -494,8 +473,8 @@ Gini(d_ns_m_nha_trang_2015$Niederschlag)
 ### Lorenz-Münzer-Koeffizienten Bochum und Nha Trang
 
 ```{r}
-12/11*Gini(d_ns_m_2008$Niederschlag)
-12/11*Gini(d_ns_m_nha_trang_2015$Niederschlag)
+12 / 11 * Gini(d_ns_m_2008$Niederschlag)
+12 / 11 * Gini(d_ns_m_nha_trang_2015$Niederschlag)
 ```
 
 # Zusammenfassung
@@ -504,7 +483,8 @@ Gini(d_ns_m_nha_trang_2015$Niederschlag)
 
 ### Werte aus Dataframe
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 ggplot(data = d) + 
   geom_hline(mapping = aes(yintercept = <M>), Argumente) +
   geom_vline(mapping = aes(xintercept = <M>), Argumente)
@@ -512,7 +492,8 @@ ggplot(data = d) +
 
 ### Werte direkt angegeben
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 ggplot() + 
   geom_hline(yintercept = c(...), Argumente) +
   geom_vline(xintercept = c(...), Argumente)
@@ -529,7 +510,8 @@ ggplot() +
 
 ## Boxplots mit `geom_boxplot()`
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 ggplot(data = d) +
   geom_boxplot(mapping = aes(x = <M>, y = <M>), Argumente)
 ```
@@ -543,7 +525,7 @@ ggplot(data = d) +
 
 : {tbl-colwidths="[20,50,30]"}
 
-[]{.down40}
+[]{.down90}
 
 | Argumente | Beschreibung                                           |
 |-----------|--------------------------------------------------------|
@@ -553,10 +535,13 @@ ggplot(data = d) +
 
 ## Bänder mit `geom_ribbon()`
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 ggplot(data = d) +
   geom_ribbon(mapping = aes(x = <M>, ymin = <M>, ymax = <M>), Argumente)
 ```
+
+[]{.down40}
 
 | AES  | Beschreibung         | Optional |
 |------|----------------------|----------|
