@@ -5,8 +5,22 @@ subtitle: "Kurz und (fast) schmerzlos"
 
 ```{r}
 #| include: false
+library(gt)
+library(hms)
+library(knitr)
 library(tidyverse)
-library(kableExtra)
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Operatoren und grundlegende Funktionen
@@ -28,63 +42,42 @@ library(kableExtra)
 
 ## Beispiel
 
-::: {.columns}
-::: {.column width=50%}
 ```{r}
 1e5 / 33
 pi %% 3
 1 / 3 + 1 / 2
 6^8
 ```
-:::
-::: {.column width=50%}
+
 - Werte werden ohne spezielle print-Anweisung ausgegeben
 - Standardmäßig werden Fließkommaoperationen durchgeführt
 - Lassen Sie Platz um die Operatoren (außer um \^)
-:::
-:::
 
 ## Variablen 1/2
 
-::: {.columns}
-::: {.column width=50%}
 ```{r}
 x <- 32
 y <- 7 / 8
 x * y
 ```
-:::
-::: {.column width=50%}
+
 - Daten und Berechnungsergebnisse werden in Variablen gespeichert
 - Der Zuweisungsoperator in R ist `<-` (Tastenkombination alt + -)
 - Variablen im *Environment* gelistet (RStudio oben rechts)
 - Namen von Variablen müssen mit einem Buchstaben beginnen
-:::
-:::
-
-
-
 
 ## Variablen 2/2
 
-
-::: {.columns}
-::: {.column width=50%}
 ```{r}
 X <- pi
 x <- 2
 a.b <- 100
 x * X * a.b
 ```
-:::
-::: {.column width=50%}
+
 - `pi` ist eine vorbelegte Variable mit Näherung für $\pi$
 - Groß- und Kleinschreibung wird berücksichtigt
 - Der Punkt ist ein ganz normaler Buchstabe und kein Operator
-:::
-:::
-
-
 
 ## Weitere Zuweisungsoperatoren
 
@@ -111,38 +104,34 @@ x
 
 ## Primitive Datentypen
 
-[]{.down40}
+[]{.down20}
 
-| Datentyp  | Literale             |
-|-----------|----------------------|
-| logical   | `TRUE`, `FALSE`      |
-| integer   | `5L`, `125L`         |
-| double    | `1`, `1.75`, `1e10`  |
-| character | `"Hello World!"`     |
+| Datentyp  | Literale             | Art           |
+|-----------|----------------------|---------------|
+| logical   | `TRUE`, `FALSE`      | Wahrheitswert |
+| integer   | `5L`, `125L`         | Ganze Zahl    |
+| double    | `1`, `1.75`, `1e10`  | 'Reelle' Zahl |
+| character | `"Hello World!"`     | Zeichenkette  |
 
-: {tbl-colwidths="[40,60]"}
+: {tbl-colwidths="[30, 35, 35]"}
 
 []{.down40}
 
 - Datentypen werden nicht explizit angegeben (anders als in Java)
 - Voreinstellung für Zahlen ist `double`
-- Anderen Programmiersprachen: String statt Character
-- logical = Wahrheitswerte
-- integer = ganzzahlig
-- character = Zeichenkette
 
-## Spezielle Konstanten
+## Vordefinierte Konstanten
 
-[]{.down80}
+[]{.down20}
 
 | Konstante        | Bedeutung                                           |
 |------------------|-----------------------------------------------------|
 | `Inf` und `-Inf` | Unendlich und minus Unendlich                       |
-| `NaN`            | Rechenoperation ergibt keine Zahl, z.B. $\sqrt{-1}$ |
+| `NaN`            | Rechenoperation ergibt keine reelle Zahl, z.B. $\sqrt{-1}$ |
 | `NULL`           | Ein leeres Objekt                                   |
 | `NA`             | Unbekannter Datenwert (Not Available)               |
 
-: {tbl-colwidths="[40,60]"}
+: {tbl-colwidths="[30, 70]"}
 
 ## Mathematische Funktion
 
@@ -155,7 +144,7 @@ x
 | `log(x)`, `exp(x)`                | Natürlicher Logarithmus und Exponentialfunktion |
 | `log2(x)`, `log10(x)`             | Logarithmus mit anderen Basen                   |
 
-: {tbl-colwidths="[40,60]"}
+: {tbl-colwidths="[30,70]"}
 
 Beispiele
 
@@ -166,7 +155,7 @@ log2(4096)
 
 ## Funktionen zur Typumwandlung
 
-[]{.down100}
+[]{.down20}
 
 | Funktion          | Bedeutung                        |
 |-------------------|----------------------------------|
@@ -174,9 +163,11 @@ log2(4096)
 | `as.character(x)` | Konvertiert in eine Zeichenkette |
 | `as.logical(x)`   | In Wahrheitswert konvertieren    |
 
-: {tbl-colwidths="[40,60]"}
+: {tbl-colwidths="[30,70]"}
 
-- as.logical: alle Zahlenwerte = 0 sind FALSE, alle Zahlenwerte ungleich 0 sind TRUE
+- Funktion `as.logical`
+  - Zahlenwert 0 entspricht `FALSE`, 
+  - Andere Zahlenwerte entsprechen `TRUE`
 
 ## Beispiele
 
@@ -188,6 +179,7 @@ as.logical(0.1)
 ```
 
 ## Vergleichsoperatoren und Verknüpfungen
+
 []{.down40}
 
 |    Operator        |           Bedeutung           |
@@ -210,45 +202,44 @@ as.logical(0.1)
 
 : {tbl-colwidths="[40,60]"}
 
-## Beispiele {.smaller}
+## Beispiele
 
 ::: {.columns}
-::: {.column width=50%}
+::: {.column}
 ```{r}
 NA == 10
+NA == NA
 is.na(NA)
 is.na(10)
-pi >= 3.14
-pi != 1
-as.character(3 * 9 + 1) == 28
+2 * 10 == 20
 ```
 :::
-::: {.column width=50%}
+::: {.column}
 ```{r}
+pi < 3.14
+as.character(3 * 9 + 1) == 28
 TRUE | FALSE
 TRUE & FALSE
-!FALSE
+!(TRUE & FALSE)
 ```
 :::
 :::
 
 ## Rechengenauigkeit
 
-Achtung
-
 ```{r}
 sqrt(2) ^ 2 == 2
 1 / 49 * 49 == 1
 ```
 
-$\rightarrow$ Rundungsfehler, Computer rechnet mit (grob gesagt) 15 Nachkommastellen 
-
-Überprüfung in R
+→ Rundungsfehler, Zahlen mit rund 15 Nachkommastellen
 
 ```{r}
 near(sqrt(2)^2, 2)
-near(1/49*49, 1)
+near(1 / 49 * 49, 1)
 ```
+
+→ Vergleichen mit `near()`
 
 ## Weitere nützliche Funktionen 1/2
 
@@ -271,7 +262,7 @@ paste(1, 2, 3, 4, 5, 6)
 paste(1, 2, 3, 4, 5, 6, sep = ", ")
 paste0(1, 2, 3, 4, 5, 6)
 signif(9283649, 4)
-paste0("pi=", round(pi, digits = 4))
+paste0("pi = ", round(pi, digits = 4))
 ```
 
 ## Optionale Parameter von Funktionen
@@ -315,7 +306,7 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
   - Oft werden verwandte Funktionen gemeinsam erklärt
   - Das fällt Ihnen mit der Zeit leichter
 
-## Richtig googeln und richtige Verwendung von KI
+## Suchen im Internet
 
 ![](bilder/google.svg)
 
@@ -324,7 +315,6 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
 - Erst denken, dann googeln, dann nochmal denken
 - Nichts aus dem Internet abtippen, das Sie nicht verstehen
 - Meistens ist .org besser als .com
-- Hinweis wie mit KI/LLMs umgegangen wird
 
 # Datenstrukturen
 
@@ -361,36 +351,45 @@ Für uns wichtig
 
 | Funktion                    | Beschreibung                                             |
 |-----------------------------|----------------------------------------------------------|
-| `a:b`                       | Erzeugt einen Vektor von `a` bis `b` mit Inkrement 1        |
-| `c(x1, x2, x3)`             | Erzeugt einen Vektor mit den Werten `x1`, `x2`, `x3`        |
-| `seq(a, b, by = inc)`       | Erzeugt einen Vektor von `a` bis `b` mit Inkrement `inc`    |
-| `seq(a, b, length.out = n)` | Erzeugt einen Vektor von `a` bis `b` mit `n` Elementen      |
+| `a:b`                       | Erzeugt einen Vektor von `a` bis `b` mit Inkrement 1     |
+| `c(x1, x2, x3)`             | Erzeugt einen Vektor mit den Werten `x1`, `x2`, `x3`     |
+| `seq(a, b, by = inc)`       | Erzeugt einen Vektor von `a` bis `b` mit Inkrement `inc` |
+| `seq(a, b, length.out = n)` | Erzeugt einen Vektor von `a` bis `b` mit `n` Elementen   |
 | `rep(x, times = n)`         | Hängt das Array oder die Zahl `x` `n`-mal hintereinander |
 | `rep(x, each = n)`          | Wiederholt jedes Element in `x` `n`-mal                  |
 
 : {tbl-colwidths="[40,60]"}
 
-
-
 []{.down20}
 
 - `a:b` wie in Matlab (aber kein 1:0.1:2)
-- c steht für *combine*
+- `c` steht für *combine*
 - Inkrement = Zunahme
-- seq wie Sequenz
-- rep wie repetition = Wiederholung
+- `seq` wie Sequenz
+- `rep` wie repetition = Wiederholung
 
+## Erzeugen von Vektoren 2/2
 
-## Erzeugen von Vektoren 2/2 {.smaller}
-
+::: {.columns}
+::: {.column}
 ```{r}
-1:-6                            # Geht auch rückwärts
-c("A", "B", "C", 1:3)           # Typkonvertierung automatisch
-seq(1, 5, by = 0.7)             # Zweiter Wert nicht unbedingt dabei
-seq(1, 5, length.out = 6)       # Inkrement automatisch
-rep(c(4, 7, 1, 1), times = 3)   # Drei mal hintereinander
-rep(c(4, 7, 1, 1), each = 3)    # Jedes Element drei mal
+1:6                     # Zahlen 1 bis 6
+1:-6                    # Rückwärts
+"1999":"2005"           # Mit Strings
+c(1:3, 4:9)             # Vektoren 
+c("A", "B", "C", 1:3)   # Typkonvertierung
 ```
+:::
+::: {.column}
+```{r}
+seq(1, 5, by = 0.7)     # Ohne zweiten Wert
+seq(1, 5, length.out=6) # Inkrement
+rep(c(4, 2), times = 3) # Vektor mehrfach
+rep(c(4, 2), each = 3)  # Elemente mehrfach
+rep(c(4, 2), each = 4)  # Elemente mehrfach
+```
+:::
+:::
 
 ## Operatoren & Funktionen für Vektoren
 
@@ -405,7 +404,7 @@ sqrt(x)
 
 → Ausführung Elementweise
 
-## Kuriositätenkabinett {.smaller}
+## Kuriositätenkabinett
 
 ```{r}
 a <- 0:8
@@ -503,8 +502,6 @@ cor(x, y)
 
 ## Benannte Vektoren
 
-Die Einträge von Vektoren können benannt werden
-
 ```{r}
 stundenlohn <- c("Kellner:in" = 8.5, "Ingenieur:in" = 50)
 stundenlohn
@@ -513,7 +510,7 @@ stundenlohn["Kellner:in"]
 mean(stundenlohn)
 ```
 
-→ Anwendung: Zum Beispiel bei Farbskala
+→ Viele Anwendungen, zum Beispiel bei Farbskala
 
 ## Dataframes
 
@@ -521,9 +518,9 @@ mean(stundenlohn)
 
 ```{r}
 d <- tibble(
-  X=0:4, 
-  Y=c(1.2, 3.2, 0.5, 0.9, 1.1), 
-  Z=c("A", "B", "C", "D", "E")
+  X = 0:4,
+  Y = c(1.2, 3.2, 0.5, 0.9, 1.1),
+  Z = c("A", "B", "C", "D", "E")
 )
 ```
 
@@ -534,21 +531,22 @@ d <- tibble(
 ## Dataframe ausgeben
 
 ::: {.columns}
-::: {.column width=50%}
+::: {.column}
 ```{r}
 d
 ```
 :::
-::: {.column width=50%}
+::: {.column}
+```{r}
+show(d)
+```
+:::
+:::
 ```{r}
 str(d)
 ```
-:::
-:::
 
-```{r}
-kable(d)
-```
+Erste Ausgabe mit Bibliothek `gt` (Am Anfang konfiguriert)
 
 ## Auf Spalten zugreifen
 
@@ -598,132 +596,125 @@ Komplizierter als man auf den ersten Blick vielleicht denkt
 
 Einfach(er) mit dem lubridate-Paket (in tidyverse enthalten)
 
-## Date, Time und Date-Time
+## *Date-Time*, *Date* und *Time*
 
 ![Datum und Uhrzeit](bilder/datum-und-uhrzeit.svg)
 
 ```{r}
-now()                # date-time
-today()              # date
-hms::as_hms(now())   # time
+now()          # Date-Time (Zeitstempel)
+today()        # Date      (Datum)
+as_hms(now())  # Time      (Zeit)
 ```
+
+## *Date-time* mit `ymd_hms` und Varianten
+
+```{r}
+ymd_hms("2016-11-30 10:30:10", tz = "Europe/Berlin")
+dmy_hm("30 8 2012 10:30", tz = "Europe/Berlin")
+mdy_h("8/30/2012:10")
+```
+
+[]{.down30}
+
+- Datum und Uhrzeit aus Zeichenkette einlesen, Trennzeichen fast beliebig
+- `ymd_...`, `dmy_...`, `mdy...` je nachdem ob Jahr, Tag oder Monat zuerst
+- `..._hms`, `..._hm`, `..._h` je nach Zeitangabe
+- Zeitzone mit angeben falls nicht `UTC` (Coordinated Universal Time)
+- `CET` Central European Time, `CEST` Central European Summer Time
 
 ## *Date* mit `ymd` und Varianten
 
-::: {.columns}
-::: {.column width=40%}
 ```{r}
 ymd("2016-11-30")
 dmy("30 8 2012")
 mdy("8/1/1998")
-dmy(30052015)
 ```
-:::
 
-::: {.column width=60%}
-- Liest Datum aus Zeichenkette (Trennzeichen fast beliebig) oder
-Zahl 
-- Wenn Zahl: Mit 0X angeben, falls X \< 10 - `ymd`, `dmy` oder `mdy` je nach Reihenfolge
+[]{.down30}
+
+- Datum aus Zeichenkette einlesen, Trennzeichen fast beliebig
+- `ymd`, `dmy`, `mdy` je nachdem ob Jahr, Tag oder Monat zuerst
+- Tipp beim Ausprobieren: Tag \> 12 verwenden um Fehler zu finden 
 - In Deutschland meistens Tag/Monat/Jahr 
-- Tipp beim Ausprobieren: Tag \> 12 verwenden um Fehler zu
-finden 
-- Ausgabe in Schreibweise JJJJ-MM-TT
-:::
-:::
+- Ausgabe in der Schreibweise JJJJ-MM-TT
 
-## *Date-time* mit `ymd_hms` und Varianten
+## *Time* mit `as_hms()` und `hms::hms()`
 
-::: {.columns}
-::: {.column width=60%}
 ```{r}
-ymd_hms("2016-11-30 10:30:10", tz = "Europe/Berlin")
-dmy_hm("30 8 2012 12:59", tz = "Europe/Berlin")
-mdy_h(0226201304, tz = "Europe/Berlin")
+as_hms(48630)                                    # Sekunden seit Mitternacht
+as_hms("13:30:30")                               # Aus Zeichenkette
+as_hms(dmy_hms("1:6:1987 13:30:30"))             # Aus Date-Time
+hms::hms(hours = 13, minutes = 30, seconds = 30) # Mit Zahlenwerten
 ```
-:::
 
-::: {.column width=40%}
-- Liest Datum und Uhrzeit aus Zeichenkette (Trennzeichen fast beliebig) oder Zahl
-- Wenn Zahl: Mit 0X angeben, falls X \< 10
-- Wieder je nach Reihenfolge
-- Zeitzone mit angeben (Voreinstellung ist UTC)
-:::
-:::
+[]{.down30}
 
+- Mit `as_hms()` Zeit bestimmen, die seit 0 Uhr verstrichen ist
+- Falls Zahlenwerte vorliegen: Funktion `hms::hms()`
 
-
-## *Time* mit `hms::as.hms` und Varianten
-::: {.columns}
-::: {.column width=60%}
-```{r}
-hms::as.hms(85)
-hms::as.hms(dmy_hms("1:6:1987 13:17:01", tz = "Europe/Berlin"))
-hms::hms(hours = 1, minutes = 23, seconds = 15)
-```
-:::
-
-::: {.column width=40%}
-- Zeit, die seit 0 Uhr verstrichen ist
-- Funktion `hms()` aus lubridate-Paket funktioniert nicht beim Plotten
-- Daher `hms::hms()` aus dem Paket hms (ggf. installieren)
-:::
-:::
-
-
-## `make_date()` und `make_datetime()`
+## Funktionen `make_date()` und `make_datetime()`
 
 []{.down60}
 
 ```{r}
 make_date(year = 2000, month = 10, day = 10)
-make_datetime(year = 2000, month = 10, day = 10, hour = 10, tz = "Europe/Berlin")
+make_datetime(year = 2000, month = 10, day = 10, hour = 10)
 make_datetime(year = 2000, month = 10, day = 10, hour = 10, tz = "Europe/Berlin")
 ```
 
 ## Datumskomponenten: Jahr und Monat
-::: {.columns}
-::: {.column width=60%}
+
 ```{r}
-(d <- dmy_hms("15.04.2025 12:22:01")) # Zuweisung in Klammern: Wert wird ausgegeben
+d <- dmy_hms("15.04.2025 12:22:01")
+```
+
+::: {.columns}
+::: {.column}
+```{r}
 year(d)
 month(d)
-month(d, label = TRUE)
+month(now())
 ```
 :::
-
-::: {.column width=40%}
-- Namen des Monats mit `label = TRUE`
-- Levels: Richtige Sortierung (nicht alphabetisch)
+::: {.column}
+```{r}
+month(d, label = TRUE)
+month(d, label = TRUE, abbr = FALSE)
+```
 :::
 :::
 
-
-
-
+- Namen `year` und `month` selbsterklärend
+- Monatsname mit `label = TRUE`
+- Langer Name mit `abbr = FALSE`
+- Levels: Richtige Sortierung, nicht alphabetisch
 
 ## Datumskomponenten: Tag
+
+```{r}
+d <- dmy_hms("15.04.2025 12:22:01")
+```
+
 ::: {.columns}
-::: {.column width=50%}
+::: {.column}
 ```{r}
 day(d)
 yday(d)
 wday(d)
-wday(d, label = TRUE)
 ```
 :::
-
-::: {.column width=50%}
-- day = Wievielter Tag im Monat
-- yday = Wievielter Tag im Jahr
-- wday = Wievielter Tag in der Woche (Sonntag = 1)
-- Namen des Tages mit `label = TRUE`
-- Hängt von Ländereinstellung des Computers ab
+::: {.column}
+```{r}
+wday(d, label = TRUE)
+wday(d, label = TRUE, abbr = FALSE)
+```
 :::
 :::
 
-
-
-
+- `day` = Wievielter Tag im Monat
+- `yday` = Wievielter Tag im Jahr
+- `wday` = Wievielter Tag in der Woche (Sonntag = 1)
+- Namen des Tages mit `label = TRUE`, lange Form mit `abbr = FALSE`
 
 ## Zeitdifferenzen 1/2
 
@@ -735,7 +726,7 @@ today() - dmy("11.11.1955")
 
 []{.down60}
 
-Zeit zwischen zwei Anweisungen: Wie lange braucht die Berechnung einer Wurzel?
+Wie lange braucht die Berechnung einer Wurzel?
 
 ```{r}
 d1 <- hms::as.hms(now())
@@ -746,18 +737,16 @@ d2 - d1
 
 ## Zeitdifferenzen 2/2
 
-[]{.up10}
-
 Ende März um halb drei
 
 ```{r}
-(d <- dmy_hm("30.3.2019 14:30", tz = "Europe/Berlin"))
+d <- dmy_hm("30.3.2019 14:30", tz = "Europe/Berlin")
 ```
 
-[]{.down60}
+[]{.down40}
 
 ::: {.columns}
-::: {.column width=50%}
+::: {.column}
 23 Stunden später
 
 ```{r}
@@ -767,7 +756,7 @@ d + dhours(23)
 - `dhours()`: Zeitdauer in physikalischen Stunden
 
 :::
-::: {.column width=50%}
+::: {.column}
 Auch 23 Stunden später
 
 ```{r}
@@ -775,7 +764,6 @@ d + hours(23)
 ```
 
 - `hours()`: Zeitdauer in Stunden auf der Uhr
-
 :::
 :::
 
@@ -785,67 +773,70 @@ $\rightarrow$ Vergleichen Sie die Zeiten!
 
 ## In Zahl konvertieren mit `as.numeric()`
 
-::: {.columns}
-::: {.column width=50%}
 ```{r}
 as.numeric(ymd_hms("1970-1-1 0:0:11", tz = "UTC"))
 as.numeric(ymd("1970-1-12"))
-as.numeric(hms::as.hms(ymd_hms("1988-11-11 0:0:11", tz="Europe/Berlin")))
+as.numeric(as_hms(ymd_hms("1988-11-11 0:0:11", tz="Europe/Berlin")))
 ```
-:::
 
-::: {.column width=50%}
-Welche Zahlen kommen dabei heraus?
+[]{.down30}
 
 - Date-time: Sekunden seit Beginn des Jahres 1970 (in UTC)
 - Date: Tage seit Beginn des Jahres 1970
 - Time: Sekunden seit Beginn des Tages
-- 01.01.1970 00:00 Uhr entspricht dem "absoluten Nullpunkt" für die Zeitberechnung
-:::
-:::
-
-
-
-
+- Konvention: 01.01.1970 00:00 Uhr ist "absoluter Nullpunkt"
 
 ## 'Normal' rechnen mit Zeitdifferenzen
 
 ```{r}
-d1 <- hms::as.hms(now())
-d2 <- hms::as.hms(now())
+d1 <- as_hms(now())
+d2 <- as_hms(now())
 d2 - d1
 ```
 
-[]{.down60}
-
-- Das Ergebnis ist vom Typ 'Time Difference' und keine Zahl
+- Ergebnis vom Typ 'Time Difference' und keine Zahl
 
 ```{r}
 1000 * as.numeric(d2 - d1)
 ```
 
 - Mit `as.numeric()` in Zahl konvertieren
-- Ausgabe jetzt in Millisekunden
+- Faktor 1000: Ausgabe in Millisekunden
 
-## Datum runden {.smaller}
+## Datum runden
 
 ![](bilder/datum-runden.svg)
 
 ```{r}
-floor_date(d, unit = "hour")
-ceiling_date(d, unit = "5 minutes")
+d <- dmy_hm("30.3.2019 14:32", tz = "Europe/Berlin")
 ```
 
-- `floor_date()` : Abrunden
-- `round_date()` : Runden
-- `ceil_date()` : Aufrunden
+[]{.up20}
+
+::: {.columns}
+::: {.column}
+```{r}
+floor_date(d, unit = "hour")
+```
+:::
+::: {.column}
+```{r}
+ceiling_date(d, unit = "5 minutes")
+```
+:::
+:::
+
+[]{.down30}
+
+- Abrunden mit `floor_date()`
+- Runden mit `round_date()`
+- Aufrunden mit `ceil_date()`
 - Einheit, zu der gerundet werden soll, mit `unit = XXX` angeben
 - Man kann auch zu einem Vielfachen einer Einheit runden
 
 ## Formatierte Ausgabe mit `sprintf()`
 
-Mit `sprintf` können Ausgaben ein bisschen schicker gestaltet werden. Dabei steht `%i` für eine
-ganze Zahl und `%5.3f` eine Fließkommazahl insgesamt fünf Zeichen breit mit 3 Nachkommastellen.
+Mit `sprintf` können Ausgaben ein bisschen schöner gestaltet werden. Dabei steht `%i` für eine ganze Zahl und `%5.3f` eine Fließkommazahl insgesamt fünf Zeichen breit mit 3 Nachkommastellen.
 
 ```{r}
 x <- 1 / 3
