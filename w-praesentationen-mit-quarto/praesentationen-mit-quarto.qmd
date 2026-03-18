@@ -4,8 +4,21 @@ title: "Präsentationen erstellen mit Quarto"
 
 ```{r}
 #| include: false
+library(gt)
+library(knitr)
 library(tidyverse)
-library(kableExtra)
+
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Ein Abschnitt
@@ -22,10 +35,10 @@ ggplot(data = mtcars) + geom_point(mapping = aes(x = cyl, y = mpg))
 
 ```{r}
 d <- read_csv2("daten/beispiel-2.csv")
-kable(d)
+d
 ```
 
 ## Folie mit Graphik
 
-![](bilder/sydney-harbour-ridge.jpg)
+![](bilder/sydney-harbour-bridge.jpg)
 
