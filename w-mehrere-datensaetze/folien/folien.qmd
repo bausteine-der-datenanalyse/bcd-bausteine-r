@@ -3,9 +3,8 @@ title: "Mehrere Datensätze"
 ---
 
 ```{r}
-#| echo: false
+#| include: false
 library(tidyverse)
-library(kableExtra)
 ```
 
 
@@ -78,19 +77,13 @@ read_one_file <- function(filename) {
     STATIONS_ID = factor(STATIONS_ID)
   )
 }
-
 d <- list.files(path = "daten", pattern = "produkt_nieder_tag.*.txt", full.names = TRUE) |>
   map(read_one_file) |>
   bind_rows()
 ```
 
-
 - Mit `list.files` Dateien auflisten lassen
-
 - Mit `map` die Funktion `read_one_file` für alle Dateien ausführen
-
 - Ergebnis mit `bind_rows` in einem Dataframe kombinieren
-
-- Wichtig: Für `bind_rows` müssen Merkmale den selben Datentyp haben. Falls notwendig mit `mutate` und `as.character` oder `as.numeric` konvertieren
-
-- Empfohlen für große Anzahl an Dateien
+- Wichtig: Bei `bind_rows` Datentyp beachten. Bei Bedarf mit `mutate` und `as.character` oder `as.numeric` konvertieren
+- Empfohlen falls mehr als drei Dateien
