@@ -4,19 +4,22 @@ title: "Tipps und Tricks"
 
 ```{r}
 #| echo: false
-library(readxl)
 library(gt)
-library(kableExtra)
+library(knitr)
+library(readxl)
 library(tidyverse)
 
-show_table <- function(d, h = NULL, p = FALSE) gt(d) |> 
-  tab_options(
-    ihtml.active = TRUE,
-    ihtml.height = h,
-    ihtml.use_pagination = p,
-    ihtml.use_text_wrapping = FALSE,
-    table.background.color = "#f4f1f1"
-  )
+show_dataframe <- function(d, options, ...) {
+  gt(d) |>
+    opt_interactive(
+      use_text_wrapping = FALSE,
+      page_size_default = 9,
+      use_compact_mode = TRUE,
+      use_pagination = (nrow(d) > 9)
+    ) |>
+    knitr::knit_print(options, ...)
+}
+registerS3method("knit_print", "data.frame", show_dataframe)
 ```
 
 # Dataframes speichern und laden
@@ -33,7 +36,7 @@ Diese Vorgehensweise lässt sich mit wenig Aufwand durch die Funktionen `save` u
 
 ## Dataframe speichern und laden 2/3
 
-```{r, message=FALSE}
+```{r}
 d <- tibble(A = c(1, 2, 3), B = c('u', 'v', 'w'))
 save(d, file = "daten/test.RData")
 rm(list = "d")
@@ -42,15 +45,14 @@ rm(list = "d")
 Dataframe `d`
 
 1.  anlegen
-
-2.  in der Datei `daten/test.RData` speichern
-
-3.  löschen (nur für Demonstrationszwecke) (mit rm für remove = entfernen)
+1.  in der Datei `daten/test.RData` speichern
+1.  löschen (nur für Demonstrationszwecke)
 
 ## Dataframe speichern und laden 3/3
 
 ```{r}
 load('daten/test.RData')
+d
 ```
 
 -   Dataframe `d` wurde aus der Datei geladen und ist jetzt wieder vorhanden
@@ -65,18 +67,17 @@ d <- tibble(
   Name = c("unistrasse_nord", "unistrasse_sued", "markstrasse_ost", "markstrasse_west"), 
   Wert = c(10, 20, 4, 8)
 )
-show_table(d)
+d
 ```
 
 ## Richtung löschen
 
 ```{r}
-d1 <- d |> 
+d |> 
   mutate(NameKurz = str_replace(Name, "_nord|_sued|_ost|_west", ""))
-show_table(d1)
 ```
 
-- Mit `str_replace` werden die Richtungen durch eine leere Zeichenkette ersetzt
+- Mit `str_replace` Richtungen durch eine leere Zeichenkette ersetzen
 - Verschiedene zu ersetztende Zeichenketten mit `|` trennen
 
 # Daten mit sehr vielen Merkmalen und/oder kryptischen und/oder langen Namen für Spalten
@@ -87,7 +88,7 @@ show_table(d1)
 
 ```{r}
 d <- read_csv2("daten/Jawe2020.csv", locale = locale(encoding = "ISO-8859-1"))
-show_table(d, h = px(350), p = TRUE)
+d
 ```
 
 -   Daten zu Dauerzählstellen von der Bast
@@ -130,7 +131,7 @@ d1 <- d |> select(all_of(colnames))
 ::: {.column width="53%"}
 ```{r}
 #| echo: false
-show_table(d1, p = TRUE)
+d1
 ```
 :::
 
@@ -153,7 +154,7 @@ show_table(d1, p = TRUE)
 
 ```{r}
 d_f <- read_excel("daten/familien-1.xlsx")
-show_table(d_f)
+d_f
 ```
 
 -   Unhandlich
@@ -172,7 +173,7 @@ d1 <- d_f |>
 ::: {.column width="30%"}
 ```{r}
 #| echo: false
-show_table(d1, p = TRUE)
+d1
 ```
 :::
 
@@ -190,24 +191,16 @@ show_table(d1, p = TRUE)
 
 ```{r}
 d2 <- d1 |>
-  separate(name, into = c("x", "kind", "merkmal")) |> 
-  select(-x)
-
+  separate(name, into = c(NA, "kind", "merkmal"))
 ```
 
-::::: columns
-::: {.column width="50%"}
 ```{r}
 #| echo: false
-show_table(d2, p = TRUE)
+d2
 ```
-:::
 
-::: {.column width="50%"}
--   Inhalt von Spalte `name` in `x`, `kind` und `merkmal` aufteilen
--   Nicht benögte Spalte `x` wegwerfen
-:::
-:::::
+- Inhalt von Variable `name` in Variablen `kind` und `merkmal` aufteilen
+- Nicht benögte Spalte mit `NA`
 
 ## Schritt 3: Spalten für Merkmale
 
@@ -217,20 +210,14 @@ d3 <- d2 |>
   mutate(alter = as.integer(alter))
 ```
 
-::::: columns
-::: {.column width="50%"}
 ```{r}
 #| echo: false
-show_table(d3)
+d3
 ```
-:::
 
-::: {.column width="50%"}
 -   Aus Inhalt der Spalte `Merkmal` werden Namen von Spalten
 -   Werte aus Spalte `value` einsetzen
 -   `Alter` wieder in Zahl umwandeln (optional)
-:::
-:::::
 
 ## In einem Rutsch
 
@@ -239,8 +226,7 @@ d_k <- d_f |>
   pivot_longer(
     cols = starts_with("kind"), values_transform = as.character, values_drop_na = TRUE
   ) |>
-  separate(name, into = c("x", "kind", "merkmal")) |> 
-  select(-x) |>
+  separate(name, into = c(NA, "kind", "merkmal")) |> 
   pivot_wider(names_from = merkmal, values_from = value) |>
   mutate(Alter = as.integer(alter))
 ```
@@ -248,7 +234,7 @@ d_k <- d_f |>
 ## In einem Rutsch
 
 ```{r}
-show_table(d_k)
+d_k
 ```
 
 # Namen von Spalten enthalten Merkmale und es gibt Defaultwerte
@@ -263,7 +249,7 @@ d_f <- read_excel("daten/familien-2.xlsx")
 
 ```{r}
 #| echo: false
-show_table(d_f)
+d_f
 ```
 
 -   Unhandlich
@@ -281,12 +267,12 @@ d1 <- d_f |>
 ::: {.column width="65%"}
 ```{r}
 #| echo: false
-show_table(d1, p = TRUE)
+d1
 ```
 :::
 
 ::: {.column width="35%"}
-- Spalte für Werte behalten wir
+- Alle Variablen mit `"kind"`
 :::
 :::::
 
@@ -294,16 +280,14 @@ show_table(d1, p = TRUE)
 
 ```{r}
 d2 <- d1 |>
-  separate(name, into = c("x1", "kind", "x2")) |>
-  mutate(kind = as.integer(kind)) |>
-  select(-starts_with("x"))
+  separate(name, into = c(NA, "kind", NA)) |> mutate(kind = as.integer(kind))
 ```
 
 ::::: columns
 ::: {.column width="65%"}
 ```{r}
 #| echo: false
-show_table(d2, p = TRUE)
+d2
 ```
 :::
 
@@ -328,7 +312,7 @@ d3 <- d2 |>
 ::: {.column width="50%"}
 ```{r}
 #| echo: false
-show_table(d3, p = TRUE)
+d3
 ```
 :::
 
@@ -346,9 +330,8 @@ show_table(d3, p = TRUE)
 ```{r}
 d_k <- d_f |>
   pivot_longer(cols = starts_with("kind"), values_to = "schule") |>
-  separate(name, into = c("x1", "kind", "x2")) |>
+  separate(name, into = c(NA, "kind", NA)) |>
   mutate(Kind = as.integer(kind)) |>
-  select(-starts_with("x")) |>
   mutate(
     schule = if_else(
       is.na(schule) & kind <= anzahl_kinder, schule_alle_kinder, schule
@@ -361,5 +344,5 @@ d_k <- d_f |>
 ## In einem Rutsch
 
 ```{r}
-show_table(d_k)
+d_k
 ```
