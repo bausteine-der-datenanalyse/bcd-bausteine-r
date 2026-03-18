@@ -2,10 +2,9 @@
 title: "Schreiben mit Quarto"
 author: "Matthias Baitsch und Florian Bagemihl"
 
+lang: de
 date: today
 date-format: long
-
-lang: de
 
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
@@ -16,6 +15,7 @@ execute:
 format: 
   typst:
     toc: true
+    brand: false  
     section-numbering: 1.1.1
 ---
 
@@ -43,15 +43,16 @@ Eine Quarto-Datei besitzt die Endung `.qmd` und setzt sich aus einem Dateikopf u
 
 ## Dateikopf
 
-Ganz zu Beginn der Datei steht zwischen `---` und `---` der so genannte YAML-Header der Datei (YAML heißt die Auszeichnungssprache des Headers, aber das ist für uns nicht wichtig). Im Dateikopf werden grundlegende Einstellungen zum Dokument festgelegt. Sie könnnen für ihre Arbeit folgenden Header als Grundlage verwenden:
+Ganz zu Beginn der Datei steht zwischen `---` und `---` der so genannte YAML-Header der Datei (YAML heißt die Auszeichnungssprache des Headers, aber das ist für uns nicht wichtig). Im Dateikopf werden grundlegende Einstellungen zum Dokument festgelegt. Sie könnnen für ihre Arbeit diesen Header als Grundlage verwenden:
 
 ``` yaml
 ---
 title: "Titel eintragen"
 author: "Namen eintragen"
+
+lang: de
 date: today
 date-format: long
-lang: de
 
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
