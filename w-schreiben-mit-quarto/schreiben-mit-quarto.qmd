@@ -279,7 +279,7 @@ Grundsätzlich gilt die Regel: Abbildungen werden immer im Text referenziert, so
 
 ## Tabellen
 
-Tabellen lassen sich aus einem Dataframe mit der Funktion `kable` erzeugen, ein Minimalbeispiel zeigt @tbl-mathematische-konstanten. Auch hier kann wieder mithilfe der Bezeichnung des R-Chunks aus dem Text auf die Tabelle verwiesen werden.
+Tabellen lassen sich aus einem Dataframe mit der Funktion `gt` erzeugen, ein Minimalbeispiel zeigt @tbl-mathematische-konstanten. Auch hier kann wieder mithilfe der Bezeichnung des R-Chunks aus dem Text auf die Tabelle verwiesen werden.
 
 ```{r}
 #| label: tbl-mathematische-konstanten

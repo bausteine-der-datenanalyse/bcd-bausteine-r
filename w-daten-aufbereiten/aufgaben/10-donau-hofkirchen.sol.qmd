@@ -1,8 +1,8 @@
 ```{r}
 #| include: false
+library(gt)
 library(readxl)
 library(tidyverse)
-library(kableExtra)
 ```
 
 #### Einlesen und Aufbereiten der Daten
@@ -92,7 +92,7 @@ paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 d_donau_sd <- d_donau |>
   group_by(Jahr) |>
   summarise(sd = sd(Abfluss))
-kable(d_donau_sd)
+d_donau_sd
 ```
 
 #### Standardabweichung über die Jahre
