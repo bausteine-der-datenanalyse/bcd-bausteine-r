@@ -21,9 +21,9 @@ format:
 
 ```{r}
 #| include: false
+library(gt)
 library(readxl)
 library(tidyverse)
-library(kableExtra)
 ```
 
 # Einführung
@@ -84,7 +84,6 @@ In dem Setup-Abschnitt
 ```{{r}}
 library(readxl)
 library(tidyverse)
-library(kableExtra)
 ```
 
 werden die notwendigen Bibliotheken geladen. Es empfiehlt sich alle im Dokument verwendeten Pakete als ersten Code-Chunk im Dokument zu laden.
@@ -288,7 +287,8 @@ d <- tibble(
   A = c("$\\pi$", "$\\mathrm{e}$", "$\\sqrt{2}$"),
   Test = round(c(pi, exp(1), sqrt(2)), digits = 3)
 )
-kable(d, caption = "Mathematische Konstanten")
+gt(d, caption = "Mathematische Konstanten") |>
+  fmt_markdown(columns = A)
 ```
 
 Alternativ können Tabellen auch in der Markdown-Schreibweise eingefügt werden.
