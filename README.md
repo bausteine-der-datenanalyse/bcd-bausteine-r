@@ -67,7 +67,7 @@ Aufgaben sind einmal das Aufgabenblatt (i.d.R. eingefügt) und die Datei, in der
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-mehrere-datensaetze/folien/folien.html)
 
-### Tipps und Tricks zu RStudio
+### Tipps und Tricks
 
 - [Folien](https://bausteine-der-datenanalyse.github.io/bcd-bausteine-r/w-tipps-und-tricks/folien/folien.html)
 
