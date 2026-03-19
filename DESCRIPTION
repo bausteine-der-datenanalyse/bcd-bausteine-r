@@ -18,6 +18,7 @@ Imports:
     modelr,
     plotly,
     osmdata,
+    tsibble,
     wbstats,
     RcppRoll,
     ggridges,
