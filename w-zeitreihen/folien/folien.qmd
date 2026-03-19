@@ -86,7 +86,7 @@ if (!file.exists("daten/d_wind_raw.RData")) {
   d_wind_raw <- selectDWD(name = "Helgoland", res = "10_minutes", var = "wind", per = "historical", current = TRUE) |>
     dataDWD() |>
     bind_rows()
-  save(d_wind_raw, file = fname)
+  save(d_wind_raw, file = "daten/d_wind_raw.RData")
 } else {
   load(file = "daten/d_wind_raw.RData")
 }
