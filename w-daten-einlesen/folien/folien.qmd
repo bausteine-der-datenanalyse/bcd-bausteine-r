@@ -110,7 +110,7 @@ Wo liegt das Problem?
 ## Importassistent 3/3
 
 ```{r}
-read_excel("daten/unistrasse-2017.xlsx",sheet="raw(T)",range="B2:H20712")
+read_excel("daten/unistrasse-2017.xlsx", sheet = "raw(T)", range = "B2:H20712")
 ```
 
 - Einstellung in Excel unvollständig, daher Datum nicht richtig gelesen
@@ -182,7 +182,7 @@ Datei [beispiel-2.csv](daten/beispiel-2.csv){download=""}
 []{.up10}
 
 - Einträge durch "`;`" getrennt
-- Dezimaltrenner "`,`", Tausender "`.`" 
+- Dezimaltrenner "`,`", Tausender "`.`"
 - Datum mit Tag/Monat/Jahr
 :::
 ::::
@@ -221,7 +221,7 @@ Datei [beispiel-3.csv](daten/beispiel-3.csv){download=""}
 []{.up10}
 
 - Einträge durch "`;`" getrennt
-- Dezimaltrenner "`.`", Tausender "`,`" 
+- Dezimaltrenner "`.`", Tausender "`,`"
 - Datum mit Tag/Monat/Jahr
 :::
 ::::
@@ -291,10 +291,10 @@ read_csv2("daten/beispiel-4.csv", locale = locale(encoding = "iso-8859-1"))
 ## Beispiel: Niederschlagsdaten Bochum
 
 ```{r}
-#| message: false
 read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
-  delim = ";", trim_ws=TRUE,
+  delim = ";",
+  trim_ws = TRUE,
   locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
 ```

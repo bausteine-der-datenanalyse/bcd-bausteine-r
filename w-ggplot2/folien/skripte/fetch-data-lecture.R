@@ -49,7 +49,7 @@ countries <- cls$Economy
 countries
 
 # Bevölkerung
-popf <- pop |> 
+popf <- pop |>
   filter(country %in% countries) |>
   select(year = date, country, pop = value)
 summary(popf)
@@ -101,7 +101,6 @@ d_wb_2012 <- d_wb_all |>
 #
 save(
   d_wb_all, d_wb_2012,
-  file="data/data-lecture.Rdata"
+  file = "data/data-lecture.Rdata"
 )
 file.remove("data/class.xls")
-

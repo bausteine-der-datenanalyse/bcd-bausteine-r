@@ -8,7 +8,7 @@ author: "TODO: Namen eintragen"
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
-lc_to_tibble <- function(lc) { return(tibble(u = lc$p, v = lc$L)) }
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
 
 ## Titel Folie 1

@@ -117,7 +117,7 @@ d_uni |> select(-Fahrtrichtung, -Abstand, -"Länge (Radar)")
 d_uni |> select(Datum, v = Geschwindigkeit, L = "Länge (cm)", Fahrzeug)
 ```
 
-- Auswählen und umbenennen mit `neuer_name = alter_name` 
+- Auswählen und umbenennen mit `neuer_name = alter_name`
 - Andere Variablen einfach beibehalten
 
 ## Variablen nach Muster auswählen
@@ -203,7 +203,7 @@ d |> filter(Fahrzeug == "LKW" & Geschwindigkeit > 60)
 ```
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
-- Logisches und: `&` 
+- Logisches und: `&`
 
 ## Filter: Nur LKW oder Fahrzeuge schneller 80km/h
 
@@ -212,7 +212,7 @@ d |> filter(Fahrzeug == "LKW" | Geschwindigkeit > 80)
 ```
 
 - Bedingung als logischer Ausdruck mit Name der Variablen
-- Logisches oder: `|` 
+- Logisches oder: `|`
 
 ## Filter: Fahrzeugtyp nicht erkannt
 
@@ -371,7 +371,7 @@ d |>
 ## Datum runden
 
 ```{r}
-d |> 
+d |>
   mutate(
     Datum = dmy_hms(Datum, tz = "Europe/Berlin"),
     D15 = floor_date(Datum, "15 minutes")
@@ -383,7 +383,7 @@ d |>
 ## Alles in einem Rutsch {.smaller}
 
 ```{r}
-d_unistrasse <- read_excel("daten/unistrasse-2017-2.xlsx",sheet="raw(T)",range="B2:H20712") |>
+d_unistrasse <- read_excel("daten/unistrasse-2017-2.xlsx", sheet = "raw(T)", range = "B2:H20712") |>
   select(Datum, Fahrzeug = Fahrzeug, L = `Länge (cm)`, v = Geschwindigkeit) |>
   filter(!is.na(Fahrzeug)) |>
   mutate(
@@ -397,11 +397,11 @@ d_unistrasse
 - Mehrere Operationen nacheinander ausgeführt
 - Lesbarkeit: Jede Operation in eine eigene Zeile
 
-## Damit: Plot Uhrzeit und Geschwindigkeit 
+## Damit: Plot Uhrzeit und Geschwindigkeit
 
 ```{r}
 ggplot(data = d_unistrasse) +
-  geom_hex(mapping = aes(x = Uhrzeit, y = v)) 
+  geom_hex(mapping = aes(x = Uhrzeit, y = v))
 ```
 
 - Histogramm der Geschwindigkeitsverteilung über Uhrzeit
@@ -428,7 +428,7 @@ d |> mutate(Raser = if_else(Geschwindigkeit >= 70, "Ja", "Nein"))
 ## Nur `summarize()`
 
 ```{r}
-d_unistrasse |> 
+d_unistrasse |>
   summarise(Anzahl = n(), Mittelwert = mean(v), Standardabweichung = sd(v))
 ```
 
@@ -441,8 +441,8 @@ d_unistrasse |>
 ## Kombination `group_by()` und `summarize()`
 
 ```{r}
-d_unistrasse |> 
-  group_by(Fahrzeug) |> 
+d_unistrasse |>
+  group_by(Fahrzeug) |>
   summarise(Anzahl = n(), Mittelwert = mean(v), Standardabweichung = sd(v))
 ```
 
@@ -459,7 +459,7 @@ d_unistrasse |>
 d <- d_unistrasse |>
   group_by(D15) |>
   summarise(VMit = mean(v))
-ggplot(data = d, mapping = aes(x = D15, y = VMit)) + geom_line() + geom_point() 
+ggplot(data = d, mapping = aes(x = D15, y = VMit)) + geom_line() + geom_point()
 ```
 
 ## Effekt von `group_by()`
@@ -507,7 +507,7 @@ d_unistrasse |> group_by(Fahrzeug) |> str()
 ## Einlesen der Daten (Quelle: BMWi)
 
 ```{r}
-d_et_wide <- read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet="4", range="A8:AC17")
+d_et_wide <- read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet = "4", range = "A8:AC17")
 ```
 
 ```{r}
@@ -522,7 +522,7 @@ d_et_wide |> pivot_longer(cols = "1990":"2017", names_to = "Jahr", values_to = "
 ```
 
 - Variablen `1990` bis `2017` umordnen
-- `names_to = Name`: Variable für alte Variablennamen 
+- `names_to = Name`: Variable für alte Variablennamen
 - `values_to = Name`: Variable für Werte
 
 ## Transformation mit `pivot_longer()` 2/2
@@ -532,14 +532,14 @@ d_et_wide |> pivot_longer(cols = !Energieträger, names_to = "Jahr", values_to =
 ```
 
 - Alle Variablen außer `Energieträger` umordnen
-- `names_to = Name`: Variable für alte Variablennamen 
+- `names_to = Name`: Variable für alte Variablennamen
 - `values_to = Name`: Variable für Werte
 
 ## Beispiel vollständig
 
 ```{r}
-d_et_long <- 
-  read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet="4", range="A8:AC17") |>
+d_et_long <-
+  read_excel("daten/energiedaten-gesamt-xls.xlsx", sheet = "4", range = "A8:AC17") |>
   pivot_longer(!Energieträger, names_to = "Jahr", values_to = "Verbrauch") |>
   mutate(Jahr = as.numeric(Jahr))
 ggplot(data = d_et_long) +
@@ -618,7 +618,7 @@ d_mitarbeitende |> left_join(d_abteilungen)
 
 ![](bilder/kodierte-werte.svg)
 
-- In den Rohdaten sind Codes eingetragen und nicht Werte 
+- In den Rohdaten sind Codes eingetragen und nicht Werte
 - Warum macht man das?
   - Arbeit sparen wenn Werte von Hand eingetragen werden
   - Speicherplatz sparen bei umfangreichen Tabellen
@@ -629,7 +629,7 @@ d_mitarbeitende |> left_join(d_abteilungen)
 []{.down50}
 
 ```{r}
-d_ud <- read_excel("daten/beispiel-kodierung.xlsx", range="B2:D5")
+d_ud <- read_excel("daten/beispiel-kodierung.xlsx", range = "B2:D5")
 ```
 
 ```{r}
@@ -642,7 +642,7 @@ d_ud
 ::: {.columns}
 ::: {.column}
 ```{r}
-d_ud_k1 <- read_excel("daten/beispiel-kodierung.xlsx", range="F2:G5")
+d_ud_k1 <- read_excel("daten/beispiel-kodierung.xlsx", range = "F2:G5")
 ```
 ```{r}
 #| echo: false
@@ -651,7 +651,7 @@ d_ud_k1
 :::
 ::: {.column}
 ```{r}
-d_ud_k2 <- read_excel("daten/beispiel-kodierung.xlsx", range="I2:J5")
+d_ud_k2 <- read_excel("daten/beispiel-kodierung.xlsx", range = "I2:J5")
 ```
 ```{r}
 #| echo: false
@@ -731,7 +731,7 @@ Niederschlagsdaten vom Deutschen Wetterdienst
 ```{r}
 d_ns <- read_delim(
   "daten/produkt_nieder_monat_18910101_20171231_00555.txt",
-  delim = ";", , trim_ws=TRUE, locale = locale(decimal_mark = ".", grouping_mark = ",")
+  delim = ";", , trim_ws = TRUE, locale = locale(decimal_mark = ".", grouping_mark = ",")
 )
 ```
 
@@ -745,10 +745,10 @@ d_ns
 ## Werte durch NAs ersetzen (eine Variable) 3/4
 
 ```{r}
-d_ns |> 
+d_ns |>
   mutate(
     MO_NSH = na_if(MO_NSH, -999)
-  ) 
+  )
 ```
 
 - Mit `na_if(Y, x)` alle Werte `x` in Variable `Y` durch `NA` ersetzen
@@ -756,7 +756,7 @@ d_ns |>
 ## Werte durch NAs ersetzen (mehrere Variablen) 4/4
 
 ```{r}
-d_ns |> 
+d_ns |>
   mutate(
     across(c(MO_NSH, MO_RR, MO_SH_S, MX_RS), ~na_if(.x, -999))
   )
@@ -821,7 +821,7 @@ d |>
 ```
 
 - Kontrolle: Die Anteile müssen sich zu 100% addieren
-- 38 + 14 + 11 + 21 + 13 + 1 + 2 = 100, passt also! 
+- 38 + 14 + 11 + 21 + 13 + 1 + 2 = 100, passt also!
 
 ## Gruppiertes `slice()` 1/2
 

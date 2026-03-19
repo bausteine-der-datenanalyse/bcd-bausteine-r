@@ -91,7 +91,7 @@ ggplot() +
 
 ```{r}
 ggplot(data = tibble(A = c(-8, -1, 1, 3, 10), B = f2(A))) +
-  geom_function(fun = f2) + 
+  geom_function(fun = f2) +
   geom_point(mapping = aes(x = A, y = B))
 ```
 
@@ -138,7 +138,7 @@ sigma <- sd(d_ns_m$Niederschlag)
 ### Funktion `f` für Normalverteilung x mit `mu` und `sigma`
 
 ```{r}
-f <- function(x) dnorm(x, mean=mu, sd=sigma)
+f <- function(x) dnorm(x, mean = mu, sd = sigma)
 ```
 
 ## Histogramm mit Normalverteilung Niederschläge 2/2
@@ -194,7 +194,7 @@ ggplot(data = d_ns_m, mapping = aes(x = Niederschlag)) +
   geom_histogram(mapping = aes(y = stat(density)), binwidth = 10, boundary = 0) +
   geom_density(bw = 2, linewidth = 1, color = "orange") +
   geom_density(bw = 4, linewidth = 1, color = "blue") +
-  geom_density(bw = 8, linewidth = 1, color = "red") + 
+  geom_density(bw = 8, linewidth = 1, color = "red") +
   lims(x = c(-20, 220))
 ```
 
@@ -245,15 +245,13 @@ ggplot(data = d_ns_m) +
 
 ### Normale Funktion
 
-```{r}
-#| eval: false
+```{.r}
 f <- function(x) sin(x^2)
 ```
 
 ### Normalverteilung
 
-```{r}
-#| eval: false
+```{.r}
 mu <- mean(<Vektor>)
 sigma <- sd(<Vektor>)
 f <- function(x) dnorm(x, mu, sigma)
@@ -261,8 +259,7 @@ f <- function(x) dnorm(x, mu, sigma)
 
 ## Funktionen plotten mit `geom_function()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot() +
   geom_function(stat = "function", fun = <Funktion>, xlim = c(<from>, <to>), Argumente)
 ```
@@ -273,8 +270,7 @@ ggplot() +
 
 ## Funktionen plotten mit `geom_ribbon()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot() +
   geom_ribbon(
     mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)),
@@ -287,8 +283,7 @@ ggplot() +
 
 ## Dichtefunktion mit `geom_density()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = <DATAFRAME>) +
   geom_density(mapping = aes(x = <M>, ...), Argumente)
 ```
@@ -320,10 +315,9 @@ ggplot(data = <DATAFRAME>) +
 
 ## Normal-Quantil-Plot
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = <Dataframe>) +
-  geom_qq(mapping = aes(sample = <M>), Argumente) + 
+  geom_qq(mapping = aes(sample = <M>), Argumente) +
   geom_qq_line(mapping = aes(sample = <M>), Argumente)
 ```
 
@@ -345,8 +339,7 @@ ggplot(data = <Dataframe>) +
 
 ## Dichtefunktionen untereinander
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = <Dataframe>) +
   geom_density_ridges(mapping = aes(x = <M>, y = <M>, ...), bandwidth = bw)
 ```

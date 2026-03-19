@@ -1,6 +1,6 @@
 ## Ausbau der Windenergie in Deutschland
 
-Die Bundesnetzagentur führt mit dem [Marktstammdatenregister (MaStR)](https://www.marktstammdatenregister.de/MaStR) ein umfassendes behördliches Register für Stammdaten des Strom- und Gasmarktes. Die erfassten Daten sind öffentlich zugänglich, dabei allerdings sehr umfangreich und in der Rohform (XML-Dateien) schwer auszuwerten.  
+Die Bundesnetzagentur führt mit dem [Marktstammdatenregister (MaStR)](https://www.marktstammdatenregister.de/MaStR) ein umfassendes behördliches Register für Stammdaten des Strom- und Gasmarktes. Die erfassten Daten sind öffentlich zugänglich, dabei allerdings sehr umfangreich und in der Rohform (XML-Dateien) schwer auszuwerten.
 
 In diesem Abschnitt sollen die Daten genutzt werden, um den Stand des Windenergieausbaus in Deutschland zu untersuchen. Sie verwenden dabei einen Ausschnitt der Daten des Marktstammdatenregisters, der vorab aufbereitet wurden. Bei Interesse finden Sie die zugehörigen Programme im Unterordner `skripte`.
 
@@ -12,7 +12,7 @@ Verwenden Sie für dieses Aufgabenblatt die Datei [09-raeumliche-daten-aufgaben.
 
 Werten Sie die Daten zur Windkraft zunächst ohne räumlichen Bezug aus. Erstellen Sie dazu Grafiken zu den folgenden Entwicklungen der Windkraft in Deutschland:
 
-- Anzahl der installierten Anlagen 
+- Anzahl der installierten Anlagen
 - Zuwachs an installierter Leistung
 - Leistung pro Anlage
 - Welche Größen könnten noch von Interesse sein?

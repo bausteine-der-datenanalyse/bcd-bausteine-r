@@ -9,10 +9,11 @@ library(kableExtra)
 
 ```{r}
 d_donau <- read_delim(
-    "daten/6342800.day",
-    locale = locale(decimal_mark = ".", grouping_mark = ","),
-    trim_ws = TRUE, skip = 40
-  ) |> 
+  "daten/6342800.day",
+  locale = locale(decimal_mark = ".", grouping_mark = ","),
+  trim_ws = TRUE,
+  skip = 40
+) |>
   select(Datum = "YYYY-MM-DD", Abfluss = Original) |>
   mutate(
     Monat = month(Datum, label = TRUE),
@@ -25,8 +26,8 @@ d_donau <- read_delim(
 ###### Streuplot
 
 ```{r}
-ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) + 
-  geom_point(alpha = 1/3) +
+ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
+  geom_point(alpha = 1 / 3) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
@@ -35,9 +36,10 @@ ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
 ```{r}
 ggplot(data = d_donau) +
   geom_boxplot(
-    mapping = aes(x = factor(Jahr), y = Abfluss), 
-    outlier.alpha = 0.3, outlier.size = 0.5
-  ) + 
+    mapping = aes(x = factor(Jahr), y = Abfluss),
+    outlier.alpha = 0.3,
+    outlier.size = 0.5
+  ) +
   scale_x_discrete(breaks = seq(1900, 2010, by = 10)) +
   labs(x = NULL, y = NULL)
 ```
@@ -53,14 +55,18 @@ beta <- sum((x - xmid) * (y - ymid)) / sum((x - xmid)^2)
 alpha <- ymid - beta * xmid
 R2 <- sum((alpha + beta * x - ymid)^2) / sum((y - ymid)^2)
 r2 <- cor(x, y)^2
-zw <- 100 * beta * 36500  / mean(y)
+zw <- 100 * beta * 36500 / mean(y)
 
 paste0(
-        "alpha = ", signif(alpha, 4), 
-        ", beta = ", signif(beta, 4), 
-        ", R^2 = ", signif(R2, 4),
-        ", r^2 = ", signif(r2, 4)
-       )
+  "alpha = ",
+  signif(alpha, 4),
+  ", beta = ",
+  signif(beta, 4),
+  ", R^2 = ",
+  signif(R2, 4),
+  ", r^2 = ",
+  signif(r2, 4)
+)
 
 paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 ```
@@ -83,7 +89,7 @@ paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 #### Standardabweichung für jedes Jahr
 
 ```{r}
-d_donau_sd <- d_donau |> 
+d_donau_sd <- d_donau |>
   group_by(Jahr) |>
   summarise(sd = sd(Abfluss))
 kable(d_donau_sd)
@@ -126,7 +132,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
 Jahre mit größtem und kleinsten Gesamtabfluss (Summe aller Tage)
 
 ```{r}
-d_donau_jahressumme <- d_donau |> 
+d_donau_jahressumme <- d_donau |>
   group_by(Jahr) |>
   summarise(Abfluss = sum(Abfluss)) |>
   filter(Jahr > 1900) |>
@@ -141,7 +147,7 @@ ggplot(data = d_donau_min_max, mapping = aes(x = Datum, y = Abfluss)) +
 #### Monats-Mittelwerte
 
 ```{r}
-dd2 <- d_donau |> 
+dd2 <- d_donau |>
   group_by(Monat) |>
   summarise(
     mean = mean(Abfluss),
@@ -149,10 +155,12 @@ dd2 <- d_donau |>
     q75 = quantile(Abfluss, probs = 0.75)
   )
 
-ggplot(data = dd2, mapping = aes(group = 1)) + 
+ggplot(data = dd2, mapping = aes(group = 1)) +
   geom_ribbon(
-    mapping = aes(x = Monat, ymin = q25, ymax = q75), 
-    color = "blue", fill = "light blue", alpha = 1/2
+    mapping = aes(x = Monat, ymin = q25, ymax = q75),
+    color = "blue",
+    fill = "light blue",
+    alpha = 1 / 2
   ) +
   geom_line(mapping = aes(x = Monat, y = mean), linewidth = 1) +
   labs(y = "Abfluss")
@@ -165,32 +173,41 @@ ggplot(data = dd2, mapping = aes(group = 1)) +
 ###### Verteilung als Histogramm
 
 ```{r}
-ggplot(data = d_donau) + geom_histogram(mapping = aes(x = Abfluss), binwidth = 30) +
-    labs(y = "", title = "Histogramm")
+ggplot(data = d_donau) +
+  geom_histogram(mapping = aes(x = Abfluss), binwidth = 30) +
+  labs(y = "", title = "Histogramm")
 ```
 
 ###### Empirische Verteilungsfunktion
 
 ```{r}
-ggplot(data = d_donau) + stat_ecdf(mapping = aes(x = Abfluss)) + 
-    labs(y = "", title = "Empirische Verteilung")
+ggplot(data = d_donau) +
+  stat_ecdf(mapping = aes(x = Abfluss)) +
+  labs(y = "", title = "Empirische Verteilung")
 ```
 
 ###### Normalverteilung
 
 ```{r}
 ggplot(data = d_donau) +
-  geom_histogram(mapping = aes(x = Abfluss, y = after_stat(density)), binwidth = 30) +
-  stat_function(fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)), color = "red")
+  geom_histogram(
+    mapping = aes(x = Abfluss, y = after_stat(density)),
+    binwidth = 30
+  ) +
+  stat_function(
+    fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)),
+    color = "red"
+  )
 ```
 
--   Normalverteilung passt nicht gut
+- Normalverteilung passt nicht gut
 
 ###### QQ-Plot
 
 ```{r}
 ggplot(data = d_donau, mapping = aes(sample = Abfluss)) +
-  stat_qq() + stat_qq_line()
+  stat_qq() +
+  stat_qq_line()
 ```
 
--   Auch hier ist zu erkennen, dass die Verteilung linkssteil ist.
+- Auch hier ist zu erkennen, dass die Verteilung linkssteil ist.

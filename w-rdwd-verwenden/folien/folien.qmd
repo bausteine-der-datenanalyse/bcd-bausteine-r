@@ -26,7 +26,7 @@ registerS3method("knit_print", "data.frame", show_dataframe)
 ## Regendaten einer Station
 
 ```{r, message=FALSE}
-d <- selectDWD(name = "Bochum", res = "daily", var = "kl", per = "historical", current=TRUE) |>
+d <- selectDWD(name = "Bochum", res = "daily", var = "kl", per = "historical", current = TRUE) |>
   dataDWD(read = FALSE) |>
   readDWD(varnames = TRUE) |>
   mutate(datum = ymd(MESS_DATUM))
@@ -68,7 +68,7 @@ metaIndex
 ```{r}
 ids <- findID("Berlin", exactmatch = FALSE, quiet = TRUE)
 metaIndex |>
-  filter(Stations_id %in% ids, res == 'daily', var == 'kl', per == 'historical') |>
+  filter(Stations_id %in% ids, res == "daily", var == "kl", per == "historical") |>
   select(Stationsname, von_datum, bis_datum)
 ```
 
@@ -80,7 +80,7 @@ metaIndex |>
 
 ```{r}
 metaIndex |>
-  filter(str_starts(Stationsname, "Berlin"), res == 'daily', var == 'kl', per == 'historical') |>
+  filter(str_starts(Stationsname, "Berlin"), res == "daily", var == "kl", per == "historical") |>
   select(Stationsname, von_datum, bis_datum)
 ```
 

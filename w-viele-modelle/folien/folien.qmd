@@ -75,7 +75,7 @@ rd_freiburg
 ```{r}
 #| warning: false
 ggplot(data = rd_freiburg) +
-  geom_line(mapping = aes(x = MESS_DATUM, y = pred), color = "red") 
+  geom_line(mapping = aes(x = MESS_DATUM, y = pred), color = "red")
 ```
 
 []{.down40}

@@ -10,5 +10,5 @@ d_wea_min <- d_wea_min |> select(datum, zeit, v_wind, drehzahl, leistung, B6_y, 
 
 save(
   d_wea_min,
-  file="data/data-exercise.Rdata"
+  file = "data/data-exercise.Rdata"
 )

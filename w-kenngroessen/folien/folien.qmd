@@ -76,7 +76,7 @@ Keine Funktion für AD-Streuung
 []{.up10}
 ```{r}
 d <- tibble(
-  A = c(1, 2, 3, 4, 5, 6), 
+  A = c(1, 2, 3, 4, 5, 6),
   B = c(1, 2, 1, 2, 1, 2)
 )
 ```
@@ -191,7 +191,7 @@ sd(d_ns_m_2010$Niederschlag)
 
 ```{r}
 d <- tibble(A = c(1, 2, 3), B = c(0, 4, 5))
-ggplot(data = d) + 
+ggplot(data = d) +
   geom_hline(mapping = aes(yintercept = A)) + geom_vline(mapping = aes(xintercept = B))
 ```
 
@@ -200,8 +200,8 @@ ggplot(data = d) +
 ## Minimalbeispiel (mit Zahlenwerten)
 
 ```{r}
-ggplot() + 
-  geom_hline(yintercept = c(1, 2, 3)) + geom_vline(xintercept = c(0, 4, 5)) 
+ggplot() +
+  geom_hline(yintercept = c(1, 2, 3)) + geom_vline(xintercept = c(0, 4, 5))
 ```
 
 - Werte können auch direkt angegeben werden (anstatt aus Dataframe)
@@ -214,7 +214,7 @@ ggplot() +
 ```{r}
 ggplot(data = d_ns_m) +
   geom_histogram(mapping = aes(x = Niederschlag), binwidth = 10, boundary = 0) +
-  geom_vline(xintercept = mean(d_ns_m$Niederschlag), color = 'red')
+  geom_vline(xintercept = mean(d_ns_m$Niederschlag), color = "red")
 ```
 
 - Ohne `c(...)` wenn nur ein Wert dargestellt werden soll
@@ -225,7 +225,7 @@ ggplot(data = d_ns_m) +
 ```{r}
 ggplot(data = d_ns_m) +
   geom_step(mapping = aes(x = Niederschlag), stat = "ecdf") +
-  geom_hline(yintercept = c(0.2, 0.5, 0.9), color = 'blue')
+  geom_hline(yintercept = c(0.2, 0.5, 0.9), color = "blue")
 ```
 
 ## Monatsniederschläge mit Mittelwert
@@ -276,7 +276,7 @@ quantile(d$X, probs = c(0.2, 0.25, 0.5, 0.9), type = 2)
 p <- c(0.2, 0.25, 0.5, 0.9)
 q <- quantile(d$X, p, type = 2)
 ggplot(data = d) +
-  geom_hline(yintercept = p, color = 'blue') + geom_vline(xintercept = q, color = 'red') +
+  geom_hline(yintercept = p, color = "blue") + geom_vline(xintercept = q, color = "red") +
   geom_step(mapping = aes(x = X), stat = "ecdf")
 ```
 
@@ -396,7 +396,7 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_A)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
@@ -406,7 +406,7 @@ ggplot(data = lc_to_tibble(lc_A)) +
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_B)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
@@ -416,7 +416,7 @@ ggplot(data = lc_to_tibble(lc_B)) +
 
 ```{r}
 ggplot(data = lc_to_tibble(lc_C)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
@@ -429,7 +429,7 @@ ggplot(data = lc_to_tibble(lc_C)) +
 ```{r}
 d <- Lc(d_ns_m_2008$Niederschlag)
 ggplot(data = lc_to_tibble(d)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
@@ -438,7 +438,7 @@ ggplot(data = lc_to_tibble(d)) +
 ```{r}
 d <- Lc(d_ns_m_nha_trang_2015$Niederschlag)
 ggplot(data = lc_to_tibble(d)) +
-  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = 'black', fill = 'linen') +
+  geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
 
@@ -483,18 +483,16 @@ Gini(d_ns_m_nha_trang_2015$Niederschlag)
 
 ### Werte aus Dataframe
 
-```{r}
-#| eval: false
-ggplot(data = d) + 
+```{.r}
+ggplot(data = d) +
   geom_hline(mapping = aes(yintercept = <M>), Argumente) +
   geom_vline(mapping = aes(xintercept = <M>), Argumente)
 ```
 
 ### Werte direkt angegeben
 
-```{r}
-#| eval: false
-ggplot() + 
+```{.r}
+ggplot() +
   geom_hline(yintercept = c(...), Argumente) +
   geom_vline(xintercept = c(...), Argumente)
 ```
@@ -510,8 +508,7 @@ ggplot() +
 
 ## Boxplots mit `geom_boxplot()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_boxplot(mapping = aes(x = <M>, y = <M>), Argumente)
 ```
@@ -535,8 +532,7 @@ ggplot(data = d) +
 
 ## Bänder mit `geom_ribbon()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_ribbon(mapping = aes(x = <M>, ymin = <M>, ymax = <M>), Argumente)
 ```

@@ -16,7 +16,11 @@ d_sum <- function(ti) {
     pad()
 }
 
-d <- read_excel("data/unistrasse-2017.xlsx", sheet = "raw(T)", range = "B2:H20712")
+d <- read_excel(
+  "data/unistrasse-2017.xlsx",
+  sheet = "raw(T)",
+  range = "B2:H20712"
+)
 
 d_all <- d |>
   filter(!is.na(Fahrzeug)) |>
@@ -32,4 +36,4 @@ d_15m
 d_60m <- d_sum(60)
 d_60m
 
-save(d_all, d_15m, d_60m, file="data/data-exercise.Rdata")
+save(d_all, d_15m, d_60m, file = "data/data-exercise.Rdata")

@@ -312,7 +312,7 @@ ggplot(data = d) +
 ```
 - Art der Intervalle (linksoffen, rechtsoffen) mit `closed`
 
-## Histogramm anpassen 4/5 
+## Histogramm anpassen 4/5
 
 ```{r}
 ggplot(data = d) +
@@ -431,8 +431,7 @@ ggplot(data = d_ns_bochum_tag) +
 
 ## Werte darstellen mit `geom_col()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_col(mapping = aes(x = <M>, y = <M>, fill = <M>, color = <M>), Argumente)
 ```
@@ -459,8 +458,7 @@ ggplot(data = d) +
 
 ## Zählen und darstellen mit `geom_bar()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_bar(mapping = aes(x = <M>, fill = <M>, color = <M>), Argumente)
 ```
@@ -489,8 +487,7 @@ $\rightarrow$ Wie `geom_col` aber ohne y
 
 ## Histogramme mit `geom_histogram()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_histogram(mapping = aes(x = <M>, y = after_stat(density), fill = <M>), Argumente)
 ```
@@ -520,8 +517,7 @@ ggplot(data = d) +
 
 ## Empirische Verteilungsfunktion mit `geom_step()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = d) +
   geom_step(mapping = aes(x = <M>, color = <M>), stat = "ecdf")
 ```

@@ -9,13 +9,13 @@ date-format: long
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
 
-execute: 
+execute:
   echo: false
 
-format: 
+format:
   typst:
     toc: true
-    brand: false  
+    brand: false
     section-numbering: 1.1.1
 ---
 
@@ -57,10 +57,10 @@ date-format: long
 bibliography: bibliographie.bib
 bibliographystyle: american-psychological-association
 
-execute: 
+execute:
   echo: false
 
-format: 
+format:
   typst:
     toc: true
     section-numbering: 1.1.1
@@ -73,7 +73,7 @@ Anschließend wird angegeben, dass sich die verwendeten Literaturstellen in der 
 
 Im nächsten Abschnitt wird gesagt, dass der R-Code nicht ausgegeben wird. Verwenden Sie diese Option um den Fluss beim Lesen Ihres Textes nicht durch Programmcode zu stören. Bei Bedarf lassen sich die Rechnungen gut anhand des Quellcodes nachvollziehen.
 
-Schließlich wir als Ausgabeformat `typst` ausgewählt um ein PDF-Dokument zu erzeugen. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*), `number-sections: true` für nummerierte Abschnitte und `section-numbering: 1.1.1` für das Nummerierungschema. 
+Schließlich wir als Ausgabeformat `typst` ausgewählt um ein PDF-Dokument zu erzeugen. Dabei steht `toc: true` dafür, dass ein Inhaltsverzeichnis eingefügt wird (toc = *Table of Contents*), `number-sections: true` für nummerierte Abschnitte und `section-numbering: 1.1.1` für das Nummerierungschema.
 
 ## Inhalt
 
@@ -288,7 +288,7 @@ d <- tibble(
   A = c("$\\pi$", "$\\mathrm{e}$", "$\\sqrt{2}$"),
   Test = round(c(pi, exp(1), sqrt(2)), digits = 3)
 )
-kable(d, caption = 'Mathematische Konstanten')
+kable(d, caption = "Mathematische Konstanten")
 ```
 
 Alternativ können Tabellen auch in der Markdown-Schreibweise eingefügt werden.

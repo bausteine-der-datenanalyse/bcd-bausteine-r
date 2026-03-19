@@ -37,7 +37,7 @@ Diese Vorgehensweise lässt sich mit wenig Aufwand durch die Funktionen `save` u
 ## Dataframe speichern und laden 2/3
 
 ```{r}
-d <- tibble(A = c(1, 2, 3), B = c('u', 'v', 'w'))
+d <- tibble(A = c(1, 2, 3), B = c("u", "v", "w"))
 save(d, file = "daten/test.RData")
 rm(list = "d")
 ```
@@ -51,7 +51,7 @@ Dataframe `d`
 ## Dataframe speichern und laden 3/3
 
 ```{r}
-load('daten/test.RData')
+load("daten/test.RData")
 d
 ```
 
@@ -64,7 +64,7 @@ d
 
 ```{r}
 d <- tibble(
-  Name = c("unistrasse_nord", "unistrasse_sued", "markstrasse_ost", "markstrasse_west"), 
+  Name = c("unistrasse_nord", "unistrasse_sued", "markstrasse_ost", "markstrasse_west"),
   Wert = c(10, 20, 4, 8)
 )
 d
@@ -73,7 +73,7 @@ d
 ## Richtung löschen
 
 ```{r}
-d |> 
+d |>
   mutate(NameKurz = str_replace(Name, "_nord|_sued|_ost|_west", ""))
 ```
 
@@ -163,7 +163,7 @@ d_f
 ## Schritt 1: Alles in eine Zeile
 
 ```{r}
-d1 <- d_f |> 
+d1 <- d_f |>
   pivot_longer(
     cols = starts_with("kind"), values_transform = as.character, values_drop_na = TRUE
   )
@@ -205,7 +205,7 @@ d2
 ## Schritt 3: Spalten für Merkmale
 
 ```{r}
-d3 <- d2 |> 
+d3 <- d2 |>
   pivot_wider(names_from = merkmal, values_from = value) |>
   mutate(alter = as.integer(alter))
 ```
@@ -226,7 +226,7 @@ d_k <- d_f |>
   pivot_longer(
     cols = starts_with("kind"), values_transform = as.character, values_drop_na = TRUE
   ) |>
-  separate(name, into = c(NA, "kind", "merkmal")) |> 
+  separate(name, into = c(NA, "kind", "merkmal")) |>
   pivot_wider(names_from = merkmal, values_from = value) |>
   mutate(Alter = as.integer(alter))
 ```

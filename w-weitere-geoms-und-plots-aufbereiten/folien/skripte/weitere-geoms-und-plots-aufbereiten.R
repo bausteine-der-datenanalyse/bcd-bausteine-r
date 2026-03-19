@@ -28,8 +28,15 @@ gdp <- as.tibble(wb(indicator = "NY.GDP.MKTP.CD"))
 gdp
 
 # Klassifizierung
-download.file("http://databank.worldbank.org/data/download/site-content/CLASS.xls", "data/class.xls")
-cls <- read_xls("data/class.xls", sheet = "List of economies", range = "A5:G224") |>
+download.file(
+  "http://databank.worldbank.org/data/download/site-content/CLASS.xls",
+  "data/class.xls"
+)
+cls <- read_xls(
+  "data/class.xls",
+  sheet = "List of economies",
+  range = "A5:G224"
+) |>
   filter(Economy != "x")
 cls
 
@@ -49,7 +56,7 @@ countries <- cls$Economy
 countries
 
 # Bevölkerung
-popf <- pop |> 
+popf <- pop |>
   filter(country %in% countries) |>
   select(year = date, country, pop = value)
 summary(popf)
@@ -81,7 +88,15 @@ d_wb_all <- popf |>
   left_join(clsf, by = "country") |>
   mutate(
     year = as.integer(year),
-    ig = factor(ig, levels = c("Low income", "Lower middle income", "Upper middle income", "High income"))
+    ig = factor(
+      ig,
+      levels = c(
+        "Low income",
+        "Lower middle income",
+        "Upper middle income",
+        "High income"
+      )
+    )
   ) |>
   arrange(country, year)
 d_wb_all
@@ -97,7 +112,20 @@ d_wb_2012
 
 # Ausgewählte Länder
 d_wb_countries <- d_wb_all |>
-  filter(country %in% c("Germany", "Vietnam", "India", "China", "Portugal", "Switzerland", "United States", "Maledives", "Russian Federation"))
+  filter(
+    country %in%
+      c(
+        "Germany",
+        "Vietnam",
+        "India",
+        "China",
+        "Portugal",
+        "Switzerland",
+        "United States",
+        "Maledives",
+        "Russian Federation"
+      )
+  )
 d_wb_countries
 
 # Ausgewählte Länder im Jahr 2012
@@ -111,7 +139,7 @@ d_wb_regions <- d_wb_all |>
   group_by(region, year) |>
   summarize(
     gdp = sum(gdp),
-    pop = sum(pop), 
+    pop = sum(pop),
     gge = sum(gge)
   )
 
@@ -127,16 +155,17 @@ download.file(
 
 # Auspacken
 unzip(
-  "data/niederschlag.zip", 
+  "data/niederschlag.zip",
   files = "produkt_nieder_tag_19510101_20171231_00055.txt",
   exdir = "data"
 )
 
 # Tageswerte einlesen
 d_ns_bochum_tag <- read.csv(
-    "data/produkt_nieder_tag_19510101_20171231_00055.txt", 
-    sep = ";", dec = "."
-  ) |>
+  "data/produkt_nieder_tag_19510101_20171231_00055.txt",
+  sep = ";",
+  dec = "."
+) |>
   select(MESS_DATUM, RS) |>
   mutate(
     Datum = ymd(MESS_DATUM),
@@ -156,11 +185,15 @@ d_ns_bochum_monat <- d_ns_bochum_tag |>
 # Speichern und Aufräumen
 #
 save(
-  d_wb_all, d_wb_2012, d_wb_countries, d_wb_countries_2012, d_wb_regions, 
-  d_ns_bochum_tag, d_ns_bochum_monat, 
-  file="data/data-lecture.Rdata"
+  d_wb_all,
+  d_wb_2012,
+  d_wb_countries,
+  d_wb_countries_2012,
+  d_wb_regions,
+  d_ns_bochum_tag,
+  d_ns_bochum_monat,
+  file = "data/data-lecture.Rdata"
 )
 file.remove("data/class.xls")
 file.remove("data/niederschlag.zip")
 file.remove("data/produkt_nieder_tag_19510101_20171231_00055.txt")
-

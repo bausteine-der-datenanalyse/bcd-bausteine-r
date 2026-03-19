@@ -33,7 +33,13 @@ load_file <- function(year, range = NULL) {
       )
     ) |>
     select(-ends_with("_id"), -ort_ir, -ort_nir, -im_ruhrgebiet) |>
-    select(Jahr = jahr, Fachbereich = fachbereich, Geschlecht = geschlecht, Verkehrsmittel = vm_heute, Zeit = zeit)
+    select(
+      Jahr = jahr,
+      Fachbereich = fachbereich,
+      Geschlecht = geschlecht,
+      Verkehrsmittel = vm_heute,
+      Zeit = zeit
+    )
 }
 
 d_bo_vm <- rbind(
@@ -45,5 +51,5 @@ d_bo_vm <- rbind(
 
 save(
   d_bo_vm,
-  file="data/data-exercise.Rdata"
+  file = "data/data-exercise.Rdata"
 )

@@ -33,7 +33,7 @@ name <- "Horst Mustermann"
 age <- 32
 weight <- 89
 height <- 1.83
-bmi <- weight/height^2 
+bmi <- weight/height^2
 paste0(name, ", ", age, " Jahre, BMI = ", signif(bmi, 3))
 ```
 
@@ -63,7 +63,7 @@ dmy("1. January 2010")
 ymd("2015-Mar-06")
 dmy("6 Jun 2011")
 mdy("August 19 (1966)")
-mdy("12/30/14") 
+mdy("12/30/14")
 ```
 
 # Aufgabe 5

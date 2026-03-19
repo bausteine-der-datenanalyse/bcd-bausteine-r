@@ -32,7 +32,7 @@ library(rnaturalearth)
 
 ### Koordinatensystem mit Breiten- und Längengraden
 
-- Koordinaten eines Punktes mit Breitengrad (*latitute*) und Längengrad (*longitude*) 
+- Koordinaten eines Punktes mit Breitengrad (*latitute*) und Längengrad (*longitude*)
   - Angaben im Winkelmaß
   - Breitengrad ab Äquator (zwischen -90° und 90° oder mit Zusatz N/S)
   - Längengrad ab Nullmeridian (zwischen -180° und 180° oder mit Zusatz O/W)
@@ -51,14 +51,14 @@ library(rnaturalearth)
 
 ```{r}
 #| echo: false
-pts <- 
+pts <-
   st_multipoint(rbind(c(0, 0), c(7.27, 51.45))) |>
-  st_sfc(crs = 4326) 
+  st_sfc(crs = 4326)
 world <- ne_countries(returnclass = "sf") |>
   filter(geounit != "Antarctica") |>
   select(geometry)
-p <- ggplot() + 
-  geom_sf(data = world, fill="light gray") +
+p <- ggplot() +
+  geom_sf(data = world, fill = "light gray") +
   geom_sf(data = pts, color = "red") +
   scale_y_continuous(breaks = seq(-90, 90, 10))
 p + coord_sf(crs = "+proj=longlat")
@@ -136,11 +136,11 @@ d_world <- ne_countries() |>
 ## Plot der Weltkarte
 
 ```{r}
-ggplot() + 
+ggplot() +
   geom_sf(data = d_world)
 ```
 
-- Plotten von `sf` Dataframes mit `geom_sf()` 
+- Plotten von `sf` Dataframes mit `geom_sf()`
 - Mapping für Geometrie ist eingebaut
 
 # Berechnung neuer Daten
@@ -164,7 +164,7 @@ d_world_a <- d_world |>
 ## Weltkarte mit Fläche der Länder 2/2
 
 ```{r}
-ggplot(data = d_world_a) + 
+ggplot(data = d_world_a) +
   geom_sf(mapping = aes(fill = area)) +
   scale_fill_distiller(palette = 8, direction = 1)
 ```
@@ -178,8 +178,8 @@ ggplot(data = d_world_a) +
 ```{r}
 d_le <- wb_data(indicator = "SP.DYN.LE00.IN") |>
   select(adm0_a3 = iso3c, date, le = SP.DYN.LE00.IN) |>
-  filter(!is.na(le)) |> 
-  group_by(adm0_a3) |> 
+  filter(!is.na(le)) |>
+  group_by(adm0_a3) |>
   slice_max(date)
 ```
 
@@ -201,9 +201,9 @@ d_world_le <- d_world |>
 ## Weltkarte mit Lebenserwartung
 
 ```{r}
-ggplot(data = d_world_le) + 
+ggplot(data = d_world_le) +
   geom_sf(mapping = aes(fill = le)) +
-  scale_fill_distiller(palette="RdPu") + labs(fill = "Lebenserwartung")
+  scale_fill_distiller(palette = "RdPu") + labs(fill = "Lebenserwartung")
 ```
 
 # Werte zu einzelnen Koordinaten
@@ -226,7 +226,7 @@ ggplot() + geom_sf(data = d_world) +
 ```{r}
 d_cities_sf <- d_cities |> st_as_sf(coords = c("long", "lat"), crs = "+proj=longlat")
 ggplot() + geom_sf(data = d_world) +
-  geom_sf(data = d_cities_sf, mapping = aes(size = pop), color = 'hotpink', show.legend = FALSE)
+  geom_sf(data = d_cities_sf, mapping = aes(size = pop), color = "hotpink", show.legend = FALSE)
 ```
 
 - Dataframe in Simple Feature Objekt konvertieren mit `st_as_sf`
@@ -257,8 +257,8 @@ d_rb <- gisco_get_nuts(country = "Germany", nuts_level = 3, resolution = 10)
 ```{r}
 ggplot() +
   geom_sf(data = d_rb, mapping = aes(fill = NUTS_NAME), linewidth = 0.1, show.legend = FALSE) +
-  geom_sf(data = d_bl, fill = NA, linewidth = 0.5, color = 'white') +
-  geom_sf(data = d_de, fill = NA, linewidth = 0.75, color='black') +
+  geom_sf(data = d_bl, fill = NA, linewidth = 0.5, color = "white") +
+  geom_sf(data = d_de, fill = NA, linewidth = 0.75, color = "black") +
   theme_void()
 ```
 
@@ -277,8 +277,8 @@ ggplot() +
 
 ```{r}
 #| eval: false
-q <- opq(getbb('Bochum, Germany'))
-s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf() 
+q <- opq(getbb("Bochum, Germany"))
+s1 <- add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
 ```
 
 - Bereich festlegen mit `getbb` (bb steht für Bounding Box)
@@ -301,7 +301,7 @@ s1 <- s1a
 ```
 
 ```{r}
-ggplot() + 
+ggplot() +
   geom_sf(data = s1$osm_lines)
 ```
 
@@ -311,7 +311,7 @@ ggplot() +
 
 ```{r}
 if (!file.exists("daten/strassen-bochum.RData")) {
-  q  <- opq(getbb('Bochum, Germany'))
+  q  <- opq(getbb("Bochum, Germany"))
   s1 <- add_osm_feature(q, key = "highway", value = c("motorway", "primary", "motorway_link", "primary_link")) |> osmdata_sf()
   s2 <- add_osm_feature(q, key = "highway", value = c("secondary", "tertiary", "secondary_link", "tertiary_link")) |> osmdata_sf()
   s3 <- add_osm_feature(q, key = "highway", value = c("unclassified", "residential")) |> osmdata_sf()
@@ -330,12 +330,12 @@ if (!file.exists("daten/strassen-bochum.RData")) {
 ## Karte von Bochum 2/3
 
 ```{r}
-p <- ggplot() + 
-  geom_sf(data = u1$osm_polygons, color = 'orange', linewidth = 0.35) +
-  geom_sf(data = f1$osm_lines, color = 'steelblue', linewidth = 0.35) +
-  geom_sf(data = s3$osm_lines, color = 'light gray', linewidth = 0.15) +
-  geom_sf(data = s2$osm_lines, color = 'dark gray', linewidth = 0.25) +
-  geom_sf(data = s1$osm_lines, color = 'black', linewidth = 0.35) +
+p <- ggplot() +
+  geom_sf(data = u1$osm_polygons, color = "orange", linewidth = 0.35) +
+  geom_sf(data = f1$osm_lines, color = "steelblue", linewidth = 0.35) +
+  geom_sf(data = s3$osm_lines, color = "light gray", linewidth = 0.15) +
+  geom_sf(data = s2$osm_lines, color = "dark gray", linewidth = 0.25) +
+  geom_sf(data = s1$osm_lines, color = "black", linewidth = 0.35) +
   coord_sf(xlim = c(7.1, 7.3), ylim = c(51.41, 51.52)) +
   theme_void()
 ```
@@ -353,14 +353,14 @@ p
 ```{r}
 if (!file.exists("daten/bab.RData")) {
   bab_raw <- opq(bbox = getbb("Deutschland", featuretype = "country")) |>
-    add_osm_feature(key = "highway", value = "motorway") |> 
+    add_osm_feature(key = "highway", value = "motorway") |>
     osmdata_sf()
   d_bab <- bab_raw$osm_lines |>
     st_filter(d_de, .predicate = st_within) |>
     drop_na(ref) |>
     group_by(ref) |>
     summarise() |>
-    st_simplify(dTolerance = 100) 
+    st_simplify(dTolerance = 100)
   save(d_bab, file = "daten/bab.RData")
 } else {
   load(file = "daten/bab.RData")
@@ -374,7 +374,7 @@ if (!file.exists("daten/bab.RData")) {
 
 ```{r}
 ggplot() +
-  geom_sf(data = d_bl, linewidth = 0.25) + 
+  geom_sf(data = d_bl, linewidth = 0.25) +
   geom_sf(data = d_de, fill = NA, linewidth = 0.5) +
   geom_sf(data = d_bab, mapping = aes(color = ref), linewidth = 0.35, show.legend = FALSE) +
   theme_void()
@@ -386,7 +386,7 @@ ggplot() +
 
 ```{r}
 #| eval: false
-q <- opq(getbb('Bochum, Germany'))
+q <- opq(getbb("Bochum, Germany"))
 s1 <-  add_osm_feature(q, key = "highway", value = "motorway") |> osmdata_sf()
 ggplot() + geom_sf(data = s1$osm_lines) + coord_sf(xlim = c(7.17, 7.3), ylim = c(51.44, 51.5))
 ```

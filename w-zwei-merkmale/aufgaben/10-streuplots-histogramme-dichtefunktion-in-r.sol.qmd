@@ -9,7 +9,10 @@ load("daten/zwei-merkmale-aufgaben-2.Rdata")
 
 ```{r}
 ggplot(data = d_unistrasse) +
-  geom_point(mapping = aes(x=Datum, y=Geschwindigkeit, color=VZ, shape=Fahrzeug), alpha = 0.25)
+  geom_point(
+    mapping = aes(x = Datum, y = Geschwindigkeit, color = VZ, shape = Fahrzeug),
+    alpha = 0.25
+  )
 ```
 
 - Fahrzeugtyp nicht wirklich ablesbar
@@ -20,15 +23,21 @@ ggplot(data = d_unistrasse) +
 Mit Rechtecken
 
 ```{r}
-ggplot(data = d_unistrasse) + 
-  geom_bin2d(mapping = aes(x = Uhrzeit, y = Geschwindigkeit), binwidth = c(0.5, 3))
+ggplot(data = d_unistrasse) +
+  geom_bin2d(
+    mapping = aes(x = Uhrzeit, y = Geschwindigkeit),
+    binwidth = c(0.5, 3)
+  )
 ```
 
 Mit Sechsecken
 
 ```{r}
-ggplot(data = d_unistrasse) + 
-  geom_hex(mapping = aes(x = Uhrzeit, y = Geschwindigkeit), binwidth = c(0.5, 3))
+ggplot(data = d_unistrasse) +
+  geom_hex(
+    mapping = aes(x = Uhrzeit, y = Geschwindigkeit),
+    binwidth = c(0.5, 3)
+  )
 ```
 
 #### Dichtefunktionsplot
@@ -36,14 +45,17 @@ ggplot(data = d_unistrasse) +
 Mit Niveaulinien (über den Streuplot gelegt)
 
 ```{r}
-ggplot(data = d_unistrasse) + 
+ggplot(data = d_unistrasse) +
   geom_point(mapping = aes(x = Uhrzeit, y = Geschwindigkeit), alpha = 0.25) +
-  geom_density_2d(mapping = aes(x = Uhrzeit, y = Geschwindigkeit), color = 'gray')
+  geom_density_2d(
+    mapping = aes(x = Uhrzeit, y = Geschwindigkeit),
+    color = "gray"
+  )
 ```
 
 Mit gefüllten Flächen
 
 ```{r}
-ggplot(data = d_unistrasse) + 
+ggplot(data = d_unistrasse) +
   geom_density_2d_filled(mapping = aes(x = Uhrzeit, y = Geschwindigkeit))
 ```

@@ -12,7 +12,7 @@ library(RcppRoll)
 library(tidyverse)
 
 show_dataframe <- function(d, options, ...) {
-  if(nrow(d) < 20000) {
+  if (nrow(d) < 20000) {
     do_gt = gt
   } else {
     do_gt = gt_preview
@@ -40,7 +40,7 @@ df <- tibble(
   Datum = seq(as.Date("1949-01-01"), by = "month", length.out = 144),
   Passagiere = as.numeric(AirPassengers)
 )
-ggplot(data = df) + 
+ggplot(data = df) +
   geom_line(mapping = aes(x = Datum, y = Passagiere)) +
   labs(title = "Monatliche Passagierzahlen im Luftverkehr")
 ```
@@ -63,14 +63,14 @@ Das R-Paket `tsibble` stellt eine Datenstruktur (das `tsibble` - wie `tibble` au
 - Normalen Dataframe mit `as_tsibble` in `tsibble` konvertieren
   - Zeitpunkte dürfen nicht doppelt vorkommen
   - Angeben, welche Variable Index sein soll
-  
+
 # Winddaten vom Deutschen Wetterdienst
 
 ## Übersicht Stationen
 
 ```{r}
 data("metaIndex")
-d_stationen <- metaIndex |> 
+d_stationen <- metaIndex |>
   filter(var == "wind", res == "10_minutes") |>
   mutate(Dauer = round(as.numeric(bis_datum - von_datum) / 365.25)) |>
   arrange(desc(Dauer)) |>
@@ -83,11 +83,9 @@ d_stationen
 
 ```{r message=FALSE}
 if (!file.exists("daten/d_wind_raw.RData")) {
-  d_wind_raw <- selectDWD(
-    name = "Helgoland", res = "10_minutes", var = "wind", per = "historical", current = TRUE
-  ) |>
-  dataDWD() |>
-  bind_rows()
+  d_wind_raw <- selectDWD(name = "Helgoland", res = "10_minutes", var = "wind", per = "historical", current = TRUE) |>
+    dataDWD() |>
+    bind_rows()
   save(d_wind_raw, file = fname)
 } else {
   load(file = "daten/d_wind_raw.RData")
@@ -132,7 +130,7 @@ show(d_wind_raw_ts)
 ## Plot der Rohdaten
 
 ```{r}
-ggplot(data = d_wind_raw_ts) + 
+ggplot(data = d_wind_raw_ts) +
   geom_line(mapping = aes(x = Datum, y = Geschwindigkeit))
 ```
 
@@ -143,7 +141,7 @@ Lücken im Datensatz, erste Lücke mit Linie verbunden!
 ## Lücken listen mit `count_gaps`
 
 ```{r}
-d_wind_raw_ts |> count_gaps() 
+d_wind_raw_ts |> count_gaps()
 ```
 
 ## Lücken listen mit `count_gaps`
@@ -160,7 +158,7 @@ d_wind <- d_wind_raw_ts |> fill_gaps()
 
 ```{r}
 #| echo: false
-d_wind 
+d_wind
 ```
 
 ::: {.columns}
@@ -183,7 +181,7 @@ Fehlende Beobachtungen mit `NA` aufgefüllt.
 ## Plot
 
 ```{r}
-ggplot(d_wind) + 
+ggplot(d_wind) +
   geom_line(mapping = aes(x = Datum, y = Geschwindigkeit))
 ```
 
@@ -206,10 +204,10 @@ d_wind_stark <- d_wind |>
 
 ```{r}
 #| echo: false
-d_wind_stark 
+d_wind_stark
 ```
 
-Funktionen `roll_minr` und `roll_maxr` suchen aus `n = 12` Werten (aktuell und 11 vorangegangene) kleinsten und größten Wert heraus. Analog für Summe, Mittelwert und so weiter. 
+Funktionen `roll_minr` und `roll_maxr` suchen aus `n = 12` Werten (aktuell und 11 vorangegangene) kleinsten und größten Wert heraus. Analog für Summe, Mittelwert und so weiter.
 
 ## Plot
 
@@ -234,7 +232,7 @@ d_wind_stark_g <- d_wind_stark |>
 
 ```{r}
 #| echo: false
-d_wind_stark_g 
+d_wind_stark_g
 ```
 
 Neue Gruppe falls Abstand zwischen Beobachtungen größer 10 Minuten. In `cumsum` wird `FALSE = 0` und `TRUE = 1` verwendet.
@@ -250,7 +248,7 @@ ggplot(data = d_wind_stark_g) +
 ## Ereignisse zusammenfassen
 
 ```{r}
-d_starkwindereignisse <- d_wind_stark_g |> 
+d_starkwindereignisse <- d_wind_stark_g |>
   as_tibble() |>
   group_by(gruppe) |>
   summarise(start = min(Datum), dauer = max(Datum) - min(Datum), v_max = max(v_max_120))
@@ -258,7 +256,7 @@ d_starkwindereignisse <- d_wind_stark_g |>
 
 ```{r}
 #| echo: false
-d_starkwindereignisse 
+d_starkwindereignisse
 ```
 
 Mit `as_tibble` wieder in 'normalen' Dataframe umwandeln damit `group_by` funktioniert wie gewohnt
@@ -295,5 +293,4 @@ ggplot(data = d_starkwindereignisse) +
 ```{r}
 ggplot(data = d_starkwindereignisse) +
   geom_histogram(mapping = aes(x = as.numeric(dauer, unit = "hours")), binwidth = 1)
-
 ```

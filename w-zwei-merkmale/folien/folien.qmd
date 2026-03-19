@@ -93,15 +93,15 @@ d_pisa |> gt() |> opt_interactive()
 ## Prognosen Sachverständigenrat
 
 ```{r}
-ggplot(data = d_svrw) + 
+ggplot(data = d_svrw) +
   geom_point(mapping = aes(x = Prognose, y = Wachstum))
 ```
 
 ## Prognosen Sachverständigenrat erweitert
 
 ```{r}
-ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +   
-  geom_point(size = 2) + geom_abline(intercept = 0, slope = 1, color = 'red') + geom_rug(color = 'blue')
+ggplot(data = d_svrw, mapping = aes(x = Prognose, y = Wachstum)) +
+  geom_point(size = 2) + geom_abline(intercept = 0, slope = 1, color = "red") + geom_rug(color = "blue")
 ```
 
 ## Prognosen Sachverständigenrat erweitert erklärt
@@ -123,7 +123,7 @@ ggplot(data = d_le_latest) +
 
 ```{r}
 ggplot(data = d_le_latest) +
-  geom_point(mapping = aes(x = he, y = le), shape = 21, fill = 'orange')
+  geom_point(mapping = aes(x = he, y = le), shape = 21, fill = "orange")
 ```
 
 ## `geom_point()`: Shapes
@@ -135,7 +135,7 @@ ggplot(data = d_le_latest) +
 # From https://ggplot2.tidyverse.org/reference/scale_shape.html
 d <- tibble(S = 0:24)
 ggplot(d, aes(0, 0, shape = S)) +
-  geom_point(aes(shape = S), size = 5, fill = 'red') +
+  geom_point(aes(shape = S), size = 5, fill = "red") +
   scale_shape_identity() +
   facet_wrap(~S) +
   theme_void()
@@ -144,7 +144,7 @@ ggplot(d, aes(0, 0, shape = S)) +
 ## Interaktive Diagramme mit `plotly`
 
 ```{r}
-p <- ggplot(data=d_le_latest) + geom_point(mapping = aes(x = he, y = le, label = country), shape = 21, fill = 'orange')
+p <- ggplot(data = d_le_latest) + geom_point(mapping = aes(x = he, y = le, label = country), shape = 21, fill = "orange")
 ggplotly(p, width = 800, height = 400)
 ```
 
@@ -186,8 +186,8 @@ p
 ## Blasendiagramm
 
 ```{r}
-ggplot(data = d_le_latest) + 
-  geom_point(mapping=aes(x = he, y = le, size = gdppc))
+ggplot(data = d_le_latest) +
+  geom_point(mapping = aes(x = he, y = le, size = gdppc))
 ```
 
 - Skalierung nach BIP pro Kopf
@@ -195,7 +195,7 @@ ggplot(data = d_le_latest) +
 ## Darstellung von fünf Merkmalen
 
 ```{r}
-d <- tibble(A = c(1, 6, 2, 8), B = c(10, 0, 5, 3.75), C = c(16, 2, 8, 4), D = c('a', 'b', 'b', 'a'), E = c('u', 'u', 'v', 'v'))
+d <- tibble(A = c(1, 6, 2, 8), B = c(10, 0, 5, 3.75), C = c(16, 2, 8, 4), D = c("a", "b", "b", "a"), E = c("u", "u", "v", "v"))
 ggplot(data = d) + geom_point(mapping = aes(x = A, y = B, size = C, color = D, shape = E))
 ```
 
@@ -206,7 +206,7 @@ ggplot(data = d) + geom_point(mapping = aes(x = A, y = B, size = C, color = D, s
 ## Histogramm 2D (Basisversion)
 
 ```{r}
-ggplot(data = d_le_latest) + 
+ggplot(data = d_le_latest) +
   geom_bin2d(mapping = aes(x = he, y = le))
 ```
 
@@ -227,7 +227,7 @@ ggplot(data = d_le_latest) +
 
 ```{r}
 ggplot(data = d_le_latest) +
-  geom_hex(mapping = aes(x=he, y=le), binwidth = c(1, 4))
+  geom_hex(mapping = aes(x = he, y = le), binwidth = c(1, 4))
 ```
 
 - Unterschied zu vorher: `geom_hex(...)` statt `geom_bin2d(...)`
@@ -245,7 +245,7 @@ ggplot(data = d_le_latest) +
 ## Dichtefunktion gefüllt
 
 ```{r}
-ggplot(data = d_le_latest) + 
+ggplot(data = d_le_latest) +
   geom_density_2d_filled(mapping = aes(x = he, y = le))
 ```
 
@@ -265,10 +265,10 @@ cor(d$X, d$Y)
 ## Zugehöriger Plot
 
 ```{r}
-ggplot(data = d, mapping = aes(x = X, y = Y)) + 
-  geom_vline(xintercept = mean(d$X), color = 'orange') + 
-  geom_hline(yintercept = mean(d$Y), color = 'orange') + 
-  geom_smooth(formula = y ~ x, method = 'lm', linewidth = 0.25) +
+ggplot(data = d, mapping = aes(x = X, y = Y)) +
+  geom_vline(xintercept = mean(d$X), color = "orange") +
+  geom_hline(yintercept = mean(d$Y), color = "orange") +
+  geom_smooth(formula = y ~ x, method = "lm", linewidth = 0.25) +
   geom_point(size = 3)
 ```
 
@@ -338,10 +338,10 @@ cor(log10(d_le_latest$gdppc), d_le_latest$le)
 
 ```{r}
 d <- tibble(X = c(1, 2, 3), Y = c(1, 5, 3))
-xm = mean(d$X)
-ym = mean(d$Y) 
-betaD = sum((d$X - xm) * (d$Y - ym)) / sum((d$X - xm)^2)
-alphaD = ym - betaD * xm
+xm <- mean(d$X)
+ym <- mean(d$Y)
+betaD <- sum((d$X - xm) * (d$Y - ym)) / sum((d$X - xm)^2)
+alphaD <- ym - betaD * xm
 ```
 
 - Rechenoperationen werden für Vektoren elementweise ausgeführt (anders als in Matlab)
@@ -353,8 +353,8 @@ alphaD = ym - betaD * xm
 ### Plot der Ausgleichsgeraden
 
 ```{r}
-ggplot(data = d) + 
-  geom_abline(intercept = alphaD, slope = betaD, color = 'orange', size = 1) +
+ggplot(data = d) +
+  geom_abline(intercept = alphaD, slope = betaD, color = "orange", size = 1) +
   geom_point(mapping = aes(x = X, y = Y), size = 3)
 ```
 
@@ -363,8 +363,8 @@ ggplot(data = d) +
 ### Ausgleichsgerade mit `geom_smooth()`
 
 ```{r}
-ggplot(data = d, mapping = aes(x = X, y = Y)) + 
-  geom_smooth(formula = y ~ x, method = 'lm', se = FALSE, color = 'orange') +
+ggplot(data = d, mapping = aes(x = X, y = Y)) +
+  geom_smooth(formula = y ~ x, method = "lm", se = FALSE, color = "orange") +
   geom_point(size = 3)
 ```
 
@@ -373,9 +373,9 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
 ### Ausgleichskurven mit LOESS, Beispiel 1
 
 ```{r}
-d <- tibble( X = 10 * runif(300), Y = sin(2 * pi * X / 10) + 0.2 * rnorm(300))
+d <- tibble(X = 10 * runif(300), Y = sin(2 * pi * X / 10) + 0.2 * rnorm(300))
 ggplot(data = d, mapping = aes(x = X, y = Y)) +
-  geom_point() + geom_smooth(formula = y ~ x, method = "loess", se = FALSE) 
+  geom_point() + geom_smooth(formula = y ~ x, method = "loess", se = FALSE)
 ```
 
 ##
@@ -385,7 +385,7 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
 ```{r}
 d <- tibble(X = 10 * runif(20), Y = sin(2 * pi * X / 10) + 0.2 * rnorm(20))
 ggplot(data = d, mapping = aes(x = X, y = Y)) +
-  geom_point() + geom_smooth(formula = y ~ x, method = "loess", se = TRUE) 
+  geom_point() + geom_smooth(formula = y ~ x, method = "loess", se = TRUE)
 ```
 
 - LOESS: Locally Estimated Scatterplot Smoothing
@@ -410,8 +410,7 @@ ggplot(data = d, mapping = aes(x = X, y = Y)) +
 
 ## Geglättete Daten mit `geom_smooth()`
 
-```{r}
-#| eval: false
+```{.r}
 ggplot(data = <DATAFRAME>) +
   geom_smooth(mapping = aes(x = <M>, y = <M>), Argumente)
 ```
@@ -426,7 +425,7 @@ ggplot(data = <DATAFRAME>) +
 | Argumente | Beschreibung                                       | Optional |
 |-----------|----------------------------------------------------|----------|
 | formula   | In der Regel `y ~ x`                               | Nein     |
-| method    | Methode (Linear mit `'lm'`, LOESS mit `'loess'`)   | Ja       |
+| method    | Methode (Linear mit `"lm"`, LOESS mit `"loess"`)   | Ja       |
 | se        | Konfidenzintervall anzeigen (`TRUE` oder `FALSE`)  | Ja       |
 | color     | Farbe                                              | Ja       |
 | size      | Linienstärke                                       | Ja       |
