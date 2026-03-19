@@ -12,6 +12,7 @@ Imports:
     ineq,
     rdwd,
     purrr,
+    RCurl,
     trend,
     giscoR,
     modelr,
