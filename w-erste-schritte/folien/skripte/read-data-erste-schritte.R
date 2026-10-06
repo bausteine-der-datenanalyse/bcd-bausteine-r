@@ -12,8 +12,15 @@ d_stat <-
       start = c(1, 6, 15, 24, 39, 49, 61, 102, 143),
       end = c(5, 14, 23, 38, 48, 60, 101, 142, 147),
       col_names = c(
-        "Stations_id", "von_datum", "bis_datum", "Stationshoehe",
-        "geoBreite", "geoLaenge", "Station", "Bundesland", "Abgabe"
+        "Stations_id",
+        "von_datum",
+        "bis_datum",
+        "Stationshoehe",
+        "geoBreite",
+        "geoLaenge",
+        "Station",
+        "Bundesland",
+        "Abgabe"
       )
     ),
     skip = 2,
@@ -51,7 +58,15 @@ read_one_file <- function(file) {
 }
 
 d_ns <- list.files(
-  path = "daten", pattern = "produkt_nieder_tag_.*txt", full.names = TRUE
+  path = "daten",
+  pattern = "produkt_nieder_tag_.*txt",
+  full.names = TRUE
 ) |>
   map(read_one_file) |>
   bind_rows()
+
+d_ns_monat <- d_ns |>
+  filter(!is.na(Niederschlag)) |>
+  group_by(Station, Jahr, Monat) |>
+  summarise(n = n(), Niederschlag = sum(Niederschlag)) |>
+  ungroup()

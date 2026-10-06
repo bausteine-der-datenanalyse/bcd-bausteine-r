@@ -1,5 +1,6 @@
 .quarto
 __output
+*_cache
 
 .Rproj.user
 .Rhistory
