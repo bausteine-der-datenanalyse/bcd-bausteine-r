@@ -1,11 +1,27 @@
 ## 
 
-1. Datei erste-schritte.zip von Moodle herunterladen und entpacken
-1. Workspace-Datei erste-schritte.code-workspace in Positron öffnen (File → Open Workspace from File…)
+1. Datei Laden Sie das Positron-Projekt [01-erste-schritte.zip](../../folien-r/c/01-erste-schritte.zip) zu den Folien herunter und entpacken Sie die Datei.
+1. Workspace-Datei erste-schritte.code-workspace doppelklicken, jetzt sollte Positron starten
+   - Falls VS Code installiert ist, öffnet sich eventuell VS Code statt Positron. Dann die Datei mit Rechtsklick → Öffnen mit → Positron öffnen.
 1. Datei erste-schritte.qmd öffnen
 1. Dokument durchschauen
-1. 'Preview' ausführen
-1. Dokument nochmal durchschauen, was hat sich geändert?
-1. Quarto ausführen und html-Dokument anschauen
+1. 'Preview' ausführen und Folien zusätzlich im Browser öffnen
+    - Die Vorschau erscheint in Positron im Bereich Viewer
+    - Rechts neben der Adresszeile (oben) das Symbol "Open in browser" klicken
+1. Alle Codeblöcke einzeln ausführen
+    - Über jedem Codeblock "Run Cell" klicken oder den Cursor in den Codeblock setzen und Strg+Shift+Enter (Mac: Cmd+Shift+Enter) drücken
+    - Ausgaben erscheinen in der Console, Grafiken im Bereich Plots
+1. Pinguin-Plot (Beispiel 1) verändern, speichern und die Vorschau beobachten
+    - `size = 2` auf `5` setzen
+    - `colour = species` durch `colour = island` ersetzen
+    - `x` und `y` vertauschen
+1. Eine eigene Folie einfügen
+    - Mit `## Meine Folie` eine neue Folie beginnen und zwei Stichpunkte darunter schreiben
+1. Daten anschauen
+    - In der Console `penguins` eingeben: Welche Spalten gibt es, wie viele Zeilen?
+    - Den Dataframe `d_ns_monat` in der Variablenansicht von Positron öffnen
+    - Im Ordner `daten` eine der Dateien `produkt_nieder_tag_…` öffnen: So sehen Rohdaten vom Deutschen Wetterdienst aus
+1. Einen Fehler provozieren
+    - Im Pinguin-Plot `ggplot` zu `ggplott` ändern, den Codeblock ausführen und die Fehlermeldung lesen
+    - Danach den Fehler wieder korrigieren
 
-Was können Sie jetzt schon verstehen?

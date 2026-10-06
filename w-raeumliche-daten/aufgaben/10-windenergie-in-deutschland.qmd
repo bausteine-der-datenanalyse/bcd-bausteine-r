@@ -6,7 +6,7 @@ In diesem Abschnitt sollen die Daten genutzt werden, um den Stand des Windenergi
 
 Eine vergleichbare Auswertung der Daten finden Sie auf der Webseite [Strom-Report](https://strom-report.com/windenergie/).
 
-Verwenden Sie für dieses Aufgabenblatt die Datei [09-raeumliche-daten-aufgaben.zip](09-raeumliche-daten-aufgaben.zip).
+Verwenden Sie für dieses Aufgabenblatt die Datei [10-raeumliche-daten-aufgaben.zip](10-raeumliche-daten-aufgaben.zip).
 
 ### Auswertung ohne räumlichen Bezug
 
