@@ -1,6 +1,6 @@
 ## Folien selber erstellen und verändern
 
-1. Datei Laden Sie das Positron-Projekt [01-erste-schritte.zip](../../folien-r/c/01-erste-schritte.zip) zu den Folien herunter und entpacken Sie die Datei.
+1. Datei Laden Sie das Positron-Projekt [01-erste-schritte.zip](../../r-folien/c/01-erste-schritte.zip) zu den Folien herunter und entpacken Sie die Datei.
 1. Workspace-Datei erste-schritte.code-workspace doppelklicken, jetzt sollte Positron starten
    - Falls VS Code installiert ist, öffnet sich eventuell VS Code statt Positron. Dann die Datei mit Rechtsklick → Öffnen mit → Positron öffnen.
 1. Datei erste-schritte.qmd öffnen
