@@ -51,7 +51,7 @@ ggplot(data = d_bruecken) +
   labs(x = "Baujahr", y = "Zustandsnote", color = "Baustoff")
 ```
 
-Viele Brücken mit einer Note von 3.0 oder schlechter sind Spannbetonbrücken aus den 1960er und 1970er Jahren. Bei so vielen sich überdeckenden Punkten ist das Bild aber unübersichtlich. Um die Frage sicher zu beantworten, bräuchte man andere Darstellungen, z. B. die Verteilung der Noten getrennt nach Baustoff. Das kommt später.
+Viel lässt sich nicht erkennen. Die meisten Brücken sind aus Beton/Stahlbeton oder Spannbeton, die Farben der anderen Baustoffe gehen zwischen den vielen sich überdeckenden Punkten unter.
 
 ```{r}
 ggplot(data = d_bruecken) +
@@ -59,3 +59,8 @@ ggplot(data = d_bruecken) +
   labs(x = "Baujahr", y = "Zustandsnote") +
   facet_wrap(~baustoffklasse)
 ```
+
+- Spannbetonbrücken wurden vor allem ab etwa 1960 gebaut. Bei denen aus den 1960er und 1970er Jahren gibt es viele Noten von 3.0 und schlechter.
+- Bei Beton/Stahlbeton sieht man die vielen Brücken aus den 1930er Jahren. Noten von 3.0 und schlechter kommen bei Brücken bis etwa 1980 vor, bei neueren Brücken kaum.
+- Bei Stahl und Stahlverbund gibt es ebenfalls einige schlechte Noten bei Brücken aus den 1960er und 1970er Jahren.
+- Holz, Stein und sonstige Baustoffe kommen nur selten vor.
