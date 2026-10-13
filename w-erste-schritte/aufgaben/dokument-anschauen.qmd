@@ -8,8 +8,8 @@
 1. 'Preview' ausführen und Folien zusätzlich im Browser öffnen
     - Die Vorschau erscheint in Positron im Bereich Viewer
     - Rechts neben der Adresszeile (oben) das Symbol "Open in browser" klicken
-1. Alle Codeblöcke einzeln ausführen
-    - Über jedem Codeblock "Run Cell" klicken oder den Cursor in den Codeblock setzen und Strg+Shift+Enter (Mac: Cmd+Shift+Enter) drücken
+1. Alle Codezellen einzeln ausführen
+    - Über jeder Codezelle "Run Cell" klicken oder den Cursor in die Codezelle setzen und Strg+Shift+Enter (Mac: Cmd+Shift+Enter) drücken
     - Ausgaben erscheinen in der Console, Grafiken im Bereich Plots
 1. Pinguin-Plot (Beispiel 1) verändern, speichern und die Vorschau beobachten
     - `size = 2` auf `5` setzen
@@ -22,6 +22,6 @@
     - Den Dataframe `d_ns_monat` in der Variablenansicht von Positron öffnen
     - Im Ordner `daten` eine der Dateien `produkt_nieder_tag_…` öffnen: So sehen Rohdaten vom Deutschen Wetterdienst aus
 1. Einen Fehler provozieren
-    - Im Pinguin-Plot `ggplot` zu `ggplott` ändern, den Codeblock ausführen und die Fehlermeldung lesen
+    - Im Pinguin-Plot `ggplot` zu `ggplott` ändern, die Codezelle ausführen und die Fehlermeldung lesen
     - Danach den Fehler wieder korrigieren
 
