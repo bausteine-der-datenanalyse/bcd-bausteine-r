@@ -1,0 +1,26 @@
+## Plots mit ggplot2 selbst erstellen
+
+Arbeiten Sie im selben Projekt weiter und legen Sie für jeden Teil einen eigenen Abschnitt im Dokument an.
+
+### Ein kleiner Datensatz
+
+Legen Sie mit `tibble(...)` einen eigenen Dataframe mit vier Zeilen und den Spalten `a`, `b` und `d` (Zahlen) sowie `c` (Text mit zwei verschiedenen Werten) an, so wie in den Folien. Stellen Sie ihn mit `geom_point` dar: `a` und `b` als Koordinaten, `c` als Farbe und `d` als Größe der Punkte. Überlegen Sie vorher, wie der Plot aussehen wird, und prüfen Sie Ihre Vermutung.
+
+### Zustand der Brücken an Bundesfernstraßen
+
+Brücken an Autobahnen und Bundesstraßen werden regelmäßig geprüft. Jedes Bauwerk erhält dabei eine Zustandsnote zwischen 1,0 (sehr guter Zustand) und 4,0 (ungenügender Zustand). Die Datei `daten/bruecken.csv` enthält diese Zustandsnoten für gut 50 000 Brücken bzw. Teilbauwerke (Datenstand etwa 2018, Quelle: Bundesanstalt für Straßenwesen).
+
+| Spalte           | Bedeutung                                              |
+|------------------|--------------------------------------------------------|
+| `bauwerksnummer` | Nummer des Bauwerks                                    |
+| `teilbauwerk`    | Nummer des Teilbauwerks, z. B. bei getrennten Überbauten |
+| `bauwerksname`   | Name des Bauwerks                                      |
+| `ort`            | Ort                                                    |
+| `zustandsnote`   | Zustandsnote von 1,0 bis 4,0                           |
+| `x`, `y`         | Lage als Rechts- und Hochwert in Metern (UTM, Zone 32) |
+
+1. Öffnen Sie die Datei `bruecken.csv` im Ordner `daten` in Positron. Wie ist sie aufgebaut? Was steht in der ersten Zeile, und wodurch sind die Werte voneinander getrennt?
+1. In der Vorlage liest `read_csv(...)` die Datei in den Dataframe `d_bruecken` ein. Doppelklicken Sie `d_bruecken` im Fenster *Variables* und vergleichen Sie mit der Datei. Was ist die statistische Einheit? Auf welcher Skala wird die Zustandsnote gemessen?
+1. Stellen Sie die Lage aller Brücken als Punkte dar, `x` und `y` als Koordinaten. Verwenden Sie kleine Punkte (`size = 0.1`) und hängen Sie `+ coord_equal()` an, damit die Karte nicht verzerrt wird. Was erkennen Sie? Wo gibt es besonders viele Brücken?
+1. Färben Sie die Punkte nach der Zustandsnote ein und beschriften Sie Achsen und Legende auf Deutsch. Tipp: Mit `+ scale_color_gradient(low = "grey90", high = "red")` heben sich Brücken in schlechtem Zustand besser ab.
+1. Lässt sich auf der Karte erkennen, ob es Regionen gibt, in denen Brücken besonders oft in schlechtem Zustand sind? Antworten Sie in ein bis zwei Sätzen.

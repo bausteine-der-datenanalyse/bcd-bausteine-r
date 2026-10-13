@@ -1,0 +1,21 @@
+---
+title: "Aufgaben zu den Grundlagen von ggplot2"
+author: "TODO: Namen eintragen"
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+## Ein erster Plot Schritt für Schritt
+
+```{r}
+d_pinguine <- penguins
+```
+
+## Zustand der Brücken an Bundesfernstraßen
+
+```{r}
+d_bruecken <- read_csv("daten/bruecken.csv")
+```

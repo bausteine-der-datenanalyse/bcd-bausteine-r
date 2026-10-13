@@ -1,0 +1,40 @@
+```{r}
+#| include: false
+library(tidyverse)
+d_pinguine <- penguins
+```
+
+#### Fertiger Plot
+
+```{r}
+ggplot(data = d_pinguine) +
+  geom_point(
+    mapping = aes(x = flipper_len, y = body_mass, color = species, shape = island),
+    size = 3,
+    alpha = 0.5
+  ) +
+  labs(
+    x = "Flossenlänge in mm",
+    y = "Körpermasse in g",
+    color = "Art",
+    shape = "Insel",
+    title = "Pinguine in der Antarktis"
+  )
+```
+
+#### Daten
+
+- `d_pinguine` ist ein Dataframe mit 344 Zeilen (Beobachtungen) und 8 Spalten (Merkmale).
+- Statistische Einheit: ein Pinguin. Jede Zeile beschreibt einen Pinguin.
+- `species` (Art) und `island` (Insel): diskret, nominalskaliert, qualitativ.
+- `flipper_len` (Flossenlänge) und `body_mass` (Körpermasse): stetig, verhältnisskaliert, quantitativ. Erfasst sind sie allerdings in ganzen Millimetern bzw. Gramm, die Daten selbst sind also diskret (wie die Körpergröße im Skript).
+- `NA` (*not available*) bedeutet, dass der Wert fehlt, z. B. weil er nicht gemessen wurde.
+
+#### Beobachtungen
+
+- Schritt 2: `ggplot(...)` erzeugt nur die leere Zeichenfläche. Es fehlt noch die Angabe, was gezeichnet werden soll.
+- Schritt 3: Jeder Punkt ist ein Pinguin, x ist die Flossenlänge, y die Körpermasse. Bei zwei Pinguinen fehlen die Messwerte (`NA`), sie können nicht gezeichnet werden.
+- Schritt 4: Die Farbe hängt von der Art ab. ggplot ordnet jeder Art eine Farbe zu und erzeugt dazu die Legende.
+- Schritt 5: Die Form hängt von der Insel ab. Gentoo-Pinguine gibt es nur auf Biscoe, Chinstrap nur auf Dream, Adelie auf allen drei Inseln.
+- Schritt 6: Innerhalb von `aes(...)` wird eine visuelle Eigenschaft einem Merkmal zugeordnet, sie ändert sich also von Punkt zu Punkt. Außerhalb gilt der Wert für alle Punkte gleich.
+- Schritt 7: `labs(...)` setzt Achsenbeschriftungen, Titel der Legenden und Titel des Plots.

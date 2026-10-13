@@ -1,0 +1,96 @@
+## Ein erster Plot Schritt für Schritt
+
+Laden Sie das Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei `ggplot2-aufgaben.code-workspace`, um Positron zu starten, und öffnen Sie das Dokument `ggplot2-aufgaben.qmd`.
+
+Sie verwenden den Datensatz `penguins`, der in R enthalten ist. Er beschreibt 344 Pinguine dreier Arten, die zwischen 2007 und 2009 auf drei Inseln in der Antarktis beobachtet wurden. Für diese Aufgabe brauchen Sie die Spalten
+
+| Spalte        | Bedeutung              |
+|---------------|------------------------|
+| `species`     | Art                    |
+| `island`      | Insel                  |
+| `flipper_len` | Flossenlänge in mm     |
+| `body_mass`   | Körpermasse in g       |
+
+Tippen Sie den Code in den folgenden Schritten ab, und zwar wirklich abtippen, nicht kopieren. Ergänzen Sie den Code im Abschnitt „Ein erster Plot Schritt für Schritt“ von Schritt zu Schritt und führen Sie die Codezelle jedes Mal aus. Schreiben Sie unter die Codezelle in Stichpunkten, was sich jeweils verändert hat.
+
+### Schritt 1: Daten anschauen
+
+```{.r}
+d_pinguine <- penguins
+```
+
+Statistische Datensätze werden in R als *Dataframe* gespeichert. Ein Dataframe ist eine Tabelle, in der jede Spalte einen Namen hat und Werte desselben Typs enthält, z. B. Zahlen oder Text. Die Anweisung oben legt eine Kopie des Datensatzes unter dem Namen `d_pinguine` an. Nach dem Ausführen erscheint `d_pinguine` rechts im Fenster *Variables*. Doppelklicken Sie den Eintrag, um sich die Tabelle anzusehen.
+
+Der Dataframe ist so organisiert, wie es im Skript im Kapitel „Statistische Daten“ unter „Organisation von Datensätzen“ beschrieben ist: Jede Zeile ist eine Beobachtung, jede Spalte ein Merkmal, und jede Zelle enthält eine Ausprägung.
+
+- Was ist hier die statistische Einheit?
+- Bestimmen Sie für `species`, `island`, `flipper_len` und `body_mass` wie auf Aufgabenblatt 02, ob das Merkmal diskret oder stetig ist, welches Skalenniveau zugrunde liegt und ob es qualitativ oder quantitativ ist.
+- In manchen Zellen steht `NA`. Was könnte das bedeuten?
+
+### Schritt 2: Leere Zeichenfläche
+
+```{.r}
+ggplot(data = d_pinguine)
+```
+
+Was sehen Sie? Warum ist noch nichts zu sehen?
+
+### Schritt 3: Punkte
+
+```{.r}
+ggplot(data = d_pinguine) +
+  geom_point(mapping = aes(x = flipper_len, y = body_mass))
+```
+
+Was ist auf den Achsen dargestellt? Was bedeutet ein einzelner Punkt? R meldet, dass zwei Zeilen entfernt wurden. Woran könnte das liegen?
+
+### Schritt 4: Farbe
+
+```{.r}
+ggplot(data = d_pinguine) +
+  geom_point(mapping = aes(x = flipper_len, y = body_mass, color = species))
+```
+
+Was hat sich geändert? Woher kommt die Legende?
+
+### Schritt 5: Form
+
+```{.r}
+ggplot(data = d_pinguine) +
+  geom_point(mapping = aes(x = flipper_len, y = body_mass, color = species, shape = island))
+```
+
+Lässt sich erkennen, auf welcher Insel welche Art lebt?
+
+### Schritt 6: Größe und Transparenz für alle Punkte
+
+```{.r}
+ggplot(data = d_pinguine) +
+  geom_point(
+    mapping = aes(x = flipper_len, y = body_mass, color = species, shape = island),
+    size = 3,
+    alpha = 0.5
+  )
+```
+
+`size` und `alpha` stehen hier außerhalb von `aes(...)`. Was ist der Unterschied zu `color = species`?
+
+### Schritt 7: Beschriftung
+
+```{.r}
+ggplot(data = d_pinguine) +
+  geom_point(
+    mapping = aes(x = flipper_len, y = body_mass, color = species, shape = island),
+    size = 3,
+    alpha = 0.5
+  ) +
+  labs(
+    x = "Flossenlänge in mm",
+    y = "Körpermasse in g",
+    color = "Art",
+    shape = "Insel",
+    title = "Pinguine in der Antarktis"
+  )
+```
+
+Erzeugen Sie zum Schluss mit `Render` das HTML-Dokument und schauen Sie sich das Ergebnis an.
