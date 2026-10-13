@@ -20,16 +20,8 @@ number-sections: true
 format-links: false
 
 format: 
-  revealjs:
-    overview: true
-    slide-number: "c/t"
-    code-line-numbers: false
+  tinh-slides-revealjs:
     footer: "Bausteine Computergestützter Datenanalyse"
-    theme: 
-      - bcd-style-slides.scss
-      - bcd-style-titlepage.scss
-    resources:
-      - _brand
   html: default
 
 citation:
