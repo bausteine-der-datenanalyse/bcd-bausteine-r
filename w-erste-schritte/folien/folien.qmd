@@ -1,9 +1,8 @@
 ---
-title: "Erste Schritte in Positron"
+title: "Erste Schritte in R und Positron"
 execute: 
   cache: true
 ---
-
 
 ```{r}
 #| cache: false
@@ -29,10 +28,10 @@ ggplot(data = penguins) +
 - Variablen: Art, Insel, Schnabel, Flosse, Masse, Geschlecht, Jahr
 - Datensatz zu Demonstrationszwecken, in R enthalten
 
-## Beispiel 2: Monatlicher Niederschlag im Jahresverlauf
+## Beispiel 2: Monatlicher Niederschlag (alle Stationen)
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag)) +
@@ -40,14 +39,14 @@ ggplot(data = d_ns_monat) +
   labs(title = "Monatliche Niederschläge (alle Stationen)")
 ```
 
-- Daten aus den Dateien im Ordner `daten`
-- Einlesen mithilfe von `skripte/read-data-erste-schritte.R`
-- Das werden Sie lernen
+- Tageswerte mehrerer Stationen des Deutschen Wetterdienstes
+- Boxplot: Verteilung der Monatssummen für jeden Monat
+- Wie man Boxplots liest, kommt bei den statistischen Grundlagen
 
-## Beispiel 3: Monatlicher Niederschlag im Jahresverlauf
+## Beispiel 3: Monatlicher Niederschlag (Stationen)
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 ggplot(data = d_ns_monat) +
   geom_boxplot(mapping = aes(x = Monat, y = Niederschlag, fill = Station)) +
@@ -55,10 +54,13 @@ ggplot(data = d_ns_monat) +
   labs(title = "Monatliche Niederschläge (nach Stationen)")
 ```
 
-## Beispiel 4: Mittlerer jährlicher Niederschlag an verschiedenen Stationen in Deutschland
+- Gleiche Daten, im Code kommt nur `fill = Station` dazu
+- Unterschiede zwischen den Stationen werden sichtbar
+
+## Beispiel 4: Mittlerer Jahresniederschlag
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 # Dataframes für Deutschlandkarte
 d_de <- gisco_get_nuts(country = "Germany", nuts_level = 0, resolution = 03)
@@ -107,18 +109,26 @@ p2 <- ggplot(data = d_ns_jahr) +
 p1 + p2
 ```
 
+- Karte und Balkendiagramm in einer Grafik
+- Mittelwert nur aus vollständigen Jahren
+- Kartendaten aus dem Paket `giscoR`
+
 ## Von den Daten zu den Folien
 
 [Tageswerte der Niederschläge](daten/produkt_nieder_tag_18900101_20231231_04625.txt) an den verschiedenen Stationen vom Deutschen Wetterdienst
 
-[]{.down20}
+- Daten aus den Dateien im Ordner `daten`
+- Einlesen mithilfe von `skripte/read-data-erste-schritte.R`
+
+[]{.down10}
 
 ### Wie entstehen daraus die Folien?
 
-1. Daten aus Datei einlesen
-1. Jahres- und Monatswerte ermitteln
+1. Daten aus Datei einlesen, Monatswerte ermitteln
 1. Grafiken erstellen
 1. Daraus zusammen mit Text das HTML-Dokument erzeugen
+
+[]{.down10}
 
 ### Und wie funktioniert das?
 
@@ -147,6 +157,8 @@ p1 + p2
 - Frei verfügbar, erste Version 1993 veröffentlicht
 - Keine Angst: Das wird keine Informatikvorlesung
 
+[]{.down10}
+
 ### Arbeitsumgebung Positron
 
 - Grafische Oberfläche zur Datenanalyse mit R (und Python)
@@ -157,10 +169,10 @@ p1 + p2
 
 ![](bilder/positron.svg)
 
-1. Editor: Hier geben Sie ihren Text und Programmcode ein
-1. Variablen (u.A.): Aktuell definierte Variablen
-1. Konsole (u.A.): Hier können Sie direkt R-Befehle eingeben
-1. Plots (u.A.): Ausgabe der Grafiken
+1. Editor: Hier geben Sie Ihren Text und Programmcode ein
+1. Variablen (u. a.): Aktuell definierte Variablen
+1. Konsole (u. a.): Hier können Sie direkt R-Befehle eingeben
+1. Plots (u. a.): Ausgabe der Grafiken
 
 # Quarto-Markdown in Positron
 
@@ -173,13 +185,16 @@ p1 + p2
 - Statistische Untersuchungen mit speziellem Programm
 - Ergebnisse und Grafiken von Hand in Dokument übernehmen
 - Vorteile: Einfach, gewohnte Arbeitsweise
-- Nachteile: Fehler in Berechnung - Zurück auf Start! Weg von den Daten zum Dokument nicht reproduzierbar
+- Nachteile: Fehler in Berechnung – zurück auf Start!
+- Weg von den Daten zum Dokument nicht reproduzierbar
+
+[]{.down20}
 
 ### Arbeiten mit Quarto
 
-- Quarto-Markdown-Dokument fasst Text und Berechnungen zusammen
+- Quarto-Dokument fasst Text und Berechnungen zusammen
 - Daraus wird PDF/HTML/Word/PPT erzeugt (ähnlich wie mit LaTeX)
-- Vorteile: Änderungen einfach, Methoden nachvollziehbar, reproduzierbar
+- Vorteile: Änderungen einfach, nachvollziehbar, reproduzierbar
 - Nachteile: Ungewohnte Arbeitsweise, Lernkurve
 
 ## Möglichkeiten mit Quarto
@@ -189,8 +204,8 @@ p1 + p2
 - Kurze Berichte erstellen
 - Präsentationen (Sie schauen gerade eine an) vorbereiten
 - [Ganze Bücher schreiben](https://r4ds.hadley.nz)
-- [Interaktive Webapplikationen entwickeln (mit Shiny)](https://shiny.rstudio.com/gallery/)
-- [Hier eine Sammlung von Beispielen](https://quarto.org/docs/gallery/)
+- [Interaktive Webapplikationen entwickeln (mit Shiny)](https://shiny.posit.co/r/gallery/)
+- [Sammlung von Beispielen zu Quarto](https://quarto.org/docs/gallery/)
 - [Video zur Einführung (englisch)](https://youtu.be/_f3latmOhew?si=bGnCJk9dwSYG6cLK)
 
 ## Ein einfaches Beispiel
@@ -198,7 +213,7 @@ p1 + p2
 ![](bilder/quarto-hello-world.png)
 
 - links: Eingabe in Quarto Markdown
-- rechts: Ausgabe in html
+- rechts: Ausgabe in HTML
 
 - [Quelle](https://quarto.org/docs/computations/r.html)
 
@@ -218,11 +233,23 @@ p1 + p2
 - beginnt mit ein paar Grundeinstellungen (oben nicht dargestellt)
 - danach kommt
   - Text in spezieller Markdown-Schreibweise
-  - Blöcke mit R-Code, die so genannten 'Chunks'
+  - Blöcke mit R-Code, die so genannten Codezellen (auch „Chunks“)
 
 ## Quarto-Markdown in Positron
 
 ![](bilder/quarto-markdown-positron.svg)
 
-- Chunks lassen sich einzeln oder alle zusammen ausführen
+- Codezellen lassen sich einzeln oder alle zusammen ausführen
 - Ergebnisse erscheinen in der Konsole, Grafiken im Plots-Bereich
+
+# Zusammenfassung
+
+## Zusammenfassung
+
+[]{.down100}
+
+- R ist eine Programmiersprache für Statistik und Datenvisualisierung
+- Positron ist die Arbeitsumgebung, in der wir mit R arbeiten
+- Ein Quarto-Markdown-Dokument (.qmd) verbindet Text und Codezellen
+- Quarto erzeugt daraus ein reproduzierbares Dokument (HTML, PDF, …)
+- Wie das funktioniert sehen Sie im Aufgabenblatt
