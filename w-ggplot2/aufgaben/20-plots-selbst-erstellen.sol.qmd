@@ -1,7 +1,9 @@
 ```{r}
 #| include: false
 library(tidyverse)
-d_bruecken <- read_csv("daten/bruecken.csv")
+library(readxl)
+d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |>
+  filter(baujahr >= 1900, baujahr <= 2026)
 ```
 
 #### Ein kleiner Datensatz
@@ -18,32 +20,42 @@ ggplot(data = d_klein) +
   geom_point(mapping = aes(x = a, y = b, color = c, size = d))
 ```
 
-#### Datei und Dataframe
+#### Dataframe
 
-- Die Datei ist eine Textdatei. In der ersten Zeile stehen die Spaltennamen, danach folgt für jedes Bauwerk eine Zeile. Die Werte sind durch Kommas getrennt (CSV, *Comma Separated Values*). Fehlende Werte sind leer.
 - Statistische Einheit: ein Bauwerk bzw. Teilbauwerk. Jede Zeile beschreibt eines.
-- Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3,0 ist nicht „doppelt so schlecht“ wie eine mit Note 1,5.
+- `baujahr` ist quantitativ (diskret, intervallskaliert), `baustoffklasse` ist qualitativ (nominalskaliert).
+- Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht „doppelt so schlecht“ wie eine mit Note 1.5.
 
-#### Lage der Brücken
-
-```{r}
-ggplot(data = d_bruecken) +
-  geom_point(mapping = aes(x = x, y = y), size = 0.1) +
-  coord_equal()
-```
-
-- Die Punkte bilden das Netz der Autobahnen und Bundesstraßen ab, die Umrisse Deutschlands sind gut zu erkennen.
-- Besonders viele Brücken gibt es dort, wo das Straßennetz dicht ist, z. B. im Ruhrgebiet und entlang der Autobahnen.
-- Bei 783 Bauwerken fehlen die Koordinaten. Sie werden nicht gezeichnet, R meldet das als Warnung.
-
-#### Zustand der Brücken
+#### Zustandsnote und Baujahr
 
 ```{r}
 ggplot(data = d_bruecken) +
-  geom_point(mapping = aes(x = x, y = y, color = zustandsnote), size = 0.1) +
-  scale_color_gradient(low = "grey90", high = "red") +
-  coord_equal() +
-  labs(x = "Rechtswert in m", y = "Hochwert in m", color = "Zustandsnote")
+  geom_point(mapping = aes(x = baujahr, y = zustandsnote))
 ```
 
-Ein deutliches regionales Muster ist kaum zu erkennen. Brücken in schlechtem Zustand liegen über das ganze Land verteilt, und bei rund 50 000 sich überdeckenden Punkten gehen einzelne Farben leicht unter. Um die Frage sicher zu beantworten, bräuchte man andere Darstellungen, z. B. nur die Brücken mit einer Note ab 3,0 oder die Verteilung der Noten getrennt nach Regionen. Das kommt später.
+Die Punkte überdecken sich so stark, dass man kaum etwas erkennt. Sie liegen in Zeilen, weil die Zustandsnote nur in Schritten von 0.1 vergeben wird, und viele Brücken haben dasselbe Baujahr und dieselbe Note.
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote), alpha = 0.05)
+```
+
+- Viele Brücken stammen aus den 1930er Jahren (Bau der ersten Autobahnen) und vor allem aus der Zeit von etwa 1960 bis heute.
+- Neuere Brücken haben tendenziell bessere Noten. Noten von 3.0 und schlechter kommen vor allem bei Brücken aus den 1960er und 1970er Jahren vor.
+
+#### Baustoffe
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote, color = baustoffklasse), alpha = 0.2) +
+  labs(x = "Baujahr", y = "Zustandsnote", color = "Baustoff")
+```
+
+Viele Brücken mit einer Note von 3.0 oder schlechter sind Spannbetonbrücken aus den 1960er und 1970er Jahren. Bei so vielen sich überdeckenden Punkten ist das Bild aber unübersichtlich. Um die Frage sicher zu beantworten, bräuchte man andere Darstellungen, z. B. die Verteilung der Noten getrennt nach Baustoff. Das kommt später.
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote), alpha = 0.2) +
+  labs(x = "Baujahr", y = "Zustandsnote") +
+  facet_wrap(~baustoffklasse)
+```

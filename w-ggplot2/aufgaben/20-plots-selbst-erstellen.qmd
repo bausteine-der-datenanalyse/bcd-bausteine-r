@@ -8,19 +8,27 @@ Legen Sie mit `tibble(...)` einen eigenen Dataframe mit vier Zeilen und den Spal
 
 ### Zustand der Brücken an Bundesfernstraßen
 
-Brücken an Autobahnen und Bundesstraßen werden regelmäßig geprüft. Jedes Bauwerk erhält dabei eine Zustandsnote zwischen 1,0 (sehr guter Zustand) und 4,0 (ungenügender Zustand). Die Datei `daten/bruecken.csv` enthält diese Zustandsnoten für gut 50 000 Brücken bzw. Teilbauwerke (Datenstand etwa 2018, Quelle: Bundesanstalt für Straßenwesen).
+Brücken an Autobahnen und Bundesstraßen werden regelmäßig geprüft. Jedes Bauwerk erhält dabei eine Zustandsnote zwischen 1.0 (sehr guter Zustand) und 4.0 (ungenügender Zustand). Die Excel-Tabelle `daten/Brueckenstatistik-excel.xlsx` enthält diese Zustandsnoten zusammen mit weiteren Angaben für gut 50 000 Brücken bzw. Teilbauwerke.
 
-| Spalte           | Bedeutung                                              |
-|------------------|--------------------------------------------------------|
-| `bauwerksnummer` | Nummer des Bauwerks                                    |
-| `teilbauwerk`    | Nummer des Teilbauwerks, z. B. bei getrennten Überbauten |
-| `bauwerksname`   | Name des Bauwerks                                      |
-| `ort`            | Ort                                                    |
-| `zustandsnote`   | Zustandsnote von 1,0 bis 4,0                           |
-| `x`, `y`         | Lage als Rechts- und Hochwert in Metern (UTM, Zone 32) |
+Quelle der Daten: Bundesanstalt für Straßen- und Verkehrswesen (CC-BY 4.0) <https://www.bast.de/fokusbruecken>, Stand: März 2026
 
-1. Öffnen Sie die Datei `bruecken.csv` im Ordner `daten` in Positron. Wie ist sie aufgebaut? Was steht in der ersten Zeile, und wodurch sind die Werte voneinander getrennt?
-1. In der Vorlage liest `read_csv(...)` die Datei in den Dataframe `d_bruecken` ein. Doppelklicken Sie `d_bruecken` im Fenster *Variables* und vergleichen Sie mit der Datei. Was ist die statistische Einheit? Auf welcher Skala wird die Zustandsnote gemessen?
-1. Stellen Sie die Lage aller Brücken als Punkte dar, `x` und `y` als Koordinaten. Verwenden Sie kleine Punkte (`size = 0.1`) und hängen Sie `+ coord_equal()` an, damit die Karte nicht verzerrt wird. Was erkennen Sie? Wo gibt es besonders viele Brücken?
-1. Färben Sie die Punkte nach der Zustandsnote ein und beschriften Sie Achsen und Legende auf Deutsch. Tipp: Mit `+ scale_color_gradient(low = "grey90", high = "red")` heben sich Brücken in schlechtem Zustand besser ab.
-1. Lässt sich auf der Karte erkennen, ob es Regionen gibt, in denen Brücken besonders oft in schlechtem Zustand sind? Antworten Sie in ein bis zwei Sätzen.
+Die wichtigsten Spalten:
+
+| Spalte             | Bedeutung                                                |
+|--------------------|----------------------------------------------------------|
+| `bwnr`             | Nummer des Bauwerks                                      |
+| `tbwnr`            | Nummer des Teilbauwerks, z. B. bei getrennten Überbauten |
+| `bauwerksart_text` | Art des Bauwerks, z. B. Plattenbrücke                    |
+| `baujahr`          | Baujahr                                                  |
+| `laenge`, `breite` | Länge und Breite in Metern                               |
+| `flaeche`          | Fläche in Quadratmetern                                  |
+| `baustoffklasse`   | Baustoff, z. B. Spannbeton                               |
+| `zustandsnote`     | Zustandsnote von 1.0 bis 4.0                             |
+
+1. In der Vorlage liest `read_excel(...)` die Excel-Tabelle in den Dataframe `d_bruecken` ein. Dabei werden nur Brücken mit einem Baujahr von 1900 bis 2026 behalten, denn einige wenige Einträge sind unplausibel (z. B. Baujahr 1000 oder 3019). Doppelklicken Sie `d_bruecken` im Fenster *Variables*. Was ist die statistische Einheit? Welchen Typ haben die Merkmale `baujahr`, `baustoffklasse` und `zustandsnote`?
+1. Stellen Sie die Zustandsnote über dem Baujahr als Punkte dar. Was fällt auf?
+1. Die Punkte überdecken sich stark, weil es viele Brücken mit demselben Baujahr und derselben Note gibt. Verwenden Sie deshalb `geom_jitter` statt `geom_point`: Es verschiebt jeden Punkt ein kleines Stück zufällig. Machen Sie die Punkte außerdem mit `alpha = 0.05` durchscheinend, damit man sieht, wo viele Punkte liegen. Was erkennen Sie? Wann wurden besonders viele Brücken gebaut? Wie hängen Baujahr und Zustandsnote zusammen?
+1. Färben Sie die Punkte nach der Baustoffklasse ein und beschriften Sie Achsen und Legende auf Deutsch. Was lässt sich erkennen?
+1. Statt die Baustoffe durch Farben zu unterscheiden, können Sie für jeden Baustoff einen eigenen kleinen Plot zeichnen lassen. Lassen Sie dazu `color = baustoffklasse` weg und hängen Sie `+ facet_wrap(~baustoffklasse)` an. Bei welchen Baustoffen und Baujahren sieht man viele Brücken mit einer Note von 3.0 oder schlechter? Antworten Sie in ein bis zwei Sätzen.
+
+Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
