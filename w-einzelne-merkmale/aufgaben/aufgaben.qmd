@@ -9,7 +9,7 @@ library(tidyverse)
 load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
 
-## Titel Folie 1
+## Dataframe anzeigen
 
 ```{r}
 3 * 3
@@ -17,7 +17,7 @@ load("daten/einzelne-merkmale-aufgaben.Rdata")
 
 - Wie erwartet ergibt drei mal drei neun
 
-## Titel Folie 2
+## Entfernungen zu umliegenden Städten
 
 ```{r}
 sqrt(4)

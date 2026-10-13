@@ -11,7 +11,7 @@ load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
 
-## Titel Folie 1
+## Daten der Mobilitätsbefragung
 
 ```{r}
 show(d_bo_vm)
