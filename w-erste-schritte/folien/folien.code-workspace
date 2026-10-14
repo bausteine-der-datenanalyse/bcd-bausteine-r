@@ -15,6 +15,6 @@
 			"*_files": true,
 			".editorconfig": true,
 			"*.code-workspace": true
-		},
+		}
 	}
 }
