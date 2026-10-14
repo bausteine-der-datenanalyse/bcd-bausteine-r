@@ -11,7 +11,23 @@ Sie verwenden den Datensatz `penguins`, der in R enthalten ist. Er beschreibt 34
 | `flipper_len` | Flossenlänge in mm     |
 | `body_mass`   | Körpermasse in g       |
 
-Tippen Sie den Code in den folgenden Schritten ab, und zwar wirklich abtippen, nicht kopieren. Ergänzen Sie den Code im Abschnitt „Ein erster Plot Schritt für Schritt“ von Schritt zu Schritt und führen Sie die Codezelle jedes Mal aus. Schreiben Sie unter die Codezelle in Stichpunkten, was sich jeweils verändert hat.
+
+Vorgehensweise: Tippen Sie den Code in Ihrer eigenen qmd-Datei ab und ergänzen Sie ihn Schritt für Schritt. Führen Sie den Code nach jeder Änderung aus. Shortcuts:
+
+- Strg+Shift+Enter (Mac: Cmd+Shift+Enter) führt die ganze Codezelle aus, in der der Cursor steht. Der Cursor bleibt dabei an seiner Stelle, Sie können also gleich weiter ändern.
+- Strg+Enter (Mac: Cmd+Enter) führt nur die aktuelle Anweisung aus und setzt den Cursor auf die nächste.
+
+::: {.callout-note}
+## Abtippen statt kopieren
+
+Tipenn Sie den Code ab, anstatt ihn zu kopieren. Sie brauchen zwar ein bisschen länger, aber Sie
+
+- lesen den Code genauer,
+- gewöhnen sich an die Schreibweise,
+- machen kleine Fehler, aus denen Sie etwas lernen können.
+
+Also, tippen statt kopieren!
+:::
 
 ### Schritt 1: Daten anschauen
 
