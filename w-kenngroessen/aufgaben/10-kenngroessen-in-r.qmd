@@ -1,3 +1,4 @@
+::: {#exr-kenngroessen-in-r}
 ## Kenngrößen und Beschreibung von Verteilungen in R
 
 In dieser Übungsaufgabe verwenden Sie nochmals die Ergebnisse eine Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat. Verwenden Sie hierzu die Datei [${zipfile}](${zipfile}).
@@ -29,3 +30,4 @@ Verwenden Sie im dritten Plot das Argument `varwidth = TRUE`.
 Stellen Sie die Lorenzkurve zu den Fahrzeiten dar und bestimmen Sie den zugehörigen Gini-Koeffizienten. Spielt es hier eine große Rolle ob man $G$ oder $G^*$ betrachtet?
 
 Tipp: Die Funktion `lc_to_tibble()`, die der das Ergebnis von `Lc` in einen Dataframe konvertiert werden kann wird zu Beginn von `kenngroessen-aufgaben.qmd` definiert und kann somit verwendet werden (so wie in den Folien zur Vorlesung).
+:::

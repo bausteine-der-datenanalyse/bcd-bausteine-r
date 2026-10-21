@@ -1,5 +1,7 @@
+::: {#exr-plots-aufbereiten}
 ## Plots aufbereiten
 
 Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Datei.
 
 Bereiten Sie die Plots in `weitere-geoms-und-plots-aufbereiten-aufgaben.qmd` so auf, dass sie Ihnen gut gefallen.
+:::

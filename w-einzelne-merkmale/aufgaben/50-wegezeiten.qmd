@@ -1,0 +1,10 @@
+::: {#exr-wegezeiten}
+## Wegezeiten
+
+Wie lange dauert der Weg zur Hochschule Bochum? Im Einzelnen:
+
+-   Wie sind die Wegezeiten verteilt?
+-   Gibt es einen Zusammenhang zwischen Verkehrsmittel und der benötigten Zeit?
+-   Welche Wegezeit wird von 75% der Befragten nicht überschritten?
+-   Wie unterscheidet sich dieser 75% Anteil nach den Verkehrsmitteln?
+:::

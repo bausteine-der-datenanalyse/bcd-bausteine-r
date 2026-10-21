@@ -1,0 +1,8 @@
+::: {#exr-wahl-der-verkehrsmittel}
+## Wahl der Verkehrsmittel
+
+Welche Verkehrsmittel werden für den Weg zur BO verwendet? Im Einzelnen:
+
+-   Welches Verkehrsmittel wird wie häufig genutzt?
+-   Welcher Fachbereich nutzt am stärksten den ÖPNV?
+:::

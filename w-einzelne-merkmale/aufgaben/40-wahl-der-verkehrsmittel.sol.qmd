@@ -1,0 +1,16 @@
+#### Verkehrsmittel
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = Verkehrsmittel))
+```
+
+#### Verkehrsmittel in den Fachbereichen
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(
+    mapping = aes(x = Fachbereich, fill = Verkehrsmittel),
+    position = "fill"
+  )
+```

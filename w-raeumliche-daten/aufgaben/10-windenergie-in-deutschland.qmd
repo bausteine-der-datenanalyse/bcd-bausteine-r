@@ -1,3 +1,4 @@
+::: {#exr-windenergie-in-deutschland}
 ## Ausbau der Windenergie in Deutschland
 
 Die Bundesnetzagentur führt mit dem [Marktstammdatenregister (MaStR)](https://www.marktstammdatenregister.de/MaStR) ein umfassendes behördliches Register für Stammdaten des Strom- und Gasmarktes. Die erfassten Daten sind öffentlich zugänglich, dabei allerdings sehr umfangreich und in der Rohform (XML-Dateien) schwer auszuwerten.
@@ -31,3 +32,4 @@ Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Ker
   - die Gesamtleistung je Bundeslandes
   - die Gesamtleistung bezogen auf die Fläche des jeweiligen Bundeslandes
 - Welche Darstellungsformen könnten noch von Interesse sein?
+:::

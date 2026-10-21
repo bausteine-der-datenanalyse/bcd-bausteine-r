@@ -1,3 +1,4 @@
+::: {#exr-erster-plot}
 ## Ein erster Plot Schritt für Schritt
 
 Laden Sie das Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei `ggplot2-aufgaben.code-workspace`, um Positron zu starten, und öffnen Sie das Dokument `ggplot2-aufgaben.qmd`.
@@ -110,3 +111,4 @@ ggplot(data = d_pinguine) +
 ```
 
 Erzeugen Sie zum Schluss mit `Render` das HTML-Dokument und schauen Sie sich das Ergebnis an.
+:::

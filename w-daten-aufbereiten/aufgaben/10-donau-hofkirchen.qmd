@@ -1,3 +1,4 @@
+::: {#exr-donau-hofkirchen}
 ## Abfluss der Donau bei Hofkirchen
 
 ### Einlesen und Aufbereiten der Daten
@@ -49,3 +50,4 @@ Stellen Sie die Mittelwerte sowie das obere und untere Quartil jedes Monats dar.
 - Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar.
 - Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung.
 - Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis.
+:::

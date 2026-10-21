@@ -1,3 +1,4 @@
+::: {#exr-streuplots-histogramme-dichtefunktion-in-r}
 ## Streuplots sowie zweidimensionale Histogramme und Dichtefunktionen in R
 
 Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Datei.
@@ -15,3 +16,4 @@ Erstellen Sie ein zweidimensionales Histogramm der Geschwindigkeiten über die U
 ### Dichtefunktionsplot
 
 Erstellen Sie einen Plot der approximierten Dichtefunktion (Konturlinien) zusammen mit den Messpunkten. Plotten Sie die Dichtefunktion darüber hinaus als ausgefüllte Fläche.
+:::

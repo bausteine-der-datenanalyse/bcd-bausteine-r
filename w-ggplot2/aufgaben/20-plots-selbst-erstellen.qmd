@@ -1,3 +1,4 @@
+::: {#exr-plots-selbst-erstellen}
 ## Plots mit ggplot2 selbst erstellen
 
 Arbeiten Sie im selben Projekt weiter und legen Sie für jeden Teil einen eigenen Abschnitt im Dokument an.
@@ -32,3 +33,4 @@ Die wichtigsten Spalten:
 1. Statt die Baustoffe durch Farben zu unterscheiden, können Sie für jeden Baustoff einen eigenen kleinen Plot zeichnen lassen. Lassen Sie dazu `color = baustoffklasse` weg und hängen Sie `+ facet_wrap(~baustoffklasse)` an. Bei welchen Baustoffen und Baujahren sieht man viele Brücken mit einer Note von 3.0 oder schlechter? Antworten Sie in ein bis zwei Sätzen.
 
 Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
+:::

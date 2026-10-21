@@ -1,3 +1,4 @@
+::: {#exr-dokument-anschauen}
 ## Folien selber erstellen und verändern
 
 1. Datei Laden Sie das Positron-Projekt [01-erste-schritte.zip](../../r-folien/c/01-erste-schritte.zip) zu den Folien herunter und entpacken Sie die Datei.
@@ -24,4 +25,4 @@
 1. Einen Fehler provozieren
     - Im Pinguin-Plot `ggplot` zu `ggplott` ändern, die Codezelle ausführen und die Fehlermeldung lesen
     - Danach den Fehler wieder korrigieren
-
+:::

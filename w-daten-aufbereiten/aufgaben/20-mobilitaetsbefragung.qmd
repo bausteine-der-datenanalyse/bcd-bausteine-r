@@ -1,3 +1,4 @@
+::: {#exr-mobilitaetsbefragung}
 ## Mobilitätsbefragung an der BO
 
 ### Einlesen und Aufbereiten der Daten
@@ -34,3 +35,4 @@ Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne, Wuppertal, Gelsenkir
 ### Reisezeit und Verkehrsmittel
 
 Erstellen Sie für jedes Verkehrsmittel einen Boxplot für die Reisezeit und deuten Sie kurz das Ergebnis.
+:::

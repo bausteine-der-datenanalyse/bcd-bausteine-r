@@ -1,3 +1,4 @@
+::: {#exr-korrelationskoeffizient-und-ausgleichsgerade-in-r}
 ## Korrelationskoeffizient und Ausgleichsgerade in R
 
 Sie untersuchen Messdaten von einer Windkraftanlage in Dortmund (Forschungsprojekt an der Ruhr-Universität Bochum) (daten/zwei-merkmale-aufgaben-2.Rdata). Die Daten wurden freundlicherweise von Prof. Rüdiger Höffer zur Verfügung gestellt.
@@ -32,3 +33,4 @@ Berechnen Sie dabei jeweils den Korrelationskoeffizienten $r$ und plotten Sie di
 ### Andere Darstellungsformen
 
 Experimentieren Sie mit anderen Darstellungsformen (2D-Histogramm, Dichten) für den Zusammenhang zwischen Windgeschwindigkeit und Verformung.
+:::

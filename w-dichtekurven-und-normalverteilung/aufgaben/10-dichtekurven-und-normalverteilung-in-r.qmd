@@ -1,3 +1,4 @@
+::: {#exr-dichtekurven-und-normalverteilung-in-r}
 ## Dichtekurven und Normalverteilung in R
 
 Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Datei. Sie verwenden den Datensatz zu einer Geschwindigkeitsmessung an der Universitätsstraße Bochum im Jahr 2017 von Prof. Iris Mühlenbruch. Die Spalte VZ kennzeichnet dabei die Verkehrszeit (siehe <https://de.wikipedia.org/wiki/Verkehrszeiten>).
@@ -34,3 +35,4 @@ Verwenden Sie hierzu jeweils
 Hinweis: Für übereinander/untereinander angeordnete Dichtekurven brauchen Sie die library(ggridges).
 
 Welche Darstellungsform scheint Ihnen am besten geeignet?
+:::
