@@ -1,3 +1,5 @@
+{{< pagebreak >}}
+
 ## Teil 2: Umsetzung in R
 
 In den folgenden Aufgaben verwenden Sie die Ergebnisse eine Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat.
