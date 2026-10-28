@@ -1,3 +1,12 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/zwei-merkmale-aufgaben-1.Rdata")
+load("daten/zwei-merkmale-aufgaben-2.Rdata")
+```
+:::
+
 ::: {#exr-streuplots-histogramme-dichtefunktion-in-r}
 ## Streuplots sowie zweidimensionale Histogramme und Dichtefunktionen in R
 
@@ -18,13 +27,6 @@ Erstellen Sie ein zweidimensionales Histogramm der Geschwindigkeiten über die U
 Erstellen Sie einen Plot der approximierten Dichtefunktion (Konturlinien) zusammen mit den Messpunkten. Plotten Sie die Dichtefunktion darüber hinaus als ausgefüllte Fläche.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-load("daten/zwei-merkmale-aufgaben-1.Rdata")
-load("daten/zwei-merkmale-aufgaben-2.Rdata")
-```
-
 **Streuplot**
 
 ```{r}

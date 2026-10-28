@@ -1,3 +1,11 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/einzelne-merkmale-aufgaben.Rdata")
+```
+:::
+
 ::: {#exr-wahl-der-verkehrsmittel}
 ## Wahl der Verkehrsmittel
 

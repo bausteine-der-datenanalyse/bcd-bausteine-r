@@ -1,3 +1,13 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+library(readxl)
+d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |>
+  filter(baujahr >= 1900, baujahr <= 2026)
+```
+:::
+
 ::: {#exr-plots-selbst-erstellen}
 ## Plots mit ggplot2 selbst erstellen
 
@@ -35,14 +45,6 @@ Die wichtigsten Spalten:
 Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-library(readxl)
-d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |>
-  filter(baujahr >= 1900, baujahr <= 2026)
-```
-
 **Ein kleiner Datensatz**
 
 ```{r}

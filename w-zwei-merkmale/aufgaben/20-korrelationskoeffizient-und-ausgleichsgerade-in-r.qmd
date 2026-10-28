@@ -1,3 +1,12 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/zwei-merkmale-aufgaben-1.Rdata")
+load("daten/zwei-merkmale-aufgaben-2.Rdata")
+```
+:::
+
 ::: {#exr-korrelationskoeffizient-und-ausgleichsgerade-in-r}
 ## Korrelationskoeffizient und Ausgleichsgerade in R
 
@@ -35,13 +44,6 @@ Berechnen Sie dabei jeweils den Korrelationskoeffizienten $r$ und plotten Sie di
 Experimentieren Sie mit anderen Darstellungsformen (2D-Histogramm, Dichten) für den Zusammenhang zwischen Windgeschwindigkeit und Verformung.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-load("daten/zwei-merkmale-aufgaben-1.Rdata")
-load("daten/zwei-merkmale-aufgaben-2.Rdata")
-```
-
 **Windgeschwindigkeit über die Zeit**
 
 ```{r}

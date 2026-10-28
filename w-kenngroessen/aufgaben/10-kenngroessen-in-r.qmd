@@ -1,3 +1,13 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(ineq)
+library(tidyverse)
+load("daten/kenngroessen-aufgaben.Rdata")
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
+```
+:::
+
 ::: {#exr-kenngroessen-in-r}
 ## Kenngrößen und Beschreibung von Verteilungen in R
 
@@ -32,14 +42,6 @@ Stellen Sie die Lorenzkurve zu den Fahrzeiten dar und bestimmen Sie den zugehör
 Tipp: Die Funktion `lc_to_tibble()`, die der das Ergebnis von `Lc` in einen Dataframe konvertiert werden kann wird zu Beginn von `kenngroessen-aufgaben.qmd` definiert und kann somit verwendet werden (so wie in den Folien zur Vorlesung).
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(ineq)
-library(tidyverse)
-load("daten/kenngroessen-aufgaben.Rdata")
-lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
-```
-
 **Lage- und Streumaße für Fahrzeiten**
 
 ```{r}

@@ -1,3 +1,13 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(sf)
+library(giscoR)
+library(tidyverse)
+load("daten/mastr-data.RData")
+```
+:::
+
 ::: {#exr-windenergie-in-deutschland}
 ## Ausbau der Windenergie in Deutschland
 
@@ -34,14 +44,6 @@ Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Ker
 - Welche Darstellungsformen könnten noch von Interesse sein?
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(sf)
-library(giscoR)
-library(tidyverse)
-load("daten/mastr-data.RData")
-```
-
 **Daten (ohne räumlichen Bezug) aufbereiten**
 
 ```{r}

@@ -1,3 +1,11 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(readxl)
+library(tidyverse)
+```
+:::
+
 ::: {#exr-mobilitaetsbefragung}
 ## Mobilitätsbefragung an der BO
 
@@ -37,12 +45,6 @@ Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne, Wuppertal, Gelsenkir
 Erstellen Sie für jedes Verkehrsmittel einen Boxplot für die Reisezeit und deuten Sie kurz das Ergebnis.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(readxl)
-library(tidyverse)
-```
-
 **Einlesen und Aufbereiten der Daten**
 
 ```{r}

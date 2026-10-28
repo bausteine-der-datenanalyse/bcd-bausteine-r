@@ -1,3 +1,11 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
+```
+:::
+
 ::: {#exr-dichtekurven-und-normalverteilung-in-r}
 ## Dichtekurven und Normalverteilung in R
 
@@ -37,12 +45,6 @@ Hinweis: Für übereinander/untereinander angeordnete Dichtekurven brauchen Sie 
 Welche Darstellungsform scheint Ihnen am besten geeignet?
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
-```
-
 **Normalverteilung**
 
 Nur die Kurven

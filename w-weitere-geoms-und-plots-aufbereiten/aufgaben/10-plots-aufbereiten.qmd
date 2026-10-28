@@ -1,3 +1,10 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+```
+:::
+
 ::: {#exr-plots-aufbereiten}
 ## Plots aufbereiten
 
@@ -6,11 +13,6 @@ Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Si
 Bereiten Sie die Plots in `weitere-geoms-und-plots-aufbereiten-aufgaben.qmd` so auf, dass sie Ihnen gut gefallen.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-```
-
 ```{r}
 load("daten/data-exercise-03.Rdata")
 load("daten/data-exercise-05.Rdata")

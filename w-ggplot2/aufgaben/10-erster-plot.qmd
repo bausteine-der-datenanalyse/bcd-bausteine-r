@@ -1,3 +1,11 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+d_pinguine <- penguins
+```
+:::
+
 ::: {#exr-erster-plot}
 ## Ein erster Plot Schritt für Schritt
 
@@ -113,12 +121,6 @@ ggplot(data = d_pinguine) +
 Erzeugen Sie zum Schluss mit `Render` das HTML-Dokument und schauen Sie sich das Ergebnis an.
 
 ::: {.tinh-solution}
-```{r}
-#| include: false
-library(tidyverse)
-d_pinguine <- penguins
-```
-
 **Fertiger Plot**
 
 ```{r}
