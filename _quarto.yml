@@ -13,6 +13,7 @@ date: today
 
 execute: 
   echo: true
+  cache: true
 
 toc-depth: 1
 number-depth: 1

@@ -3,6 +3,7 @@ title: "Daten aufbereiten"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(gt)
 library(hms)
@@ -10,17 +11,7 @@ library(knitr)
 library(readxl)
 library(tidyverse)
 
-show_dataframe <- function(d, options, ...) {
-  gt(d) |>
-    opt_interactive(
-      use_text_wrapping = FALSE,
-      page_size_default = 9,
-      use_compact_mode = TRUE,
-      use_pagination = (nrow(d) > 9)
-    ) |>
-    knitr::knit_print(options, ...)
-}
-registerS3method("knit_print", "data.frame", show_dataframe)
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 # Ziel bei der Aufbereitung von Daten

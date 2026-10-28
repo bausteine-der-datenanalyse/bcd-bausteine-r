@@ -3,11 +3,13 @@ title: "Untersuchung von zwei Merkmalen in R"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(gt)
 library(plotly)
 library(tidyverse)
 load("daten/zwei-merkmale-1.Rdata")
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 

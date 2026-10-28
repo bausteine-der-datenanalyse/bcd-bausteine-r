@@ -12,6 +12,7 @@ library(giscoR)
 library(patchwork)
 library(tidyverse)
 source("skripte/read-data-erste-schritte.R")
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 # Beispiele zum Einstieg

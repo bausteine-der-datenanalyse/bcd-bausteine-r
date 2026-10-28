@@ -3,6 +3,7 @@ title: "Lineare Trends für viele Datensätze"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(gt)
 library(knitr)
@@ -11,6 +12,7 @@ library(readxl)
 library(modelr)
 library(tidyverse)
 load("daten/rd.rdata")
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 # Einführung

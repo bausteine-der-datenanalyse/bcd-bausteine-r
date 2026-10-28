@@ -3,6 +3,7 @@ title: "Räumliche Daten"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(gt)
 library(sf)
@@ -12,6 +13,7 @@ library(osmdata)
 library(wbstats)
 library(tidyverse)
 library(rnaturalearth)
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 # Einführung

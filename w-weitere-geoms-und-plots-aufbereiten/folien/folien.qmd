@@ -3,9 +3,11 @@ title: "Weitere Geoms und Aufbereiten von Plots"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(tidyverse)
 load("daten/plots-aufbereiten.Rdata")
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 # Linienplots mit `geom_line()`

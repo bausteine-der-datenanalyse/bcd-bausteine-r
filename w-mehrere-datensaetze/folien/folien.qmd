@@ -3,8 +3,10 @@ title: "Mehrere Datensätze"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(tidyverse)
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 
