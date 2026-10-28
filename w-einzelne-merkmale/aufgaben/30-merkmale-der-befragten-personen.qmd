@@ -6,4 +6,30 @@ Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folg
 1.  Wie viele der befragten Personen sind weiblich, wie viele männlich?
 1.  Unterscheiden sich die Anteile zwischen den Befragungen 2017 und 2019?
 1.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
+
+::: {.tinh-solution}
+**Studierende an der BO: Geschlecht**
+
+Basisversion
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = Geschlecht))
+```
+
+Mit Farbe
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = Jahr, fill = Geschlecht))
+```
+
+**Studierende an der BO: Fachbereiche**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = 0, fill = Fachbereich)) +
+  coord_polar(theta = "y")
+```
+:::
 :::

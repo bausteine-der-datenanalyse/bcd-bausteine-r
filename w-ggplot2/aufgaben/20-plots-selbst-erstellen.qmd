@@ -33,4 +33,73 @@ Die wichtigsten Spalten:
 1. Statt die Baustoffe durch Farben zu unterscheiden, können Sie für jeden Baustoff einen eigenen kleinen Plot zeichnen lassen. Lassen Sie dazu `color = baustoffklasse` weg und hängen Sie `+ facet_wrap(~baustoffklasse)` an. Bei welchen Baustoffen und Baujahren sieht man viele Brücken mit einer Note von 3.0 oder schlechter? Antworten Sie in ein bis zwei Sätzen.
 
 Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
+
+::: {.tinh-solution}
+```{r}
+#| include: false
+library(tidyverse)
+library(readxl)
+d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |>
+  filter(baujahr >= 1900, baujahr <= 2026)
+```
+
+**Ein kleiner Datensatz**
+
+```{r}
+d_klein <- tibble(
+  a = c(1, 2, 3, 4),
+  b = c(2, 4, 1, 3),
+  c = c("x", "y", "x", "y"),
+  d = c(1, 4, 2, 3)
+)
+
+ggplot(data = d_klein) +
+  geom_point(mapping = aes(x = a, y = b, color = c, size = d))
+```
+
+**Dataframe**
+
+- Statistische Einheit: ein Bauwerk bzw. Teilbauwerk. Jede Zeile beschreibt eines.
+- `baujahr` ist quantitativ (diskret, intervallskaliert), `baustoffklasse` ist qualitativ (nominalskaliert).
+- Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht „doppelt so schlecht“ wie eine mit Note 1.5.
+
+**Zustandsnote und Baujahr**
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_point(mapping = aes(x = baujahr, y = zustandsnote))
+```
+
+Die Punkte überdecken sich so stark, dass man kaum etwas erkennt. Sie liegen in Zeilen, weil die Zustandsnote nur in Schritten von 0.1 vergeben wird, und viele Brücken haben dasselbe Baujahr und dieselbe Note.
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote), alpha = 0.05)
+```
+
+- Viele Brücken stammen aus den 1930er Jahren (Bau der ersten Autobahnen) und vor allem aus der Zeit von etwa 1960 bis heute.
+- Neuere Brücken haben tendenziell bessere Noten. Noten von 3.0 und schlechter kommen vor allem bei Brücken aus den 1960er und 1970er Jahren vor.
+
+**Baustoffe**
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote, color = baustoffklasse), alpha = 0.2) +
+  labs(x = "Baujahr", y = "Zustandsnote", color = "Baustoff")
+```
+
+Viel lässt sich nicht erkennen. Die meisten Brücken sind aus Beton/Stahlbeton oder Spannbeton, die Farben der anderen Baustoffe gehen zwischen den vielen sich überdeckenden Punkten unter.
+
+```{r}
+ggplot(data = d_bruecken) +
+  geom_jitter(mapping = aes(x = baujahr, y = zustandsnote), alpha = 0.2) +
+  labs(x = "Baujahr", y = "Zustandsnote") +
+  facet_wrap(~baustoffklasse)
+```
+
+- Spannbetonbrücken wurden vor allem ab etwa 1960 gebaut. Bei denen aus den 1960er und 1970er Jahren gibt es viele Noten von 3.0 und schlechter.
+- Bei Beton/Stahlbeton sieht man die vielen Brücken aus den 1930er Jahren. Noten von 3.0 und schlechter kommen bei Brücken bis etwa 1980 vor, bei neueren Brücken kaum.
+- Bei Stahl und Stahlverbund gibt es ebenfalls einige schlechte Noten bei Brücken aus den 1960er und 1970er Jahren.
+- Holz, Stein und sonstige Baustoffe kommen nur selten vor.
+:::
 :::

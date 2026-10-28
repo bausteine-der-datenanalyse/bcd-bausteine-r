@@ -5,4 +5,23 @@ Welche Verkehrsmittel werden für den Weg zur BO verwendet? Im Einzelnen:
 
 -   Welches Verkehrsmittel wird wie häufig genutzt?
 -   Welcher Fachbereich nutzt am stärksten den ÖPNV?
+
+::: {.tinh-solution}
+**Verkehrsmittel**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = Verkehrsmittel))
+```
+
+**Verkehrsmittel in den Fachbereichen**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(
+    mapping = aes(x = Fachbereich, fill = Verkehrsmittel),
+    position = "fill"
+  )
+```
+:::
 :::
