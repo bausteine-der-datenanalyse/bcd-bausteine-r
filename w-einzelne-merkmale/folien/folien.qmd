@@ -3,23 +3,14 @@ title: "Untersuchung einzelner Merkmale in R"
 ---
 
 ```{r}
+#| cache: false
 #| include: false
 library(gt)
 library(knitr)
 library(tidyverse)
 load("daten/einzelne-merkmale.Rdata")
 
-show_dataframe <- function(d, options, ...) {
-  gt(d) |>
-    opt_interactive(
-      use_text_wrapping = FALSE,
-      page_size_default = 9,
-      use_compact_mode = TRUE,
-      use_pagination = (nrow(d) > 9)
-    ) |>
-    knitr::knit_print(options, ...)
-}
-registerS3method("knit_print", "data.frame", show_dataframe)
+source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 ```
 
 ## Übersicht Dataframes für diese Folien
@@ -39,8 +30,12 @@ Quellen: <https://data.worldbank.org> und <https://www.dwd.de>
 
 # Werte plotten mit `geom_col()`
 
+Metrisches Merkmal als Höhe von Säulen darstellen
+
 ## Beispieldatensatz
 
+::: {.columns}
+::: {.column width=80%}
 ```{r}
 d <- tibble(
   A = c("X", "Y", "X", "Z", "Z", "X"),
@@ -48,11 +43,14 @@ d <- tibble(
   C = c("U", "V", "V", "W", "V", "W")
 )
 ```
-
+:::
+::: {.column width=20%}
 ```{r}
 #| echo: false
 d
 ```
+:::
+:::
 
 - Mit `tibble` auf die Schnelle einen Dataframe erzeugen
 - Werte für ein Merkmal mit `c(...)` kombinieren
@@ -66,7 +64,8 @@ ggplot(data = d) +
   geom_col(mapping = aes(x = A, y = B))
 ```
 
-- Höhe der Säule aus **Summe** der Werte von Merkmal B
+- Eine Säule für jeden Wert von Merkmal A (x)
+- Höhe der Säule aus **Summe** der Werte von Merkmal B (y)
 
 ## Füllfarbe nach drittem Merkmal
 
@@ -76,6 +75,15 @@ ggplot(data = d) +
 ```
 
 - Mit `fill = <M>` Merkmal für Füllfarbe angeben
+
+## Alles an einer Stelle
+
+```{r}
+ggplot(data = d) +
+  geom_col(mapping = aes(x = 0, y = B, fill = C))
+```
+
+- Mit festem x-Wert nur einen Balken plotten (→ Kreisdiagramm)
 
 ## Nebeneinander
 
@@ -97,6 +105,12 @@ ggplot(data = d) +
 - Mit `coord_flip()` Koordinatenachsen vertauschen
 
 ## Mit *echten* Daten...
+
+[]{.down150}
+
+```{r}
+d_wb_countries_2012
+```
 
 ## Treibhausgasemissionen (2012)
 
@@ -152,81 +166,36 @@ ggplot(data = d_wb_countries) +
 
 - Selbe Höhe für alle Balken mit `position = "fill"` $\rightarrow$ Anteile ablesbar
 
-## Ring- und Kreisdiagramme...
+# Häufigkeitsverteilung mit `geom_bar()`
 
-## 1. Schritt: Eine Säule mit Füllfarbe
-
-```{r}
-ggplot(data = d_wb_countries_2012) +
-  geom_col(mapping = aes(x = 0, y = pop, fill = country))
-```
-
-- x-Wert fest, Höhe nach Merkmal B, Füllfarbe nach Merkmal A
-
-## 2. Schritt: Bereich auf der x-Achse
-
-```{r}
-ggplot(data = d_wb_countries_2012) +
-  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
-  lims(x = c(-1.5, 0.5))
-```
-
-- Bereich auf der x-Achse mit `lims(x = c(-1.5, 0.5))`
-
-## 3. Schritt: Koordinatentransformation
-
-```{r}
-ggplot(data = d_wb_countries_2012) +
-  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
-  lims(x = c(-1.5, 0.5)) +
-  coord_polar(theta = "y")
-```
-
-- y-Koordinate wird für den Winkel verwendet
-
-## Kreisdiagramm
-
-```{r}
-ggplot(data = d_wb_countries_2012) +
-  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
-  coord_polar(theta = "y")
-
-```
-
-- Wie Ringdiagramm, aber kein Bereich für x-Werte vorgeben
-
-## Ohne Schnickschnack
-
-```{r}
-ggplot(data = d_wb_countries_2012) +
-  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
-  coord_polar(theta = "y") +
-  theme_void()
-```
-
-- Themes behandeln wir noch ausführlich
-
-# Häufigkeitsverteilungen mit `geom_bar()`
-
-Wie `geom_col()` aber mit Zählen
+Wie `geom_col()` aber Ausprägungen werden gezählt
 
 ## Beispieldatensatz
 
+::: {.columns}
+::: {.column width=80%}
 ```{r}
 d <- tibble(
   farbe = c("rot", "gruen", "blau", "gruen", "rot", "gruen")
 )
 ```
-
+:::
+::: {.column width=20%}
 ```{r}
 #| echo: false
 d
 ```
+:::
+:::
+
+- Nur ein Merkmal `farbe`, eine Zeile pro Beobachtung
+- Wie oft jede Farbe vorkommt, ergibt sich erst durch Zählen
 
 ## Minimalbeispiel
 
 ```{r}
-ggplot(data = d) + geom_bar(mapping = aes(x = farbe))
+ggplot(data = d) +
+  geom_bar(mapping = aes(x = farbe))
 ```
 
 - Wie funktioniert das? Mit einer statistischen Transformation!
@@ -242,12 +211,28 @@ ggplot(data = d) + geom_bar(mapping = aes(x = farbe))
 - Voreingestellte statistische Transformation für `geom_bar`: Zählen
 - Transformierte Daten werden geplottet
 
+## Alles an einer Stelle
+
+```{r}
+ggplot(data = d) +
+  geom_bar(mapping = aes(x = 0, fill = farbe))
+```
+
+- Mit festem x-Wert nur einen Balken plotten (→ Kreisdiagramm)
+
 ## Mit *echten* Daten...
+
+[]{.down100}
+
+```{r}
+d_wb_2012
+```
 
 ## Anzahl der Länder pro Region
 
 ```{r}
-ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region))
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region))
 ```
 
 - Funktioniert, weil jedes Land genau einmal in `d_wb_2012` vorkommt
@@ -255,10 +240,76 @@ ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region))
 ## Anzahl der Länder pro Region
 
 ```{r}
-ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region, fill = region))
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region, group = country), color = "black")
+```
+
+- Jedes Land ein Block: `group = country`, Umrandung mit `color`
+
+## Anzahl der Länder pro Region
+
+```{r}
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region, fill = region))
 ```
 
 - Balken nach Region eingefärbt (redundant mit Achsenbeschriftung)
+
+# Ring- und Kreisdiagramme
+
+## 1. Schritt: Eine Säule mit Füllfarbe
+
+```{r}
+ggplot(data = d_wb_countries_2012) +
+  geom_col(mapping = aes(x = 0, y = pop, fill = country))
+```
+
+- x-Wert fest, Höhe nach Merkmal B, Füllfarbe nach Merkmal A
+
+## 2. Schritt: Koordinatentransformation (Kreisdiagramm)
+
+```{r}
+ggplot(data = d_wb_countries_2012) +
+  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
+  coord_polar(theta = "y")
+```
+
+- y-Koordinate wird für den Winkel verwendet
+
+## 3. Schritt: Bereich auf der x-Achse (Ringdiagramm)
+
+```{r}
+ggplot(data = d_wb_countries_2012) +
+  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
+  coord_polar(theta = "y") +
+  lims(x = c(-1.5, 0.5))
+```
+
+- Bereich auf der x-Achse mit `lims(x = c(-1.5, 0.5))` $\rightarrow$ Loch in der Mitte
+
+## 4. Ohne Schnickschnack
+
+```{r}
+ggplot(data = d_wb_countries_2012) +
+  geom_col(mapping = aes(x = 0, y = pop, fill = country)) +
+  coord_polar(theta = "y") +
+  lims(x = c(-1.5, 0.5)) +
+  theme_void()
+```
+
+- Themes behandeln wir noch ausführlich
+
+## Beispiel mit Häufigkeitsverteilung
+
+```{r}
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = 0, fill = region)) +
+  coord_polar(theta = "y") +
+  lims(x = c(-1.5, 0.5)) +
+  theme_void()
+```
+
+- Mit `geom_bar` statt `geom_col`, sonst genauso
 
 # Histogramme mit `geom_histogram()`
 
@@ -307,7 +358,12 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = d) +
-  geom_histogram(mapping = aes(x = X), binwidth = 0.5, boundary = 0, closed = "left") +
+  geom_histogram(
+    mapping = aes(x = X),
+    binwidth = 0.5,
+    boundary = 0,
+    closed = "left"
+  ) +
   geom_point(mapping = aes(x = X), y = 0, color = "red")
 ```
 - Art der Intervalle (linksoffen, rechtsoffen) mit `closed`
@@ -316,7 +372,12 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = d) +
-  geom_histogram(mapping = aes(x = X, y = after_stat(density)), binwidth = 0.5, boundary = 0, closed = "left") +
+  geom_histogram(
+    mapping = aes(x = X, y = after_stat(density)),
+    binwidth = 0.5,
+    boundary = 0,
+    closed = "left"
+  ) +
   geom_point(mapping = aes(x = X), y = 0, color = "red")
 ```
 
@@ -326,7 +387,10 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = d) +
-  geom_histogram(mapping = aes(x = X, y = after_stat(density)), breaks = c(0, 1, 1.5, 1.75, 4)) +
+  geom_histogram(
+    mapping = aes(x = X, y = after_stat(density)),
+    breaks = c(0, 1, 1.5, 1.75, 4)
+  ) +
   geom_point(mapping = aes(x = X), y = 0, color = "red")
 ```
 
@@ -334,25 +398,35 @@ ggplot(data = d) +
 
 ## Mit *echten* Daten...
 
+[]{.down100}
+
+```{r}
+d_ns_bochum_tag
+```
+
 ## Niederschläge (Tag) in Bochum
 
 ```{r}
 ggplot(data = d_ns_bochum_tag) +
-  geom_histogram(mapping = aes(x = Niederschlag), binwidth = 0.5, boundary = 0)
+  geom_histogram(mapping = aes(x = niederschlag), binwidth = 0.5, boundary = 0)
 ```
 
 ## Niederschläge (Monat) in Bochum
 
 ```{r}
 ggplot(data = d_ns_bochum_monat) +
-  geom_histogram(mapping = aes(x = Niederschlag), binwidth = 15, boundary = 0)
+  geom_histogram(mapping = aes(x = niederschlag), binwidth = 15, boundary = 0)
 ```
 
 ## Niederschläge (Monat, relative Häufigkeit) in Bochum
 
 ```{r}
 ggplot(data = d_ns_bochum_monat) +
-  geom_histogram(mapping = aes(x = Niederschlag, y = after_stat(density)), binwidth = 15, boundary = 0)
+  geom_histogram(
+    mapping = aes(x = niederschlag, y = after_stat(density)),
+    binwidth = 15,
+    boundary = 0
+  )
 ```
 
 # Verteilungsfunktionen mit `geom_step()` und Transformation
@@ -374,7 +448,11 @@ d <- tibble(
   Y = c("a", "a", "a", "b", "b", "b", "a", "b", "a", "b")
 )
 ggplot(data = d) +
-  geom_dotplot(mapping = aes(x = X, fill = Y), stackgroups = TRUE, dotsize = 0.5)
+  geom_dotplot(
+    mapping = aes(x = X, fill = Y),
+    stackgroups = TRUE,
+    dotsize = 0.5
+  )
 ```
 
 ## Empirische Verteilungsfunktion
@@ -391,7 +469,11 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = d) +
-  geom_dotplot(mapping = aes(x = X, fill = Y), stackgroups = TRUE, dotsize = 0.5) +
+  geom_dotplot(
+    mapping = aes(x = X, fill = Y),
+    stackgroups = TRUE,
+    dotsize = 0.5
+  ) +
   geom_step(mapping = aes(x = X, color = Y), stat = "ecdf")
 ```
 
@@ -413,7 +495,7 @@ ggplot(data = d) +
 
 ```{r}
 ggplot(data = d_ns_bochum_monat) +
-  geom_step(mapping = aes(x = Niederschlag), stat = "ecdf")
+  geom_step(mapping = aes(x = niederschlag), stat = "ecdf")
 ```
 
 - So gut wie kein Monat ohne Regen
@@ -422,7 +504,7 @@ ggplot(data = d_ns_bochum_monat) +
 
 ```{r}
 ggplot(data = d_ns_bochum_tag) +
-  geom_step(mapping = aes(x = Niederschlag), stat = "ecdf")
+  geom_step(mapping = aes(x = niederschlag), stat = "ecdf")
 ```
 
 - Warum ganz anders als für die monatlichen Niederschläge?

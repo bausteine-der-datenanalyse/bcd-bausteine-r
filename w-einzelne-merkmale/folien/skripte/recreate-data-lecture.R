@@ -4,8 +4,8 @@ rm(list = ls())
 load("data-raw/data-lecture-2018.Rdata")
 
 # reorganize bochum
-d_ns_bochum_tag <- d_ns_bochum_tag |> select(Datum, Niederschlag = NS)
-d_ns_bochum_monat <- d_ns_bochum_monat |> select(Jahr, Monat, Niederschlag = NS)
+d_ns_bochum_tag <- d_ns_bochum_tag |> select(datum = Datum, niederschlag = NS)
+d_ns_bochum_monat <- d_ns_bochum_monat |> select(jahr = Jahr, monat = Monat, niederschlag = NS)
 
 save(
   d_wb_all,
