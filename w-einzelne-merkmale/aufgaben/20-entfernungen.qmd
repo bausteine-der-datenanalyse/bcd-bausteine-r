@@ -11,7 +11,7 @@ Die Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der n
 | Herne         | 10.7            |
 | Wuppertal     | 21.4            |
 | Gelsenkirchen | 14.1            |
-| Mühlheim      | 27.2            |
+| Mülheim       | 27.2            |
 
 Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und stellen Sie die Entfernungen in einem geeigneten Plot dar.
 :::
