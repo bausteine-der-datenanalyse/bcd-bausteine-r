@@ -1,7 +1,5 @@
 library(gt)
 
-# Dataframes als gt-Tabelle ausgeben, interaktiv nur wenn sie nicht auf eine Folie passen, sehr lange nur Anfang und
-# Ende
 knit_print.data.frame <- function(x, options, ...) {
   n <- nrow(x)
   tab <- if (n < 20000) gt(x) else gt_preview(x)
@@ -23,6 +21,7 @@ knit_print.data.frame <- function(x, options, ...) {
   }
   knitr::knit_print(tab, options, ...)
 }
+
 registerS3method(
   "knit_print",
   "data.frame",

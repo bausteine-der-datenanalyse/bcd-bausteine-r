@@ -35,7 +35,7 @@ Metrisches Merkmal als Höhe von Säulen darstellen
 ## Beispieldatensatz
 
 ::: {.columns}
-::: {.column width=80%}
+::: {.column width=70%}
 ```{r}
 d <- tibble(
   A = c("X", "Y", "X", "Z", "Z", "X"),
@@ -44,7 +44,7 @@ d <- tibble(
 )
 ```
 :::
-::: {.column width=20%}
+::: {.column width=30%}
 ```{r}
 #| echo: false
 d
@@ -64,8 +64,8 @@ ggplot(data = d) +
   geom_col(mapping = aes(x = A, y = B))
 ```
 
-- Eine Säule für jeden Wert von Merkmal A (x)
-- Höhe der Säule aus **Summe** der Werte von Merkmal B (y)
+- Eine Säule für jede Ausprägung von Merkmal A
+- Höhe der Säule aus Summe der Werte von Merkmal B
 
 ## Füllfarbe nach drittem Merkmal
 
@@ -74,7 +74,8 @@ ggplot(data = d) +
   geom_col(mapping = aes(x = A, y = B, fill = C))
 ```
 
-- Mit `fill = <M>` Merkmal für Füllfarbe angeben
+- Merkmal für Füllfarbe mit `fill = <M>` angeben
+- Jetzt klar, wie sich Höhe ergibt
 
 ## Alles an einer Stelle
 
@@ -173,14 +174,14 @@ Wie `geom_col()` aber Ausprägungen werden gezählt
 ## Beispieldatensatz
 
 ::: {.columns}
-::: {.column width=80%}
+::: {.column width=70%}
 ```{r}
 d <- tibble(
   farbe = c("rot", "gruen", "blau", "gruen", "rot", "gruen")
 )
 ```
 :::
-::: {.column width=20%}
+::: {.column width=30%}
 ```{r}
 #| echo: false
 d
