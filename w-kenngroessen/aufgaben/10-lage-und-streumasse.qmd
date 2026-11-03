@@ -14,8 +14,6 @@ lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 Bestimmen Sie die gängigen Lage- und Streumaße für die Fahrzeiten.
 
 ::: {.tinh-solution}
-**Lage- und Streumaße für Fahrzeiten**
-
 ```{r}
 mean(d_bo_vm$Zeit)
 median(d_bo_vm$Zeit)

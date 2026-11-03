@@ -154,7 +154,7 @@ d_e <- tibble(
     "Herne",
     "Wuppertal",
     "Gelsenkirchen",
-    "Mühlheim"
+    "Mülheim"
   ),
   entfernung = c(17.8, 15.4, 10.7, 21.4, 14.1, 27.2)
 )

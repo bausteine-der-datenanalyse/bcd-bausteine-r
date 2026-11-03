@@ -386,7 +386,8 @@ ggplot(data = d) +
 ## Lorenzkurve Merkmal A (Skript)
 
 ```{r}
-ggplot(data = lc_to_tibble(lc_A)) +
+d_lc <- lc_to_tibble(lc_A)
+ggplot(data = d_lc) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -396,7 +397,8 @@ ggplot(data = lc_to_tibble(lc_A)) +
 ## Lorenzkurve Merkmal B (Skript)
 
 ```{r}
-ggplot(data = lc_to_tibble(lc_B)) +
+d_lc <- lc_to_tibble(lc_B)
+ggplot(data = d_lc) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -406,7 +408,8 @@ ggplot(data = lc_to_tibble(lc_B)) +
 ## Lorenzkurve Merkmal C (Skript)
 
 ```{r}
-ggplot(data = lc_to_tibble(lc_C)) +
+d_lc <- lc_to_tibble(lc_C)
+ggplot(data = d_lc) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -418,8 +421,8 @@ ggplot(data = lc_to_tibble(lc_C)) +
 ## Niederschläge Bochum (2008)
 
 ```{r}
-d <- Lc(d_ns_m_2008$Niederschlag)
-ggplot(data = lc_to_tibble(d)) +
+d_lc <- lc_to_tibble(Lc(d_ns_m_2008$Niederschlag))
+ggplot(data = d_lc) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -427,8 +430,8 @@ ggplot(data = lc_to_tibble(d)) +
 ## Niederschläge Nha Trang (2015)
 
 ```{r}
-d <- Lc(d_ns_m_nha_trang_2015$Niederschlag)
-ggplot(data = lc_to_tibble(d)) +
+d_lc <- lc_to_tibble(Lc(d_ns_m_nha_trang_2015$Niederschlag))
+ggplot(data = d_lc) +
   geom_ribbon(mapping = aes(x = u, ymin = v, ymax = u), color = "black", fill = "linen") +
   geom_point(mapping = aes(x = u, y = v))
 ```
@@ -464,8 +467,8 @@ Gini(d_ns_m_nha_trang_2015$Niederschlag)
 ### Lorenz-Münzer-Koeffizienten Bochum und Nha Trang
 
 ```{r}
-12 / 11 * Gini(d_ns_m_2008$Niederschlag)
-12 / 11 * Gini(d_ns_m_nha_trang_2015$Niederschlag)
+Gini(d_ns_m_2008$Niederschlag, corr = TRUE)
+Gini(d_ns_m_nha_trang_2015$Niederschlag, corr = TRUE)
 ```
 
 # Zusammenfassung

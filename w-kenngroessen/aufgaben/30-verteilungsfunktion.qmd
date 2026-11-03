@@ -14,8 +14,6 @@ lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 Stellen Sie die empirische Verteilungsfunktion der Fahrzeiten zusammen mit horizontalen sowie vertikalen Linien für die Quartile und den Median dar.
 
 ::: {.tinh-solution}
-**Emp. Verteilungsfunktion mit Werten**
-
 ```{r}
 p <- c(0.25, 0.5, 0.75)
 q <- quantile(d_bo_vm$Zeit, probs = p, type = 2)

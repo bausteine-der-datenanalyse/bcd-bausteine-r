@@ -19,8 +19,8 @@ Tipp: Die Funktion `lc_to_tibble()`, die das Ergebnis von `Lc` in einen Datafram
 **Lorenzkurve der Fahrzeiten**
 
 ```{r}
-lcz <- Lc(d_bo_vm$Zeit)
-ggplot(data = lc_to_tibble(lcz)) +
+d_lc <- lc_to_tibble(Lc(d_bo_vm$Zeit))
+ggplot(data = d_lc) +
   geom_ribbon(
     mapping = aes(x = u, ymin = v, ymax = u),
     color = "black",
@@ -33,6 +33,7 @@ ggplot(data = lc_to_tibble(lcz)) +
 ```{r}
 n <- nrow(d_bo_vm)
 Gini(d_bo_vm$Zeit)
+Gini(d_bo_vm$Zeit, corr = TRUE)
 ```
 
 Für $n =$ `` `{{r}} n` `` Beobachtungen ist dabei der Vorfaktor für den Lorenz-Münzer-Koeffizienten mit $n / (n-1) =$ `` `{{r}} signif(n/(n-1), 4)` `` nahe bei 1. Der Unterschied ist vernachlässigbar.
