@@ -1,0 +1,27 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(ineq)
+library(tidyverse)
+load("daten/kenngroessen-aufgaben.Rdata")
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
+```
+:::
+
+::: {#exr-lage-und-streumasse}
+## Lage- und Streumaße
+
+Bestimmen Sie die gängigen Lage- und Streumaße für die Fahrzeiten.
+
+::: {.tinh-solution}
+**Lage- und Streumaße für Fahrzeiten**
+
+```{r}
+mean(d_bo_vm$Zeit)
+median(d_bo_vm$Zeit)
+max(d_bo_vm$Zeit) - min(d_bo_vm$Zeit)
+var(d_bo_vm$Zeit)
+sd(d_bo_vm$Zeit)
+```
+:::
+:::

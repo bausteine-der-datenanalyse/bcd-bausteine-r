@@ -1,0 +1,27 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(ineq)
+library(tidyverse)
+load("daten/kenngroessen-aufgaben.Rdata")
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
+```
+:::
+
+::: {#exr-histogramm}
+## Histogramm
+
+Plotten Sie ein Histogramm der Fahrzeiten und stellen Sie die Werte $\overline{x} - \tilde{s}$, $\overline{x}$ sowie $\overline{x} + \tilde{s}$ mit farbigen vertikalen Linien dar.
+
+::: {.tinh-solution}
+**Verteilung mit $\tilde x$ und $\tilde s$**
+
+```{r}
+m <- mean(d_bo_vm$Zeit)
+s <- sd(d_bo_vm$Zeit)
+ggplot(data = d_bo_vm) +
+  geom_histogram(mapping = aes(x = Zeit), boundary = 0, binwidth = 15) +
+  geom_vline(xintercept = c(m - s, m, m + s), color = c("red", "blue", "red"))
+```
+:::
+:::

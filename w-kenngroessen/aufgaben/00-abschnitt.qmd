@@ -1,0 +1,7 @@
+{{< pagebreak >}}
+
+## Teil 2: Umsetzung in R
+
+In den folgenden Aufgaben verwenden Sie nochmals die Ergebnisse einer Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat.
+
+Laden Sie [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei um Positron zu starten und öffnen Sie dann das Dokument `kenngroessen-aufgaben.qmd`. Führen Sie die Datei aus und erzeugen Sie mit `Render` das HTML-Dokument.

@@ -1,0 +1,54 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(ineq)
+library(tidyverse)
+load("daten/kenngroessen-aufgaben.Rdata")
+lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
+```
+:::
+
+::: {#exr-boxplot}
+## Boxplot
+
+Erstellen Sie jeweils einen Boxplot für
+
+1. alle Fahrzeiten,
+1. Fahrzeiten getrennt nach Fachbereichen sowie
+1. Fahrzeiten getrennt nach Verkehrsmitteln.
+
+Verwenden Sie im dritten Plot das Argument `varwidth = TRUE`.
+
+::: {.tinh-solution}
+**Boxplot aller Fahrzeiten**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_boxplot(mapping = aes(y = Zeit))
+```
+
+**Fahrzeiten und Fachbereiche**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_boxplot(mapping = aes(x = Fachbereich, y = Zeit))
+```
+
+**Fahrzeiten und Verkehrsmittel**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_boxplot(mapping = aes(x = Verkehrsmittel, y = Zeit), varwidth = TRUE)
+```
+
+**Fahrzeiten, Fachbereiche und Geschlecht**
+
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_boxplot(
+    mapping = aes(x = Fachbereich, y = Zeit, fill = Geschlecht),
+    varwidth = TRUE
+  )
+```
+:::
+:::
