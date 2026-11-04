@@ -68,7 +68,8 @@ d_donau <- read_delim(
   "daten/6342800.day",
   locale = locale(decimal_mark = ".", grouping_mark = ","),
   trim_ws = TRUE,
-  skip = 40
+  skip = 40,
+  col_types = cols(`YYYY-MM-DD` = col_date(), Original = col_double(), .default = col_skip())
 ) |>
   select(Datum = "YYYY-MM-DD", Abfluss = Original) |>
   mutate(

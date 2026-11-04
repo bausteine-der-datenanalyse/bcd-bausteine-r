@@ -59,10 +59,10 @@ d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
     zeit = V6_Zeit
   ) |>
   mutate(im_ruhrgebiet = ort_id != 9) |>
-  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "geschlecht")) |>
-  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "fachbereich")) |>
-  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "vm_heute")) |>
-  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "ort")) |>
+  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "geschlecht"), by = join_by(geschlecht_id)) |>
+  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "fachbereich"), by = join_by(fachbereich_id)) |>
+  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "vm_heute"), by = join_by(vm_heute_id)) |>
+  left_join(read_excel("daten/BefragungMVP2017_0_kodierung.xlsx", sheet = "ort"), by = join_by(ort_id)) |>
   mutate(
     ort = if_else(ort == "IR", ort_ir, ort),
     ort = if_else(ort == "NIR", ort_nir, ort),
@@ -158,7 +158,7 @@ d_e <- tibble(
   ),
   entfernung = c(17.8, 15.4, 10.7, 21.4, 14.1, 27.2)
 )
-d_mb_e <- d_mb |> left_join(d_e) |> filter(!is.na(entfernung))
+d_mb_e <- d_mb |> left_join(d_e, by = join_by(ort)) |> filter(!is.na(entfernung))
 ggplot(data = d_mb_e) +
   geom_point(mapping = aes(x = entfernung, y = zeit, color = fachbereich)) +
   scale_x_continuous(breaks = d_e$entfernung, minor_breaks = NULL)

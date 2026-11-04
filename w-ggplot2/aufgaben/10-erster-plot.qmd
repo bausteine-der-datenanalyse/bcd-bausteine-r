@@ -46,7 +46,7 @@ d_pinguine <- penguins
 
 Statistische Datensätze werden in R als *Dataframe* gespeichert. Ein Dataframe ist eine Tabelle, in der jede Spalte einen Namen hat und Werte desselben Typs enthält, z. B. Zahlen oder Text. Die Anweisung oben legt eine Kopie des Datensatzes unter dem Namen `d_pinguine` an. Nach dem Ausführen erscheint `d_pinguine` rechts im Fenster *Variables*. Doppelklicken Sie den Eintrag, um sich die Tabelle anzusehen.
 
-Der Dataframe ist so organisiert, wie es im Skript im Kapitel „Statistische Daten“ unter „Organisation von Datensätzen“ beschrieben ist: Jede Zeile ist eine Beobachtung, jede Spalte ein Merkmal, und jede Zelle enthält eine Ausprägung.
+Der Dataframe ist so organisiert, wie es im Skript im Kapitel "Statistische Daten" unter "Organisation von Datensätzen" beschrieben ist: Jede Zeile ist eine Beobachtung, jede Spalte ein Merkmal, und jede Zelle enthält eine Ausprägung.
 
 - Was ist hier die statistische Einheit?
 - Bestimmen Sie für `species`, `island`, `flipper_len` und `body_mass` wie auf Aufgabenblatt 02, ob das Merkmal diskret oder stetig ist, welches Skalenniveau zugrunde liegt und ob es qualitativ oder quantitativ ist.
@@ -155,5 +155,15 @@ ggplot(data = d_pinguine) +
 - Schritt 5: Die Form hängt von der Insel ab. Gentoo-Pinguine gibt es nur auf Biscoe, Chinstrap nur auf Dream, Adelie auf allen drei Inseln.
 - Schritt 6: Innerhalb von `aes(...)` wird eine visuelle Eigenschaft einem Merkmal zugeordnet, sie ändert sich also von Punkt zu Punkt. Außerhalb gilt der Wert für alle Punkte gleich.
 - Schritt 7: `labs(...)` setzt Achsenbeschriftungen, Titel der Legenden und Titel des Plots.
+
+**Warnung beseitigen**
+
+Beim fertigen Plot oben meldet R "Removed 2 rows containing missing values". Lesen Sie solche Meldungen immer: Hier fehlen bei zwei Pinguinen Flossenlänge und Körpermasse (`NA`), ggplot lässt sie deshalb weg. Das ist in Ordnung, sollte aber eine bewusste Entscheidung sein. Mit `drop_na` entfernen Sie die beiden Zeilen ausdrücklich, und die Warnung verschwindet:
+
+```{r}
+d_pinguine_vollstaendig <- drop_na(d_pinguine, flipper_len, body_mass)
+ggplot(data = d_pinguine_vollstaendig) +
+  geom_point(mapping = aes(x = flipper_len, y = body_mass))
+```
 :::
 :::

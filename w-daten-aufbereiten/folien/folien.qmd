@@ -18,9 +18,9 @@ source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 
 ## Tidy data
 
-> “Happy families are all alike; every unhappy family is unhappy in its own way.” — Leo Tolstoy
+> "Happy families are all alike; every unhappy family is unhappy in its own way." — Leo Tolstoy
 
-> “Tidy datasets are all alike, but every messy dataset is messy in its own way.” — Hadley Wickham
+> "Tidy datasets are all alike, but every messy dataset is messy in its own way." — Hadley Wickham
 
 Tidy data (aufgeräumte Daten)
 

@@ -207,10 +207,10 @@ laender <- tibble(
 ACHTUNG: Joinen ist case-sensitive!
 
 ```{r}
-data_bl <- left_join(bl, laender) |>
+data_bl <- left_join(bl, laender, by = join_by(Bundesland)) |>
   mutate(Bundesland = toupper(Bundesland)) # mit toupper Case-Sensitivität umgehen
 
-data_bl_sf <- left_join(d_deu_1, data_bl)
+data_bl_sf <- left_join(d_deu_1, data_bl, by = join_by(Bundesland))
 ```
 
 **Leistung pro Anlage**

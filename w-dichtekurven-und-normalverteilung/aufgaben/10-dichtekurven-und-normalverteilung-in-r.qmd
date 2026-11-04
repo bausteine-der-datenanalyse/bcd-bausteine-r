@@ -67,10 +67,10 @@ Mit `geom_ribbon`
 
 ```{r}
 ggplot() +
-  geom_ribbon(mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)), stat = "function", fun = f1, color = "black", fill = "orange",  alpha = 0.5) +
-  geom_ribbon(mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)), stat = "function", fun = f2, color = "black", fill = "red",     alpha = 0.5) +
-  geom_ribbon(mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)), stat = "function", fun = f3, color = "black", fill = "hotpink", alpha = 0.5) +
-  geom_ribbon(mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)), stat = "function", fun = f4, color = "black", fill = "magenta", alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f1, color = "black", fill = "orange",  alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f2, color = "black", fill = "red",     alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f3, color = "black", fill = "hotpink", alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f4, color = "black", fill = "magenta", alpha = 0.5) +
   lims(x = c(-5, 5))
 ```
 
@@ -78,7 +78,7 @@ Elegantere Lösung mit Funktion (können Sie noch nicht)
 
 ```{r}
 make_ribbon <- function(f, c) geom_ribbon(
-  mapping = aes(x = stat(x), ymin = 0, ymax = stat(y)),
+  mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)),
   stat = "function", fun = f, color = "black", fill = c,  alpha = 0.5
 )
 
@@ -95,7 +95,7 @@ sigma <- sd(d_unistrasse$Geschwindigkeit)
 f <- function(x) dnorm(x, mean = mu, sd = sigma)
 
 ggplot(data = d_unistrasse) +
-  geom_histogram(mapping = aes(x = Geschwindigkeit, y = stat(density)), binwidth = 2.5, boundary = 0) +
+  geom_histogram(mapping = aes(x = Geschwindigkeit, y = after_stat(density)), binwidth = 2.5, boundary = 0) +
   geom_vline(xintercept = c(mu - sigma, mu, mu + sigma), color = c("magenta", "blue", "magenta")) +
   geom_line(stat = "function", fun = f, linewidth = 1, color = "red")
 ```
@@ -115,7 +115,7 @@ ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +
 ```{r}
 ggplot(data = d_unistrasse, mapping = aes(x = Geschwindigkeit)) +
   geom_histogram(
-    mapping = aes(y = stat(density)),
+    mapping = aes(y = after_stat(density)),
     binwidth = 2.5,
     boundary = 0.0
   ) +

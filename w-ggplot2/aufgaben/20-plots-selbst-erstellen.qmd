@@ -63,7 +63,7 @@ ggplot(data = d_klein) +
 
 - Statistische Einheit: ein Bauwerk bzw. Teilbauwerk. Jede Zeile beschreibt eines.
 - `baujahr` ist quantitativ (diskret, intervallskaliert), `baustoffklasse` ist qualitativ (nominalskaliert).
-- Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht „doppelt so schlecht“ wie eine mit Note 1.5.
+- Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht "doppelt so schlecht" wie eine mit Note 1.5.
 
 **Zustandsnote und Baujahr**
 
