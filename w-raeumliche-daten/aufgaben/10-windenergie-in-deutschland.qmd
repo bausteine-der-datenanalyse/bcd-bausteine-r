@@ -37,10 +37,12 @@ Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Ker
 - Stellen Sie die Standorte der Anlagen auf einer Deutschlandkarte dar. Versuchen Sie zusätzliche Informationen zu visualisieren wie
   - die Leistung
   - den Zeitpunkt der Inbetriebnahmen
+
 - Visualisieren Sie
   - die gesamte Anzahl der installierten Windkraftanlagen je Bundesland
   - die Gesamtleistung je Bundeslandes
   - die Gesamtleistung bezogen auf die Fläche des jeweiligen Bundeslandes
+
 - Welche Darstellungsformen könnten noch von Interesse sein?
 
 ::: {.tinh-solution}

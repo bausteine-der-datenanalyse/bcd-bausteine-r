@@ -28,7 +28,9 @@ Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Date
 ### Häufigkeiten
 
 - Stellen Sie in einem nach den Häufigkeiten sortierten Balkendiagramm die verschiedenen Fachbereiche dar.
+
 - Zeigen Sie für jeden Fachbereich in einem Balkendiagramm die gewählten Verkehrsmittel.
+
 - Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere".
 
 Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:

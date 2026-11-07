@@ -49,7 +49,9 @@ Statistische Datensätze werden in R als *Dataframe* gespeichert. Ein Dataframe 
 Der Dataframe ist so organisiert, wie es im Skript im Kapitel "Statistische Daten" unter "Organisation von Datensätzen" beschrieben ist: Jede Zeile ist eine Beobachtung, jede Spalte ein Merkmal, und jede Zelle enthält eine Ausprägung.
 
 - Was ist hier die statistische Einheit?
+
 - Bestimmen Sie für `species`, `island`, `flipper_len` und `body_mass` wie auf Aufgabenblatt 02, ob das Merkmal diskret oder stetig ist, welches Skalenniveau zugrunde liegt und ob es qualitativ oder quantitativ ist.
+
 - In manchen Zellen steht `NA`. Was könnte das bedeuten?
 
 ### Schritt 2: Leere Zeichenfläche
