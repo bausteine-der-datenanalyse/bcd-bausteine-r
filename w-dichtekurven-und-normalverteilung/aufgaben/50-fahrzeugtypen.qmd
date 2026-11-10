@@ -1,0 +1,47 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
+```
+:::
+
+::: {#exr-fahrzeugtypen}
+## Fahrzeugtypen
+
+Die Spalte `Fahrzeug` gibt an, um welchen Fahrzeugtyp es sich handelt. Untersuchen Sie, ob sich die Verteilung der Geschwindigkeiten für die verschiedenen Fahrzeugtypen unterscheidet.
+
+1. Stellen Sie für jeden Fahrzeugtyp das Histogramm der Geschwindigkeiten zusammen mit einer approximierten Dichtekurve dar.
+
+1. Erstellen Sie für jeden Fahrzeugtyp einen NQ-Plot.
+
+1. Beschreiben Sie die Unterschiede. Welche Fahrzeugtypen verhalten sich ähnlich? Was fällt bei den Zweirädern auf und wie lässt sich das erklären?
+
+Hinweise: Für drei Fahrzeuge ist der Typ unbekannt (`NA`). Diese entfernen Sie mit `filter(!is.na(Fahrzeug))`. Für die Aufteilung nach Fahrzeugtyp verwenden Sie `facet_wrap()`.
+
+::: {.tinh-solution}
+**Histogramme mit Dichtekurven**
+
+```{r}
+d_fahrzeuge <- d_unistrasse |> filter(!is.na(Fahrzeug))
+
+ggplot(data = d_fahrzeuge, mapping = aes(x = Geschwindigkeit)) +
+  geom_histogram(mapping = aes(y = after_stat(density)), binwidth = 2.5, boundary = 0) +
+  geom_density(color = "red", bw = 2) +
+  facet_wrap(~Fahrzeug)
+```
+
+**NQ-Plots**
+
+```{r}
+ggplot(data = d_fahrzeuge, mapping = aes(sample = Geschwindigkeit)) +
+  geom_qq_line() +
+  geom_qq(color = "red") +
+  facet_wrap(~Fahrzeug)
+```
+
+- PKW, Transporter, LKW und Lastzüge verhalten sich sehr ähnlich: Der Gipfel liegt jeweils bei etwa 52 km/h. Im NQ-Plot liegen die Punkte in der Mitte auf der Geraden, an beiden Enden weichen sie ab: Es gibt mehr sehr langsame und sehr schnelle Fahrzeuge als bei einer Normalverteilung.
+
+- Zweiräder sind deutlich langsamer (Gipfel bei etwa 30 km/h) und die Verteilung ist breiter. Neben dem Hauptgipfel gibt es einen kleinen zweiten Gipfel bei etwa 50 km/h. Vermutlich sind unter den Zweirädern sowohl Fahrräder als auch Motorräder. Die Verteilung ist deshalb nicht normalverteilt, was auch der NQ-Plot zeigt.
+:::
+:::

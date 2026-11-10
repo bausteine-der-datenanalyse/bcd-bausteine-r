@@ -1,0 +1,82 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
+```
+:::
+
+::: {#exr-stichprobengroesse}
+## Stichprobengröße
+
+Wie sehen Histogramm, Dichtekurve und NQ-Plot aus, wenn die Werte wirklich normalverteilt sind? Mit
+
+```{.r}
+d <- tibble(x = rnorm(20, mean = 50, sd = 6))
+```
+
+erzeugen Sie einen Dataframe mit 20 zufälligen Werten aus einer Normalverteilung mit $\mu = 50$ und $\sigma = 6$.
+
+1. Erzeugen Sie Stichproben der Größe $n = 20$, $n = 100$ und $n = 1000$.
+
+1. Stellen Sie für jede Stichprobe das Histogramm zusammen mit einer approximierten Dichtekurve und der Normalverteilung mit $\mu = 50$ und $\sigma = 6$ dar.
+
+1. Erstellen Sie für jede Stichprobe einen NQ-Plot.
+
+1. Führen Sie den Code mehrmals aus. Was beobachten Sie? Was bedeutet das für die Beurteilung von NQ-Plots bei wenigen Werten?
+
+::: {.tinh-solution}
+```{r}
+set.seed(4711)
+f <- function(x) dnorm(x, mean = 50, sd = 6)
+
+d20 <- tibble(x = rnorm(20, mean = 50, sd = 6))
+d100 <- tibble(x = rnorm(100, mean = 50, sd = 6))
+d1000 <- tibble(x = rnorm(1000, mean = 50, sd = 6))
+```
+
+**Histogramme**
+
+```{r}
+ggplot(data = d20, mapping = aes(x = x)) +
+  geom_histogram(mapping = aes(y = after_stat(density)), binwidth = 2.5) +
+  geom_density(color = "red") +
+  geom_function(fun = f, color = "blue") +
+  coord_cartesian(xlim = c(25, 75))
+
+ggplot(data = d100, mapping = aes(x = x)) +
+  geom_histogram(mapping = aes(y = after_stat(density)), binwidth = 2.5) +
+  geom_density(color = "red") +
+  geom_function(fun = f, color = "blue") +
+  coord_cartesian(xlim = c(25, 75))
+
+ggplot(data = d1000, mapping = aes(x = x)) +
+  geom_histogram(mapping = aes(y = after_stat(density)), binwidth = 2.5) +
+  geom_density(color = "red") +
+  geom_function(fun = f, color = "blue") +
+  coord_cartesian(xlim = c(25, 75))
+```
+
+**NQ-Plots**
+
+```{r}
+ggplot(data = d20, mapping = aes(sample = x)) +
+  geom_qq_line() +
+  geom_qq(color = "red")
+
+ggplot(data = d100, mapping = aes(sample = x)) +
+  geom_qq_line() +
+  geom_qq(color = "red")
+
+ggplot(data = d1000, mapping = aes(sample = x)) +
+  geom_qq_line() +
+  geom_qq(color = "red")
+```
+
+- Bei $n = 20$ sehen Histogramm und Dichtekurve bei jedem Durchlauf anders aus und haben mit der Glockenkurve oft wenig Ähnlichkeit. Auch im NQ-Plot weichen die Punkte deutlich von der Geraden ab, vor allem an den Enden.
+
+- Mit wachsendem $n$ nähern sich Histogramm und Dichtekurve der Normalverteilung an und die Punkte im NQ-Plot liegen immer näher an der Geraden.
+
+- Bei wenigen Werten sind Abweichungen im NQ-Plot also auch dann zu erwarten, wenn das Merkmal normalverteilt ist. Nur deutliche und systematische Abweichungen sprechen gegen eine Normalverteilung.
+:::
+:::
