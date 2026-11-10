@@ -1,0 +1,57 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
+```
+:::
+
+::: {#exr-normalverteilung-in-r}
+## Normalverteilung
+
+Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2,\, 1,\, 2 \, \text{ und } 4$ in einem Plot dar.
+
+Zusatzaufgabe: Füllen Sie die Bereiche unter den Kurven farbig und verwenden Sie hierfür transparente Flächen.
+
+::: {.tinh-solution}
+**Nur die Kurven**
+
+```{r}
+f1 <- function(x) dnorm(x, mean = 0, sd = 4)
+f2 <- function(x) dnorm(x, mean = 0, sd = 2)
+f3 <- function(x) dnorm(x, mean = 0, sd = 1)
+f4 <- function(x) dnorm(x, mean = 0, sd = 0.5)
+
+ggplot() +
+  geom_function(fun = f1) +
+  geom_function(fun = f2) +
+  geom_function(fun = f3) +
+  geom_function(fun = f4) +
+  lims(x = c(-5, 5))
+```
+
+**Mit `geom_ribbon`**
+
+```{r}
+ggplot() +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f1, color = "black", fill = "orange",  alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f2, color = "black", fill = "red",     alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f3, color = "black", fill = "hotpink", alpha = 0.5) +
+  geom_ribbon(mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)), stat = "function", fun = f4, color = "black", fill = "magenta", alpha = 0.5) +
+  lims(x = c(-5, 5))
+```
+
+**Elegantere Lösung mit Funktion (können Sie noch nicht)**
+
+```{r}
+make_ribbon <- function(f, c) geom_ribbon(
+  mapping = aes(x = after_stat(x), ymin = 0, ymax = after_stat(y)),
+  stat = "function", fun = f, color = "black", fill = c,  alpha = 0.5
+)
+
+ggplot() +
+  make_ribbon(f1, "orange") + make_ribbon(f2, "red") + make_ribbon(f3, "hotpink") + make_ribbon(f4, "magenta") +
+  lims(x = c(-5, 5))
+```
+:::
+:::

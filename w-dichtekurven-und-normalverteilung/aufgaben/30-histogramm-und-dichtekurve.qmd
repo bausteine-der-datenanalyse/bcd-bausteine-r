@@ -1,0 +1,27 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
+```
+:::
+
+::: {#exr-histogramm-und-dichtekurve}
+## Histogramm und Dichtekurve
+
+Stellen Sie das Histogramm der Geschwindigkeiten gemeinsam mit einer approximierten Dichtekurve dar. Experimentieren Sie hierbei mit verschiedenen Breiten des Kerns.
+
+::: {.tinh-solution}
+```{r}
+ggplot(data = d_unistrasse, mapping = aes(x = Geschwindigkeit)) +
+  geom_histogram(
+    mapping = aes(y = after_stat(density)),
+    binwidth = 2.5,
+    boundary = 0.0
+  ) +
+  geom_density(color = "red", fill = "orange", alpha = 0.25, bw = 1)
+```
+
+- Die Breite des Kerns legen Sie mit "bw" fest. Probieren Sie verschiedene Werte aus.
+:::
+:::
