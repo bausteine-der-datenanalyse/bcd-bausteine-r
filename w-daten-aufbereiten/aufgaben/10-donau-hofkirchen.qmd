@@ -253,7 +253,7 @@ ggplot(data = d_donau) +
     mapping = aes(x = Abfluss, y = after_stat(density)),
     binwidth = 30
   ) +
-  stat_function(
+  geom_function(
     fun = \(x) dnorm(x, mean = mean(d_donau$Abfluss), sd = sd(d_donau$Abfluss)),
     color = "red"
   )

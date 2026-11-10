@@ -252,7 +252,7 @@ f <- function(x) dnorm(x, mu, sigma)
 
 ```{.r}
 ggplot() +
-  geom_function(stat = "function", fun = <Funktion>, xlim = c(<from>, <to>), Argumente)
+  geom_function(fun = <Funktion>, xlim = c(<from>, <to>), Argumente)
 ```
 
 - Funktion vorab definieren

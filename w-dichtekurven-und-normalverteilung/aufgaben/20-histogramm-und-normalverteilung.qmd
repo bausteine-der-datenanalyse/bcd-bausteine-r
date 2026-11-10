@@ -22,7 +22,7 @@ f <- function(x) dnorm(x, mean = mu, sd = sigma)
 ggplot(data = d_unistrasse) +
   geom_histogram(mapping = aes(x = Geschwindigkeit, y = after_stat(density)), binwidth = 2.5, boundary = 0) +
   geom_vline(xintercept = c(mu - sigma, mu, mu + sigma), color = c("magenta", "blue", "magenta")) +
-  geom_line(stat = "function", fun = f, linewidth = 1, color = "red")
+  geom_function(fun = f, linewidth = 1, color = "red")
 ```
 
 **NQ-Plot**
