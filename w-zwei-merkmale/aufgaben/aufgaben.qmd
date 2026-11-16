@@ -27,3 +27,10 @@ Anmerkungen:
 show(d_wea_min)
 ```
 
+
+## Datasaurus Dozen
+
+```{r}
+library(datasauRus)
+show(datasaurus_dozen)
+```

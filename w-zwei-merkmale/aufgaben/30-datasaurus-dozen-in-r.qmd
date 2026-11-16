@@ -1,0 +1,53 @@
+::: {.tinh-work}
+```{r}
+#| include: false
+library(tidyverse)
+library(datasauRus)
+```
+:::
+
+::: {#exr-datasaurus-dozen-in-r}
+## Datasaurus Dozen in R
+
+Das Paket `datasauRus` enthält den Datensatz `datasaurus_dozen` mit 13 Datensätzen aus jeweils 142 Wertepaaren $(x_i, y_i)$. Das Merkmal `dataset` gibt an, zu welchem Datensatz ein Wertepaar gehört. Die Daten stammen aus dem Artikel *Same Stats, Different Graphs* von J. Matejka und G. Fitzmaurice (2017).
+
+Installieren Sie das Paket mit `install.packages("datasauRus")` und laden Sie es mit `library(datasauRus)`.
+
+### Kenngrößen
+
+Berechnen Sie für jeden der 13 Datensätze die Mittelwerte $\bar{x}$ und $\bar{y}$, die Standardabweichungen $\tilde{s}_x$ und $\tilde{s}_y$ sowie den Korrelationskoeffizienten $r$. Verwenden Sie dazu `group_by()` und `summarise()`. Was fällt Ihnen auf?
+
+### Streuplots
+
+Stellen Sie die 13 Datensätze in Streuplots dar, für jeden Datensatz in einem eigenen Plot (`facet_wrap()`). Ergänzen Sie jeweils die Ausgleichsgerade. Was folgt daraus für die Untersuchung von zwei Merkmalen?
+
+::: {.tinh-solution}
+**Kenngrößen**
+
+```{r}
+datasaurus_dozen |>
+  group_by(dataset) |>
+  summarise(
+    x_mittel = mean(x),
+    y_mittel = mean(y),
+    x_sd = sd(x),
+    y_sd = sd(y),
+    r = cor(x, y)
+  )
+```
+
+Mittelwerte und Standardabweichungen stimmen bei allen Datensätzen bis auf die zweite Nachkommastelle überein, der Korrelationskoeffizient liegt überall bei $r \approx -0.06$.
+
+**Streuplots**
+
+```{r}
+#| fig-asp: 1
+ggplot(data = datasaurus_dozen, mapping = aes(x = x, y = y)) +
+  geom_point(size = 0.8) +
+  geom_smooth(formula = y ~ x, method = "lm", se = FALSE) +
+  facet_wrap(~dataset, ncol = 4)
+```
+
+Obwohl die Kenngrößen und damit auch die Ausgleichsgeraden praktisch gleich sind, sehen die Datensätze völlig unterschiedlich aus. Wie beim Anscombe-Quartett gilt: Kenngrößen allein reichen nicht aus, die Daten müssen immer auch grafisch dargestellt werden.
+:::
+:::
