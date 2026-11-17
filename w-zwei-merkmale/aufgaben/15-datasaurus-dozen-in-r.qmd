@@ -9,36 +9,42 @@ library(datasauRus)
 ::: {#exr-datasaurus-dozen-in-r}
 ## Datasaurus Dozen in R
 
-Das Paket `datasauRus` enthält den Datensatz `datasaurus_dozen` mit 13 Datensätzen aus jeweils 142 Wertepaaren $(x_i, y_i)$. Das Merkmal `dataset` gibt an, zu welchem Datensatz ein Wertepaar gehört. Die Daten stammen aus dem Artikel *Same Stats, Different Graphs* von J. Matejka und G. Fitzmaurice (2017).
+Das Paket `datasauRus` enthält den Datensatz `datasaurus_dozen` mit 13 Datensätzen aus jeweils 142 Wertepaaren $(x_i, y_i)$. Das Merkmal `dataset` gibt an, zu welchem Datensatz ein Wertepaar gehört.
+
+Quelle: Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing. In *Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems* (S. 1290–1294). ACM. <https://doi.org/10.1145/3025453.3025912>
 
 Installieren Sie das Paket mit `install.packages("datasauRus")` und laden Sie es mit `library(datasauRus)`.
 
-### Kenngrößen
-
-Berechnen Sie für jeden der 13 Datensätze die Mittelwerte $\bar{x}$ und $\bar{y}$, die Standardabweichungen $\tilde{s}_x$ und $\tilde{s}_y$ sowie den Korrelationskoeffizienten $r$. Verwenden Sie dazu `group_by()` und `summarise()`. Was fällt Ihnen auf?
-
 ### Streuplots
 
-Stellen Sie die 13 Datensätze in Streuplots dar, für jeden Datensatz in einem eigenen Plot (`facet_wrap()`). Ergänzen Sie jeweils die Ausgleichsgerade. Was folgt daraus für die Untersuchung von zwei Merkmalen?
+Stellen Sie die 13 Datensätze in Streuplots dar, für jeden Datensatz in einem eigenen Plot. Dazu ergänzen Sie den Plot um `facet_wrap(~dataset)`: ggplot teilt die Daten dann nach den Werten des Merkmals `dataset` auf und zeichnet für jeden Wert einen eigenen kleinen Plot. Mit dem Argument `ncol` können Sie die Anzahl der Spalten festlegen.
 
-::: {.tinh-solution}
-**Kenngrößen**
+### Ausgleichsgeraden
+
+Ergänzen Sie in den Streuplots jeweils die Ausgleichsgerade. Was fällt Ihnen auf?
+
+### Kenngrößen
+
+Berechnen Sie für jeden der 13 Datensätze die Mittelwerte $\bar{x}$ und $\bar{y}$, die Standardabweichungen $\tilde{s}_x$ und $\tilde{s}_y$ sowie den Korrelationskoeffizienten $r$. Dazu verwenden Sie die Funktion `summarise()`. Sie berechnet aus den Werten eines Dataframes Kenngrößen, die Sie selbst benennen. Mit dem Argument `.by` geschieht dies getrennt für jeden Wert eines Merkmals, zum Beispiel ergibt
 
 ```{r}
-datasaurus_dozen |>
-  group_by(dataset) |>
-  summarise(
-    x_mittel = mean(x),
-    y_mittel = mean(y),
-    x_sd = sd(x),
-    y_sd = sd(y),
-    r = cor(x, y)
-  )
+#| eval: false
+summarise(datasaurus_dozen, x_mittel = mean(x), y_mittel = mean(y), .by = dataset)
 ```
 
-Mittelwerte und Standardabweichungen stimmen bei allen Datensätzen bis auf die zweite Nachkommastelle überein, der Korrelationskoeffizient liegt überall bei $r \approx -0.06$.
+eine Tabelle mit den Mittelwerten $\bar{x}$ und $\bar{y}$ für jeden der 13 Datensätze. Was folgt aus den Ergebnissen für die Untersuchung von zwei Merkmalen?
 
-**Streuplots**
+::: {.tinh-solution}
+### Streuplots
+
+```{r}
+#| fig-asp: 1
+ggplot(data = datasaurus_dozen, mapping = aes(x = x, y = y)) +
+  geom_point(size = 0.8) +
+  facet_wrap(~dataset, ncol = 4)
+```
+
+### Ausgleichsgeraden
 
 ```{r}
 #| fig-asp: 1
@@ -48,6 +54,20 @@ ggplot(data = datasaurus_dozen, mapping = aes(x = x, y = y)) +
   facet_wrap(~dataset, ncol = 4)
 ```
 
-Obwohl die Kenngrößen und damit auch die Ausgleichsgeraden praktisch gleich sind, sehen die Datensätze völlig unterschiedlich aus. Wie beim Anscombe-Quartett gilt: Kenngrößen allein reichen nicht aus, die Daten müssen immer auch grafisch dargestellt werden.
+Obwohl die Datensätze völlig unterschiedlich aussehen, sind die Ausgleichsgeraden praktisch gleich.
+
+### Kenngrößen
+
+```{r}
+summarise(
+  datasaurus_dozen,
+  x_mittel = mean(x), y_mittel = mean(y),
+  x_sd = sd(x), y_sd = sd(y),
+  r = cor(x, y),
+  .by = dataset
+)
+```
+
+Mittelwerte und Standardabweichungen stimmen bei allen Datensätzen bis auf die zweite Nachkommastelle überein, der Korrelationskoeffizient liegt überall bei $r \approx -0.06$. Wie beim Anscombe-Quartett gilt: Kenngrößen allein reichen nicht aus, die Daten müssen immer auch grafisch dargestellt werden.
 :::
 :::

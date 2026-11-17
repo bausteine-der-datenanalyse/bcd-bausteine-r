@@ -21,16 +21,15 @@ Anmerkungen:
 -   Uhrzeit = Stunde + Minute / 60 + Sekunde / 3600
 -   Quelle: Prof. Iris Mühlenbruch
 
-## Dataframe Windenergieanlage
-
-```{r}
-show(d_wea_min)
-```
-
-
 ## Datasaurus Dozen
 
 ```{r}
 library(datasauRus)
 show(datasaurus_dozen)
+```
+
+## Dataframe Windenergieanlage
+
+```{r}
+show(d_wea_min)
 ```
