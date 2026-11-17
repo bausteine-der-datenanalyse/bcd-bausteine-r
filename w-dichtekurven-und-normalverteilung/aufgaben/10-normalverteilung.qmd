@@ -14,7 +14,7 @@ Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2,\,
 Zusatzaufgabe: Füllen Sie die Bereiche unter den Kurven farbig und verwenden Sie hierfür transparente Flächen.
 
 ::: {.tinh-solution}
-**Nur die Kurven**
+### Nur die Kurven
 
 ```{r}
 f1 <- function(x) dnorm(x, mean = 0, sd = 4)
@@ -30,7 +30,7 @@ ggplot() +
   lims(x = c(-5, 5))
 ```
 
-**Mit `geom_ribbon`**
+### Mit `geom_ribbon`
 
 ```{r}
 ggplot() +
@@ -41,7 +41,7 @@ ggplot() +
   lims(x = c(-5, 5))
 ```
 
-**Elegantere Lösung mit Funktion (können Sie noch nicht)**
+### Elegantere Lösung mit Funktion (können Sie noch nicht)
 
 ```{r}
 make_ribbon <- function(f, c) geom_ribbon(

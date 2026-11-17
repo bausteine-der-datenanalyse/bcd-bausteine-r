@@ -20,7 +20,7 @@ Wie lange dauert der Weg zur Hochschule Bochum? Im Einzelnen:
 -   Wie unterscheidet sich dieser 75% Anteil nach den Verkehrsmitteln?
 
 ::: {.tinh-solution}
-**Histogramm der Fahrzeiten**
+### Histogramm der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
@@ -31,14 +31,14 @@ ggplot(data = d_bo_vm) +
   )
 ```
 
-**Empirische Verteilungsfunktion der Fahrzeiten**
+### Empirische Verteilungsfunktion der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_step(mapping = aes(x = Zeit), stat = "ecdf")
 ```
 
-**Extra: Wert für 75% berechnen**
+### Extra: Wert für 75% berechnen
 
 ```{r}
 z75 <- quantile(d_bo_vm$Zeit, probs = 0.75)
@@ -50,7 +50,7 @@ ggplot(data = d_bo_vm) +
 
 75% der Befragten sind `` `{{r}} z75` `` Minuten oder kürzer unterwegs.
 
-**Empirische Verteilungsfunktion der Fahrzeiten**
+### Empirische Verteilungsfunktion der Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +

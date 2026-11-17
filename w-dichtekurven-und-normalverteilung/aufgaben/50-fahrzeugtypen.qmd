@@ -20,7 +20,7 @@ Die Spalte `Fahrzeug` gibt an, um welchen Fahrzeugtyp es sich handelt. Untersuch
 Hinweise: Für drei Fahrzeuge ist der Typ unbekannt (`NA`). Diese entfernen Sie mit `filter(!is.na(Fahrzeug))`. Für die Aufteilung nach Fahrzeugtyp verwenden Sie `facet_wrap()`.
 
 ::: {.tinh-solution}
-**Histogramme mit Dichtekurven**
+### Histogramme mit Dichtekurven
 
 ```{r}
 d_fahrzeuge <- d_unistrasse |> filter(!is.na(Fahrzeug))
@@ -31,7 +31,7 @@ ggplot(data = d_fahrzeuge, mapping = aes(x = Geschwindigkeit)) +
   facet_wrap(~Fahrzeug)
 ```
 
-**NQ-Plots**
+### NQ-Plots
 
 ```{r}
 ggplot(data = d_fahrzeuge, mapping = aes(sample = Geschwindigkeit)) +

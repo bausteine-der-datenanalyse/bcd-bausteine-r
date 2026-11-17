@@ -18,7 +18,7 @@ Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folg
 1.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
 
 ::: {.tinh-solution}
-**Studierende an der BO: Geschlecht**
+### Studierende an der BO: Geschlecht
 
 Basisversion
 
@@ -34,7 +34,7 @@ ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = Jahr, fill = Geschlecht))
 ```
 
-**Studierende an der BO: Fachbereiche**
+### Studierende an der BO: Fachbereiche
 
 ```{r}
 ggplot(data = d_bo_vm) +

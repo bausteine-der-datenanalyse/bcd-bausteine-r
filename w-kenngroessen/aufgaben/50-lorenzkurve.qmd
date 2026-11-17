@@ -16,7 +16,7 @@ Stellen Sie die Lorenzkurve zu den Fahrzeiten dar und bestimmen Sie den zugehör
 Tipp: Die Funktion `lc_to_tibble()`, die das Ergebnis von `Lc` in einen Dataframe konvertiert, wird zu Beginn von `kenngroessen-aufgaben.qmd` definiert und kann somit verwendet werden (so wie in den Folien zur Vorlesung).
 
 ::: {.tinh-solution}
-**Lorenzkurve der Fahrzeiten**
+### Lorenzkurve der Fahrzeiten
 
 ```{r}
 d_lc <- lc_to_tibble(Lc(d_bo_vm$Zeit))
@@ -28,7 +28,7 @@ ggplot(data = d_lc) +
   )
 ```
 
-**Gini-Koeffizient**
+### Gini-Koeffizient
 
 ```{r}
 n <- nrow(d_bo_vm)
@@ -38,7 +38,7 @@ Gini(d_bo_vm$Zeit, corr = TRUE)
 
 Für $n =$ `{r} n` Beobachtungen ist dabei der Vorfaktor für den Lorenz-Münzer-Koeffizienten mit $n / (n-1) =$ `{r} signif(n/(n-1), 4)` nahe bei 1. Der Unterschied ist vernachlässigbar.
 
-**Anmerkungen**
+### Anmerkungen
 
 - Die beiden Zahlen im Satz oben berechnet R beim Rendern direkt im Text. Im Quelltext steht an diesen Stellen `` `{{r}} n` `` und `` `{{r}} signif(n/(n-1), 4)` ``: R-Code zwischen zwei Backticks (`` ` ``), nach dem ersten Backtick `{r}`. Das Ergebnis wird in den Text eingesetzt.
 - Mathematische Formeln werden zwischen Dollarzeichen gesetzt und verwenden die Schreibweise von LaTeX.

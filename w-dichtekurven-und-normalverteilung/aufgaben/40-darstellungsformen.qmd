@@ -28,7 +28,7 @@ Hinweis: Für übereinander/untereinander angeordnete Dichtekurven brauchen Sie 
 Welche Darstellungsform scheint Ihnen am besten geeignet?
 
 ::: {.tinh-solution}
-**Wochentag**
+### Wochentag
 
 Dichtekurven übereinander
 
@@ -55,7 +55,7 @@ ggplot(data = d_unistrasse) +
   geom_boxplot(mapping = aes(x = Tag, y = Geschwindigkeit))
 ```
 
-**Verkehrszeiten**
+### Verkehrszeiten
 
 Übereinander
 

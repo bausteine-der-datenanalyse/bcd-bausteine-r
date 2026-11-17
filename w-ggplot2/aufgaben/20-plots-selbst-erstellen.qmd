@@ -45,7 +45,7 @@ Die wichtigsten Spalten:
 Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
 
 ::: {.tinh-solution}
-**Ein kleiner Datensatz**
+### Ein kleiner Datensatz
 
 ```{r}
 d_klein <- tibble(
@@ -59,13 +59,13 @@ ggplot(data = d_klein) +
   geom_point(mapping = aes(x = a, y = b, color = c, size = d))
 ```
 
-**Dataframe**
+### Dataframe
 
 - Statistische Einheit: ein Bauwerk bzw. Teilbauwerk. Jede Zeile beschreibt eines.
 - `baujahr` ist quantitativ (diskret, intervallskaliert), `baustoffklasse` ist qualitativ (nominalskaliert).
 - Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht "doppelt so schlecht" wie eine mit Note 1.5.
 
-**Zustandsnote und Baujahr**
+### Zustandsnote und Baujahr
 
 ```{r}
 ggplot(data = d_bruecken) +
@@ -82,7 +82,7 @@ ggplot(data = d_bruecken) +
 - Viele Brücken stammen aus den 1930er Jahren (Bau der ersten Autobahnen) und vor allem aus der Zeit von etwa 1960 bis heute.
 - Neuere Brücken haben tendenziell bessere Noten. Noten von 3.0 und schlechter kommen vor allem bei Brücken aus den 1960er und 1970er Jahren vor.
 
-**Baustoffe**
+### Baustoffe
 
 ```{r}
 ggplot(data = d_bruecken) +

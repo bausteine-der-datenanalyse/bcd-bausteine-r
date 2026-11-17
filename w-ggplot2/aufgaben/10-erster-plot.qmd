@@ -123,7 +123,7 @@ ggplot(data = d_pinguine) +
 Erzeugen Sie zum Schluss mit `Render` das HTML-Dokument und schauen Sie sich das Ergebnis an.
 
 ::: {.tinh-solution}
-**Fertiger Plot**
+### Fertiger Plot
 
 ```{r}
 ggplot(data = d_pinguine) +
@@ -141,7 +141,7 @@ ggplot(data = d_pinguine) +
   )
 ```
 
-**Daten**
+### Daten
 
 - `d_pinguine` ist ein Dataframe mit 344 Zeilen (Beobachtungen) und 8 Spalten (Merkmale).
 - Statistische Einheit: ein Pinguin. Jede Zeile beschreibt einen Pinguin.
@@ -149,7 +149,7 @@ ggplot(data = d_pinguine) +
 - `flipper_len` (Flossenlänge) und `body_mass` (Körpermasse): stetig, verhältnisskaliert, quantitativ. Erfasst sind sie allerdings in ganzen Millimetern bzw. Gramm, die Daten selbst sind also diskret (wie die Körpergröße im Skript).
 - `NA` (*not available*) bedeutet, dass der Wert fehlt, z. B. weil er nicht gemessen wurde.
 
-**Beobachtungen**
+### Beobachtungen
 
 - Schritt 2: `ggplot(...)` erzeugt nur die leere Zeichenfläche. Es fehlt noch die Angabe, was gezeichnet werden soll.
 - Schritt 3: Jeder Punkt ist ein Pinguin, x ist die Flossenlänge, y die Körpermasse. Bei zwei Pinguinen fehlen die Messwerte (`NA`), sie können nicht gezeichnet werden.
@@ -158,7 +158,7 @@ ggplot(data = d_pinguine) +
 - Schritt 6: Innerhalb von `aes(...)` wird eine visuelle Eigenschaft einem Merkmal zugeordnet, sie ändert sich also von Punkt zu Punkt. Außerhalb gilt der Wert für alle Punkte gleich.
 - Schritt 7: `labs(...)` setzt Achsenbeschriftungen, Titel der Legenden und Titel des Plots.
 
-**Warnung beseitigen**
+### Warnung beseitigen
 
 Beim fertigen Plot oben meldet R "Removed 2 rows containing missing values". Lesen Sie solche Meldungen immer: Hier fehlen bei zwei Pinguinen Flossenlänge und Körpermasse (`NA`), ggplot lässt sie deshalb weg. Das ist in Ordnung, sollte aber eine bewusste Entscheidung sein. Mit `drop_na` entfernen Sie die beiden Zeilen ausdrücklich, und die Warnung verschwindet:
 

@@ -12,7 +12,7 @@ load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 Plotten Sie das Histogramm der Geschwindigkeiten zusammen mit der zugehörigen Normalverteilung. Stellen Sie in dem Plot zusätzlich die Werte $\mu - \sigma,\, \mu,\, \mu + \sigma$ dar. Prüfen Sie mithilfe eines NQ-Plots, ob die Werte näherungsweise normalverteilt sind.
 
 ::: {.tinh-solution}
-**Histogramm und Normalverteilung**
+### Histogramm und Normalverteilung
 
 ```{r}
 mu <- mean(d_unistrasse$Geschwindigkeit)
@@ -25,7 +25,7 @@ ggplot(data = d_unistrasse) +
   geom_function(fun = f, linewidth = 1, color = "red")
 ```
 
-**NQ-Plot**
+### NQ-Plot
 
 ```{r}
 ggplot(data = d_unistrasse, mapping = aes(sample = Geschwindigkeit)) +

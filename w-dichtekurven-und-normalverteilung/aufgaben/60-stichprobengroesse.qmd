@@ -35,7 +35,7 @@ d100 <- tibble(x = rnorm(100, mean = 50, sd = 6))
 d1000 <- tibble(x = rnorm(1000, mean = 50, sd = 6))
 ```
 
-**Histogramme**
+### Histogramme
 
 ```{r}
 ggplot(data = d20, mapping = aes(x = x)) +
@@ -57,7 +57,7 @@ ggplot(data = d1000, mapping = aes(x = x)) +
   coord_cartesian(xlim = c(25, 75))
 ```
 
-**NQ-Plots**
+### NQ-Plots
 
 ```{r}
 ggplot(data = d20, mapping = aes(sample = x)) +

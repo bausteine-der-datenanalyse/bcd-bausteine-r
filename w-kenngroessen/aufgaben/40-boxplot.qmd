@@ -20,28 +20,28 @@ Erstellen Sie jeweils einen Boxplot für
 Verwenden Sie im dritten Plot das Argument `varwidth = TRUE`.
 
 ::: {.tinh-solution}
-**Boxplot aller Fahrzeiten**
+### Boxplot aller Fahrzeiten
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(y = Zeit))
 ```
 
-**Fahrzeiten und Fachbereiche**
+### Fahrzeiten und Fachbereiche
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x = Fachbereich, y = Zeit))
 ```
 
-**Fahrzeiten und Verkehrsmittel**
+### Fahrzeiten und Verkehrsmittel
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_boxplot(mapping = aes(x = Verkehrsmittel, y = Zeit), varwidth = TRUE)
 ```
 
-**Fahrzeiten, Fachbereiche und Geschlecht**
+### Fahrzeiten, Fachbereiche und Geschlecht
 
 ```{r}
 ggplot(data = d_bo_vm) +
