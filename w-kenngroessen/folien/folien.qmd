@@ -27,7 +27,7 @@ source(rprojroot::has_file("_bcd-setup.R")$find_file("_bcd-setup.R"))
 | `d_ns_m_0810`           | Monatswerte in den Jahren 2008 und 2010 (Bochum) |
 | `d_ns_m_nha_trang_2015` | Monatswerte der Niederschläge in Nha Trang 2015  |
 
-Quellen: <https://www.dwd.de> und <https://www.gso.gov.vn>
+Quellen: <https://www.dwd.de> und <https://www.nso.gov.vn>
 
 
 # Kenngrößen von Verteilungen berechnen
