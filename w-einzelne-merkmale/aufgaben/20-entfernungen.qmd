@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-entfernungen}
 ## Entfernungen zu umliegenden Städten
@@ -23,7 +22,13 @@ Die Entfernungen von der Hochschule Bochum zu umliegenden Städten sind in der n
 
 Erzeugen Sie mithilfe des Befehls `tibble` einen entsprechenden Dataframe und stellen Sie die Entfernungen in einem geeigneten Plot dar.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 d_bo_entfernung <- tibble(
   stadt = c(

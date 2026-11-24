@@ -2,4 +2,4 @@
 
 ## Teil 2: Umsetzung in R
 
-Laden Sie [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei um Positron zu starten und öffnen Sie dann das Dokument `zwei-merkmale-aufgaben.qmd`. Führen Sie die Datei aus und erzeugen Sie mit `Render` das HTML-Dokument.
+Laden Sie [${work-files}](${work-files}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei um Positron zu starten und öffnen Sie dann das Dokument `${name}-${exercises}.qmd`. Führen Sie die Datei aus und erzeugen Sie mit `Render` das HTML-Dokument.

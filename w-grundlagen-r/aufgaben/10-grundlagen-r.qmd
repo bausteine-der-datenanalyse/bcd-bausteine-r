@@ -1,18 +1,23 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 ```
-:::
 
 ::: {#exr-grundlagen-r}
 ## Grundlagen R
 
-Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Datei.
+Laden Sie das RStudio-Projekt [${work-files}](${work-files}) herunter und entpacken Sie die Datei.
 
-Bearbeiten Sie die Punkte in `grundlagen-r-aufgaben.qmd`.
+Bearbeiten Sie die Punkte in `${name}-${exercises}.qmd`.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Aufgabe 1
 
 1.  Berechnet R den Wert $10^{16}(1 - \frac{1}{49} \cdot (5 \cdot 18 - 83)^2)$ korrekt? Warum ist das so?

@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(readxl)
 library(tidyverse)
 ```
-:::
 
 ::: {#exr-mobilitaetsbefragung}
 ## Mobilitätsbefragung an der BO
@@ -25,30 +24,13 @@ Lesen Sie die Datei `daten/BefragungMVP2017_0.xlsx`ein und bereiten Sie die Date
 
 - `ort`: Wohnort, beachten Sie, dass es Orte gibt, die falsch eingetragen wurden, z.B. "Remschei"
 
-### Häufigkeiten
+::: {.lm-scaffold}
+```{r}
 
-- Stellen Sie in einem nach den Häufigkeiten sortierten Balkendiagramm die verschiedenen Fachbereiche dar.
+```
+:::
 
-- Zeigen Sie für jeden Fachbereich in einem Balkendiagramm die gewählten Verkehrsmittel.
-
-- Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere".
-
-Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:
-
-- Fahrzeiten und Ort
-- Fahrzeiten und Verkehrsmittel
-
-### Wegstrecke und Fahrzeit
-
-Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne, Wuppertal, Gelsenkirchen und Mülheim dar, ob ein Zusammenhang zwischen Strecke und Fahrzeit erkennbar ist.
-
-### Reisezeit und Verkehrsmittel
-
-Erstellen Sie für jedes Verkehrsmittel einen Boxplot für die Reisezeit und deuten Sie kurz das Ergebnis.
-
-::: {.tinh-solution}
-### Einlesen und Aufbereiten der Daten
-
+::: {.lm-solution}
 ```{r}
 d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
   select(
@@ -79,10 +61,29 @@ d_mb <- read_excel("daten/BefragungMVP2017_0.xlsx") |>
 ```
 
 - Die Kodierung steht in einer eigenen Excel-Tabelle.
+:::
 
 ### Häufigkeiten
 
-### Angehörige der Fachbereiche
+- Stellen Sie in einem nach den Häufigkeiten sortierten Balkendiagramm die verschiedenen Fachbereiche dar.
+
+- Zeigen Sie für jeden Fachbereich in einem Balkendiagramm die gewählten Verkehrsmittel.
+
+- Stellen Sie die fünf häufigsten Orte und ihre Anzahl in einem Balkendiagramm dar. Erstellen Sie für alle anderen Orte ebenfalls den Balken "Andere".
+
+Erstellen Sie zusätzlich Boxplots zu folgenden Zusammenhängen:
+
+- Fahrzeiten und Ort
+- Fahrzeiten und Verkehrsmittel
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+Angehörige der Fachbereiche
 
 ```{r}
 ggplot(data = d_mb) +
@@ -95,7 +96,7 @@ ggplot(data = d_mb) +
 
 - Mit `fct_infreq()` wird die Reihenfolge nach der Häufigkeit gewählt
 
-### Fachbereiche und Verkehrsmittel
+Fachbereiche und Verkehrsmittel
 
 ```{r}
 ggplot(data = d_mb) +
@@ -108,7 +109,7 @@ ggplot(data = d_mb) +
 
 - Mit `position = position_dodge(preserve = "single")` werden die Balken nebeneinander dargestellt
 
-### Häufigste Orte
+Häufigste Orte
 
 ```{r}
 orte <- d_mb |>
@@ -132,22 +133,32 @@ ggplot(data = d_mb) +
 
 - Mit `ort2 = factor(ort2, levels = c(orte, "Andere"))` wird die Reihenfolge festgelegt
 
-### Fahrzeiten und Ort
+Fahrzeiten und Ort
 
 ```{r}
 ggplot(data = d_mb) +
   geom_boxplot(mapping = aes(x = ort2, y = zeit))
 ```
 
-### Fahrzeiten und Verkehrsmittel
+Fahrzeiten und Verkehrsmittel
 
 ```{r}
 ggplot(data = d_mb) +
   geom_boxplot(mapping = aes(x = vm_heute, y = zeit))
 ```
+:::
 
 ### Wegstrecke und Fahrzeit
 
+Stellen Sie mit Verwendung der Orte Essen, Dortmund, Herne, Wuppertal, Gelsenkirchen und Mülheim dar, ob ein Zusammenhang zwischen Strecke und Fahrzeit erkennbar ist.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 d_e <- tibble(
   ort = c(
@@ -167,9 +178,19 @@ ggplot(data = d_mb_e) +
 ```
 
 - Kein unmittelbarer Zusammenhang erkennbar
+:::
 
 ### Reisezeit und Verkehrsmittel
 
+Erstellen Sie für jedes Verkehrsmittel einen Boxplot für die Reisezeit und deuten Sie kurz das Ergebnis.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 ggplot(data = d_mb) +
   geom_boxplot(mapping = aes(x = vm_heute, y = zeit), varwidth = TRUE)

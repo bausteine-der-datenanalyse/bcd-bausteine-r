@@ -1,18 +1,23 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 ```
-:::
 
 ::: {#exr-plots-aufbereiten}
 ## Plots aufbereiten
 
-Laden Sie das RStudio-Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Datei.
+Laden Sie das RStudio-Projekt [${work-files}](${work-files}) herunter und entpacken Sie die Datei.
 
-Bereiten Sie die Plots in `weitere-geoms-und-plots-aufbereiten-aufgaben.qmd` so auf, dass sie Ihnen gut gefallen.
+Bereiten Sie die Plots in `${name}-${exercises}.qmd` so auf, dass sie Ihnen gut gefallen.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 load("daten/data-exercise-03.Rdata")
 load("daten/data-exercise-05.Rdata")

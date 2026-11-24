@@ -4,4 +4,4 @@
 
 In den folgenden Aufgaben verwenden Sie die Ergebnisse einer Mobilitätsbefragung, die Prof. Iris Mühlenbruch mit Studierenden an der Hochschule Bochum durchgeführt hat.
 
-Laden Sie [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei um Positron zu starten und öffnen Sie dann das Dokument `einzelne-merkmale-aufgaben.qmd`. Führen Sie die Datei aus und zeigen Sie in einem eigenen Abschnitt den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` das HTML-Dokument und überprüfen Sie das Ergebnis.
+Laden Sie [${work-files}](${work-files}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei um Positron zu starten und öffnen Sie dann das Dokument `${name}-${exercises}.qmd`. Führen Sie die Datei aus und zeigen Sie in einem eigenen Abschnitt den Dataframe `d_bo_vm` an. Erzeugen Sie mit `Render` das HTML-Dokument und überprüfen Sie das Ergebnis.

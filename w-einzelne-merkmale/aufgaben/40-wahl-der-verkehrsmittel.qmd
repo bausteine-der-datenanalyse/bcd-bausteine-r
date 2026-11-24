@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-wahl-der-verkehrsmittel}
 ## Wahl der Verkehrsmittel
@@ -15,7 +14,13 @@ Welche Verkehrsmittel werden für den Weg zur BO verwendet? Im Einzelnen:
 
 -   Welcher Fachbereich nutzt am stärksten den ÖPNV?
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Verkehrsmittel
 
 ```{r}

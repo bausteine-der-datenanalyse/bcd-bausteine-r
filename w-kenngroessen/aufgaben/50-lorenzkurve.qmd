@@ -1,21 +1,26 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
-:::
 
 ::: {#exr-lorenzkurve}
 ## Lorenzkurve
 
 Stellen Sie die Lorenzkurve zu den Fahrzeiten dar und bestimmen Sie den zugehörigen Gini-Koeffizienten. Spielt es hier eine große Rolle ob man $G$ oder $G^*$ betrachtet?
 
-Tipp: Die Funktion `lc_to_tibble()`, die das Ergebnis von `Lc` in einen Dataframe konvertiert, wird zu Beginn von `kenngroessen-aufgaben.qmd` definiert und kann somit verwendet werden (so wie in den Folien zur Vorlesung).
+Tipp: Die Funktion `lc_to_tibble()`, die das Ergebnis von `Lc` in einen Dataframe konvertiert, wird zu Beginn von `${name}-${exercises}.qmd` definiert und kann somit verwendet werden (so wie in den Folien zur Vorlesung).
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Lorenzkurve der Fahrzeiten
 
 ```{r}

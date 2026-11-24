@@ -1,15 +1,14 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 d_pinguine <- penguins
 ```
-:::
 
 ::: {#exr-erster-plot}
 ## Ein erster Plot Schritt für Schritt
 
-Laden Sie das Projekt [${zipfile}](${zipfile}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei `ggplot2-aufgaben.code-workspace`, um Positron zu starten, und öffnen Sie das Dokument `ggplot2-aufgaben.qmd`.
+Laden Sie das Projekt [${work-files}](${work-files}) herunter und entpacken Sie die Zip-Datei. Doppelklicken Sie die Workspace-Datei `${name}-${exercises}.code-workspace`, um Positron zu starten, und öffnen Sie das Dokument `${name}-${exercises}.qmd`.
 
 Sie verwenden den Datensatz `penguins`, der in R enthalten ist. Er beschreibt 344 Pinguine dreier Arten, die zwischen 2007 und 2009 auf drei Inseln in der Antarktis beobachtet wurden. Für diese Aufgabe brauchen Sie die Spalten
 
@@ -122,7 +121,13 @@ ggplot(data = d_pinguine) +
 
 Erzeugen Sie zum Schluss mit `Render` das HTML-Dokument und schauen Sie sich das Ergebnis an.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Fertiger Plot
 
 ```{r}

@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-wegezeiten}
 ## Wegezeiten
@@ -19,7 +18,13 @@ Wie lange dauert der Weg zur Hochschule Bochum? Im Einzelnen:
 
 -   Wie unterscheidet sich dieser 75% Anteil nach den Verkehrsmitteln?
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Histogramm der Fahrzeiten
 
 ```{r}

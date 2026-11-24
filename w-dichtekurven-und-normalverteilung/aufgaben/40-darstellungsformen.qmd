@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-darstellungsformen}
 ## Darstellungsformen: Dichtekurven, Violinenplots und Boxplots
@@ -27,7 +26,13 @@ Hinweis: Für übereinander/untereinander angeordnete Dichtekurven brauchen Sie 
 
 Welche Darstellungsform scheint Ihnen am besten geeignet?
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Wochentag
 
 Dichtekurven übereinander

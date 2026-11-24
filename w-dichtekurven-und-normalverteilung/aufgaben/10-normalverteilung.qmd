@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-normalverteilung-in-r}
 ## Normalverteilung
@@ -13,7 +12,13 @@ Stellen Sie die Graphen der Normalverteilung für $\mu = 0$ und $\sigma = 1/2,\,
 
 Zusatzaufgabe: Füllen Sie die Bereiche unter den Kurven farbig und verwenden Sie hierfür transparente Flächen.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Nur die Kurven
 
 ```{r}

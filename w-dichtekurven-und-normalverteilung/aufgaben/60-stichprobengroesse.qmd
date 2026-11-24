@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-stichprobengroesse}
 ## Stichprobengröße
@@ -25,7 +24,13 @@ erzeugen Sie einen Dataframe mit 20 zufälligen Werten aus einer Normalverteilun
 
 1. Führen Sie den Code mehrmals aus. Was beobachten Sie? Was bedeutet das für die Beurteilung von NQ-Plots bei wenigen Werten?
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 set.seed(4711)
 f <- function(x) dnorm(x, mean = 50, sd = 6)

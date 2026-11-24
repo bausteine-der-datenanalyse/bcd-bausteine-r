@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/einzelne-merkmale-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-merkmale-der-befragten-personen}
 ## Merkmale der befragten Personen
@@ -17,7 +16,13 @@ Untersuchen Sie Merkmale der befragten Personen. Beantworten Sie hierzu die folg
 
 1.  Wie teilen sich die befragten Personen auf die Fachbereiche auf? Erstellen Sie hierzu ein Ring- oder Kreisdiagramm.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Studierende an der BO: Geschlecht
 
 Basisversion

@@ -1,11 +1,10 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(gt)
 library(readxl)
 library(tidyverse)
 ```
-:::
 
 ::: {#exr-donau-hofkirchen}
 ## Abfluss der Donau bei Hofkirchen
@@ -19,52 +18,13 @@ Lesen Sie die Datei aus `"daten/6342800.day` ein und bereiten Sie die Daten so a
 - `Monat`: Name des Monats der Messung
 - `Abfluss`: Wert aus ursprünglicher Variable `Original`
 
-### Plots der Abflüsse
+::: {.lm-scaffold}
+```{r}
 
-Erstellen Sie folgende Plots:
+```
+:::
 
-1. Streuplot der Abflüsse über die Zeit
-1. Einen Boxplot der Abflüsse für jedes Jahr
-
-### Linearer Trend
-
-Berechnen Sie die Ausgleichsgerade und geben Sie den Anstieg des Abflusses in den letzten 100 Jahren an.
-
-### Statistische Kennwerte
-
-Bestimmen Sie die üblichen statistischen Kennwerte für den Abfluss.
-
-### Standardabweichung für jedes Jahr
-
-Stellen Sie die Standardabweichung des Abflusses für jedes Jahr in einer Tabelle dar.
-
-### Standardabweichung über die Jahre
-
-Stellen Sie die Standardabweichung des Abflusses grafisch in einem Plot dar. Bewerten Sie, ob ein linearer Trend zu erkennen ist.
-
-### Jahre mit kleinster/größter Standardabweichung
-
-Bestimmen Sie die drei Jahre mit der jeweils kleinsten und jeweils größten Standardabweichung. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
-
-### Weitere Jahre mit besonderem Ereignis
-
-Bestimmen Sie das Jahr mit dem jeweils kleinsten und jeweils größten Gesamtabfluss. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
-
-### Monats-Mittelwerte
-
-Stellen Sie die Mittelwerte sowie das obere und untere Quartil jedes Monats dar. Bewerten Sie kurz das Ergebnis.
-
-### Verteilung
-
-- Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar.
-
-- Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung.
-
-- Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis.
-
-::: {.tinh-solution}
-### Einlesen und Aufbereiten der Daten
-
+::: {.lm-solution}
 ```{r}
 d_donau <- read_delim(
   "daten/6342800.day",
@@ -79,10 +39,23 @@ d_donau <- read_delim(
     Jahr = year(Datum)
   )
 ```
+:::
 
 ### Plots der Abflüsse
 
-### Streuplot
+Erstellen Sie folgende Plots:
+
+1. Streuplot der Abflüsse über die Zeit
+1. Einen Boxplot der Abflüsse für jedes Jahr
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+Streuplot
 
 ```{r}
 ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
@@ -90,7 +63,7 @@ ggplot(data = d_donau, mapping = aes(x = Datum, y = Abfluss)) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
-### Boxplot
+Boxplot
 
 ```{r}
 ggplot(data = d_donau) +
@@ -102,9 +75,19 @@ ggplot(data = d_donau) +
   scale_x_discrete(breaks = seq(1900, 2010, by = 10)) +
   labs(x = NULL, y = NULL)
 ```
+:::
 
 ### Linearer Trend
 
+Berechnen Sie die Ausgleichsgerade und geben Sie den Anstieg des Abflusses in den letzten 100 Jahren an.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 x <- as.numeric(d_donau$Datum)
 y <- d_donau$Abfluss
@@ -135,27 +118,57 @@ paste0("Zuwachs in 100 Jahren: ", round(zw, 1), "%")
 -   Anstatt $R^2$ können wir auch den Korrelationskoeffizienten $r$ berechnen und quadrieren
 
 -   Zuwachs in Hundert Jahren ist die Steigung der Ausgleichsgeraden $\beta$ mal 100 Jahre mal 365 Tage pro Jahr bezogen auf den Mittelwert und in Prozent
+:::
 
 ### Statistische Kennwerte
 
+Bestimmen Sie die üblichen statistischen Kennwerte für den Abfluss.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 Kennwerte Abfluss
 
 ```{r}
 summary(d_donau$Abfluss)
 paste0("Standardabweichung Abfluss: ", sd(d_donau$Abfluss))
 ```
+:::
 
 ### Standardabweichung für jedes Jahr
 
+Stellen Sie die Standardabweichung des Abflusses für jedes Jahr in einer Tabelle dar.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 d_donau_sd <- d_donau |>
   group_by(Jahr) |>
   summarise(sd = sd(Abfluss))
 d_donau_sd
 ```
+:::
 
 ### Standardabweichung über die Jahre
 
+Stellen Sie die Standardabweichung des Abflusses grafisch in einem Plot dar. Bewerten Sie, ob ein linearer Trend zu erkennen ist.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
   geom_line() +
@@ -163,10 +176,20 @@ ggplot(data = d_donau_sd, mapping = aes(x = Jahr, y = sd)) +
 ```
 
 -   Im linearen Trend wächst die Standardabweichung
+:::
 
 ### Jahre mit kleinster/größter Standardabweichung
 
-### Jahre mit kleinster Standardabweichung
+Bestimmen Sie die drei Jahre mit der jeweils kleinsten und jeweils größten Standardabweichung. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+Jahre mit kleinster Standardabweichung
 
 ```{r}
 jahre <- (d_donau_sd |> arrange(sd) |> head(3))$Jahr
@@ -176,7 +199,7 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
 
-### Jahre mit größter Standardabweichung
+Jahre mit größter Standardabweichung
 
 ```{r}
 jahre <- (d_donau_sd |> arrange(desc(sd)) |> head(3))$Jahr
@@ -185,9 +208,19 @@ ggplot(data = d_donau_max_sd, mapping = aes(x = Datum, y = Abfluss)) +
   geom_line() +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
+:::
 
 ### Weitere Jahre mit besonderem Ereignis
 
+Bestimmen Sie das Jahr mit dem jeweils kleinsten und jeweils größten Gesamtabfluss. Stellen Sie für diese Jahre den Abfluss über das komplette Jahr grafisch dar.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 Jahre mit größtem und kleinsten Gesamtabfluss (Summe aller Tage)
 
 ```{r}
@@ -202,9 +235,19 @@ ggplot(data = d_donau_min_max, mapping = aes(x = Datum, y = Abfluss)) +
   geom_line() +
   facet_wrap(~Jahr, scales = "free_x", ncol = 1)
 ```
+:::
 
 ### Monats-Mittelwerte
 
+Stellen Sie die Mittelwerte sowie das obere und untere Quartil jedes Monats dar. Bewerten Sie kurz das Ergebnis.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 dd2 <- d_donau |>
   group_by(Monat) |>
@@ -226,10 +269,24 @@ ggplot(data = dd2, mapping = aes(group = 1)) +
 ```
 
 -   Mittlerer Abfluss steigt zum Frühjahr an, im Herbst am kleinsten
+:::
 
 ### Verteilung
 
-### Verteilung als Histogramm
+- Stellen Sie die Verteilung des Abflusses sowohl als Histogramm als auch als empirische Verteilungsfunktion dar.
+
+- Plotten Sie zusätzlich noch die zu den Daten passende Normalverteilung.
+
+- Erstellen Sie einen QQ-Plot für den Abfluss und bewerten Sie das Ergebnis.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+Verteilung als Histogramm
 
 ```{r}
 ggplot(data = d_donau) +
@@ -237,7 +294,7 @@ ggplot(data = d_donau) +
   labs(y = "", title = "Histogramm")
 ```
 
-### Empirische Verteilungsfunktion
+Empirische Verteilungsfunktion
 
 ```{r}
 ggplot(data = d_donau) +
@@ -245,7 +302,7 @@ ggplot(data = d_donau) +
   labs(y = "", title = "Empirische Verteilung")
 ```
 
-### Normalverteilung
+Normalverteilung
 
 ```{r}
 ggplot(data = d_donau) +
@@ -261,7 +318,7 @@ ggplot(data = d_donau) +
 
 - Normalverteilung passt nicht gut
 
-### QQ-Plot
+QQ-Plot
 
 ```{r}
 ggplot(data = d_donau, mapping = aes(sample = Abfluss)) +

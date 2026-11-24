@@ -1,12 +1,10 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 library(readxl)
-d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |>
-  filter(baujahr >= 1900, baujahr <= 2026)
+d_bruecken <- read_excel("daten/Brueckenstatistik-excel.xlsx") |> filter(baujahr >= 1900, baujahr <= 2026)
 ```
-:::
 
 ::: {#exr-plots-selbst-erstellen}
 ## Plots mit ggplot2 selbst erstellen
@@ -16,6 +14,26 @@ Arbeiten Sie im selben Projekt weiter und legen Sie für jeden Teil einen eigene
 ### Ein kleiner Datensatz
 
 Legen Sie mit `tibble(...)` einen eigenen Dataframe mit vier Zeilen und den Spalten `a`, `b` und `d` (Zahlen) sowie `c` (Text mit zwei verschiedenen Werten) an, so wie in den Folien. Stellen Sie ihn mit `geom_point` dar: `a` und `b` als Koordinaten, `c` als Farbe und `d` als Größe der Punkte. Überlegen Sie vorher, wie der Plot aussehen wird, und prüfen Sie Ihre Vermutung.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+```{r}
+d_klein <- tibble(
+  a = c(1, 2, 3, 4),
+  b = c(2, 4, 1, 3),
+  c = c("x", "y", "x", "y"),
+  d = c(1, 4, 2, 3)
+)
+
+ggplot(data = d_klein) +
+  geom_point(mapping = aes(x = a, y = b, color = c, size = d))
+```
+:::
 
 ### Zustand der Brücken an Bundesfernstraßen
 
@@ -44,28 +62,20 @@ Die wichtigsten Spalten:
 
 Einiges in dieser Aufgabe, z. B. das Filtern beim Einlesen, `geom_jitter` und `facet_wrap`, haben Sie hier nur nach Anleitung verwendet. Diese Dinge werden später genauer erklärt.
 
-::: {.tinh-solution}
-### Ein kleiner Datensatz
-
+::: {.lm-scaffold}
 ```{r}
-d_klein <- tibble(
-  a = c(1, 2, 3, 4),
-  b = c(2, 4, 1, 3),
-  c = c("x", "y", "x", "y"),
-  d = c(1, 4, 2, 3)
-)
 
-ggplot(data = d_klein) +
-  geom_point(mapping = aes(x = a, y = b, color = c, size = d))
 ```
+:::
 
-### Dataframe
+::: {.lm-solution}
+Dataframe
 
 - Statistische Einheit: ein Bauwerk bzw. Teilbauwerk. Jede Zeile beschreibt eines.
 - `baujahr` ist quantitativ (diskret, intervallskaliert), `baustoffklasse` ist qualitativ (nominalskaliert).
 - Die Zustandsnote ist ordinalskaliert wie eine Schulnote: Sie lässt sich ordnen, aber Abstände und Quotienten sind nicht sinnvoll interpretierbar. Eine Brücke mit Note 3.0 ist nicht "doppelt so schlecht" wie eine mit Note 1.5.
 
-### Zustandsnote und Baujahr
+Zustandsnote und Baujahr
 
 ```{r}
 ggplot(data = d_bruecken) +
@@ -82,7 +92,7 @@ ggplot(data = d_bruecken) +
 - Viele Brücken stammen aus den 1930er Jahren (Bau der ersten Autobahnen) und vor allem aus der Zeit von etwa 1960 bis heute.
 - Neuere Brücken haben tendenziell bessere Noten. Noten von 3.0 und schlechter kommen vor allem bei Brücken aus den 1960er und 1970er Jahren vor.
 
-### Baustoffe
+Baustoffe
 
 ```{r}
 ggplot(data = d_bruecken) +

@@ -1,19 +1,24 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
-:::
 
 ::: {#exr-verteilungsfunktion}
 ## Verteilungsfunktion
 
 Stellen Sie die empirische Verteilungsfunktion der Fahrzeiten zusammen mit horizontalen sowie vertikalen Linien für die Quartile und den Median dar.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 p <- c(0.25, 0.5, 0.75)
 q <- quantile(d_bo_vm$Zeit, probs = p, type = 2)

@@ -1,12 +1,11 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
-:::
 
 ::: {#exr-boxplot}
 ## Boxplot
@@ -19,7 +18,13 @@ Erstellen Sie jeweils einen Boxplot für
 
 Verwenden Sie im dritten Plot das Argument `varwidth = TRUE`.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Boxplot aller Fahrzeiten
 
 ```{r}

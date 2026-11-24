@@ -1,19 +1,24 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(ineq)
 library(tidyverse)
 load("daten/kenngroessen-aufgaben.Rdata")
 lc_to_tibble <- function(lc) { tibble(u = lc$p, v = lc$L) }
 ```
-:::
 
 ::: {#exr-histogramm}
 ## Histogramm
 
 Plotten Sie ein Histogramm der Fahrzeiten und stellen Sie die Werte $\overline{x} - \tilde{s}$, $\overline{x}$ sowie $\overline{x} + \tilde{s}$ mit farbigen vertikalen Linien dar.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ```{r}
 m <- mean(d_bo_vm$Zeit)
 s <- sd(d_bo_vm$Zeit)

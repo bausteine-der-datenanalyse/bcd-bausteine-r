@@ -1,20 +1,19 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/zwei-merkmale-aufgaben-1.Rdata")
 load("daten/zwei-merkmale-aufgaben-2.Rdata")
 ```
-:::
 
 ::: {#exr-korrelationskoeffizient-und-ausgleichsgerade-in-r}
 ## Korrelationskoeffizient und Ausgleichsgerade in R
 
 Sie untersuchen Messdaten von einer Windkraftanlage in Dortmund (Forschungsprojekt an der Ruhr-Universität Bochum). Die Daten wurden freundlicherweise von Prof. Rüdiger Höffer zur Verfügung gestellt.
 
-![](bilder/wea-1.svg){width=60% fig-align="center"}
+![](_bilder/wea-1.svg){width=60% fig-align="center"}
 
-![](bilder/wea-2.svg){width=60% fig-align="center"}
+![](_bilder/wea-2.svg){width=60% fig-align="center"}
 
 Anmerkungen:
 
@@ -26,6 +25,19 @@ Anmerkungen:
 Plotten Sie die Windgeschwindigkeit über die Zeit in einem Linienplot (`geom_line()`). Welche der Merkmale `datum` oder `zeit` ist Ihrer Meinung nach besser geeignet?
 
 Zusatzfrage: Die Windgeschwindigkeit ist in Meter pro Sekunde angegeben. War es in dem Messzeitraum sehr windig?
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+```{r}
+ggplot(data = d_wea_min) +
+  geom_line(mapping = aes(x = datum, y = v_wind))
+```
+:::
 
 ### Streuplots
 
@@ -39,20 +51,13 @@ Stellen Sie folgende Zusammenhänge in Streuplots dar:
 
 Berechnen Sie dabei jeweils den Korrelationskoeffizienten $r$ und plotten Sie die Regressionsgerade.
 
-### Andere Darstellungsformen
-
-Experimentieren Sie mit anderen Darstellungsformen (2D-Histogramm, Dichten) für den Zusammenhang zwischen Windgeschwindigkeit und Verformung.
-
-::: {.tinh-solution}
-### Windgeschwindigkeit über die Zeit
-
+::: {.lm-scaffold}
 ```{r}
-ggplot(data = d_wea_min) +
-  geom_line(mapping = aes(x = datum, y = v_wind))
+
 ```
+:::
 
-### Streuplots
-
+::: {.lm-solution}
 Windgeschwindigkeit und Drehzahl
 
 ```{r}
@@ -112,9 +117,19 @@ ggplot(data = d_wea_min, mapping = aes(x = v_wind, y = w5)) +
 ```{r}
 cor(d_wea_min$v_wind, d_wea_min$w5)
 ```
+:::
 
 ### Andere Darstellungsformen
 
+Experimentieren Sie mit anderen Darstellungsformen (2D-Histogramm, Dichten) für den Zusammenhang zwischen Windgeschwindigkeit und Verformung.
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 Selber ausprobieren
 :::
 :::

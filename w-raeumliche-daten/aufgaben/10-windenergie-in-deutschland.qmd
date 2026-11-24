@@ -1,12 +1,11 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(sf)
 library(giscoR)
 library(tidyverse)
 load("daten/mastr-data.RData")
 ```
-:::
 
 ::: {#exr-windenergie-in-deutschland}
 ## Ausbau der Windenergie in Deutschland
@@ -17,7 +16,7 @@ In diesem Abschnitt sollen die Daten genutzt werden, um den Stand des Windenergi
 
 Eine vergleichbare Auswertung der Daten finden Sie auf der Webseite [Strom-Report](https://strom-report.com/windenergie/).
 
-Verwenden Sie für dieses Aufgabenblatt die Datei [${zipfile}](${zipfile}).
+Verwenden Sie für dieses Aufgabenblatt die Datei [${work-files}](${work-files}).
 
 ### Auswertung ohne räumlichen Bezug
 
@@ -32,21 +31,14 @@ Wählen Sie jeweils eine Darstellungsform, die Ihrer Meinung nach gut geeignet i
 
 Zusatzaufgabe: Stellen Sie den Verlust an Leistung durch die Abschaltung von Kernenergieanlagen zusammen mit dem Zuwachs an Windenergie dar. Wie beurteilen Sie die politische Entscheidung, die Laufzeiten der Kernkraftwerke nicht zu verlängern?
 
-### Auswertung mit räumlichem Bezug
+::: {.lm-scaffold}
+```{r}
 
-- Stellen Sie die Standorte der Anlagen auf einer Deutschlandkarte dar. Versuchen Sie zusätzliche Informationen zu visualisieren wie
-  - die Leistung
-  - den Zeitpunkt der Inbetriebnahmen
+```
+:::
 
-- Visualisieren Sie
-  - die gesamte Anzahl der installierten Windkraftanlagen je Bundesland
-  - die Gesamtleistung je Bundeslandes
-  - die Gesamtleistung bezogen auf die Fläche des jeweiligen Bundeslandes
-
-- Welche Darstellungsformen könnten noch von Interesse sein?
-
-::: {.tinh-solution}
-### Daten (ohne räumlichen Bezug) aufbereiten
+::: {.lm-solution}
+Daten (ohne räumlichen Bezug) aufbereiten
 
 ```{r}
 data_wind <- d_wind |>
@@ -55,7 +47,7 @@ data_wind <- d_wind |>
   filter(!is.na(Betriebsjahr))
 ```
 
-### Anzahl der installierten Anlagen
+Anzahl der installierten Anlagen
 
 ```{r}
 data_wind2 <- data_wind |>
@@ -85,7 +77,7 @@ ggplot(data_wind2, aes(x = Betriebsjahr, y = Kum_Anzahl)) +
   labs(y = "Anzahl von Anlagen")
 ```
 
-### Zuwachs an installierter Leistung
+Zuwachs an installierter Leistung
 
 Zuwachs an installierter Leistung pro Jahr:
 
@@ -103,7 +95,7 @@ ggplot(data_wind2, aes(x = Betriebsjahr, y = Kum_Leistung)) +
   labs(y = "Gesamtleistung von Windkraftanlagen")
 ```
 
-### Leistung pro Anlage
+Leistung pro Anlage
 
 ```{r}
 ggplot(data_wind2, aes(x = Betriebsjahr, y = Leistung_pro_Anlage)) +
@@ -116,11 +108,32 @@ ggplot(data_wind2, aes(x = Betriebsjahr, y = Kum_Leistung_pro_Anlage)) +
   labs(y = "Kumulierter Anstieg der Leistung pro Anlage")
 ```
 
-### Welche Größen könnten noch von Interesse sein?
+Welche Größen könnten noch von Interesse sein?
 
 Hier eigenständig nachdenken!
+:::
 
-### Daten (für räumlichen Bezug) aufbereiten
+### Auswertung mit räumlichem Bezug
+
+- Stellen Sie die Standorte der Anlagen auf einer Deutschlandkarte dar. Versuchen Sie zusätzliche Informationen zu visualisieren wie
+  - die Leistung
+  - den Zeitpunkt der Inbetriebnahmen
+
+- Visualisieren Sie
+  - die gesamte Anzahl der installierten Windkraftanlagen je Bundesland
+  - die Gesamtleistung je Bundeslandes
+  - die Gesamtleistung bezogen auf die Fläche des jeweiligen Bundeslandes
+
+- Welche Darstellungsformen könnten noch von Interesse sein?
+
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
+Daten (für räumlichen Bezug) aufbereiten
 
 Deutschlandkarte:
 
@@ -215,7 +228,7 @@ data_bl <- left_join(bl, laender, by = join_by(Bundesland)) |>
 data_bl_sf <- left_join(d_deu_1, data_bl, by = join_by(Bundesland))
 ```
 
-### Leistung pro Anlage
+Leistung pro Anlage
 
 Leistung farblich dargestellt:
 
@@ -227,7 +240,7 @@ ggplot() +
   scale_color_distiller(palette = 8, direction = 1)
 ```
 
-### Inbetriebnahme Anlage
+Inbetriebnahme Anlage
 
 ```{r}
 ggplot() +
@@ -237,7 +250,7 @@ ggplot() +
   scale_color_distiller(palette = 8)
 ```
 
-### Anzahl pro BL
+Anzahl pro BL
 
 ```{r}
 ggplot() +
@@ -251,7 +264,7 @@ ggplot() +
   scale_fill_distiller(palette = 8, direction = 1)
 ```
 
-### Leistung pro BL
+Leistung pro BL
 
 ```{r}
 ggplot() +
@@ -265,7 +278,7 @@ ggplot() +
   scale_fill_distiller(palette = 8, direction = 1)
 ```
 
-### Leistung pro Fläche pro BL
+Leistung pro Fläche pro BL
 
 ```{r}
 ggplot() +

@@ -25,4 +25,8 @@
 1. Einen Fehler provozieren
     - Im Pinguin-Plot `ggplot` zu `ggplott` ändern, die Codezelle ausführen und die Fehlermeldung lesen
     - Danach den Fehler wieder korrigieren
+
+::: {.lm-solution}
+Keine Lösung.
+:::
 :::

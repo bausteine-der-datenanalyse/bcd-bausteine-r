@@ -1,10 +1,9 @@
-::: {.tinh-work}
 ```{r}
+#| label: setup
 #| include: false
 library(tidyverse)
 load("daten/dichtekurven-und-normalverteilung-aufgaben.Rdata")
 ```
-:::
 
 ::: {#exr-fahrzeugtypen}
 ## Fahrzeugtypen
@@ -19,7 +18,13 @@ Die Spalte `Fahrzeug` gibt an, um welchen Fahrzeugtyp es sich handelt. Untersuch
 
 Hinweise: Für drei Fahrzeuge ist der Typ unbekannt (`NA`). Diese entfernen Sie mit `filter(!is.na(Fahrzeug))`. Für die Aufteilung nach Fahrzeugtyp verwenden Sie `facet_wrap()`.
 
-::: {.tinh-solution}
+::: {.lm-scaffold}
+```{r}
+
+```
+:::
+
+::: {.lm-solution}
 ### Histogramme mit Dichtekurven
 
 ```{r}
