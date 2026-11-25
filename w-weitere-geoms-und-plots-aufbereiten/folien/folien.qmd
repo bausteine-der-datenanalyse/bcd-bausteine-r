@@ -1,5 +1,7 @@
 ---
 title: "Weitere Geoms und Aufbereiten von Plots"
+execute: 
+  cache: true
 ---
 
 ```{r}
@@ -20,8 +22,19 @@ ggplot(data = d) + geom_line(mapping = aes(x = A, y = B))
 ```
 
 - `geom_line()` funktioniert im Prinzip genau wie `geom_point()`
+- Mapping für Koordinaten angeben
 
-## BIP Länder (erster Versuch) {}
+## Minimalbeispiel `geom_line()`
+
+```{r}
+d <- tibble(A = c(1, 5, 3, 2), B = c(2, 4.5, 4, 6))
+ggplot(data = d) + geom_line(mapping = aes(x = A, y = B))
+```
+
+- Reihenfolge der Werte anders, Plot gleich!
+- Werte für $x$-Achse werden sortiert
+
+## BIP Länder (erster Versuch)
 
 ```{r}
 ggplot(data = d_wb_countries) +
@@ -29,6 +42,7 @@ ggplot(data = d_wb_countries) +
 ```
 
 - Nicht klar, dass nur Punkte derselben Länder verbunden werden sollen!
+- Werte für $x$-Achse werden sortiert
 
 ## BIP Länder (zweiter Versuch)
 
@@ -52,7 +66,10 @@ ggplot(data = d_wb_countries) +
 
 ```{r}
 ggplot(data = d_wb_countries) +
-  geom_line(mapping = aes(x = year, y = gdp, color = country, linewidth = pop), lineend = "round")
+  geom_line(
+    mapping = aes(x = year, y = gdp, color = country, linewidth = pop),
+    lineend = "round"
+  )
 ```
 
 - `size = s` legt Linienstärke fest
@@ -98,7 +115,8 @@ ggplot(data = d) +
 d <- tibble(X1 = c(0, 1.5, 3), Y1 = c(2.5, 2, 1), X2 = c(1, 2.5, 3.5), Y2 = c(1, 3, 2))
 ggplot(data = d) +
   geom_rect(mapping = aes(xmin = X1, ymin = Y1, xmax = X2, ymax = Y2)) +
-  geom_point(mapping = aes(x = X1, y = Y1), color = "red") + geom_point(mapping = aes(x = X2, y = Y2), color = "blue")
+  geom_point(mapping = aes(x = X1, y = Y1), color = "red") +
+  geom_point(mapping = aes(x = X2, y = Y2), color = "blue")
 ```
 
 - Notwendige AES: Koordinaten der Eckpunkte
@@ -221,7 +239,8 @@ Skalen anpassen: Selber dazuschreiben
 ## Kontinuierliche Achsen: Achspunkte ändern
 
 ```{r}
-ggplot(data = d_wb_all) + geom_point(mapping = aes(x = year, y = gdp)) +
+ggplot(data = d_wb_all) +
+  geom_point(mapping = aes(x = year, y = gdp)) +
   scale_x_continuous(breaks = c(1965, 1990, 2015))
 ```
 
@@ -246,7 +265,8 @@ Argument       | Beschreibung
 ## Diskrete Achsen: Beschriftung ändern
 
 ```{r}
-ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region)) +
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region)) +
   scale_x_discrete(labels = c("A", "B", "C", "D", "E", "F", "G"))
 ```
 
@@ -266,7 +286,8 @@ ggplot(data = d_wb_2012) +
 ```{r}
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x = gdp, y = gge, fill = region, size = pop), shape = 21) +
-  scale_x_log10() + scale_y_log10()
+  scale_x_log10() +
+  scale_y_log10()
 ```
 
 - Bereich wird für kleine Werte aufgezogen, für große Werte komprimiert
@@ -297,7 +318,8 @@ d <- tibble(X = seq(0, 2, by = 0.05), Y = sin(pi * seq(0, 2, by = 0.05)))
 ## Beispiel (nicht empfohlen)
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_gradient(low = "green", high = "red")
 ```
 
@@ -306,7 +328,8 @@ ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
 ## Beispiel (auch nicht empfohlen)
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_gradient2(low = "orange", mid = "yellow", high = "green")
 ```
 
@@ -315,7 +338,8 @@ ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
 ## Brewer-Farbpalette (empfohlen) 1/3
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_distiller(palette = "RdBu")
 ```
 
@@ -324,7 +348,8 @@ ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
 ## Brewer-Farbpalette (empfohlen) 2/3
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_distiller(palette = "RdBu", direction = 1)
 ```
 
@@ -333,7 +358,8 @@ ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
 ## Brewer-Farbpalette (empfohlen) 3/3
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_distiller(palette = "RdBu", direction = 1, guide = "legend")
 ```
 
@@ -342,7 +368,8 @@ ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
 ## Brewer-Farbpalette mit Klassen (empfohlen)
 
 ```{r}
-ggplot(data = d) + geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
+ggplot(data = d) +
+  geom_col(mapping = aes(x = X, y = Y, fill = Y)) +
   scale_fill_fermenter(palette = "RdBu", direction = 1)
 ```
 
@@ -401,7 +428,9 @@ ggplot(data = d) +
 d <- tibble(farbe = c("rot", "grün", "blau", "grün", "rot", "grün"))
 ggplot(data = d) +
   geom_bar(mapping = aes(x = farbe, fill = farbe)) +
-  scale_fill_manual(values = c("rot" = "red", "blau" = "blue", "grün" = "green"))
+  scale_fill_manual(
+    values = c("rot" = "red", "blau" = "blue", "grün" = "green")
+  )
 ```
 
 - Zuordnung mit `Ausprägung = Farbe` angeben
@@ -409,7 +438,8 @@ ggplot(data = d) +
 ## Brewer-Farbpalette
 
 ```{r}
-ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region, fill = region)) +
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region, fill = region)) +
   scale_fill_brewer(palette = "Set1")
 ```
 
@@ -417,8 +447,9 @@ ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region, fill = region)) +
 
 ![](bilder/brewer.svg)
 
-- Kontinuierlich: `scale_color_distiller(palette = p)` oder `scale_fill_distiller(palette = p)`
-- Diskret: `scale_color_brewer(palette = p)` oder `scale_fill_brewer(palette = p)`
+- Diskret: `scale_*_brewer(palette=p)`
+- Kontinuierlich: `scale_*r_distiller(palette=p)`
+- Kontinuierlich mit Klassen: `scale_*_fermenter(palette=p)`
 
 ## Brewer-Farbpaletten
 
@@ -438,8 +469,10 @@ ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region, fill = region)) +
 ggplot(data = d_ns_bochum_monat) +
   geom_histogram(mapping = aes(x = NS), binwidth = 15, boundary = 0) +
   labs(
-    title = "Niederschläge in Bochum", subtitle = "1951 - 2017",
-    x = "Monatlicher Niederschlag (mm)", y = "Anzahl der Monate",
+    title = "Niederschläge in Bochum",
+    subtitle = "1951 - 2017",
+    x = "Monatlicher Niederschlag (mm)",
+    y = "Anzahl der Monate",
     caption = "Quelle: Deutscher Wetterdienst"
   )
 ```
@@ -447,7 +480,8 @@ ggplot(data = d_ns_bochum_monat) +
 ## Beschriftung der Farblegende
 
 ```{r}
-ggplot(data = d_wb_2012) + geom_bar(mapping = aes(x = region, fill = region)) +
+ggplot(data = d_wb_2012) +
+  geom_bar(mapping = aes(x = region, fill = region)) +
   labs(fill = "Weltregion")
 ```
 
@@ -506,7 +540,10 @@ ggplot(data = d_wb_2012) +
 
 ```{r}
 ggplot(data = d_wb_countries) +
-  geom_ribbon(mapping = aes(x = year, ymin = 0, ymax = gdp, color = country, fill = country), alpha = 0.3) +
+  geom_ribbon(
+    mapping = aes(x = year, ymin = 0, ymax = gdp, color = country, fill = country),
+    alpha = 0.5
+  ) +
   coord_cartesian(xlim = c(1980, 2010), ylim = c(0, 4e12))
 ```
 
@@ -516,7 +553,10 @@ ggplot(data = d_wb_countries) +
 
 ```{r}
 ggplot(data = d_wb_countries) +
-  geom_ribbon(mapping = aes(x = year, ymin = 0, ymax = gdp, color = country, fill = country), alpha = 0.3) +
+  geom_ribbon(
+    mapping = aes(x = year, ymin = 0, ymax = gdp, color = country, fill = country),
+    alpha = 0.5
+  ) +
   coord_polar(theta = "y")
 ```
 
@@ -528,7 +568,8 @@ ggplot(data = d_wb_countries) +
 ```{r}
 ggplot(data = d_wb_countries_2012) +
   geom_col(mapping = aes(x = 0, y = gge, fill = country), color = "black", width = 1) +
-  coord_polar(theta = "y") + theme_void()
+  coord_polar(theta = "y") +
+  theme_void()
 ```
 
 - Gestapeltes Balkendiagramm wird zum Tortendiagramm
@@ -539,7 +580,9 @@ ggplot(data = d_wb_countries_2012) +
 ```{r}
 ggplot(data = d_wb_countries_2012) +
   geom_col(mapping = aes(x = 0.5, y = gge, fill = country), color = "black", width = 1) +
-  scale_x_continuous(limits = c(-1, 1)) + coord_polar(theta = "y") + theme_void()
+  scale_x_continuous(limits = c(-1, 1)) +
+  coord_polar(theta = "y") +
+  theme_void()
 ```
 
 - Bereich der x-Achse anpassen
@@ -642,7 +685,8 @@ Mit Hex-Wert
 #| fig-asp: 0.3
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop)) +
-  scale_x_log10() + scale_y_log10() +
+  scale_x_log10() +
+  scale_y_log10() +
   scale_size(guide = "none")
 ```
 
@@ -655,7 +699,8 @@ ggplot(data = d_wb_2012) +
 #| fig-asp: 0.3
 ggplot(data = d_wb_2012) +
   geom_point(mapping = aes(x = gdp, y = gge, color = region, size = pop), show.legend = FALSE) +
-  scale_x_log10() + scale_y_log10()
+  scale_x_log10() +
+  scale_y_log10()
 ```
 
 - Argument `show.legend = FALSE` entfernt alle Legenden für ein Geom

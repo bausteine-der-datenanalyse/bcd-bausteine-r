@@ -54,7 +54,7 @@ x * y
 
 - Daten und Berechnungsergebnisse werden in Variablen gespeichert
 - Der Zuweisungsoperator in R ist `<-` (Tastenkombination alt + -)
-- Variablen im *Environment* gelistet (RStudio oben rechts)
+- Variablen im *Environment* gelistet (Positron oben rechts)
 - Namen von Variablen müssen mit einem Buchstaben beginnen
 
 ## Variablen 2/2
@@ -86,7 +86,7 @@ x
 Es geht aber auch traditionell
 
 ```{r}
-x = 200
+x <- 200
 x
 ```
 
@@ -218,12 +218,16 @@ TRUE & FALSE
 
 ## Rechengenauigkeit
 
+[]{.down50}
+
 ```{r}
-sqrt(2) ^ 2 == 2
+sqrt(2)^2 == 2
 1 / 49 * 49 == 1
 ```
 
 → Rundungsfehler, Zahlen mit rund 15 Nachkommastellen
+
+[]{.down50}
 
 ```{r}
 near(sqrt(2)^2, 2)
@@ -292,7 +296,7 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
 
 ![](bilder/r-hilfe.svg)
 
-- In RStudio in den Funktionsnamen klicken und Taste F1 drücken
+- In Positron in den Funktionsnamen klicken und Taste F1 drücken
   - Hilfetexte in der Regel nicht ganz einfach zu lesen
   - Oft werden verwandte Funktionen gemeinsam erklärt
   - Das fällt Ihnen mit der Zeit leichter
@@ -307,11 +311,27 @@ paste(1, 2, 3, 4, 5, 6, sep = "$")
 - Nichts aus dem Internet abtippen, das Sie nicht verstehen
 - Meistens ist .org besser als .com
 
+## Lösungen mit KI
+
+[]{.down60}
+
+Lösungen von der KI sind aus verschiedenen Gründen problematisch
+
+- KI beantwortet jede Frage souverän, egal ob sie Sinn macht
+- KI kennt den Kontext nicht (Veranstaltung, Daten, Aufgabe)
+- Lösungen sind oft unnötig kompliziert
+- Sie lernen nichts dazu, wenn die KI für Sie 'denkt'
+- Die KI verwendet Funktionen und Pakete, die wir nicht kennen
+- Lösungen sehen richtig aus, sind aber häufig falsch
+
+[]{.down50}
+
+→ Wir werden uns noch ausführlicher mit KI befassen
+
+
 # Datenstrukturen
 
 ## Datenstrukturen in R
-
-[]{.up60}
 
 ![](bilder/datenstrukturen.svg)
 
@@ -364,20 +384,20 @@ Für uns wichtig
 ::: {.columns}
 ::: {.column}
 ```{r}
-1:6                     # Zahlen 1 bis 6
-1:-6                    # Rückwärts
-"1999":"2005"           # Mit Strings
-c(1:3, 4:9)             # Vektoren
-c("A", "B", "C", 1:3)   # Typkonvertierung
+1:6 # Zahlen 1 bis 6
+1:-6 # Rückwärts
+"1999":"2005" # Mit Strings
+c(1:3, 4:9) # Vektoren
+c("A", "B", "C", 1:3) # Typkonvertierung
 ```
 :::
 ::: {.column}
 ```{r}
-seq(1, 5, by = 0.7)     # Ohne zweiten Wert
-seq(1, 5, length.out=6) # Inkrement
+seq(1, 5, by = 0.7) # Ohne zweiten Wert
+seq(1, 5, length.out = 6) # Inkrement
 rep(c(4, 2), times = 3) # Vektor mehrfach
-rep(c(4, 2), each = 3)  # Elemente mehrfach
-rep(c(4, 2), each = 4)  # Elemente mehrfach
+rep(c(4, 2), each = 3) # Elemente mehrfach
+rep(c(4, 2), each = 4) # Elemente mehrfach
 ```
 :::
 :::
@@ -578,6 +598,8 @@ summary(m)
 
 # Datum und Uhrzeit
 
+## Warum ein eigener Abschnitt?
+
 Komplizierter als man auf den ersten Blick vielleicht denkt
 
 - Wie addieren Sie einen Tag zu einer Woche?
@@ -592,9 +614,9 @@ Einfach(er) mit dem lubridate-Paket (in tidyverse enthalten)
 ![Datum und Uhrzeit](bilder/datum-und-uhrzeit.svg)
 
 ```{r}
-now()          # Date-Time (Zeitstempel)
-today()        # Date      (Datum)
-as_hms(now())  # Time      (Zeit)
+now() # Date-Time (Zeitstempel)
+today() # Date      (Datum)
+as_hms(now()) # Time      (Zeit)
 ```
 
 ## *Date-time* mit `ymd_hms` und Varianten
@@ -632,9 +654,9 @@ mdy("8/1/1998")
 ## *Time* mit `as_hms()` und `hms::hms()`
 
 ```{r}
-as_hms(48630)                                    # Sekunden seit Mitternacht
-as_hms("13:30:30")                               # Aus Zeichenkette
-as_hms(dmy_hms("1:6:1987 13:30:30"))             # Aus Date-Time
+as_hms(48630) # Sekunden seit Mitternacht
+as_hms("13:30:30") # Aus Zeichenkette
+as_hms(dmy_hms("1:6:1987 13:30:30")) # Aus Date-Time
 hms::hms(hours = 13, minutes = 30, seconds = 30) # Mit Zahlenwerten
 ```
 
@@ -720,9 +742,9 @@ today() - dmy("11.11.1955")
 Wie lange braucht die Berechnung einer Wurzel?
 
 ```{r}
-d1 <- hms::as.hms(now())
+d1 <- as_hms(now())
 x <- sqrt(93482756)
-d2 <- hms::as.hms(now())
+d2 <- as_hms(now())
 d2 - d1
 ```
 
@@ -744,7 +766,7 @@ d <- dmy_hm("30.3.2019 14:30", tz = "Europe/Berlin")
 d + dhours(23)
 ```
 
-- `dhours()`: Zeitdauer in physikalischen Stunden
+- `dhours()`: </br> Zeitdauer in physikalischen Stunden
 
 :::
 ::: {.column}
@@ -754,7 +776,7 @@ Auch 23 Stunden später
 d + hours(23)
 ```
 
-- `hours()`: Zeitdauer in Stunden auf der Uhr
+- `hours()`: </br> Zeitdauer in Stunden auf der Uhr
 :::
 :::
 
@@ -765,17 +787,16 @@ $\rightarrow$ Vergleichen Sie die Zeiten!
 ## In Zahl konvertieren mit `as.numeric()`
 
 ```{r}
-as.numeric(ymd_hms("1970-1-1 0:0:11", tz = "UTC"))
-as.numeric(ymd("1970-1-12"))
-as.numeric(as_hms(ymd_hms("1988-11-11 0:0:11", tz = "Europe/Berlin")))
+d <- ymd_hms("2025-04-15 12:00:00", tz = "UTC")
+as.numeric(d)          # Date-time: Sekunden seit 01.01.1970 0 Uhr
+as.numeric(as_date(d)) # Date: Tage seit 01.01.1970
+as.numeric(as_hms(d))  # Time: Sekunden seit 0 Uhr (= 12 * 3600)
 ```
 
 []{.down30}
 
-- Date-time: Sekunden seit Beginn des Jahres 1970 (in UTC)
-- Date: Tage seit Beginn des Jahres 1970
-- Time: Sekunden seit Beginn des Tages
-- Konvention: 01.01.1970 00:00 Uhr ist "absoluter Nullpunkt"
+- Nullpunkt (Konvention): 01.01.1970 00:00 Uhr UTC
+- Beim Datum zählen Tage, bei Date-time und Uhrzeit Sekunden
 
 ## 'Normal' rechnen mit Zeitdifferenzen
 

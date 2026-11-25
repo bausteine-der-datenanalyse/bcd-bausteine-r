@@ -2,66 +2,114 @@
 #| label: setup
 #| include: false
 library(tidyverse)
-```
-
-::: {#exr-plots-aufbereiten}
-## Plots aufbereiten
-
-Laden Sie das RStudio-Projekt [${work-files}](${work-files}) herunter und entpacken Sie die Datei.
-
-Bereiten Sie die Plots in `${name}-${exercises}.qmd` so auf, dass sie Ihnen gut gefallen.
-
-::: {.lm-scaffold}
-```{r}
-
-```
-:::
-
-::: {.lm-solution}
-```{r}
 load("daten/data-exercise-03.Rdata")
-load("daten/data-exercise-05.Rdata")
 load("daten/data-exercise-06.Rdata")
+```
+
+Laden Sie das Positron-Projekt [${work-files}](${work-files}) herunter und entpacken Sie die Datei. In `${name}-${exercises}.qmd` finden Sie zu jeder Aufgabe einen Plot, den Sie aufbereiten sollen.
+
+::: {#exr-entfernungen}
+## Entfernungen in andere Städte
+
+Bereiten Sie das Balkendiagramm der Entfernungen von Bochum in andere Städte auf:
+
+1. Sortieren Sie die Balken nach der Entfernung.
+1. Beschriften Sie die y-Achse mit Einheit, die Beschriftung der x-Achse ist überflüssig.
+1. Sorgen Sie dafür, dass sich die Städtenamen nicht überlappen.
+
+```{r}
 d_bo_entfernung <- tibble(
   stadt =      c("Essen", "Wattenscheid", "Dortmund", "Herne", "Wuppertal", "Gelsenkirchen", "Mülheim"),
   entfernung =    c(17.8,           10.2,       15.4,    10.7,        21.4,            14.1,       27.2)
 )
 ```
 
-### Entfernungen in andere Städte
-
 ```{r}
 ggplot(data = d_bo_entfernung) +
-  geom_col(mapping = aes(x = stadt, y = entfernung)) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1), legend.position = "none") +
-  labs(x = NULL, y = "Entfernung (km)")
+  geom_col(mapping = aes(x = stadt, y = entfernung))
 ```
 
-### Studierende an der BO: Geschlecht
+::: {.lm-solution}
+```{r}
+ggplot(data = d_bo_entfernung) +
+  geom_col(mapping = aes(x = fct_reorder(stadt, entfernung), y = entfernung)) +
+  guides(x = guide_axis(angle = 45)) +
+  labs(x = NULL, y = "Entfernung (km)")
+```
+:::
+:::
+
+::: {#exr-geschlecht}
+## Studierende an der BO: Geschlecht
+
+Bereiten Sie das Balkendiagramm der Studierenden nach Geschlecht auf:
+
+1. Wählen Sie eigene Farben mit `scale_fill_manual`.
+1. Die Legende wiederholt nur die Beschriftung der x-Achse, lassen Sie sie weg.
+1. Beschriften Sie die y-Achse auf Deutsch.
 
 ```{r}
 ggplot(data = d_bo_vm) +
-  geom_bar(mapping = aes(x = Geschlecht, fill = Geschlecht)) +
-  scale_fill_manual(values = c("m" = "orange", "w" = "blue")) +
-  labs(y = "Anzahl")
+  geom_bar(mapping = aes(x = Geschlecht, fill = Geschlecht))
 ```
 
-### Studierende an der BO: Fachbereiche
+::: {.lm-solution}
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = Geschlecht, fill = Geschlecht)) +
+  scale_fill_manual(values = c("m" = "orange", "w" = "blue"), guide = "none") +
+  labs(y = "Anzahl")
+```
+:::
+:::
+
+::: {#exr-fachbereiche}
+## Studierende an der BO: Fachbereiche
+
+Bereiten Sie das Kreisdiagramm der Studierenden nach Fachbereichen auf:
+
+1. Wählen Sie eine Farbpalette mit `scale_fill_brewer`.
+1. Entfernen Sie Achsen, Beschriftungen und Hintergrund, die bei einem Kreisdiagramm nichts aussagen.
+1. Wäre ein Balkendiagramm hier besser? Begründen Sie Ihre Antwort.
 
 ```{r}
 ggplot(data = d_bo_vm) +
   geom_bar(mapping = aes(x = 0, fill = Fachbereich)) +
+  coord_polar(theta = "y")
+```
+
+::: {.lm-solution}
+```{r}
+ggplot(data = d_bo_vm) +
+  geom_bar(mapping = aes(x = 0, fill = Fachbereich), color = "black", width = 1) +
   coord_polar(theta = "y") +
   scale_fill_brewer(palette = "Set3") +
   theme_void()
 ```
 
-### Histogramm mit Uhrzeit (Rechtecke)
+Ein Balkendiagramm wäre besser: Längen kann man genauer vergleichen als Winkel, und die Anzahlen lassen sich an der Achse ablesen.
+:::
+:::
+
+::: {#exr-histogramm-uhrzeit}
+## Histogramm mit Uhrzeit (Rechtecke)
+
+Bereiten Sie das zweidimensionale Histogramm der Geschwindigkeiten über der Uhrzeit an der Universitätsstraße auf:
+
+1. Wählen Sie eine Farbskala mit `scale_fill_distiller`, auf der man auch kleine Anzahlen gut erkennt (Tipp: logarithmische Skala).
+1. Beschriften Sie die Achsen mit Einheiten.
 
 ```{r}
 ggplot(data = d_unistrasse) +
+  geom_bin2d(aes(x = Uhrzeit, y = Geschwindigkeit), binwidth = c(0.5, 3))
+```
+
+::: {.lm-solution}
+```{r}
+ggplot(data = d_unistrasse) +
   geom_bin2d(aes(x = Uhrzeit, y = Geschwindigkeit), binwidth = c(0.5, 3)) +
-  scale_fill_distiller(palette = "Purples", direction = 1, trans = "log10", guide = "legend")
+  scale_fill_distiller(palette = "Purples", direction = 1, trans = "log10", guide = "legend") +
+  labs(x = "Uhrzeit (h)", y = "Geschwindigkeit (km/h)", fill = "Anzahl")
 ```
 :::
 :::
