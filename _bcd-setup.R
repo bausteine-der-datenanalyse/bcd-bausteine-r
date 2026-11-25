@@ -1,5 +1,8 @@
 library(gt)
 
+# Man spricht Deutsch
+Sys.setlocale(category = "LC_ALL", locale = "de_DE.UTF-8")
+
 knit_print.data.frame <- function(x, options, ...) {
   n <- nrow(x)
   tab <- if (n < 20000) gt(x) else gt_preview(x)
